@@ -16,7 +16,7 @@ from collections import defaultdict
 import argparse
 
 class BatchPDFOrganizer:
-    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False):
+    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None):
         """Initialize batch PDF organizer"""
         if not ebooks_folder:
             raise ValueError("ebooks_folder is required")
@@ -26,6 +26,7 @@ class BatchPDFOrganizer:
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
+        self.category_template_path = Path(category_template) if category_template else self.ebooks_folder / "category_template.json"
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
         
         if not self.api_key:
@@ -87,6 +88,47 @@ class BatchPDFOrganizer:
             print("No existing categories found")
         
         return categories
+
+    def load_category_template(self):
+        """Load predefined category hierarchy if present"""
+        template_path = self.category_template_path
+        if not template_path or not Path(template_path).exists():
+            return None
+        
+        try:
+            with open(template_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"  ⚠ Failed to load category template ({template_path}): {e}")
+            return None
+        
+        categories = {}
+        for entry in data.get('categories', []):
+            raw_path = entry.get('path')
+            if not raw_path:
+                continue
+            path_str = str(raw_path).replace('\\', '/').strip('/')
+            depth = entry.get('depth') or len(path_str.split('/'))
+            categories[path_str] = {
+                'count': entry.get('count', 0),
+                'depth': depth
+            }
+        
+        print(f"Using category template: {template_path} ({len(categories)} categories)")
+        return categories
+
+    def load_or_analyze_categories(self):
+        """Prefer template, then merge live counts"""
+        template_categories = self.load_category_template()
+        if template_categories:
+            existing = self.analyze_existing_structure()
+            for path, info in existing.items():
+                if path in template_categories:
+                    template_categories[path]['count'] = info.get('count', template_categories[path].get('count', 0))
+                else:
+                    template_categories[path] = info
+            return template_categories
+        return self.analyze_existing_structure()
     
     def get_pdf_info(self, pdf_path):
         """Get basic info from PDF"""
@@ -309,8 +351,8 @@ CRITICAL:
         
         print(f"Found {len(pdf_files)} PDFs")
         
-        # Analyze existing structure
-        categories = self.analyze_existing_structure()
+        # Analyze structure (template-aware)
+        categories = self.load_or_analyze_categories()
         
         # Get info for all PDFs
         print("\n📋 Reading PDF metadata...")
@@ -468,6 +510,7 @@ def main():
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
     parser.add_argument('--api-key', help='Anthropic API key')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
+    parser.add_argument('--category-template', help='Path to category template JSON (default: <ebooks>/category_template.json)')
     
     args = parser.parse_args()
     
@@ -482,7 +525,8 @@ def main():
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
-        dry_run=args.dry_run
+        dry_run=args.dry_run,
+        category_template=args.category_template
     )
     
     organizer.organize_pdfs()

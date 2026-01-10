@@ -15,7 +15,7 @@ from collections import defaultdict
 import argparse
 
 class PDFOrganizer:
-    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False):
+    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, require_api_key=True):
         """
         Initialize the PDF organizer
         
@@ -35,12 +35,13 @@ class PDFOrganizer:
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
+        self.category_template_path = Path(category_template) if category_template else self.ebooks_folder / "category_template.json"
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
         
-        if not self.api_key:
+        if require_api_key and not self.api_key:
             raise ValueError("Anthropic API key required. Set ANTHROPIC_API_KEY env var or pass api_key parameter")
         
-        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self.client = anthropic.Anthropic(api_key=self.api_key) if self.api_key else None
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
         
@@ -138,6 +139,83 @@ class PDFOrganizer:
             print()
         
         return categories
+
+    def load_category_template(self):
+        """Load predefined category hierarchy if available"""
+        template_path = self.category_template_path
+        if not template_path or not Path(template_path).exists():
+            return None
+        
+        try:
+            with open(template_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"  ⚠ Failed to load category template ({template_path}): {e}")
+            return None
+        
+        # Normalize into the same shape as analyze_existing_structure
+        categories = {}
+        for entry in data.get('categories', []):
+            raw_path = entry.get('path')
+            if not raw_path:
+                continue
+            path_str = str(raw_path).replace('\\', '/').strip('/')
+            path_parts = tuple(path_str.split('/'))
+            depth = entry.get('depth') or len(path_parts)
+            categories[path_str] = {
+                'count': entry.get('count', 0),
+                'depth': depth,
+                'parent': '/'.join(path_parts[:-1]) if depth > 1 else None,
+                'name': path_parts[-1],
+                'full_path': path_str,
+                'has_subdirs': False,
+                'sample_files': entry.get('sample_files', [])
+            }
+        
+        print(f"Using category template: {template_path} ({len(categories)} categories)")
+        return categories
+
+    def export_category_template(self, template_path=None):
+        """Save current ebooks folder hierarchy as a reusable template"""
+        categories = self.analyze_existing_structure()
+        template_path = Path(template_path) if template_path else self.category_template_path
+        template_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        payload = {
+            'generated_at': datetime.now().isoformat(),
+            'ebooks_root': str(self.ebooks_folder),
+            'category_count': len(categories),
+            'categories': [
+                {
+                    'path': path,
+                    'depth': info['depth'],
+                    'count': info['count']
+                }
+                for path, info in sorted(categories.items(), key=lambda x: x[0])
+            ]
+        }
+        
+        with open(template_path, 'w', encoding='utf-8') as f:
+            json.dump(payload, f, indent=2, ensure_ascii=False)
+        
+        print(f"Template saved to {template_path}")
+        return template_path
+
+    def load_or_analyze_categories(self):
+        """Use template when available, otherwise analyze live structure"""
+        template_categories = self.load_category_template()
+        if template_categories:
+            # Merge live counts to template where possible
+            existing = self.analyze_existing_structure()
+            for path, info in existing.items():
+                if path in template_categories:
+                    template_categories[path]['count'] = info.get('count', template_categories[path].get('count', 0))
+                    template_categories[path]['has_subdirs'] = info.get('has_subdirs', template_categories[path].get('has_subdirs', False))
+                else:
+                    template_categories[path] = info
+            return template_categories
+        
+        return self.analyze_existing_structure()
     
     def build_category_hierarchy_text(self, categories):
         """Build a text representation of the category hierarchy for AI context"""
@@ -206,6 +284,8 @@ class PDFOrganizer:
     
     def categorize_pdf_with_ai(self, pdf_data, existing_categories):
         """Use Claude to categorize the PDF based on hierarchical structure"""
+        if not self.client:
+            raise RuntimeError("Anthropic client not initialized. Provide an API key to categorize.")
         
         # Validate existing_categories
         if existing_categories is None:
@@ -347,9 +427,9 @@ Respond ONLY with a JSON object in this exact format:
                 display_dir = subdir if subdir != '.' else 'Downloads (root)'
                 print(f"  • {display_dir}: {count} file(s)")
         
-        # Analyze existing structure
-        existing_categories = self.analyze_existing_structure()
-        print(f"Found {len(existing_categories)} existing categories in ebooks folder")
+        # Analyze structure (prefer template when present)
+        existing_categories = self.load_or_analyze_categories()
+        print(f"Found {len(existing_categories)} categories available for sorting")
         
         # Process each PDF
         results = []
@@ -625,6 +705,8 @@ Examples:
     parser.add_argument('--api-key', help='Anthropic API key (or set ANTHROPIC_API_KEY env var)')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without moving files')
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')
+    parser.add_argument('--category-template', help='Path to category template JSON (default: <ebooks>/category_template.json)')
+    parser.add_argument('--export-template', action='store_true', help='Export current ebooks folder hierarchy to a template file and exit')
     
     args = parser.parse_args()
     
@@ -636,8 +718,15 @@ Examples:
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
-        dry_run=args.dry_run
+        dry_run=args.dry_run,
+        category_template=args.category_template,
+        require_api_key=not args.export_template
     )
+    
+    if args.export_template:
+        organizer.export_category_template(args.category_template)
+        print("Template export complete. No files were moved.")
+        return
     
     organizer.organize_pdfs(confirm=not args.no_confirm)
 
