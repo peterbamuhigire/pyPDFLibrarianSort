@@ -56,7 +56,7 @@ AI-powered PDF library organizer - **100x more cost-effective** than traditional
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/pyPDFLibrarianSort.git
+git clone https://github.com/peterbamuhigire/pyPDFLibrarianSort.git
 cd pyPDFLibrarianSort
 ```
 
