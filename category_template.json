@@ -1,0 +1,2712 @@
+{
+  "generated_at": "2026-01-10T23:06:52.786079",
+  "ebooks_root": "F:\\eBooks",
+  "category_count": 541,
+  "categories": [
+    {
+      "path": "100 For Dummies Series Books Collection",
+      "depth": 1,
+      "count": 21
+    },
+    {
+      "path": "Biographies",
+      "depth": 1,
+      "count": 3
+    },
+    {
+      "path": "Computer & ICT",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/AI",
+      "depth": 2,
+      "count": 62
+    },
+    {
+      "path": "Computer & ICT/AI/Prompting",
+      "depth": 3,
+      "count": 13
+    },
+    {
+      "path": "Computer & ICT/Computer Science Concepts",
+      "depth": 2,
+      "count": 16
+    },
+    {
+      "path": "Computer & ICT/Cyber Security",
+      "depth": 2,
+      "count": 25
+    },
+    {
+      "path": "Computer & ICT/Data Science, Analytics & Visualization",
+      "depth": 2,
+      "count": 14
+    },
+    {
+      "path": "Computer & ICT/Databases",
+      "depth": 2,
+      "count": 9
+    },
+    {
+      "path": "Computer & ICT/Design",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "Computer & ICT/ERP",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "Computer & ICT/GIS",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Computer & ICT/IT Policy & Management",
+      "depth": 2,
+      "count": 14
+    },
+    {
+      "path": "Computer & ICT/Magazines & Periodicals",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Magazines & Periodicals/Hackercool 2018 Complete",
+      "depth": 3,
+      "count": 12
+    },
+    {
+      "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing",
+      "depth": 2,
+      "count": 5
+    },
+    {
+      "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing/Networking",
+      "depth": 3,
+      "count": 14
+    },
+    {
+      "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing/PC Hardware",
+      "depth": 3,
+      "count": 10
+    },
+    {
+      "path": "Computer & ICT/Operating Systems and Software Manuals",
+      "depth": 2,
+      "count": 15
+    },
+    {
+      "path": "Computer & ICT/Operating Systems and Software Manuals/Linux",
+      "depth": 3,
+      "count": 48
+    },
+    {
+      "path": "Computer & ICT/Operating Systems and Software Manuals/Photoshop",
+      "depth": 3,
+      "count": 2
+    },
+    {
+      "path": "Computer & ICT/Papers & Academic Works",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Computer & ICT/Programming & Development",
+      "depth": 2,
+      "count": 19
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C",
+      "depth": 3,
+      "count": 2
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C#",
+      "depth": 3,
+      "count": 15
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++",
+      "depth": 3,
+      "count": 11
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)",
+      "depth": 4,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/META-INF",
+      "depth": 5,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code",
+      "depth": 5,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap02",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap03",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap04",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap05",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap06",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap07",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap08",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap09",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap10",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap11",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap12",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap13",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap14",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap15",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap16",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap17",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap18",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap19",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap20",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap21",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap22",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap23",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap24",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap25",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap26",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap27",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap28",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap29",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/listings/Chap30",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-regex",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/include",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/include/qwort",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/src",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/src/lib",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/src/prog",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-000/test",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/include",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/include/qwort",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/src",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/src/lib",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/src/prog",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-100/test",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/include",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/include/qwort",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/src",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/src/lib",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/src/prog",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/15p-unittest-200/test",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/projects/20p-dequeRegex",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/C++/C++ The Comprehensive Guide (True PDF)/code/various",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Delphi",
+      "depth": 3,
+      "count": 7
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java",
+      "depth": 3,
+      "count": 12
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals",
+      "depth": 4,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications",
+      "depth": 5,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/simple-jndi-config",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/cpp",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel",
+      "depth": 12,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/annotation",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ant",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/array",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/assertion",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/awt",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/bean",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/bean/bound",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/bean/validation",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/bean/veto",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/bundle",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/cdi",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/csv",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/date",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/enums",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/enums/v1",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/exception",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/exception/v1",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/exception/v2",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v1",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v2",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v3",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v4",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v5",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v6",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v7",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v8",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/v9",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/va",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vb",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vc",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vd",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/ve",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vf",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vg",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vh",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vi",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vj",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vk",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vl",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vm",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vn",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vo",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vp",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vq",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/c/vr",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/enums",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/i",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/i/v1",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/i/v2",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/game/vxxxx",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/generic",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/httpserver",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/input",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/io",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/io/file",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/io/ser",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/io/stream",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/io/zip",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/iterable",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/javadoc",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/jdbc",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/jmx",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/jni",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/json",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/junit",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/junit/util",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/junit/vcf",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/junit/vcf/v1",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/junit/vcf/v2",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/lambda",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/lang",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/lang/invoke",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/lang/ref",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/locale",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/logging",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/math",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/meta",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nested",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/net",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/net/http",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/net/multicast",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/net/udp",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nio",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nio/channels",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nio2",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nongeneric",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/nonoop",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/object",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/object/hashcode",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/object/tostring",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/oop",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/pattern",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/pattern/listener",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/pattern/singleton",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/prefs",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/printer",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/protecteda",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/protectedb",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/records",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/records/v1",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/records/v2",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/records/v3",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/records/v4",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/rmi",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/script",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/sealed",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/services",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/sound",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/string",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/thread",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/thread/atomic",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/thread/concurrent",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/thread/group",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/thread/timer",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/time",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/time/easter",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/tool",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/awt",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/datatransfer",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/dialog",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/event",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/g2d",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/graphics",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/image",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/layout",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/list",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/print",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/swing",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/table",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/text",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ui/tree",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/concurrent",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/list",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/map",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/queue",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/set",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/util/stream",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/wrapper",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ws",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ws/gen",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ws/gen/chrisws",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/ws/gen/geoipservice",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/dom",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/jaxb",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/jaxb/bible",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/jdom",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/jdom/xpath",
+      "depth": 15,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/sax",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/stax",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/insel/xml/xslt",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/security",
+      "depth": 12,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/security/crypto",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/java/com/tutego/security/digest",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/META-INF",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/META-INF/services",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/bundles",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/com",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/com/tutego",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/com/tutego/insel",
+      "depth": 12,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/com/tutego/insel/javafx",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/com/tutego/insel/script",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/images",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/main/resources/media",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com/tutego",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com/tutego/insel",
+      "depth": 12,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com/tutego/insel/assertj",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com/tutego/insel/junit",
+      "depth": 13,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/Inselprograms/src/test/java/com/tutego/insel/junit/util",
+      "depth": 14,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/bin",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/bin/com",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/bin/com/tutego",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/bin/com/tutego/insel",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/bin/com/tutego/insel/greeter",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/lib",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/src",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/src/com",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/src/com/tutego",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/src/com/tutego/insel",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.greeter/src/com/tutego/insel/greeter",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/bin",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/bin/com",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/bin/com/tutego",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/bin/com/tutego/insel",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/bin/com/tutego/insel/main",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/com",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/com/tutego",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/com/tutego/insel",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/com/tutego/insel/main",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/com/tutego/insel/main/class-use",
+      "depth": 12,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/index-files",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/external",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/external/jquery",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/images",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/jszip",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/jszip-utils",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/jszip-utils/dist",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/jquery/jszip/dist",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/member-search-index",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/module-search-index",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/package-search-index",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/resources",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/doc/type-search-index",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/src",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/src/com",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/src/com/tutego",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/src/com/tutego/insel",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/com.tutego.main/src/com/tutego/insel/main",
+      "depth": 11,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea",
+      "depth": 6,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/libraries",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint",
+      "depth": 7,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore",
+      "depth": 8,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0/1",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0/d",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/0/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/1/f",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/d",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/2/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/0",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/3/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4/0",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/4/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/1",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/d",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/5/f",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/6/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/7/f",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/0",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/8/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/7",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/9/d",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/0",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/1",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/a/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b/1",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/b/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/0",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/6",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/d",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/c/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d/4",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d/9",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/d/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/1",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/3",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/b",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/e",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/e/f",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f",
+      "depth": 9,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f/2",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f/5",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f/8",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f/a",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals/sample applications/idea/sonarlint/issuestore/f/c",
+      "depth": 10,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Javascript",
+      "depth": 3,
+      "count": 6
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Mobile Development",
+      "depth": 3,
+      "count": 5
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/PHP",
+      "depth": 3,
+      "count": 12
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/PHP/Shanker S. Building Dynamic Web Experiences with PHP...2024",
+      "depth": 4,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Programming Notes",
+      "depth": 3,
+      "count": 17
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Python",
+      "depth": 3,
+      "count": 14
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Web Development",
+      "depth": 3,
+      "count": 2
+    },
+    {
+      "path": "Computer & ICT/Programming & Development/Web Development/Shanker S. Building Dynamic Web Experiences with PHP...2024",
+      "depth": 4,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Software Development",
+      "depth": 2,
+      "count": 43
+    },
+    {
+      "path": "Computer & ICT/Software Development/Software Architecture",
+      "depth": 3,
+      "count": 3
+    },
+    {
+      "path": "Computer & ICT/Systems Analysis, Design and BPM",
+      "depth": 2,
+      "count": 24
+    },
+    {
+      "path": "Computer & ICT/Web and Digital Marketing",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Web and Digital Marketing/Search Engine Optimization",
+      "depth": 3,
+      "count": 16
+    },
+    {
+      "path": "Economics, Business & Management",
+      "depth": 1,
+      "count": 48
+    },
+    {
+      "path": "Economics, Business & Management/Accounting & Finance",
+      "depth": 2,
+      "count": 23
+    },
+    {
+      "path": "Economics, Business & Management/Business",
+      "depth": 2,
+      "count": 5
+    },
+    {
+      "path": "Economics, Business & Management/Business Plan Guides & Ideas",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "Economics, Business & Management/Business Plan Guides & Ideas/Ideas",
+      "depth": 3,
+      "count": 69
+    },
+    {
+      "path": "Economics, Business & Management/Business Statistics & Analytics",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Economics, Business & Management/CFA",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Economics, Business & Management/CFA/Level 1",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/CFA/Level II 2024",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/CFA/Level III 2024",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Case Studies",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Economics, Business & Management/Consulting",
+      "depth": 2,
+      "count": 40
+    },
+    {
+      "path": "Economics, Business & Management/Consulting/Cost Cutting",
+      "depth": 3,
+      "count": 10
+    },
+    {
+      "path": "Economics, Business & Management/Consulting/Data Centers",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Economics",
+      "depth": 2,
+      "count": 5
+    },
+    {
+      "path": "Economics, Business & Management/Entreprenuership & Startups",
+      "depth": 2,
+      "count": 13
+    },
+    {
+      "path": "Economics, Business & Management/HRM & Payroll",
+      "depth": 2,
+      "count": 16
+    },
+    {
+      "path": "Economics, Business & Management/Harvard Business Review",
+      "depth": 2,
+      "count": 12
+    },
+    {
+      "path": "Economics, Business & Management/Innovation, Ideas & Change Management",
+      "depth": 2,
+      "count": 7
+    },
+    {
+      "path": "Economics, Business & Management/Leadership",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Economics, Business & Management/Management - General",
+      "depth": 2,
+      "count": 14
+    },
+    {
+      "path": "Economics, Business & Management/Marketing & Sales",
+      "depth": 2,
+      "count": 24
+    },
+    {
+      "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing Secrets Collection",
+      "depth": 3,
+      "count": 67
+    },
+    {
+      "path": "Economics, Business & Management/Papers & Publications",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "Economics, Business & Management/Production, Operations & Manufacturing",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Economics, Business & Management/Project Management",
+      "depth": 2,
+      "count": 17
+    },
+    {
+      "path": "Economics, Business & Management/Retail & Small Business",
+      "depth": 2,
+      "count": 9
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/AgriBusiness",
+      "depth": 3,
+      "count": 3
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/Property Management",
+      "depth": 3,
+      "count": 3
+    },
+    {
+      "path": "Economics, Business & Management/Strategy & Competitiveness",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Forms and Documents",
+      "depth": 1,
+      "count": 1
+    },
+    {
+      "path": "Health, Food & Wellness",
+      "depth": 1,
+      "count": 16
+    },
+    {
+      "path": "Health, Food & Wellness/Dr Sebi",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "Health, Food & Wellness/Herbal Medicine",
+      "depth": 2,
+      "count": 31
+    },
+    {
+      "path": "Health, Food & Wellness/Recipes",
+      "depth": 2,
+      "count": 21
+    },
+    {
+      "path": "History, Military and Politics",
+      "depth": 1,
+      "count": 19
+    },
+    {
+      "path": "History, Military and Politics/African History",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "History, Military and Politics/Ancient History",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "History, Military and Politics/Military & Intelligence",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "History, Military and Politics/Modern History",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "History, Military and Politics/Politics",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Hobbies",
+      "depth": 1,
+      "count": 7
+    },
+    {
+      "path": "Hobbies/Manuals",
+      "depth": 2,
+      "count": 2
+    },
+    {
+      "path": "Knowledge",
+      "depth": 1,
+      "count": 45
+    },
+    {
+      "path": "Knowledge/Archaeology",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Knowledge/Astronomy",
+      "depth": 2,
+      "count": 24
+    },
+    {
+      "path": "Knowledge/Biology",
+      "depth": 2,
+      "count": 2
+    },
+    {
+      "path": "Knowledge/Engineering & Architecture",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Knowledge/Geography & Geology",
+      "depth": 2,
+      "count": 2
+    },
+    {
+      "path": "Knowledge/Mental Models",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Knowledge/Science",
+      "depth": 2,
+      "count": 0
+    },
+    {
+      "path": "Knowledge/Science/General",
+      "depth": 3,
+      "count": 1
+    },
+    {
+      "path": "Knowledge/Survival Guides",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Literature & Novels",
+      "depth": 1,
+      "count": 14
+    },
+    {
+      "path": "Magazines, Journals & Periodicals",
+      "depth": 1,
+      "count": 1
+    },
+    {
+      "path": "Magazines, Journals & Periodicals/Old Pulp Magazines Collection 184",
+      "depth": 2,
+      "count": 35
+    },
+    {
+      "path": "Magazines, Journals & Periodicals/Reader's Digest USA",
+      "depth": 2,
+      "count": 7
+    },
+    {
+      "path": "Magazines, Journals & Periodicals/Wall Street Journal",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Nature, Gardening & Farming",
+      "depth": 1,
+      "count": 20
+    },
+    {
+      "path": "Personal Development",
+      "depth": 1,
+      "count": 93
+    },
+    {
+      "path": "Personal Development/Creativity and Thinking",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Personal Development/Psychology",
+      "depth": 2,
+      "count": 12
+    },
+    {
+      "path": "Personal Development/Wealth and Prosperity",
+      "depth": 2,
+      "count": 9
+    },
+    {
+      "path": "Personal Development/Work and Success",
+      "depth": 2,
+      "count": 7
+    },
+    {
+      "path": "Religion & Spirituality",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Religion & Spirituality/Ancient Mythology",
+      "depth": 2,
+      "count": 10
+    },
+    {
+      "path": "Religion & Spirituality/Christianity",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Religion & Spirituality/Islam",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "Religion & Spirituality/Occult & New Age Stuff",
+      "depth": 2,
+      "count": 27
+    },
+    {
+      "path": "Ugandan Books, Laws, History",
+      "depth": 1,
+      "count": 3
+    },
+    {
+      "path": "Uncategorized",
+      "depth": 1,
+      "count": 0
+    }
+  ]
+}

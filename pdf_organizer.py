@@ -35,7 +35,8 @@ class PDFOrganizer:
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
-        self.category_template_path = Path(category_template) if category_template else self.ebooks_folder / "category_template.json"
+        default_template = Path(__file__).resolve().parent / "category_template.json"
+        self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
         
         if require_api_key and not self.api_key:
@@ -705,7 +706,7 @@ Examples:
     parser.add_argument('--api-key', help='Anthropic API key (or set ANTHROPIC_API_KEY env var)')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without moving files')
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')
-    parser.add_argument('--category-template', help='Path to category template JSON (default: <ebooks>/category_template.json)')
+    parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
     parser.add_argument('--export-template', action='store_true', help='Export current ebooks folder hierarchy to a template file and exit')
     
     args = parser.parse_args()

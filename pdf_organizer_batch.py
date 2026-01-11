@@ -26,7 +26,8 @@ class BatchPDFOrganizer:
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
-        self.category_template_path = Path(category_template) if category_template else self.ebooks_folder / "category_template.json"
+        default_template = Path(__file__).resolve().parent / "category_template.json"
+        self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
         
         if not self.api_key:
@@ -510,7 +511,7 @@ def main():
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
     parser.add_argument('--api-key', help='Anthropic API key')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
-    parser.add_argument('--category-template', help='Path to category template JSON (default: <ebooks>/category_template.json)')
+    parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
     
     args = parser.parse_args()
     
