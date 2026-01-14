@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-01-10T23:06:52.786079",
+  "generated_at": "2026-01-14T22:24:49.941746",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 541,
+  "category_count": 561,
   "categories": [
     {
       "path": "100 For Dummies Series Books Collection",
@@ -14,6 +14,16 @@
       "count": 3
     },
     {
+      "path": "Comics & Classics",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Comics & Classics/TinTin -- Collector's Edition",
+      "depth": 2,
+      "count": 27
+    },
+    {
       "path": "Computer & ICT",
       "depth": 1,
       "count": 0
@@ -21,12 +31,12 @@
     {
       "path": "Computer & ICT/AI",
       "depth": 2,
-      "count": 62
+      "count": 64
     },
     {
       "path": "Computer & ICT/AI/Prompting",
       "depth": 3,
-      "count": 13
+      "count": 14
     },
     {
       "path": "Computer & ICT/Computer Science Concepts",
@@ -36,7 +46,7 @@
     {
       "path": "Computer & ICT/Cyber Security",
       "depth": 2,
-      "count": 25
+      "count": 27
     },
     {
       "path": "Computer & ICT/Data Science, Analytics & Visualization",
@@ -51,12 +61,12 @@
     {
       "path": "Computer & ICT/Design",
       "depth": 2,
-      "count": 3
+      "count": 5
     },
     {
       "path": "Computer & ICT/ERP",
       "depth": 2,
-      "count": 8
+      "count": 12
     },
     {
       "path": "Computer & ICT/GIS",
@@ -79,6 +89,11 @@
       "count": 12
     },
     {
+      "path": "Computer & ICT/Magazines & Periodicals/MIT Technology Review (2025 complete, 6 issues)",
+      "depth": 3,
+      "count": 6
+    },
+    {
       "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing",
       "depth": 2,
       "count": 5
@@ -96,12 +111,17 @@
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals",
       "depth": 2,
-      "count": 15
+      "count": 16
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Linux",
       "depth": 3,
       "count": 48
+    },
+    {
+      "path": "Computer & ICT/Operating Systems and Software Manuals/Linux/Linux USA 2025 Complete",
+      "depth": 4,
+      "count": 12
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Photoshop",
@@ -116,7 +136,7 @@
     {
       "path": "Computer & ICT/Programming & Development",
       "depth": 2,
-      "count": 19
+      "count": 20
     },
     {
       "path": "Computer & ICT/Programming & Development/C",
@@ -431,7 +451,7 @@
     {
       "path": "Computer & ICT/Programming & Development/Java",
       "depth": 3,
-      "count": 12
+      "count": 11
     },
     {
       "path": "Computer & ICT/Programming & Development/Java/Java - The Comprehensive Guide to Java Programming for Professionals",
@@ -2326,7 +2346,7 @@
     {
       "path": "Computer & ICT/Software Development",
       "depth": 2,
-      "count": 43
+      "count": 45
     },
     {
       "path": "Computer & ICT/Software Development/Software Architecture",
@@ -2336,12 +2356,12 @@
     {
       "path": "Computer & ICT/Systems Analysis, Design and BPM",
       "depth": 2,
-      "count": 24
+      "count": 26
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing",
       "depth": 2,
-      "count": 1
+      "count": 0
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing/Search Engine Optimization",
@@ -2351,12 +2371,12 @@
     {
       "path": "Economics, Business & Management",
       "depth": 1,
-      "count": 48
+      "count": 19
     },
     {
       "path": "Economics, Business & Management/Accounting & Finance",
       "depth": 2,
-      "count": 23
+      "count": 27
     },
     {
       "path": "Economics, Business & Management/Business",
@@ -2366,7 +2386,7 @@
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas",
       "depth": 2,
-      "count": 8
+      "count": 10
     },
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas/Ideas",
@@ -2376,7 +2396,7 @@
     {
       "path": "Economics, Business & Management/Business Statistics & Analytics",
       "depth": 2,
-      "count": 1
+      "count": 2
     },
     {
       "path": "Economics, Business & Management/CFA",
@@ -2401,12 +2421,17 @@
     {
       "path": "Economics, Business & Management/Case Studies",
       "depth": 2,
-      "count": 4
+      "count": 5
     },
     {
       "path": "Economics, Business & Management/Consulting",
       "depth": 2,
-      "count": 40
+      "count": 28
+    },
+    {
+      "path": "Economics, Business & Management/Consulting/Consulting Playbooks",
+      "depth": 3,
+      "count": 10
     },
     {
       "path": "Economics, Business & Management/Consulting/Cost Cutting",
@@ -2419,19 +2444,29 @@
       "count": 0
     },
     {
+      "path": "Economics, Business & Management/Consulting/Frameworks",
+      "depth": 3,
+      "count": 14
+    },
+    {
+      "path": "Economics, Business & Management/Consulting/McKinsey",
+      "depth": 3,
+      "count": 4
+    },
+    {
       "path": "Economics, Business & Management/Economics",
       "depth": 2,
-      "count": 5
+      "count": 7
     },
     {
       "path": "Economics, Business & Management/Entreprenuership & Startups",
       "depth": 2,
-      "count": 13
+      "count": 17
     },
     {
-      "path": "Economics, Business & Management/HRM & Payroll",
+      "path": "Economics, Business & Management/HRM, Performance & Payroll",
       "depth": 2,
-      "count": 16
+      "count": 21
     },
     {
       "path": "Economics, Business & Management/Harvard Business Review",
@@ -2441,7 +2476,7 @@
     {
       "path": "Economics, Business & Management/Innovation, Ideas & Change Management",
       "depth": 2,
-      "count": 7
+      "count": 9
     },
     {
       "path": "Economics, Business & Management/Leadership",
@@ -2451,12 +2486,12 @@
     {
       "path": "Economics, Business & Management/Management - General",
       "depth": 2,
-      "count": 14
+      "count": 21
     },
     {
       "path": "Economics, Business & Management/Marketing & Sales",
       "depth": 2,
-      "count": 24
+      "count": 32
     },
     {
       "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing Secrets Collection",
@@ -2466,27 +2501,32 @@
     {
       "path": "Economics, Business & Management/Papers & Publications",
       "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Economics, Business & Management/Presentations",
+      "depth": 2,
       "count": 3
     },
     {
       "path": "Economics, Business & Management/Production, Operations & Manufacturing",
       "depth": 2,
-      "count": 4
+      "count": 6
     },
     {
       "path": "Economics, Business & Management/Project Management",
       "depth": 2,
-      "count": 17
+      "count": 22
     },
     {
       "path": "Economics, Business & Management/Retail & Small Business",
       "depth": 2,
-      "count": 9
+      "count": 11
     },
     {
       "path": "Economics, Business & Management/Specific Industries",
       "depth": 2,
-      "count": 6
+      "count": 9
     },
     {
       "path": "Economics, Business & Management/Specific Industries/AgriBusiness",
@@ -2501,7 +2541,7 @@
     {
       "path": "Economics, Business & Management/Strategy & Competitiveness",
       "depth": 2,
-      "count": 6
+      "count": 11
     },
     {
       "path": "Forms and Documents",
@@ -2511,7 +2551,7 @@
     {
       "path": "Health, Food & Wellness",
       "depth": 1,
-      "count": 16
+      "count": 0
     },
     {
       "path": "Health, Food & Wellness/Dr Sebi",
@@ -2519,9 +2559,24 @@
       "count": 3
     },
     {
+      "path": "Health, Food & Wellness/Health Guides",
+      "depth": 2,
+      "count": 4
+    },
+    {
       "path": "Health, Food & Wellness/Herbal Medicine",
       "depth": 2,
-      "count": 31
+      "count": 34
+    },
+    {
+      "path": "Health, Food & Wellness/History & Knowledge",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Health, Food & Wellness/Mental Health",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Health, Food & Wellness/Recipes",
@@ -2531,7 +2586,7 @@
     {
       "path": "History, Military and Politics",
       "depth": 1,
-      "count": 19
+      "count": 0
     },
     {
       "path": "History, Military and Politics/African History",
@@ -2539,19 +2594,34 @@
       "count": 8
     },
     {
+      "path": "History, Military and Politics/American History",
+      "depth": 2,
+      "count": 2
+    },
+    {
       "path": "History, Military and Politics/Ancient History",
       "depth": 2,
-      "count": 8
+      "count": 10
+    },
+    {
+      "path": "History, Military and Politics/European History",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "History, Military and Politics/History & Political Books",
+      "depth": 2,
+      "count": 6
     },
     {
       "path": "History, Military and Politics/Military & Intelligence",
       "depth": 2,
-      "count": 8
+      "count": 17
     },
     {
       "path": "History, Military and Politics/Modern History",
       "depth": 2,
-      "count": 3
+      "count": 5
     },
     {
       "path": "History, Military and Politics/Politics",
@@ -2561,7 +2631,12 @@
     {
       "path": "Hobbies",
       "depth": 1,
-      "count": 7
+      "count": 1
+    },
+    {
+      "path": "Hobbies/Cars",
+      "depth": 2,
+      "count": 4
     },
     {
       "path": "Hobbies/Manuals",
@@ -2569,9 +2644,19 @@
       "count": 2
     },
     {
+      "path": "Hobbies/Pets",
+      "depth": 2,
+      "count": 1
+    },
+    {
+      "path": "Hobbies/Sports",
+      "depth": 2,
+      "count": 1
+    },
+    {
       "path": "Knowledge",
       "depth": 1,
-      "count": 45
+      "count": 26
     },
     {
       "path": "Knowledge/Archaeology",
@@ -2581,12 +2666,17 @@
     {
       "path": "Knowledge/Astronomy",
       "depth": 2,
-      "count": 24
+      "count": 28
     },
     {
       "path": "Knowledge/Biology",
       "depth": 2,
-      "count": 2
+      "count": 9
+    },
+    {
+      "path": "Knowledge/Climate & Environment",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Knowledge/Engineering & Architecture",
@@ -2594,9 +2684,9 @@
       "count": 1
     },
     {
-      "path": "Knowledge/Geography & Geology",
+      "path": "Knowledge/Geography & Natural Sciences",
       "depth": 2,
-      "count": 2
+      "count": 3
     },
     {
       "path": "Knowledge/Mental Models",
@@ -2604,9 +2694,19 @@
       "count": 4
     },
     {
+      "path": "Knowledge/Philosophy",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "Knowledge/Prehistory",
+      "depth": 2,
+      "count": 1
+    },
+    {
       "path": "Knowledge/Science",
       "depth": 2,
-      "count": 0
+      "count": 7
     },
     {
       "path": "Knowledge/Science/General",
@@ -2656,12 +2756,12 @@
     {
       "path": "Personal Development/Creativity and Thinking",
       "depth": 2,
-      "count": 6
+      "count": 8
     },
     {
       "path": "Personal Development/Psychology",
       "depth": 2,
-      "count": 12
+      "count": 23
     },
     {
       "path": "Personal Development/Wealth and Prosperity",
@@ -2671,7 +2771,7 @@
     {
       "path": "Personal Development/Work and Success",
       "depth": 2,
-      "count": 7
+      "count": 13
     },
     {
       "path": "Religion & Spirituality",
