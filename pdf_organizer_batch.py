@@ -22,20 +22,43 @@ class BatchPDFOrganizer:
             raise ValueError("ebooks_folder is required")
         if not downloads_folder:
             raise ValueError("downloads_folder is required")
-        
+
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
-        
+
         if not self.api_key:
             raise ValueError("Anthropic API key required")
-        
+
         self.client = anthropic.Anthropic(api_key=self.api_key)
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
+
+    def cleanup(self):
+        """Clean up sensitive data and API client from memory"""
+        # Clear API client reference
+        if hasattr(self, 'client'):
+            self.client = None
+
+        # Clear API key from memory
+        if hasattr(self, 'api_key'):
+            self.api_key = None
+
+    def __enter__(self):
+        """Context manager entry"""
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit - ensures cleanup"""
+        self.cleanup()
+        return False
+
+    def __del__(self):
+        """Destructor - ensures cleanup on object deletion"""
+        self.cleanup()
     
     def load_log(self):
         """Load organization history"""
@@ -503,34 +526,34 @@ CRITICAL:
 
 def main():
     parser = argparse.ArgumentParser(description='Batch PDF Organizer (Cost-Effective)')
-    
+
     default_downloads = str(Path.home() / "Downloads")
-    
-    parser.add_argument('--downloads', default=default_downloads, 
+
+    parser.add_argument('--downloads', default=default_downloads,
                        help=f'Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
     parser.add_argument('--api-key', help='Anthropic API key')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
-    
+
     args = parser.parse_args()
-    
+
     print("="*70)
     print("  PDF Organizer - BATCH MODE (Cost-Effective)")
     print("="*70)
     print("\n💰 This version uses ONE API call for all PDFs")
     print(f"   Cost: ~$0.05-0.10 total vs $0.05 per PDF!")
     print()
-    
-    organizer = BatchPDFOrganizer(
+
+    # Use context manager to ensure cleanup
+    with BatchPDFOrganizer(
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
         dry_run=args.dry_run,
         category_template=args.category_template
-    )
-    
-    organizer.organize_pdfs()
+    ) as organizer:
+        organizer.organize_pdfs()
 
 
 if __name__ == "__main__":

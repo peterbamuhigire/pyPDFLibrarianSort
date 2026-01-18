@@ -18,7 +18,7 @@ class PDFOrganizer:
     def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, require_api_key=True):
         """
         Initialize the PDF organizer
-        
+
         Args:
             downloads_folder: Path to Downloads folder (e.g., C:/Users/YourName/Downloads)
             ebooks_folder: Path to ebooks storage (e.g., F:/ebooks)
@@ -28,23 +28,46 @@ class PDFOrganizer:
         # Validate required parameters
         if not ebooks_folder:
             raise ValueError("ebooks_folder is required. Please specify where to organize PDFs (e.g., F:/ebooks)")
-        
+
         if not downloads_folder:
             raise ValueError("downloads_folder is required. Please specify where PDFs are located (e.g., C:/Users/YourName/Downloads)")
-        
+
         self.downloads_folder = Path(downloads_folder)
         self.ebooks_folder = Path(ebooks_folder)
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
-        
+
         if require_api_key and not self.api_key:
             raise ValueError("Anthropic API key required. Set ANTHROPIC_API_KEY env var or pass api_key parameter")
-        
+
         self.client = anthropic.Anthropic(api_key=self.api_key) if self.api_key else None
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
+
+    def cleanup(self):
+        """Clean up sensitive data and API client from memory"""
+        # Clear API client reference
+        if hasattr(self, 'client'):
+            self.client = None
+
+        # Clear API key from memory
+        if hasattr(self, 'api_key'):
+            self.api_key = None
+
+    def __enter__(self):
+        """Context manager entry"""
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit - ensures cleanup"""
+        self.cleanup()
+        return False
+
+    def __del__(self):
+        """Destructor - ensures cleanup on object deletion"""
+        self.cleanup()
         
     def load_log(self):
         """Load organization history"""
@@ -687,19 +710,19 @@ def main():
 Examples:
   # Auto-detect Downloads folder for current user
   python pdf_organizer.py --ebooks "F:/ebooks"
-  
+
   # Specify custom Downloads folder
   python pdf_organizer.py --downloads "C:/CustomDownloads" --ebooks "F:/ebooks"
-  
+
   # Dry run (preview only)
   python pdf_organizer.py --ebooks "F:/ebooks" --dry-run
         """
     )
-    
+
     # Get default Downloads folder for current user
     default_downloads = str(Path.home() / "Downloads")
-    
-    parser.add_argument('--downloads', 
+
+    parser.add_argument('--downloads',
                        default=default_downloads,
                        help=f'Path to Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Path to ebooks folder (e.g., F:/ebooks)')
@@ -708,28 +731,28 @@ Examples:
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
     parser.add_argument('--export-template', action='store_true', help='Export current ebooks folder hierarchy to a template file and exit')
-    
+
     args = parser.parse_args()
-    
+
     # Show detected Downloads folder
     if args.downloads == default_downloads:
         print(f"Using auto-detected Downloads folder: {args.downloads}")
-    
-    organizer = PDFOrganizer(
+
+    # Use context manager to ensure cleanup
+    with PDFOrganizer(
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
         dry_run=args.dry_run,
         category_template=args.category_template,
         require_api_key=not args.export_template
-    )
-    
-    if args.export_template:
-        organizer.export_category_template(args.category_template)
-        print("Template export complete. No files were moved.")
-        return
-    
-    organizer.organize_pdfs(confirm=not args.no_confirm)
+    ) as organizer:
+        if args.export_template:
+            organizer.export_category_template(args.category_template)
+            print("Template export complete. No files were moved.")
+            return
+
+        organizer.organize_pdfs(confirm=not args.no_confirm)
 
 
 if __name__ == "__main__":

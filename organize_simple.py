@@ -160,25 +160,27 @@ def main():
     
     try:
         from pdf_organizer import PDFOrganizer
-        
-        organizer = PDFOrganizer(
+
+        # Use context manager to ensure API key cleanup
+        with PDFOrganizer(
             downloads_folder=downloads_folder,
             ebooks_folder=ebooks_folder,
             api_key=api_key,
             dry_run=False
-        )
-        
-        results = organizer.organize_pdfs(confirm=True)
-        
-        print()
-        print("="*70)
-        print("  Complete!")
-        print("="*70)
-        
-        if results:
-            print(f"\n✓ Organized {len(results)} PDFs")
-            print(f"Check: {ebooks_folder}")
-        
+        ) as organizer:
+            results = organizer.organize_pdfs(confirm=True)
+
+            print()
+            print("="*70)
+            print("  Complete!")
+            print("="*70)
+
+            if results:
+                print(f"\n✓ Organized {len(results)} PDFs")
+                print(f"Check: {ebooks_folder}")
+
+        # API key is now cleared from memory
+
     except Exception as e:
         print()
         print("="*70)
@@ -187,7 +189,7 @@ def main():
         print()
         print(f"Error: {e}")
         print()
-        
+
         import traceback
         print("Full traceback:")
         print(traceback.format_exc())

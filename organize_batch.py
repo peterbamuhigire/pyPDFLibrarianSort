@@ -103,29 +103,31 @@ def main():
     
     try:
         from pdf_organizer_batch import BatchPDFOrganizer
-        
-        organizer = BatchPDFOrganizer(
+
+        # Use context manager to ensure API key cleanup
+        with BatchPDFOrganizer(
             downloads_folder=downloads,
             ebooks_folder=ebooks,
             api_key=api_key,
             dry_run=False
-        )
-        
-        organizer.organize_pdfs()
-        
-        print()
-        print("="*70)
-        print("  Complete!")
-        print("="*70)
-        print(f"\n✓ Check: {ebooks}")
-        
+        ) as organizer:
+            organizer.organize_pdfs()
+
+            print()
+            print("="*70)
+            print("  Complete!")
+            print("="*70)
+            print(f"\n✓ Check: {ebooks}")
+
+        # API key is now cleared from memory
+
     except Exception as e:
         print()
         print("="*70)
         print("  ERROR")
         print("="*70)
         print(f"\n{e}")
-        
+
         import traceback
         print("\nFull traceback:")
         print(traceback.format_exc())
