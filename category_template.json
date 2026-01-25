@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-01-18T06:51:03.711060",
+  "generated_at": "2026-01-26T01:04:28.104033",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 586,
+  "category_count": 591,
   "categories": [
     {
       "path": "Biographies",
@@ -2496,7 +2496,7 @@
     {
       "path": "Economics, Business & Management/Consulting/Frameworks",
       "depth": 3,
-      "count": 12
+      "count": 13
     },
     {
       "path": "Economics, Business & Management/Consulting/McKinsey",
@@ -2897,6 +2897,31 @@
       "path": "Personal Development/Work, Performance and Success",
       "depth": 2,
       "count": 21
+    },
+    {
+      "path": "Philosophy and Thought",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Philosophy and Thought/Aristotle",
+      "depth": 2,
+      "count": 10
+    },
+    {
+      "path": "Philosophy and Thought/Heraclitus and the Pre-Socratics",
+      "depth": 2,
+      "count": 8
+    },
+    {
+      "path": "Philosophy and Thought/Immanuel Kant",
+      "depth": 2,
+      "count": 6
+    },
+    {
+      "path": "Philosophy and Thought/Plato",
+      "depth": 2,
+      "count": 6
     },
     {
       "path": "Religion & Spirituality",

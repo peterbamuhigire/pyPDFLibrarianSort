@@ -29,8 +29,16 @@ def main():
     except ImportError as e:
         print(f"  ❌ Missing package: {e}")
         print("\nInstalling...")
-        os.system("pip install google-generativeai pypdf --quiet")
-        print("  ✓ Installed")
+        os.system(f'"{sys.executable}" -m pip install google-generativeai pypdf --quiet')
+        try:
+            import google.generativeai
+            from pypdf import PdfReader
+            print("  ✓ Installed")
+        except ImportError as e2:
+            print(f"  ❌ Install failed: {e2}")
+            print("  Please run: python -m pip install -r requirements.txt")
+            input("Press Enter to exit...")
+            return
     
     print()
     

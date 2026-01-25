@@ -38,7 +38,7 @@ class PDFOrganizer:
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-pro')
+        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash')
 
         if require_api_key and not self.api_key:
             raise ValueError("Gemini API key required. Set GEMINI_API_KEY env var or pass api_key parameter")
