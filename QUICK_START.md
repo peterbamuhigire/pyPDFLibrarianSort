@@ -11,6 +11,7 @@ python organize_simple.py
 ```
 
 This will:
+
 - ✅ Check if packages are installed (installs them if missing)
 - ✅ Ask you step-by-step what you need
 - ✅ Auto-detect your Downloads folder
@@ -24,17 +25,20 @@ This will:
 ### Method 2: Test First, Then Run
 
 **Step 1 - Test everything:**
+
 ```bash
 python test_basic.py
 ```
 
 This verifies:
+
 - Python packages installed
 - API key available
 - PDFOrganizer class works
 - Validation working
 
 **Step 2 - If tests pass, organize:**
+
 ```bash
 python organize_simple.py
 ```
@@ -50,29 +54,33 @@ python pdf_organizer.py --downloads "C:\Users\Peter\Downloads" --ebooks "F:\eboo
 ```
 
 Replace:
+
 - `C:\Users\Peter\Downloads` with your actual Downloads path
 - `F:\ebooks` with where you want PDFs organized
-- `your-key-here` with your Anthropic API key
+- `your-key-here` with your Gemini API key
 
 ---
 
 ### Method 4: Set Environment Variable, Then Run
 
 **Windows (Command Prompt):**
+
 ```cmd
-set ANTHROPIC_API_KEY=your-key-here
+set GEMINI_API_KEY=your-key-here
 python organize_simple.py
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
-$env:ANTHROPIC_API_KEY="your-key-here"
+$env:GEMINI_API_KEY="your-key-here"
 python organize_simple.py
 ```
 
 **Mac/Linux:**
+
 ```bash
-export ANTHROPIC_API_KEY="your-key-here"
+export GEMINI_API_KEY="your-key-here"
 python organize_simple.py
 ```
 
@@ -81,6 +89,7 @@ python organize_simple.py
 ## 🔍 What's Different About These Approaches
 
 ### organize_simple.py
+
 - **Interactive**: Asks questions step by step
 - **Auto-installs**: Installs missing packages
 - **Auto-detects**: Finds your Downloads folder
@@ -88,6 +97,7 @@ python organize_simple.py
 - **No config files**: Everything specified when you run it
 
 ### test_basic.py
+
 - **Diagnostic**: Tests each component
 - **Safe**: Doesn't modify anything
 - **Clear**: Shows exactly what's wrong
@@ -100,13 +110,13 @@ python organize_simple.py
 ### 1. Install Python Packages
 
 ```bash
-pip install anthropic pdfplumber pypdf
+pip install google-generativeai pdfplumber pypdf
 ```
 
 ### 2. Get API Key
 
-Go to: https://console.anthropic.com/
-Copy your API key (starts with `sk-ant-`)
+Go to: <https://aistudio.google.com/app/apikey>
+Copy your API key (starts with `AIza`)
 
 ### 3. Run Simple Script
 
@@ -128,7 +138,7 @@ Follow the prompts!
 ======================================================================
 
 Step 1: Checking dependencies...
-  ✓ anthropic
+  ✓ google-generativeai
   ✓ pdfplumber
   ✓ pypdf
 
@@ -152,9 +162,9 @@ Folder doesn't exist. Create F:\ebooks? (Y/n): y
 
 Step 4: Configure API Key
 ----------------------------------------------------------------------
-Get your API key at: https://console.anthropic.com/
+Get your API key at: https://aistudio.google.com/app/apikey
 
-Enter your Anthropic API key: sk-ant-your-key-here
+Enter your Gemini API key: AIza-your-key-here
 ✓ API key configured
 
 ======================================================================
@@ -162,7 +172,7 @@ Enter your Anthropic API key: sk-ant-your-key-here
 ======================================================================
 Downloads: C:\Users\Peter\Downloads
 Ebooks:    F:\ebooks
-API Key:   sk-ant-xxx...xxx
+API Key:   AIza-xxx...xxx
 
 Found 15 PDFs in Downloads folder
 
@@ -179,11 +189,12 @@ Start organizing? (Y/n): y
 
 ## ❌ Common Issues & Quick Fixes
 
-### "ModuleNotFoundError: No module named 'anthropic'"
+### "ModuleNotFoundError: No module named 'google-generativeai'"
 
 **Fix:**
+
 ```bash
-pip install anthropic pdfplumber pypdf
+pip install google-generativeai pdfplumber pypdf
 ```
 
 ### "Error: ebooks_folder is required"
@@ -209,15 +220,18 @@ pip install anthropic pdfplumber pypdf
 If NOTHING works:
 
 **Step 1:**
+
 ```bash
 python test_basic.py
 ```
+
 Read the output carefully. It will tell you exactly what's wrong.
 
 **Step 2:**
 Fix what `test_basic.py` reports.
 
 **Step 3:**
+
 ```bash
 python organize_simple.py
 ```
@@ -251,7 +265,7 @@ C:\Users\Peter\Downloads\files> python organize_simple.py
 ======================================================================
 
 Step 1: Checking dependencies...
-  ✓ anthropic
+  ✓ google-generativeai
   ✓ pdfplumber
   ✓ pypdf
 
@@ -269,7 +283,7 @@ Enter Ebooks folder path: F:\ebooks
 
 Step 4: Configure API Key
 ----------------------------------------------------------------------
-Enter your Anthropic API key: sk-ant-api03-xxxxx
+Enter your Gemini API key: AIza-xxxxx
 ✓ API key configured
 
 ======================================================================
@@ -277,7 +291,7 @@ Enter your Anthropic API key: sk-ant-api03-xxxxx
 ======================================================================
 Downloads: C:\Users\Peter\Downloads
 Ebooks:    F:\ebooks
-API Key:   sk-ant-api...xxxx
+API Key:   AIza-xxxx...xxxx
 
 Found 23 PDFs in Downloads folder
 

@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from pypdf import PdfReader
-import anthropic
+import google.generativeai as genai
 from collections import defaultdict
 import argparse
 
@@ -28,12 +28,14 @@ class BatchPDFOrganizer:
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
-        self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
+        self.api_key = api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
+        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-pro')
 
         if not self.api_key:
-            raise ValueError("Anthropic API key required")
+            raise ValueError("Gemini API key required")
 
-        self.client = anthropic.Anthropic(api_key=self.api_key)
+        genai.configure(api_key=self.api_key)
+        self.client = genai.GenerativeModel(self.model_name)
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
 
@@ -224,13 +226,15 @@ CRITICAL:
         print(f"📊 Processing {len(pdf_list)} PDFs in one call...")
         
         try:
-            message = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
-                max_tokens=8000,  # Increased for large batches
-                messages=[{"role": "user", "content": prompt}]
+            message = self.client.generate_content(
+                prompt,
+                generation_config={
+                    "temperature": 0.2,
+                    "max_output_tokens": 8000
+                }
             )
             
-            response_text = message.content[0].text.strip()
+            response_text = (message.text or "").strip()
             
             # Aggressive cleaning
             # Remove any markdown code blocks
@@ -532,7 +536,7 @@ def main():
     parser.add_argument('--downloads', default=default_downloads,
                        help=f'Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--api-key', help='Anthropic API key')
+    parser.add_argument('--api-key', help='Gemini API key')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
 

@@ -65,7 +65,7 @@ echo.
 
 REM Check if dependencies are installed
 echo Checking dependencies...
-python -c "import anthropic" 2>nul
+python -c "import google.generativeai" 2>nul
 if errorlevel 1 (
     echo [WARNING] Dependencies are NOT installed
     echo.
@@ -83,7 +83,7 @@ if errorlevel 1 (
         if not exist "requirements.txt" (
             echo Creating requirements.txt...
             (
-                echo anthropic^>=0.39.0
+                echo google-generativeai^>=0.7.2
                 echo pdfplumber^>=0.11.0
                 echo pypdf^>=3.17.0
                 echo pdf2image^>=1.17.0
@@ -95,7 +95,7 @@ if errorlevel 1 (
         python -m pip install --upgrade pip --quiet
         echo.
         echo Installing packages...
-        python -m pip install anthropic pdfplumber pypdf --quiet
+        python -m pip install google-generativeai pdfplumber pypdf --quiet
         echo.
         echo [OK] Installation complete!
         echo.
@@ -104,7 +104,7 @@ if errorlevel 1 (
         echo.
         echo [INFO] Please install dependencies before running.
         echo Run: INSTALL_DEPENDENCIES.bat
-        echo   Or: pip install anthropic pdfplumber pypdf
+        echo   Or: pip install google-generativeai pdfplumber pypdf
         echo.
         pause
         exit /b 1

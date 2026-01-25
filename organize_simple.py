@@ -19,11 +19,11 @@ def main():
     missing = []
     
     try:
-        import anthropic
-        print("  ✓ anthropic")
+        import google.generativeai
+        print("  ✓ google-generativeai")
     except ImportError:
-        print("  ❌ anthropic - NOT INSTALLED")
-        missing.append("anthropic")
+        print("  ❌ google-generativeai - NOT INSTALLED")
+        missing.append("google-generativeai")
     
     try:
         from pypdf import PdfReader
@@ -106,19 +106,19 @@ def main():
     print("Step 4: Configure API Key")
     print("-" * 70)
     
-    api_key = os.getenv('ANTHROPIC_API_KEY')
+    api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
     
     if api_key:
         print(f"✓ Found in environment: {api_key[:10]}...")
         use_env = input("\nUse this key? (Y/n): ").strip().lower()
         if use_env not in ['', 'y', 'yes']:
-            api_key = input("Enter your Anthropic API key: ").strip()
+            api_key = input("Enter your Gemini API key: ").strip()
     else:
         print("No API key found in environment.")
         print()
-        print("Get your API key at: https://console.anthropic.com/")
+        print("Get your API key at: https://aistudio.google.com/app/apikey")
         print()
-        api_key = input("Enter your Anthropic API key: ").strip()
+        api_key = input("Enter your Gemini API key: ").strip()
     
     if not api_key or api_key.strip() == '':
         print("❌ ERROR: API key is required")

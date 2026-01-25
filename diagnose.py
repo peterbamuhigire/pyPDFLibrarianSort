@@ -25,7 +25,7 @@ print()
 # Check imports
 print("2. Checking Required Packages:")
 packages = {
-    'anthropic': 'Anthropic',
+    'google.generativeai': 'google-generativeai',
     'pdfplumber': 'pdfplumber',
     'pypdf': 'pypdf',
     'tkinter': 'tkinter (GUI)',
@@ -42,12 +42,12 @@ for module_name, display_name in packages.items():
 
 if not all_ok:
     print()
-    print("   Run: pip install anthropic pdfplumber pypdf")
+    print("   Run: pip install google-generativeai pdfplumber pypdf")
 print()
 
 # Check API key
 print("3. API Key:")
-api_key = os.getenv('ANTHROPIC_API_KEY')
+api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
 if api_key:
     print(f"   ✓ Set (starts with: {api_key[:7]}...)")
 else:

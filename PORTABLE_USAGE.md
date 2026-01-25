@@ -3,6 +3,7 @@
 ## 🎒 Using PDF Organizer from Any Location
 
 The PDF Organizer is now fully portable! You can run it from:
+
 - ✅ USB flash drive
 - ✅ External hard drive
 - ✅ Network drive
@@ -10,6 +11,7 @@ The PDF Organizer is now fully portable! You can run it from:
 - ✅ Cloud sync folders (Dropbox, OneDrive, etc.)
 
 The tool **automatically detects** the current user's Downloads folder, so it works regardless of:
+
 - Which computer you're on
 - Which user account is logged in
 - Where the tool is installed
@@ -19,13 +21,16 @@ The tool **automatically detects** the current user's Downloads folder, so it wo
 ## 🚀 Quick Start (Portable Mode)
 
 ### Step 1: Copy All Files
+
 Copy these files to your USB stick or any folder:
+
 - All `.py` files
 - All `.bat` files
 - `requirements.txt`
 - All `.md` documentation files
 
 ### Step 2: Install Dependencies (One Time Per Computer)
+
 On each computer where you'll use the tool:
 
 **Double-click:** `INSTALL_DEPENDENCIES.bat`
@@ -35,9 +40,11 @@ This installs Python packages to the user account (not the USB stick).
 > **Note:** Dependencies need to be installed once per computer, not per USB stick.
 
 ### Step 3: Run from Anywhere
+
 **Double-click:** `PORTABLE_LAUNCHER.bat`
 
 The tool will:
+
 - ✓ Auto-detect the current user's Downloads folder
 - ✓ Work from whatever location it's in
 - ✓ Remember your ebooks folder path
@@ -48,15 +55,17 @@ The tool will:
 ## 📋 What Gets Auto-Detected
 
 ### ✅ Automatically Detected
+
 - **Downloads Folder:** `C:\Users\[CurrentUser]\Downloads`
   - Works for any user on any computer
   - No configuration needed
 
 ### 🔧 You Configure Once
+
 - **Ebooks Folder:** e.g., `F:\ebooks` or `D:\MyLibrary`
   - Set once in the GUI
   - Saved in settings file
-- **API Key:** Your Anthropic API key
+- **API Key:** Your Gemini API key
   - Enter once in the GUI
   - Saved in settings file
 
@@ -67,11 +76,13 @@ The tool will:
 Settings are saved in the **user's home folder**, not on the USB stick:
 
 **Windows:**
+
 ```
 C:\Users\[YourName]\.pdf_organizer_settings.json
 ```
 
 **Mac/Linux:**
+
 ```
 /Users/[YourName]/.pdf_organizer_settings.json
 OR
@@ -79,6 +90,7 @@ OR
 ```
 
 This means:
+
 - ✅ Settings persist across sessions
 - ✅ Different computers can have different settings
 - ✅ Multiple users on same computer have separate settings
@@ -89,12 +101,14 @@ This means:
 ## 🔄 Multi-Computer Workflow
 
 ### Computer A (Home)
+
 1. Run from USB stick: `PORTABLE_LAUNCHER.bat`
 2. Auto-detects: `C:\Users\HomeUser\Downloads`
 3. Configure: Ebooks → `F:\ebooks`
 4. Organize PDFs
 
 ### Computer B (Work)
+
 1. Same USB stick: `PORTABLE_LAUNCHER.bat`
 2. Auto-detects: `C:\Users\WorkUser\Downloads`
 3. Configure: Ebooks → `E:\WorkLibrary`
@@ -106,7 +120,7 @@ Each computer remembers its own settings!
 
 ## 📁 Recommended Setup
 
-### For USB Stick Usage:
+### For USB Stick Usage
 
 ```
 USB-Drive:\
@@ -125,13 +139,14 @@ USB-Drive:\
 
 Then set ebooks folder to: `E:\MyEbooks` (or whatever your USB drive letter is)
 
-### For Network Drive:
+### For Network Drive
 
 ```
 \\NetworkDrive\Tools\PDF-Organizer\
 ```
 
 Configure ebooks to a network location:
+
 ```
 \\NetworkDrive\SharedLibrary\Ebooks\
 ```
@@ -158,22 +173,26 @@ python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
 ## 🎯 Use Cases
 
 ### 1. Work + Home
+
 - Keep tool on USB stick
 - Use at work and home
 - Each location organizes its own Downloads
 - Point to different ebook libraries
 
 ### 2. Multiple Users, One Computer
+
 - Each user has their own Downloads folder
 - Tool auto-detects current user
 - Different ebook libraries per user
 
 ### 3. IT Support / Admin
+
 - Keep tool on USB stick
 - Help users organize their Downloads
 - Works on any computer instantly
 
 ### 4. Library Management
+
 - Store tool with your ebook library
 - Open from library location
 - Always points to correct folders
@@ -184,12 +203,14 @@ python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
 
 If you need to organize a folder other than Downloads:
 
-### GUI Method:
+### GUI Method
+
 1. Launch the tool
 2. Click "Browse" next to Downloads Folder
 3. Select any folder you want
 
-### Command-Line Method:
+### Command-Line Method
+
 ```bash
 python pdf_organizer.py --downloads "C:\MyFolder" --ebooks "F:\ebooks"
 ```
@@ -199,12 +220,14 @@ python pdf_organizer.py --downloads "C:\MyFolder" --ebooks "F:\ebooks"
 ## 🔒 Privacy Note
 
 When running from USB stick:
+
 - ✓ Settings (including API key) are saved to user's home folder
 - ✓ API key is NOT stored on the USB stick
 - ✓ Each computer has separate settings
 - ✓ Safe to share USB stick (no personal data on it)
 
 If you want API key on USB stick (for single-user USB):
+
 - Set environment variable on the USB stick (advanced)
 - Or enter it each time you launch
 
@@ -225,28 +248,34 @@ If you want API key on USB stick (for single-user USB):
 ## 🆘 Troubleshooting Portable Mode
 
 ### "Python not found"
+
 **Problem:** Python not installed on this computer
 
 **Solution:** Install Python on each computer you'll use (one-time setup)
 
 ### "Dependencies not installed"
+
 **Problem:** Packages not installed on this computer
 
 **Solution:** Run `INSTALL_DEPENDENCIES.bat` once per computer
 
 ### "Wrong Downloads folder detected"
+
 **Problem:** Wants to use different folder
 
-**Solution:** 
+**Solution:**
+
 1. Launch GUI
-2. Click "Browse" 
+2. Click "Browse"
 3. Select correct folder
 4. Settings will be saved for this computer
 
 ### "Can't save settings"
+
 **Problem:** No write permission to user home folder
 
-**Solution:** 
+**Solution:**
+
 - Check user permissions
 - Or enter settings each time (they won't save)
 

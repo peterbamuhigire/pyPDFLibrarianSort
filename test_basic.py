@@ -16,19 +16,19 @@ print()
 # Test 1: Imports
 print("Test 1: Checking imports...")
 try:
-    import anthropic
+    import google.generativeai
     from pypdf import PdfReader
     import pdfplumber
     print("✓ All imports successful")
 except ImportError as e:
     print(f"❌ Import failed: {e}")
-    print("\nRun: pip install anthropic pypdf pdfplumber")
+    print("\nRun: pip install google-generativeai pypdf pdfplumber")
     input("\nPress Enter to exit...")
     sys.exit(1)
 
 # Test 2: API Key
 print("\nTest 2: Checking API key...")
-api_key = os.getenv('ANTHROPIC_API_KEY')
+api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
 if not api_key:
     print("⚠ No API key in environment")
     api_key = input("Enter your API key (or press Enter to skip): ").strip()

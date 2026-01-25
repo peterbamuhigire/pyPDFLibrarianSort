@@ -64,7 +64,7 @@ class PDFOrganizerGUI:
                   command=self.browse_ebooks).grid(row=3, column=2, padx=5, pady=5)
         
         # API Key
-        ttk.Label(main_frame, text="Anthropic API Key:").grid(row=4, column=0, sticky=tk.W, pady=5)
+        ttk.Label(main_frame, text="Gemini API Key:").grid(row=4, column=0, sticky=tk.W, pady=5)
         ttk.Entry(main_frame, textvariable=self.api_key, width=50, 
                  show="*").grid(row=4, column=1, pady=5)
         ttk.Button(main_frame, text="Show/Hide", 
@@ -143,7 +143,7 @@ class PDFOrganizerGUI:
             messagebox.showerror("Error", "Please select Ebooks folder.\n\nThe Ebooks folder is where PDFs will be organized (e.g., F:\\ebooks)")
             return
         if not self.api_key.get() or self.api_key.get().strip() == '':
-            messagebox.showerror("Error", "Please enter your Anthropic API key.\n\nGet one at: https://console.anthropic.com/")
+            messagebox.showerror("Error", "Please enter your Gemini API key.\n\nGet one at: https://aistudio.google.com/app/apikey")
             return
             
         # Clear log

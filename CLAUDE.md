@@ -1,22 +1,24 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding assistants when working with code in this repository.
 
 ## Project Overview
 
-pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Claude AI to automatically categorize and organize PDFs. The key innovation is **batch processing**: processing 200 PDFs in one API call costs $0.10 vs $10 for individual processing (100x cost savings).
+pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Gemini AI to automatically categorize and organize PDFs. The key innovation is **batch processing**: processing 200 PDFs in one API call costs $0.10 vs $10 for individual processing (100x cost savings).
 
 ## Core Architecture
 
 ### Two Processing Modes
 
 **Single Mode (`pdf_organizer.py`)**
+
 - Processes PDFs one at a time with individual API calls
 - Higher accuracy (95%) but expensive ($0.05 per PDF)
 - Uses `PDFOrganizer` class
 - Best for important documents requiring precision
 
 **Batch Mode (`pdf_organizer_batch.py`)** (Recommended)
+
 - Processes ALL PDFs in a single API call
 - Cost-effective ($0.05-0.10 for 200+ PDFs)
 - Uses `BatchPDFOrganizer` class
@@ -26,19 +28,23 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Claude AI to
 ### Key Components
 
 **Main Classes:**
+
 - `PDFOrganizer` (pdf_organizer.py) - Single-file processing engine
 - `BatchPDFOrganizer` (pdf_organizer_batch.py) - Batch processing engine
 
 **Interactive Launchers:**
+
 - `organize_simple.py` - Interactive setup for single mode
 - `organize_batch.py` - Interactive setup for batch mode (recommended)
 
 **Category System:**
+
 - `category_template.json` - Pre-generated hierarchical category structure
 - `fetch-categories.py` - Generates category template from existing ebooks folder
 - Both organizers analyze existing folder structure and preserve deep hierarchies (up to 3+ levels)
 
 **Other Tools:**
+
 - `pdf_organizer_gui.py` - Tkinter GUI interface (legacy)
 - `test_basic.py` - Diagnostic tests for dependencies and basic functionality
 - `diagnose.py` - System diagnostic tool
@@ -49,7 +55,7 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Claude AI to
 1. **Discovery**: Recursively find PDFs in Downloads folder
 2. **Metadata Extraction**: Use pypdf to extract title, author from PDF metadata
 3. **Structure Analysis**: Scan existing ebooks folder hierarchy OR load category_template.json
-4. **AI Categorization**: Send batch of filenames + metadata + category structure to Claude
+4. **AI Categorization**: Send batch of filenames + metadata + category structure to Gemini
 5. **Response Parsing**: AI returns JSON with category paths and suggested filenames
 6. **File Operations**: Move PDFs to appropriate folders with smart renaming
 
@@ -70,6 +76,7 @@ The organizers can use a pre-generated category template (`category_template.jso
 ```
 
 To generate from an existing ebooks folder:
+
 ```bash
 cd /path/to/ebooks
 python /path/to/pyPDFLibrarianSort/fetch-categories.py
@@ -129,25 +136,29 @@ copy category_template.json C:/path/to/pyPDFLibrarianSort/
 ## Important Implementation Details
 
 ### API Key Management
-- Reads from `ANTHROPIC_API_KEY` environment variable
+
+- Reads from `GEMINI_API_KEY` environment variable
 - Can be passed as parameter: `PDFOrganizer(api_key="sk-...")`
 - Interactive launchers prompt for key if not found
 - Can optionally be stored in `~/.pdf_organizer_settings.json` (by setup.py)
 
 ### File Operations
+
 - All operations are local - PDFs never uploaded to API
-- Only filenames and metadata sent to Claude
+- Only filenames and metadata sent to Gemini
 - Uses `shutil.move()` for file operations
 - Maintains `organization_log.json` in ebooks folder for tracking
 - Dry-run mode available: `PDFOrganizer(dry_run=True)`
 
 ### Category Hierarchy
+
 - Preserves multi-level folder structures (e.g., "Computer & ICT/Programming/Python")
 - AI receives complete existing structure to maintain consistency
 - Creates new categories when appropriate
 - Falls back to "Uncategorized" for unclear PDFs
 
 ### Error Handling
+
 - PDFs that fail to read skip gracefully
 - API errors reported but don't stop batch processing
 - Validation ensures required folders exist before processing
@@ -166,10 +177,12 @@ python -c "from pdf_organizer import PDFOrganizer; o = PDFOrganizer('downloads',
 ## Dependencies
 
 Only 2 runtime dependencies (see requirements.txt):
-- `anthropic>=0.39.0` - Claude AI API client
+
+- `google-generativeai>=0.7.2` - Gemini AI API client
 - `pypdf>=3.17.0` - PDF metadata extraction
 
 Optional (for GUI):
+
 - `tkinter` - Usually included with Python
 
 Note: `pdfplumber` is imported in test_basic.py but not used in production code.

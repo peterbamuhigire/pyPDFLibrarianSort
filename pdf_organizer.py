@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from pypdf import PdfReader
-import anthropic
+import google.generativeai as genai
 from collections import defaultdict
 import argparse
 
@@ -22,7 +22,7 @@ class PDFOrganizer:
         Args:
             downloads_folder: Path to Downloads folder (e.g., C:/Users/YourName/Downloads)
             ebooks_folder: Path to ebooks storage (e.g., F:/ebooks)
-            api_key: Anthropic API key (or set ANTHROPIC_API_KEY env var)
+            api_key: Gemini API key (or set GEMINI_API_KEY env var)
             dry_run: If True, only show what would be done without moving files
         """
         # Validate required parameters
@@ -37,12 +37,17 @@ class PDFOrganizer:
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
-        self.api_key = api_key or os.getenv('ANTHROPIC_API_KEY')
+        self.api_key = api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
+        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-pro')
 
         if require_api_key and not self.api_key:
-            raise ValueError("Anthropic API key required. Set ANTHROPIC_API_KEY env var or pass api_key parameter")
+            raise ValueError("Gemini API key required. Set GEMINI_API_KEY env var or pass api_key parameter")
 
-        self.client = anthropic.Anthropic(api_key=self.api_key) if self.api_key else None
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
+            self.client = genai.GenerativeModel(self.model_name)
+        else:
+            self.client = None
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
 
@@ -307,9 +312,9 @@ class PDFOrganizer:
         }
     
     def categorize_pdf_with_ai(self, pdf_data, existing_categories):
-        """Use Claude to categorize the PDF based on hierarchical structure"""
+        """Use Gemini to categorize the PDF based on hierarchical structure"""
         if not self.client:
-            raise RuntimeError("Anthropic client not initialized. Provide an API key to categorize.")
+            raise RuntimeError("Gemini client not initialized. Provide an API key to categorize.")
         
         # Validate existing_categories
         if existing_categories is None:
@@ -355,16 +360,15 @@ Respond ONLY with a JSON object in this exact format:
 }}"""
 
         try:
-            message = self.client.messages.create(
-                model="claude-sonnet-4-20250514",
-                max_tokens=500,
-                messages=[{
-                    "role": "user",
-                    "content": prompt
-                }]
+            message = self.client.generate_content(
+                prompt,
+                generation_config={
+                    "temperature": 0.2,
+                    "max_output_tokens": 500
+                }
             )
-            
-            response_text = message.content[0].text
+
+            response_text = message.text or ""
             
             # Parse JSON response
             if "```json" in response_text:
@@ -726,7 +730,7 @@ Examples:
                        default=default_downloads,
                        help=f'Path to Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Path to ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--api-key', help='Anthropic API key (or set ANTHROPIC_API_KEY env var)')
+    parser.add_argument('--api-key', help='Gemini API key (or set GEMINI_API_KEY env var)')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without moving files')
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')

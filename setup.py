@@ -45,7 +45,7 @@ def test_imports():
     print_header("Testing Package Imports")
     
     packages = [
-        ('anthropic', 'Anthropic'),
+        ('google.generativeai', 'google-generativeai'),
         ('pdfplumber', 'pdfplumber'),
         ('pypdf', 'pypdf'),
         ('tkinter', 'tkinter (GUI)')
@@ -67,15 +67,15 @@ def setup_api_key():
     print_header("API Key Configuration")
     
     # Check if already set
-    existing_key = os.getenv('ANTHROPIC_API_KEY')
+    existing_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
     if existing_key:
         print(f"✅ API key already set: {existing_key[:8]}...{existing_key[-4:]}")
         change = input("\nDo you want to change it? (y/n): ").lower()
         if change != 'y':
             return True
     
-    print("\nYou need an Anthropic API key to use this tool.")
-    print("Get one at: https://console.anthropic.com/")
+    print("\nYou need a Gemini API key to use this tool.")
+    print("Get one at: https://aistudio.google.com/app/apikey")
     print("\nOptions:")
     print("1. Enter API key now (will be saved to config file)")
     print("2. Set as environment variable (recommended)")
@@ -84,7 +84,7 @@ def setup_api_key():
     choice = input("\nSelect option (1/2/3): ").strip()
     
     if choice == '1':
-        api_key = input("\nEnter your API key: ").strip()
+        api_key = input("\nEnter your Gemini API key: ").strip()
         if api_key:
             # Save to config file
             config_file = Path.home() / '.pdf_organizer_settings.json'
@@ -100,14 +100,14 @@ def setup_api_key():
             return True
     
     elif choice == '2':
-        api_key = input("\nEnter your API key: ").strip()
+        api_key = input("\nEnter your Gemini API key: ").strip()
         if api_key:
             print("\nTo set as environment variable:")
             if sys.platform == 'win32':
-                print(f'\nRun in Command Prompt:\nsetx ANTHROPIC_API_KEY "{api_key}"')
-                print(f'\nOr in PowerShell:\n$env:ANTHROPIC_API_KEY = "{api_key}"')
+                print(f'\nRun in Command Prompt:\nsetx GEMINI_API_KEY "{api_key}"')
+                print(f'\nOr in PowerShell:\n$env:GEMINI_API_KEY = "{api_key}"')
             else:
-                print(f'\nRun in terminal:\nexport ANTHROPIC_API_KEY="{api_key}"')
+                print(f'\nRun in terminal:\nexport GEMINI_API_KEY="{api_key}"')
                 print(f'\nAdd to ~/.bashrc or ~/.zshrc to make permanent')
             input("\nPress Enter after you've set the environment variable...")
             return True

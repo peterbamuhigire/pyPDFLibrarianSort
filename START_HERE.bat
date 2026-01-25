@@ -72,7 +72,7 @@ echo.
 
 REM Check if dependencies are installed
 echo Checking dependencies...
-python -c "import anthropic" 2>nul
+python -c "import google.generativeai" 2>nul
 if errorlevel 1 (
     echo [WARNING] Dependencies may not be installed
     echo.

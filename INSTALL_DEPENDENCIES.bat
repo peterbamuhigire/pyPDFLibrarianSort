@@ -40,7 +40,7 @@ REM Check if requirements.txt exists
 if not exist "requirements.txt" (
     echo [INFO] Creating requirements.txt...
     (
-        echo anthropic^>=0.39.0
+        echo google-generativeai^>=0.7.2
         echo pdfplumber^>=0.11.0
         echo pypdf^>=3.17.0
         echo pdf2image^>=1.17.0
@@ -68,13 +68,13 @@ if errorlevel 1 (
 echo.
 
 REM Install each package individually with progress
-echo [2/6] Installing anthropic (Claude AI library)...
-python -m pip install "anthropic>=0.39.0" --quiet
+echo [2/6] Installing google-generativeai (Gemini AI library)...
+python -m pip install "google-generativeai>=0.7.2" --quiet
 if errorlevel 1 (
-    echo [ERROR] Failed to install anthropic
+    echo [ERROR] Failed to install google-generativeai
     set INSTALL_FAILED=1
 ) else (
-    echo [OK] anthropic installed
+    echo [OK] google-generativeai installed
 )
 echo.
 
@@ -127,12 +127,12 @@ set ALL_OK=1
 echo Checking required packages...
 echo.
 
-python -c "import anthropic" 2>nul
+python -c "import google.generativeai" 2>nul
 if errorlevel 1 (
-    echo [FAIL] anthropic - NOT installed
+    echo [FAIL] google-generativeai - NOT installed
     set ALL_OK=0
 ) else (
-    echo [PASS] anthropic - Installed
+    echo [PASS] google-generativeai - Installed
 )
 
 python -c "import pdfplumber" 2>nul
@@ -169,7 +169,7 @@ if "%ALL_OK%"=="1" (
     echo You're ready to use the PDF Organizer!
     echo.
     echo Next steps:
-    echo 1. Get your Anthropic API key from: https://console.anthropic.com/
+    echo 1. Get your Gemini API key from: https://aistudio.google.com/app/apikey
     echo 2. Double-click START_HERE.bat to launch the tool
     echo    OR run: python pdf_organizer_gui.py
     echo.
@@ -186,7 +186,7 @@ if "%ALL_OK%"=="1" (
     echo    Right-click this file and "Run as administrator"
     echo.
     echo 2. Install manually:
-    echo    pip install anthropic pdfplumber pypdf
+    echo    pip install google-generativeai pdfplumber pypdf
     echo.
     echo 3. Use virtual environment:
     echo    python -m venv venv

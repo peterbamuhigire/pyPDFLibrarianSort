@@ -6,11 +6,11 @@
 
 ## 🎯 Project Overview
 
-**pyPDFLibrarianSort** is an open-source Python tool that uses Claude AI to automatically organize PDF libraries with intelligent categorization, smart renaming, and hierarchical folder structures.
+**pyPDFLibrarianSort** is an open-source Python tool that uses Gemini AI to automatically organize PDF libraries with intelligent categorization, smart renaming, and hierarchical folder structures.
 
 ### Key Highlights
 
-- 🤖 **AI-Powered** - Uses Anthropic's Claude for intelligent categorization
+- 🤖 **AI-Powered** - Uses Google Gemini for intelligent categorization
 - 💰 **Cost-Effective** - 100x cheaper than traditional per-file processing
 - 🌲 **Smart Organization** - Preserves and creates deep folder hierarchies
 - 📝 **Auto-Renaming** - Uses PDF metadata to create descriptive filenames
@@ -21,11 +21,13 @@
 ## 💰 The Cost Innovation
 
 ### Before (Traditional Approach)
+
 - Process each PDF individually
 - 200 PDFs = 200 API calls
 - Cost: **$10.00**
 
 ### After (Batch Mode)
+
 - Process all PDFs in one request
 - 200 PDFs = 1 API call
 - Cost: **$0.10**
@@ -37,6 +39,7 @@
 ## 📦 What's Included
 
 ### Core Scripts
+
 1. **organize_batch.py** - Interactive batch launcher (RECOMMENDED)
 2. **pdf_organizer_batch.py** - Batch processing engine
 3. **organize_simple.py** - Interactive single-file launcher
@@ -45,6 +48,7 @@
 6. **diagnose.py** - System diagnostics
 
 ### Documentation
+
 1. **README.md** - Main project documentation
 2. **COST_COMPARISON.md** - Detailed cost analysis
 3. **INSTALLATION.md** - Setup guide
@@ -55,6 +59,7 @@
 8. **GIT_COMMANDS.md** - Git reference
 
 ### Project Files
+
 1. **LICENSE** - MIT License
 2. **CONTRIBUTING.md** - Contribution guidelines
 3. **.gitignore** - Git ignore rules
@@ -94,6 +99,7 @@ python organize_batch.py
 ## 🎓 Example Transformation
 
 ### Before
+
 ```
 Downloads/
 ├── 1221432HASdade.pdf
@@ -104,6 +110,7 @@ Downloads/
 ```
 
 ### After
+
 ```
 F:\ebooks\
 ├── Computer & ICT/
@@ -136,16 +143,19 @@ F:\ebooks\
 ## 📈 Expected Impact
 
 ### For Individuals
+
 - Organize 1000+ personal PDFs quickly
 - Save money on API costs
 - Find documents faster with good structure
 
 ### For Organizations
+
 - Organize company document libraries
 - Maintain consistent categorization
 - Save significant API costs at scale
 
 ### For Researchers
+
 - Organize academic papers
 - Maintain research libraries
 - Quick categorization of new papers
@@ -155,18 +165,21 @@ F:\ebooks\
 ## 🎯 Publishing to GitHub
 
 ### Repository Details
+
 - **Name:** pyPDFLibrarianSort
 - **Description:** "AI-powered PDF library organizer - Your intelligent librarian for organizing thousands of PDFs!"
 - **License:** MIT (open source)
 - **Language:** Python 3.8+
-- **Tags:** `pdf`, `ai`, `claude`, `python`, `automation`, `organizer`, `librarian`
+- **Tags:** `pdf`, `ai`, `gemini`, `python`, `automation`, `organizer`, `librarian`
 
 ### Repository URL Structure
+
 ```
 https://github.com/peterbamuhigire/pyPDFLibrarianSort
 ```
 
 ### First Release
+
 - **Tag:** v1.0.0
 - **Title:** "v1.0.0 - Initial Release"
 - **Tagline:** "Your AI librarian is here!"
@@ -179,9 +192,10 @@ https://github.com/peterbamuhigire/pyPDFLibrarianSort
 > "Your AI librarian that organizes thousands of PDFs - 100x more economically!"
 
 **Elevator Pitch:**
-> "pyPDFLibrarianSort uses Claude AI to intelligently categorize and organize your PDF library. Process 200 PDFs for $0.10 instead of $10, maintain deep folder hierarchies, and automatically rename files using metadata - all with simple Python scripts."
+> "pyPDFLibrarianSort uses Gemini AI to intelligently categorize and organize your PDF library. Process 200 PDFs for $0.10 instead of $10, maintain deep folder hierarchies, and automatically rename files using metadata - all with simple Python scripts."
 
 **Twitter/Social Media:**
+
 ```
 🚀 Introducing pyPDFLibrarianSort!
 
@@ -193,7 +207,7 @@ Your AI librarian for organizing PDFs:
 
 200 PDFs: $0.10 vs $10 traditional!
 
-Built with @AnthropicAI Claude
+Built with Google Gemini
 #Python #OpenSource
 
 github.com/peterbamuhigire/pyPDFLibrarianSort
@@ -244,6 +258,7 @@ Before publishing to GitHub:
 ## 🏆 Success Metrics
 
 **Initial Goals (First Month):**
+
 - ⭐ 50-100 GitHub stars
 - 🍴 10-20 forks
 - 👀 500+ repository views
@@ -251,6 +266,7 @@ Before publishing to GitHub:
 - 🐛 5-10 issues/feature requests
 
 **Long-term Goals (6 Months):**
+
 - ⭐ 500+ stars
 - 🍴 50+ forks
 - 👥 5-10 regular contributors
@@ -279,7 +295,7 @@ MIT License - Free to use, modify, and distribute
 - Discussions: `/discussions`
 - License: MIT
 - Python Version: 3.8+
-- Dependencies: anthropic, pypdf
+- Dependencies: google-generativeai, pypdf
 
 ---
 

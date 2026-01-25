@@ -4,13 +4,13 @@ AI-powered PDF library organizer - **100x more cost-effective** than traditional
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Powered by Claude](https://img.shields.io/badge/Powered%20by-Claude%20AI-blueviolet)](https://www.anthropic.com/)
+[![Powered by Gemini](https://img.shields.io/badge/Powered%20by-Gemini%20AI-blueviolet)](https://ai.google.dev/)
 
 > **Your AI librarian that organizes thousands of PDFs intelligently and economically**
 
 ## 🎯 Features
 
-- 🤖 **AI-Powered Categorization** - Uses Claude AI to intelligently categorize PDFs based on filenames and metadata
+- 🤖 **AI-Powered Categorization** - Uses Gemini AI to intelligently categorize PDFs based on filenames and metadata
 - 💰 **Cost-Effective** - Batch mode: $0.10 for 200 PDFs vs $10 single mode (100x savings!)
 - 🌲 **Deep Hierarchy Support** - Preserves and extends multi-level folder structures (3+ levels deep)
 - 📝 **Smart Renaming** - Automatically renames files using PDF metadata (title, author)
@@ -51,7 +51,7 @@ AI-powered PDF library organizer - **100x more cost-effective** than traditional
 
 - Python 3.8 or higher
 - pip (Python package manager)
-- Anthropic API key ([Get one here](https://console.anthropic.com/))
+- Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
 
 ### Step 1: Clone the Repository
 
@@ -67,7 +67,8 @@ pip install -r requirements.txt
 ```
 
 This installs only 2 packages:
-- `anthropic` - Claude AI API client
+
+- `google-generativeai` - Gemini AI API client
 - `pypdf` - PDF metadata extraction
 
 ### Step 3: Set Up API Key
@@ -75,18 +76,21 @@ This installs only 2 packages:
 **Option A: Environment Variable (Recommended)**
 
 Windows (Command Prompt):
+
 ```cmd
-setx ANTHROPIC_API_KEY "your-api-key-here"
+setx GEMINI_API_KEY "your-api-key-here"
 ```
 
 Windows (PowerShell):
+
 ```powershell
-$env:ANTHROPIC_API_KEY = "your-api-key-here"
+$env:GEMINI_API_KEY = "your-api-key-here"
 ```
 
 macOS/Linux:
+
 ```bash
-export ANTHROPIC_API_KEY="your-api-key-here"
+export GEMINI_API_KEY="your-api-key-here"
 # Add to ~/.bashrc or ~/.zshrc to make permanent
 ```
 
@@ -103,6 +107,7 @@ python organize_batch.py
 ```
 
 This launches an interactive wizard that:
+
 1. Auto-detects your Downloads folder
 2. Asks where to organize PDFs (ebooks folder)
 3. Prompts for API key if needed
@@ -128,6 +133,7 @@ python organize_batch.py
 ```
 
 **Features:**
+
 - Processes ALL PDFs in one API call
 - Cost: ~$0.05-0.15 regardless of PDF count
 - Speed: 200 PDFs in 2-3 minutes
@@ -135,6 +141,7 @@ python organize_batch.py
 - Auto-chunks if > 500 PDFs
 
 **When to use:**
+
 - You have 10+ PDFs to organize
 - Cost is a concern
 - You want to organize your entire library at once
@@ -148,6 +155,7 @@ python organize_simple.py
 ```
 
 **Features:**
+
 - Processes PDFs one at a time
 - Cost: $0.05 per PDF
 - Speed: ~1-2 seconds per PDF
@@ -155,6 +163,7 @@ python organize_simple.py
 - Individual attention to each file
 
 **When to use:**
+
 - You have critical documents requiring precision
 - You're organizing a small batch (< 10 PDFs)
 - Maximum categorization accuracy is needed
@@ -171,11 +180,11 @@ Visual interface with buttons and progress bars (legacy mode).
 
 ### Getting Your API Key
 
-1. Go to [Anthropic Console](https://console.anthropic.com/)
+1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. Sign up or log in
 3. Navigate to API Keys section
 4. Create a new API key
-5. Copy the key (starts with `sk-ant-`)
+5. Copy the key (starts with `AIza`)
 
 ### Setting the API Key
 
@@ -185,19 +194,20 @@ Permanent setup that works for all sessions:
 
 ```bash
 # Windows (CMD)
-setx ANTHROPIC_API_KEY "sk-ant-your-key-here"
+setx GEMINI_API_KEY "AIza-your-key-here"
 
 # Windows (PowerShell)
-[System.Environment]::SetEnvironmentVariable('ANTHROPIC_API_KEY','sk-ant-your-key-here','User')
+[System.Environment]::SetEnvironmentVariable('GEMINI_API_KEY','AIza-your-key-here','User')
 
 # macOS/Linux (add to ~/.bashrc or ~/.zshrc)
-echo 'export ANTHROPIC_API_KEY="sk-ant-your-key-here"' >> ~/.bashrc
+echo 'export GEMINI_API_KEY="AIza-your-key-here"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 **Method 2: Interactive Entry**
 
 Just run the tool - it will ask for your key:
+
 ```bash
 python organize_batch.py
 # Will prompt: "Enter API key: "
@@ -206,7 +216,7 @@ python organize_batch.py
 **Method 3: Command Line Parameter**
 
 ```bash
-python pdf_organizer.py --downloads ~/Downloads --ebooks ~/ebooks --api-key "sk-ant-your-key"
+python pdf_organizer.py --downloads ~/Downloads --ebooks ~/ebooks --api-key "AIza-your-key"
 ```
 
 ## ⚙️ Configuration
@@ -223,7 +233,7 @@ All interactive launchers (`organize_batch.py`, `organize_simple.py`) will ask f
    - Example: `F:\ebooks`, `~/Documents/eBooks`, `/storage/library`
    - Created automatically if doesn't exist
 
-3. **API Key** - Your Anthropic API key
+3. **API Key** - Your Gemini API key
    - Detected from environment variable if set
    - Otherwise prompted interactively
 
@@ -237,7 +247,7 @@ from pdf_organizer import PDFOrganizer
 organizer = PDFOrganizer(
     downloads_folder="C:/Users/Peter/Downloads",
     ebooks_folder="F:/ebooks",
-    api_key="sk-ant-...",
+    api_key="AIza-...",
     dry_run=False,  # Set True to preview without moving files
     category_template="category_template.json"  # Optional
 )
@@ -253,7 +263,7 @@ from pdf_organizer_batch import BatchPDFOrganizer
 organizer = BatchPDFOrganizer(
     downloads_folder="C:/Users/Peter/Downloads",
     ebooks_folder="F:/ebooks",
-    api_key="sk-ant-...",
+    api_key="AIza-...",
     dry_run=False,
     category_template="category_template.json"
 )
@@ -269,7 +279,7 @@ The setup wizard (`setup.py`) can create `~/.pdf_organizer_settings.json`:
 {
   "downloads_path": "C:/Users/Peter/Downloads",
   "ebooks_path": "F:/ebooks",
-  "api_key": "sk-ant-..."
+  "api_key": "AIza-..."
 }
 ```
 
@@ -304,17 +314,20 @@ A JSON file containing your ebooks folder hierarchy:
 ### Generating a Template
 
 **Step 1: Navigate to your ebooks folder**
+
 ```bash
 cd F:/ebooks  # Windows
 cd ~/Documents/eBooks  # macOS/Linux
 ```
 
 **Step 2: Run the generator**
+
 ```bash
 python /path/to/pyPDFLibrarianSort/fetch-categories.py
 ```
 
 **Step 3: Copy to project root (optional)**
+
 ```bash
 copy category_template.json C:/path/to/pyPDFLibrarianSort/
 ```
@@ -324,6 +337,7 @@ copy category_template.json C:/path/to/pyPDFLibrarianSort/
 Templates are auto-detected if `category_template.json` exists in the project root.
 
 **Manual specification:**
+
 ```python
 organizer = PDFOrganizer(
     downloads_folder="...",
@@ -333,6 +347,7 @@ organizer = PDFOrganizer(
 ```
 
 **Benefits:**
+
 - Skip scanning large folder structures (saves time)
 - Consistent categorization across runs
 - Share templates across systems
@@ -342,6 +357,7 @@ organizer = PDFOrganizer(
 ### Example 1: Basic Batch Organization
 
 **Before:**
+
 ```
 C:/Users/Peter/Downloads/
 ├── 1221432HASdade.pdf
@@ -352,11 +368,13 @@ C:/Users/Peter/Downloads/
 ```
 
 **Run:**
+
 ```bash
 python organize_batch.py
 ```
 
 **After:**
+
 ```
 F:/ebooks/
 ├── Computer & ICT/
@@ -378,6 +396,7 @@ F:/ebooks/
 ### Example 2: Preserving Existing Structure
 
 Your existing ebooks folder:
+
 ```
 F:/ebooks/
 ├── Computer Science/
@@ -389,6 +408,7 @@ F:/ebooks/
 ```
 
 New PDFs in Downloads:
+
 ```
 Downloads/
 ├── deep_learning.pdf
@@ -396,6 +416,7 @@ Downloads/
 ```
 
 **Result:** PDFs categorized into existing structure:
+
 ```
 F:/ebooks/
 ├── Computer Science/
@@ -426,6 +447,7 @@ organizer.organize_pdfs()
 ```
 
 Output shows what would happen:
+
 ```
 [DRY RUN] Would move:
   Python_Tutorial.pdf
@@ -464,7 +486,7 @@ from pdf_organizer import PDFOrganizer
 organizer = PDFOrganizer(
     downloads_folder="C:/pdfs",
     ebooks_folder="F:/ebooks",
-    api_key="sk-ant-..."
+    api_key="AIza-..."
 )
 
 # Process all PDFs
@@ -492,6 +514,7 @@ organizer.organize_pdfs()
 ### Integration with Other Tools
 
 **Pre-processing hook:**
+
 ```python
 import os
 from pdf_organizer import PDFOrganizer
@@ -512,31 +535,35 @@ organizer.organize_pdfs()
 
 ## 🐛 Troubleshooting
 
-### "Module not found: anthropic"
+### "Module not found: google-generativeai"
 
 **Solution:**
+
 ```bash
 pip install -r requirements.txt
 # or
-pip install anthropic pypdf
+pip install google-generativeai pypdf
 ```
 
 ### "API key required"
 
 **Solution:**
 Set the environment variable:
+
 ```bash
-export ANTHROPIC_API_KEY="sk-ant-your-key-here"
+export GEMINI_API_KEY="AIza-your-key-here"
 ```
 
 Or pass it as parameter:
+
 ```python
-organizer = PDFOrganizer(..., api_key="sk-ant-your-key")
+organizer = PDFOrganizer(..., api_key="AIza-your-key")
 ```
 
 ### "No PDFs found in Downloads folder"
 
 **Checks:**
+
 1. Verify the Downloads path is correct
 2. Ensure PDFs have `.pdf` extension (case-insensitive)
 3. Check subdirectories - tool searches recursively
@@ -544,6 +571,7 @@ organizer = PDFOrganizer(..., api_key="sk-ant-your-key")
 ### "Permission denied" when moving files
 
 **Solution:**
+
 - Close any PDFs that are open
 - Run with administrator privileges
 - Check folder permissions
@@ -551,6 +579,7 @@ organizer = PDFOrganizer(..., api_key="sk-ant-your-key")
 ### High API Costs
 
 **Solution:** Use batch mode!
+
 ```bash
 python organize_batch.py  # Not organize_simple.py
 ```
@@ -558,6 +587,7 @@ python organize_batch.py  # Not organize_simple.py
 ### Incorrect Categorization
 
 **Single file mode** for better accuracy:
+
 ```bash
 python organize_simple.py
 ```
@@ -567,11 +597,13 @@ Or review the `organization_log.json` in your ebooks folder to see AI decisions.
 ### Testing the Installation
 
 Run the diagnostic test:
+
 ```bash
 python test_basic.py
 ```
 
 This verifies:
+
 - Python version
 - Package installation
 - API key configuration
@@ -597,7 +629,7 @@ This verifies:
          │      - Scan ebooks folder OR
          │      - Load category_template.json
          │
-         ├─→ [4] AI Categorization (Claude)
+         ├─→ [4] AI Categorization (Gemini)
          │      Input: filenames + metadata + categories
          │      Output: JSON with paths & new names
          │
@@ -619,10 +651,11 @@ This verifies:
 ### Processing Modes
 
 **Single Mode:**
+
 ```
 For each PDF:
   1. Extract metadata
-  2. Call Claude API
+  2. Call Gemini API
   3. Move file
   4. Log result
 
@@ -630,9 +663,10 @@ Cost: 0.05 × N PDFs
 ```
 
 **Batch Mode:**
+
 ```
 1. Gather ALL PDF metadata
-2. Single Claude API call with all PDFs
+2. Single Gemini API call with all PDFs
 3. Parse JSON response
 4. Move all files
 5. Log all results
@@ -652,9 +686,10 @@ Level 1: Computer & ICT
 ```
 
 **How it works:**
+
 1. Scans your existing ebooks folder structure
-2. Sends the complete hierarchy to Claude
-3. Claude categorizes new PDFs to match existing patterns
+2. Sends the complete hierarchy to Gemini
+3. Gemini categorizes new PDFs to match existing patterns
 4. Creates new subcategories when appropriate
 
 ## 🛡️ Privacy & Security
@@ -662,11 +697,13 @@ Level 1: Computer & ICT
 ### What Gets Sent to the API?
 
 **Sent:**
+
 - PDF filenames
 - PDF metadata (title, author)
 - Existing category structure
 
 **Example:**
+
 ```json
 {
   "filename": "python_tutorial.pdf",
@@ -676,6 +713,7 @@ Level 1: Computer & ICT
 ```
 
 **NOT Sent:**
+
 - PDF content/text
 - Full file paths
 - Any sensitive information from within PDFs
@@ -685,7 +723,7 @@ Level 1: Computer & ICT
 - All file operations are **local only**
 - PDFs never leave your computer
 - API calls use HTTPS encryption
-- No data stored on Anthropic servers (per API policy)
+- No data stored on Google servers (per API policy)
 
 ### API Key Security
 
@@ -730,7 +768,7 @@ Simply move it manually to the correct folder. The tool preserves your folder st
 
 ### Does it work offline?
 
-No, an internet connection is required to call the Claude API for categorization.
+No, an internet connection is required to call the Gemini API for categorization.
 
 ### Can I organize PDFs in multiple folders?
 
@@ -738,7 +776,7 @@ Yes, run the tool multiple times with different `downloads_folder` paths.
 
 ### What about non-English PDFs?
 
-Claude supports multiple languages. The tool should work with PDFs in various languages.
+Gemini supports multiple languages. The tool should work with PDFs in various languages.
 
 ### How do I report issues?
 
@@ -768,7 +806,7 @@ Free to use, modify, and distribute!
 
 ## 🙏 Credits
 
-- Powered by [Anthropic Claude](https://www.anthropic.com/) AI
+- Powered by [Google Gemini](https://ai.google.dev/) AI
 - Built with ❤️ for PDF organization enthusiasts
 - Thanks to all contributors!
 
@@ -777,7 +815,7 @@ Free to use, modify, and distribute!
 - [Documentation](docs/)
 - [Issue Tracker](https://github.com/yourusername/pyPDFLibrarianSort/issues)
 - [Discussions](https://github.com/yourusername/pyPDFLibrarianSort/discussions)
-- [Anthropic API](https://console.anthropic.com/)
+- [Gemini API](https://ai.google.dev/)
 
 ---
 

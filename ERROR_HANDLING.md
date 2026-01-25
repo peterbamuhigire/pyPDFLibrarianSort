@@ -7,6 +7,7 @@
 **What it means:** The AI failed to provide a category path, or returned None/empty.
 
 **Why it happens:**
+
 - API connection issue
 - AI response was malformed
 - API rate limit hit
@@ -15,15 +16,16 @@
 **Solutions:**
 
 1. **Check your API key:**
+
    ```bash
    # Verify it's set
-   echo %ANTHROPIC_API_KEY%  # Windows
-   echo $ANTHROPIC_API_KEY   # Mac/Linux
+   echo %GEMINI_API_KEY%  # Windows
+   echo $GEMINI_API_KEY   # Mac/Linux
    ```
 
 2. **Check internet connection:**
    - Make sure you're connected
-   - Try: `ping api.anthropic.com`
+   - Try: `ping generativelanguage.googleapis.com`
 
 3. **Try again:**
    - Tool now has fallback to "Uncategorized" if this happens
@@ -31,7 +33,7 @@
 
 4. **Check API limits:**
    - Make sure you haven't hit rate limits
-   - Check your Anthropic console: https://console.anthropic.com/
+   - Check your Google AI Studio: <https://aistudio.google.com/app/apikey>
 
 **Fixed in latest version:** Tool now automatically uses "Uncategorized" category if AI fails.
 
@@ -42,12 +44,13 @@
 **What it means:** Dependencies not installed
 
 **Solution:**
+
 ```bash
 # Run the dependency installer
 INSTALL_DEPENDENCIES.bat
 
 # Or manually:
-pip install pdfplumber pypdf anthropic
+pip install pdfplumber pypdf google-generativeai
 ```
 
 ---
@@ -57,7 +60,8 @@ pip install pdfplumber pypdf anthropic
 **What it means:** Python not in PATH
 
 **Solution:**
-1. Reinstall Python from https://python.org
+
+1. Reinstall Python from <https://python.org>
 2. ✅ CHECK "Add Python to PATH" during installation
 3. Restart computer
 4. Try again
@@ -109,18 +113,19 @@ pip install pdfplumber pypdf anthropic
 
 ### ❌ "API key not found"
 
-**What it means:** ANTHROPIC_API_KEY not set
+**What it means:** GEMINI_API_KEY not set
 
 **Solutions:**
 
 1. **Set environment variable:**
+
    ```bash
    # Windows (Command Prompt)
-   setx ANTHROPIC_API_KEY "your-key-here"
+   setx GEMINI_API_KEY "your-key-here"
    
    # Windows (PowerShell)
-   $env:ANTHROPIC_API_KEY = "your-key-here"
-   [Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "your-key-here", "User")
+   $env:GEMINI_API_KEY = "your-key-here"
+   [Environment]::SetEnvironmentVariable("GEMINI_API_KEY", "your-key-here", "User")
    ```
 
 2. **Or enter in GUI:**
@@ -128,6 +133,7 @@ pip install pdfplumber pypdf anthropic
    - It will be saved to settings
 
 3. **Or pass as argument:**
+
    ```bash
    python pdf_organizer.py --ebooks "F:\ebooks" --api-key "your-key"
    ```
@@ -141,7 +147,7 @@ pip install pdfplumber pypdf anthropic
 **Solutions:**
 
 1. **Verify API key:**
-   - Check at https://console.anthropic.com/
+   - Check at <https://aistudio.google.com/app/apikey>
    - Make sure it's active
    - Create new key if needed
 
@@ -156,6 +162,7 @@ pip install pdfplumber pypdf anthropic
 **What it means:** AI returned incomplete response
 
 **What happens:**
+
 - File automatically goes to "Uncategorized" folder
 - Process continues with other files
 
@@ -176,6 +183,7 @@ pip install pdfplumber pypdf anthropic
 **What it means:** AI returned malformed JSON
 
 **What happens:**
+
 - File goes to "Uncategorized"
 - Error is logged
 - Process continues
@@ -183,7 +191,7 @@ pip install pdfplumber pypdf anthropic
 **Solutions:**
 
 1. **Check API status:**
-   - Visit https://status.anthropic.com/
+   - Visit <https://status.cloud.google.com/>
    - May be temporary API issue
 
 2. **Try again later:**
@@ -211,11 +219,13 @@ The tool now includes automatic error recovery:
 ### Logs
 
 All operations are logged to:
+
 ```
 F:\ebooks\organization_log.json
 ```
 
 Check this file to see:
+
 - Which files were processed
 - What categories were assigned
 - Any errors that occurred
@@ -228,6 +238,7 @@ Check this file to see:
 ### Before Running
 
 1. ✅ **Dry run first:**
+
    ```bash
    python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
    ```
@@ -304,18 +315,18 @@ If you encounter persistent errors:
 python --version
 
 # Check packages
-pip list | grep anthropic
+pip list | grep generativeai
 pip list | grep pdfplumber
 pip list | grep pypdf
 
 # Check API key (doesn't show full key)
-python -c "import os; print('Set' if os.getenv('ANTHROPIC_API_KEY') else 'Not Set')"
+python -c "import os; print('Set' if os.getenv('GEMINI_API_KEY') else 'Not Set')"
 
 # Test PDF reading
 python -c "from pypdf import PdfReader; print('PDF library works')"
 
 # Test imports
-python -c "import anthropic, pdfplumber, pypdf; print('All imports OK')"
+python -c "import google.generativeai, pdfplumber, pypdf; print('All imports OK')"
 ```
 
 ---
@@ -329,7 +340,7 @@ python -c "import anthropic, pdfplumber, pypdf; print('All imports OK')"
 | PermissionError | No write access | Close files, check permissions |
 | JSONDecodeError | AI response invalid | Retry, check API status |
 | ConnectionError | No internet | Check connection |
-| 401 Unauthorized | Invalid API key | Verify key at console.anthropic.com |
+| 401 Unauthorized | Invalid API key | Verify key at aistudio.google.com |
 | 429 Too Many Requests | Rate limit hit | Wait and retry |
 | WindowsPath/NoneType | AI returned no category | Fixed in latest version |
 

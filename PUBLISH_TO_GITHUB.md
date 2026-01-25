@@ -1,4 +1,4 @@
-# 🚀 Ready to Publish pyPDFLibrarianSort to GitHub!
+# 🚀 Ready to Publish pyPDFLibrarianSort to GitHub
 
 Everything is ready! Follow these exact steps:
 
@@ -41,7 +41,7 @@ pyPDFLibrarianSort/
 
 ### Step 1: Create GitHub Repository
 
-1. **Go to:** https://github.com/new
+1. **Go to:** <https://github.com/new>
 
 2. **Fill in:**
    - Repository name: `pyPDFLibrarianSort`
@@ -73,6 +73,7 @@ cd pyPDFLibrarianSort
 ```
 
 **Verify structure:**
+
 ```bash
 ls -la
 ```
@@ -131,7 +132,7 @@ git push -u origin main
    - `pdf`
    - `organizer`
    - `ai`
-   - `claude`
+   - `gemini`
    - `python`
    - `automation`
    - `librarian`
@@ -163,7 +164,7 @@ git push -u origin main
 
 ### ✨ Features
 
-- 🤖 **AI-Powered Categorization** using Claude
+- 🤖 **AI-Powered Categorization** using Gemini
 - 💰 **100x More Cost-Effective** ($0.10 vs $10 for 200 PDFs)
 - 🌲 **Hierarchical Folder Structures**
 - 📝 **Smart Auto-Renaming** from PDF metadata
@@ -194,11 +195,12 @@ See [README.md](README.md) for full documentation.
 
 ### 🙏 Credits
 
-Powered by [Anthropic Claude AI](https://www.anthropic.com/)
+Powered by [Google Gemini AI](https://ai.google.dev/)
 
 ---
 
 ⭐ Star this repo if it helps you organize your PDF library!
+
 ```
 
 4. **Click:** "Publish release"
@@ -237,6 +239,7 @@ Add dynamic badges to your README.md:
 ### Social Media Posts
 
 **Twitter/X:**
+
 ```
 🚀 Just open-sourced pyPDFLibrarianSort!
 
@@ -248,7 +251,7 @@ Your AI librarian for organizing PDFs:
 
 200 PDFs: $0.10 vs $10!
 
-Built with @AnthropicAI Claude
+Built with Google Gemini
 
 github.com/peterbamuhigire/pyPDFLibrarianSort
 
@@ -256,11 +259,12 @@ github.com/peterbamuhigire/pyPDFLibrarianSort
 ```
 
 **LinkedIn:**
+
 ```
 I'm excited to share pyPDFLibrarianSort - an open-source AI-powered PDF organizer!
 
 Key Features:
-• Uses Claude AI for intelligent categorization
+• Uses Gemini AI for intelligent categorization
 • 100x more cost-effective than traditional methods
 • Preserves hierarchical folder structures
 • Auto-renames files using metadata
@@ -275,6 +279,7 @@ Check it out: github.com/peterbamuhigire/pyPDFLibrarianSort
 ### Community Submissions
 
 **Reddit:**
+
 - r/Python - "Show & Tell"
 - r/programming
 - r/datahoarder
@@ -282,11 +287,12 @@ Check it out: github.com/peterbamuhigire/pyPDFLibrarianSort
 - r/SideProject
 
 **Hacker News:**
+
 ```
 Show HN: pyPDFLibrarianSort - AI librarian that organizes PDFs (100x cheaper)
 
 Your AI librarian for organizing thousands of PDFs intelligently.
-Uses Claude to categorize, rename, and organize into hierarchies.
+Uses Gemini to categorize, rename, and organize into hierarchies.
 $0.10 for 200 PDFs vs $10 traditional approach.
 
 Built this after spending $10 on 200 PDFs and realizing batch 
@@ -296,6 +302,7 @@ github.com/peterbamuhigire/pyPDFLibrarianSort
 ```
 
 **Product Hunt:**
+
 - Submit as new product
 - Use screenshots/demo
 - Emphasize cost savings
@@ -305,12 +312,14 @@ github.com/peterbamuhigire/pyPDFLibrarianSort
 ## 📈 Monitor Your Project
 
 ### First Week Goals
+
 - ⭐ 10-20 stars
 - 🍴 2-5 forks
 - 👀 100+ views
 - 💬 1-2 discussions
 
 ### First Month Goals
+
 - ⭐ 50-100 stars
 - 🍴 10-20 forks
 - 👀 500+ views
@@ -334,7 +343,7 @@ github.com/peterbamuhigire/pyPDFLibrarianSort
 Before you push, verify:
 
 - [ ] All Python files have no API keys or personal paths
-- [ ] requirements.txt only has: `anthropic>=0.39.0` and `pypdf>=3.17.0`
+- [ ] requirements.txt only has: `google-generativeai>=0.7.2` and `pypdf>=3.17.0`
 - [ ] README.md has no "peterbamuhigire" placeholders
 - [ ] All documentation links work
 - [ ] .gitignore includes `*.pdf`, `.env`, `__pycache__`
@@ -346,12 +355,14 @@ Before you push, verify:
 ## 🆘 If Something Goes Wrong
 
 ### Wrong commit message?
+
 ```bash
 git commit --amend -m "New message"
 git push --force
 ```
 
 ### Forgot a file?
+
 ```bash
 git add filename.py
 git commit --amend --no-edit
@@ -359,6 +370,7 @@ git push --force
 ```
 
 ### Need to undo everything?
+
 ```bash
 rm -rf .git
 # Start over from Step 3
@@ -366,14 +378,16 @@ rm -rf .git
 
 ---
 
-## 🎉 You're Ready!
+## 🎉 You're Ready
 
 **Your repository will be live at:**
+
 ```
 https://github.com/peterbamuhigire/pyPDFLibrarianSort
 ```
 
 **Commands summary:**
+
 ```bash
 cd pyPDFLibrarianSort
 git init
@@ -385,6 +399,7 @@ git push -u origin main
 ```
 
 **Then:**
+
 1. Add topics
 2. Create release v1.0.0
 3. Share on social media
@@ -398,6 +413,7 @@ git push -u origin main
 
 ---
 
-**Questions?** 
+**Questions?**
+
 - Check `docs/GITHUB_SETUP.md` for detailed guide
 - Check `docs/GIT_COMMANDS.md` for git reference

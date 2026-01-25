@@ -23,13 +23,13 @@ def main():
     # Check packages
     print("Checking dependencies...")
     try:
-        import anthropic
+        import google.generativeai
         from pypdf import PdfReader
         print("  ✓ All packages installed")
     except ImportError as e:
         print(f"  ❌ Missing package: {e}")
         print("\nInstalling...")
-        os.system("pip install anthropic pypdf --quiet")
+        os.system("pip install google-generativeai pypdf --quiet")
         print("  ✓ Installed")
     
     print()
@@ -59,14 +59,14 @@ def main():
     
     # Get API key
     print()
-    api_key = os.getenv('ANTHROPIC_API_KEY')
+    api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
     if api_key:
         print(f"✓ API key found: {api_key[:10]}...")
         use_env = input("Use this key? (Y/n): ").strip().lower()
         if use_env not in ['', 'y', 'yes']:
-            api_key = input("Enter API key: ").strip()
+            api_key = input("Enter Gemini API key: ").strip()
     else:
-        api_key = input("Enter API key: ").strip()
+        api_key = input("Enter Gemini API key: ").strip()
     
     # Summary
     print()
