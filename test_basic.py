@@ -4,7 +4,6 @@ Minimal Test - Verify PDF Organizer Works
 Tests the basic functionality step by step
 """
 
-import os
 import sys
 from pathlib import Path
 
@@ -17,6 +16,7 @@ print()
 print("Test 1: Checking imports...")
 try:
     import google.generativeai
+    import anthropic
     from pypdf import PdfReader
     import pdfplumber
     print("✓ All imports successful")
@@ -28,16 +28,21 @@ except ImportError as e:
 
 # Test 2: API Key
 print("\nTest 2: Checking API key...")
-api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-if not api_key:
-    print("⚠ No API key in environment")
-    api_key = input("Enter your API key (or press Enter to skip): ").strip()
-    if not api_key:
-        print("⚠ Skipping API test")
-    else:
-        print(f"✓ Using provided key: {api_key[:10]}...")
+print("Select provider for API test:")
+print("1) Gemini")
+print("2) Anthropic")
+provider_choice = input("Select provider [1]: ").strip().lower()
+provider = "anthropic" if provider_choice in ['2', 'anthropic', 'a'] else "gemini"
+
+if provider == "anthropic":
+    api_key = input("Enter your Anthropic API key (or press Enter to skip): ").strip()
 else:
-    print(f"✓ Found API key: {api_key[:10]}...")
+    api_key = input("Enter your Gemini API key (or press Enter to skip): ").strip()
+
+if not api_key:
+    print("⚠ Skipping API test")
+else:
+    print(f"✓ Using provided key: {api_key[:10]}...")
 
 # Test 3: Create test folders
 print("\nTest 3: Creating test folders...")
@@ -71,6 +76,7 @@ try:
                 downloads_folder=str(test_downloads),
                 ebooks_folder=str(test_ebooks),
                 api_key=api_key,
+                provider=provider,
                 dry_run=True
             )
             print("✓ PDFOrganizer initialized successfully")

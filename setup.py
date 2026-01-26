@@ -4,7 +4,6 @@ Setup script for PDF Organizer
 Helps with initial configuration and testing
 """
 
-import os
 import sys
 import subprocess
 from pathlib import Path
@@ -46,6 +45,7 @@ def test_imports():
     
     packages = [
         ('google.generativeai', 'google-generativeai'),
+        ('anthropic', 'anthropic'),
         ('pdfplumber', 'pdfplumber'),
         ('pypdf', 'pypdf'),
         ('tkinter', 'tkinter (GUI)')
@@ -63,60 +63,14 @@ def test_imports():
     return all_ok
 
 def setup_api_key():
-    """Help user set up API key"""
+    """Explain API key requirements"""
     print_header("API Key Configuration")
-    
-    # Check if already set
-    existing_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-    if existing_key:
-        print(f"✅ API key already set: {existing_key[:8]}...{existing_key[-4:]}")
-        change = input("\nDo you want to change it? (y/n): ").lower()
-        if change != 'y':
-            return True
-    
-    print("\nYou need a Gemini API key to use this tool.")
-    print("Get one at: https://aistudio.google.com/app/apikey")
-    print("\nOptions:")
-    print("1. Enter API key now (will be saved to config file)")
-    print("2. Set as environment variable (recommended)")
-    print("3. Skip (you can enter it in the GUI later)")
-    
-    choice = input("\nSelect option (1/2/3): ").strip()
-    
-    if choice == '1':
-        api_key = input("\nEnter your Gemini API key: ").strip()
-        if api_key:
-            # Save to config file
-            config_file = Path.home() / '.pdf_organizer_settings.json'
-            import json
-            config = {}
-            if config_file.exists():
-                with open(config_file, 'r') as f:
-                    config = json.load(f)
-            config['api_key'] = api_key
-            with open(config_file, 'w') as f:
-                json.dump(config, f)
-            print("✅ API key saved to config file")
-            return True
-    
-    elif choice == '2':
-        api_key = input("\nEnter your Gemini API key: ").strip()
-        if api_key:
-            print("\nTo set as environment variable:")
-            if sys.platform == 'win32':
-                print(f'\nRun in Command Prompt:\nsetx GEMINI_API_KEY "{api_key}"')
-                print(f'\nOr in PowerShell:\n$env:GEMINI_API_KEY = "{api_key}"')
-            else:
-                print(f'\nRun in terminal:\nexport GEMINI_API_KEY="{api_key}"')
-                print(f'\nAdd to ~/.bashrc or ~/.zshrc to make permanent')
-            input("\nPress Enter after you've set the environment variable...")
-            return True
-    
-    elif choice == '3':
-        print("⚠ You'll need to enter the API key when running the tool")
-        return True
-    
-    return False
+    print("\nThis tool requires an API key that you enter when you start organizing.")
+    print("We do not read API keys from environment variables or config files.")
+    print("\nGet a key from:")
+    print("- Gemini: https://aistudio.google.com/app/apikey")
+    print("- Anthropic: https://console.anthropic.com/")
+    return True
 
 def configure_folders():
     """Help user configure folder paths"""

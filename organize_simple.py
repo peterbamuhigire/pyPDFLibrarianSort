@@ -101,23 +101,25 @@ def main():
     else:
         print(f"✓ Using: {ebooks_folder}")
     
-    # Step 4: Get API Key
+    # Step 4: Choose Provider
     print()
-    print("Step 4: Configure API Key")
+    print("Step 4: Choose AI Provider")
     print("-" * 70)
-    
-    api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-    
-    if api_key:
-        print(f"✓ Found in environment: {api_key[:10]}...")
-        use_env = input("\nUse this key? (Y/n): ").strip().lower()
-        if use_env not in ['', 'y', 'yes']:
-            api_key = input("Enter your Gemini API key: ").strip()
+    print("1) Gemini")
+    print("2) Anthropic")
+    provider_choice = input("Select provider [1]: ").strip().lower()
+    provider = "anthropic" if provider_choice in ['2', 'anthropic', 'a'] else "gemini"
+
+    # Step 5: Get API Key
+    print()
+    print("Step 5: Configure API Key")
+    print("-" * 70)
+
+    if provider == "anthropic":
+        print("Get your API key at: https://console.anthropic.com/")
+        api_key = input("Enter your Anthropic API key: ").strip()
     else:
-        print("No API key found in environment.")
-        print()
         print("Get your API key at: https://aistudio.google.com/app/apikey")
-        print()
         api_key = input("Enter your Gemini API key: ").strip()
     
     if not api_key or api_key.strip() == '':
@@ -127,13 +129,14 @@ def main():
     
     print("✓ API key configured")
     
-    # Step 5: Summary and confirmation
+    # Step 6: Summary and confirmation
     print()
     print("="*70)
     print("  Configuration Summary")
     print("="*70)
     print(f"Downloads: {downloads_folder}")
     print(f"Ebooks:    {ebooks_folder}")
+    print(f"Provider:  {provider.title()}")
     print(f"API Key:   {api_key[:10]}...{api_key[-4:]}")
     print()
     
@@ -151,7 +154,7 @@ def main():
         input("Press Enter to exit...")
         return
     
-    # Step 6: Import and run
+    # Step 7: Import and run
     print()
     print("="*70)
     print("  Starting Organization")
@@ -166,6 +169,7 @@ def main():
             downloads_folder=downloads_folder,
             ebooks_folder=ebooks_folder,
             api_key=api_key,
+            provider=provider,
             dry_run=False
         ) as organizer:
             results = organizer.organize_pdfs(confirm=True)

@@ -4,7 +4,6 @@ PDF Organizer Diagnostic Tool
 Run this to check your configuration and identify issues
 """
 
-import os
 import sys
 from pathlib import Path
 
@@ -26,6 +25,7 @@ print()
 print("2. Checking Required Packages:")
 packages = {
     'google.generativeai': 'google-generativeai',
+    'anthropic': 'anthropic',
     'pdfplumber': 'pdfplumber',
     'pypdf': 'pypdf',
     'tkinter': 'tkinter (GUI)',
@@ -47,12 +47,7 @@ print()
 
 # Check API key
 print("3. API Key:")
-api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-if api_key:
-    print(f"   ✓ Set (starts with: {api_key[:7]}...)")
-else:
-    print("   ⚠ Not set as environment variable")
-    print("   You can enter it in the GUI")
+print("   API keys are entered at runtime and are not stored or read from the environment.")
 print()
 
 # Check settings file
@@ -87,11 +82,7 @@ if settings_file.exists():
         else:
             print(f"   Ebooks:    Not set")
         
-        if settings.get('api_key'):
-            key = settings['api_key']
-            print(f"   API Key:   Saved (starts with: {key[:7]}...)")
-        else:
-            print(f"   API Key:   Not saved")
+        print(f"   API Key:   Not stored")
     except Exception as e:
         print(f"   ⚠ Error reading settings: {e}")
 else:

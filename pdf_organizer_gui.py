@@ -7,7 +7,6 @@ Easy-to-use interface for organizing PDFs
 import tkinter as tk
 from tkinter import ttk, filedialog, scrolledtext, messagebox
 import threading
-import os
 from pathlib import Path
 from pdf_organizer import PDFOrganizer
 
@@ -21,6 +20,7 @@ class PDFOrganizerGUI:
         self.downloads_path = tk.StringVar()
         self.ebooks_path = tk.StringVar()
         self.api_key = tk.StringVar()
+        self.provider = tk.StringVar(value="Gemini")
         self.dry_run = tk.BooleanVar(value=True)
         
         # Auto-detect Downloads folder for current user
@@ -63,23 +63,29 @@ class PDFOrganizerGUI:
         ttk.Button(main_frame, text="Browse", 
                   command=self.browse_ebooks).grid(row=3, column=2, padx=5, pady=5)
         
+        # Provider
+        ttk.Label(main_frame, text="AI Provider:").grid(row=4, column=0, sticky=tk.W, pady=5)
+        provider_combo = ttk.Combobox(main_frame, textvariable=self.provider, width=47, state="readonly")
+        provider_combo['values'] = ("Gemini", "Anthropic")
+        provider_combo.grid(row=4, column=1, pady=5, sticky=(tk.W, tk.E))
+
         # API Key
-        ttk.Label(main_frame, text="Gemini API Key:").grid(row=4, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(main_frame, textvariable=self.api_key, width=50, 
-                 show="*").grid(row=4, column=1, pady=5)
+        ttk.Label(main_frame, text="API Key:").grid(row=5, column=0, sticky=tk.W, pady=5)
+        self.api_entry = ttk.Entry(main_frame, textvariable=self.api_key, width=50, show="*")
+        self.api_entry.grid(row=5, column=1, pady=5)
         ttk.Button(main_frame, text="Show/Hide", 
-                  command=self.toggle_api_key).grid(row=4, column=2, padx=5, pady=5)
+              command=self.toggle_api_key).grid(row=5, column=2, padx=5, pady=5)
         
         # Options
         options_frame = ttk.LabelFrame(main_frame, text="Options", padding="10")
-        options_frame.grid(row=5, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=10)
+        options_frame.grid(row=6, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=10)
         
         ttk.Checkbutton(options_frame, text="Dry Run (preview only, don't move files)", 
                        variable=self.dry_run).grid(row=0, column=0, sticky=tk.W)
         
         # Buttons
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=6, column=0, columnspan=3, pady=10)
+        button_frame.grid(row=7, column=0, columnspan=3, pady=10)
         
         ttk.Button(button_frame, text="Organize PDFs", 
                   command=self.run_organizer, style='Accent.TButton').pack(side=tk.LEFT, padx=5)
@@ -90,11 +96,11 @@ class PDFOrganizerGUI:
         
         # Progress
         self.progress = ttk.Progressbar(main_frame, mode='indeterminate')
-        self.progress.grid(row=7, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=5)
+        self.progress.grid(row=8, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=5)
         
         # Log output
         log_frame = ttk.LabelFrame(main_frame, text="Activity Log", padding="5")
-        log_frame.grid(row=8, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=5)
+        log_frame.grid(row=9, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=5)
         
         self.log_text = scrolledtext.ScrolledText(log_frame, height=20, width=90)
         self.log_text.pack(fill=tk.BOTH, expand=True)
@@ -103,7 +109,7 @@ class PDFOrganizerGUI:
         self.root.columnconfigure(0, weight=1)
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(1, weight=1)
-        main_frame.rowconfigure(8, weight=1)
+        main_frame.rowconfigure(9, weight=1)
         
     def browse_downloads(self):
         folder = filedialog.askdirectory(title="Select Downloads Folder")
@@ -117,15 +123,10 @@ class PDFOrganizerGUI:
             
     def toggle_api_key(self):
         # Toggle between show and hide
-        current_show = self.log_text.winfo_children()[0].cget('show') if hasattr(self, 'api_entry') else '*'
-        # Find the entry widget and toggle
-        for widget in self.root.winfo_children()[0].winfo_children():
-            if isinstance(widget, ttk.Entry) and widget.cget('show') == '*':
-                widget.configure(show='')
-                return
-            elif isinstance(widget, ttk.Entry) and widget.cget('show') == '':
-                widget.configure(show='*')
-                return
+        if not hasattr(self, 'api_entry'):
+            return
+        current_show = self.api_entry.cget('show')
+        self.api_entry.configure(show='' if current_show == '*' else '*')
     
     def log(self, message):
         """Add message to log"""
@@ -143,7 +144,14 @@ class PDFOrganizerGUI:
             messagebox.showerror("Error", "Please select Ebooks folder.\n\nThe Ebooks folder is where PDFs will be organized (e.g., F:\\ebooks)")
             return
         if not self.api_key.get() or self.api_key.get().strip() == '':
-            messagebox.showerror("Error", "Please enter your Gemini API key.\n\nGet one at: https://aistudio.google.com/app/apikey")
+            provider = self.provider.get().strip().lower()
+            if provider == 'anthropic':
+                help_url = "https://console.anthropic.com/"
+                provider_name = "Anthropic"
+            else:
+                help_url = "https://aistudio.google.com/app/apikey"
+                provider_name = "Gemini"
+            messagebox.showerror("Error", f"Please enter your {provider_name} API key.\n\nGet one at: {help_url}")
             return
             
         # Clear log
@@ -167,6 +175,7 @@ class PDFOrganizerGUI:
                 downloads_folder=self.downloads_path.get(),
                 ebooks_folder=self.ebooks_path.get(),
                 api_key=self.api_key.get(),
+                provider=self.provider.get().strip().lower(),
                 dry_run=self.dry_run.get()
             )
             
@@ -213,7 +222,7 @@ class PDFOrganizerGUI:
         settings = {
             'downloads_path': self.downloads_path.get(),
             'ebooks_path': self.ebooks_path.get(),
-            'api_key': self.api_key.get()
+            'provider': self.provider.get()
         }
         
         import json
@@ -234,7 +243,8 @@ class PDFOrganizerGUI:
                     settings = json.load(f)
                     self.downloads_path.set(settings.get('downloads_path', ''))
                     self.ebooks_path.set(settings.get('ebooks_path', ''))
-                    self.api_key.set(settings.get('api_key', ''))
+                    self.provider.set(settings.get('provider', 'Gemini'))
+                    self.api_key.set('')
             except:
                 pass
                 

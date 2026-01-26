@@ -24,14 +24,16 @@ def main():
     print("Checking dependencies...")
     try:
         import google.generativeai
+        import anthropic
         from pypdf import PdfReader
         print("  ✓ All packages installed")
     except ImportError as e:
         print(f"  ❌ Missing package: {e}")
         print("\nInstalling...")
-        os.system(f'"{sys.executable}" -m pip install google-generativeai pypdf --quiet')
+        os.system(f'"{sys.executable}" -m pip install anthropic google-generativeai pypdf --quiet')
         try:
             import google.generativeai
+            import anthropic
             from pypdf import PdfReader
             print("  ✓ Installed")
         except ImportError as e2:
@@ -65,17 +67,26 @@ def main():
             Path(ebooks).mkdir(parents=True, exist_ok=True)
             print(f"✓ Created")
     
+    # Choose provider
+    print()
+    print("Choose AI Provider:")
+    print("1) Gemini")
+    print("2) Anthropic")
+    provider_choice = input("Select provider [1]: ").strip().lower()
+    provider = "anthropic" if provider_choice in ['2', 'anthropic', 'a'] else "gemini"
+
     # Get API key
     print()
-    api_key = os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-    if api_key:
-        print(f"✓ API key found: {api_key[:10]}...")
-        use_env = input("Use this key? (Y/n): ").strip().lower()
-        if use_env not in ['', 'y', 'yes']:
-            api_key = input("Enter Gemini API key: ").strip()
+    if provider == "anthropic":
+        api_key = input("Enter Anthropic API key: ").strip()
     else:
         api_key = input("Enter Gemini API key: ").strip()
     
+    if not api_key or api_key.strip() == "":
+        print("❌ ERROR: API key is required")
+        input("Press Enter to exit...")
+        return
+
     # Summary
     print()
     print("="*70)
@@ -83,6 +94,7 @@ def main():
     print("="*70)
     print(f"Downloads: {downloads}")
     print(f"Ebooks:    {ebooks}")
+    print(f"Provider:  {provider.title()}")
     print(f"API Key:   {api_key[:10]}...{api_key[-4:]}")
     print()
     
@@ -117,6 +129,7 @@ def main():
             downloads_folder=downloads,
             ebooks_folder=ebooks,
             api_key=api_key,
+            provider=provider,
             dry_run=False
         ) as organizer:
             organizer.organize_pdfs()

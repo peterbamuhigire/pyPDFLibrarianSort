@@ -11,18 +11,19 @@ from pathlib import Path
 from datetime import datetime
 from pypdf import PdfReader
 import google.generativeai as genai
+from anthropic import Anthropic
 from collections import defaultdict
 import argparse
 
 class PDFOrganizer:
-    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, require_api_key=True):
+    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, require_api_key=True, provider="gemini", model_name=None):
         """
         Initialize the PDF organizer
 
         Args:
             downloads_folder: Path to Downloads folder (e.g., C:/Users/YourName/Downloads)
             ebooks_folder: Path to ebooks storage (e.g., F:/ebooks)
-            api_key: Gemini API key (or set GEMINI_API_KEY env var)
+            api_key: API key for the selected provider
             dry_run: If True, only show what would be done without moving files
         """
         # Validate required parameters
@@ -37,15 +38,24 @@ class PDFOrganizer:
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
-        self.api_key = api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash')
+        self.api_key = api_key
+        self.provider = (provider or "gemini").strip().lower()
+        if self.provider == "gemini":
+            self.model_name = model_name or "gemini-1.5-flash"
+        elif self.provider == "anthropic":
+            self.model_name = model_name or "claude-3-5-sonnet-20240620"
+        else:
+            raise ValueError(f"Unsupported provider: {provider}")
 
         if require_api_key and not self.api_key:
-            raise ValueError("Gemini API key required. Set GEMINI_API_KEY env var or pass api_key parameter")
+            raise ValueError("API key required for the selected provider")
 
         if self.api_key:
-            genai.configure(api_key=self.api_key)
-            self.client = genai.GenerativeModel(self.model_name)
+            if self.provider == "gemini":
+                genai.configure(api_key=self.api_key)
+                self.client = genai.GenerativeModel(self.model_name)
+            else:
+                self.client = Anthropic(api_key=self.api_key)
         else:
             self.client = None
         self.log_file = self.ebooks_folder / "organization_log.json"
@@ -312,9 +322,9 @@ class PDFOrganizer:
         }
     
     def categorize_pdf_with_ai(self, pdf_data, existing_categories):
-        """Use Gemini to categorize the PDF based on hierarchical structure"""
+        """Use AI to categorize the PDF based on hierarchical structure"""
         if not self.client:
-            raise RuntimeError("Gemini client not initialized. Provide an API key to categorize.")
+            raise RuntimeError("AI client not initialized. Provide an API key to categorize.")
         
         # Validate existing_categories
         if existing_categories is None:
@@ -360,15 +370,25 @@ Respond ONLY with a JSON object in this exact format:
 }}"""
 
         try:
-            message = self.client.generate_content(
-                prompt,
-                generation_config={
-                    "temperature": 0.2,
-                    "max_output_tokens": 500
-                }
-            )
-
-            response_text = message.text or ""
+            if self.provider == "gemini":
+                message = self.client.generate_content(
+                    prompt,
+                    generation_config={
+                        "temperature": 0.2,
+                        "max_output_tokens": 500
+                    }
+                )
+                response_text = message.text or ""
+            else:
+                response = self.client.messages.create(
+                    model=self.model_name,
+                    max_tokens=700,
+                    temperature=0.2,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                response_text = "".join(
+                    block.text for block in (response.content or []) if hasattr(block, "text")
+                )
             
             # Parse JSON response
             if "```json" in response_text:
@@ -730,7 +750,8 @@ Examples:
                        default=default_downloads,
                        help=f'Path to Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Path to ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--api-key', help='Gemini API key (or set GEMINI_API_KEY env var)')
+    parser.add_argument('--provider', choices=['gemini', 'anthropic'], default='gemini', help='AI provider to use')
+    parser.add_argument('--api-key', help='API key for the selected provider')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without moving files')
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
@@ -747,6 +768,7 @@ Examples:
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
+        provider=args.provider,
         dry_run=args.dry_run,
         category_template=args.category_template,
         require_api_key=not args.export_template

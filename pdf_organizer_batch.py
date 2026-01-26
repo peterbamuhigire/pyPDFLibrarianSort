@@ -12,11 +12,12 @@ from pathlib import Path
 from datetime import datetime
 from pypdf import PdfReader
 import google.generativeai as genai
+from anthropic import Anthropic
 from collections import defaultdict
 import argparse
 
 class BatchPDFOrganizer:
-    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None):
+    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, provider="gemini", model_name=None):
         """Initialize batch PDF organizer"""
         if not ebooks_folder:
             raise ValueError("ebooks_folder is required")
@@ -28,14 +29,23 @@ class BatchPDFOrganizer:
         self.dry_run = dry_run
         default_template = Path(__file__).resolve().parent / "category_template.json"
         self.category_template_path = Path(category_template) if category_template else default_template
-        self.api_key = api_key or os.getenv('GEMINI_API_KEY') or os.getenv('GOOGLE_API_KEY')
-        self.model_name = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash')
+        self.api_key = api_key
+        self.provider = (provider or "gemini").strip().lower()
+        if self.provider == "gemini":
+            self.model_name = model_name or "gemini-1.5-flash"
+        elif self.provider == "anthropic":
+            self.model_name = model_name or "claude-3-5-sonnet-20240620"
+        else:
+            raise ValueError(f"Unsupported provider: {provider}")
 
         if not self.api_key:
-            raise ValueError("Gemini API key required")
+            raise ValueError("API key required for the selected provider")
 
-        genai.configure(api_key=self.api_key)
-        self.client = genai.GenerativeModel(self.model_name)
+        if self.provider == "gemini":
+            genai.configure(api_key=self.api_key)
+            self.client = genai.GenerativeModel(self.model_name)
+        else:
+            self.client = Anthropic(api_key=self.api_key)
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
 
@@ -226,15 +236,25 @@ CRITICAL:
         print(f"📊 Processing {len(pdf_list)} PDFs in one call...")
         
         try:
-            message = self.client.generate_content(
-                prompt,
-                generation_config={
-                    "temperature": 0.2,
-                    "max_output_tokens": 8000
-                }
-            )
-            
-            response_text = (message.text or "").strip()
+            if self.provider == "gemini":
+                message = self.client.generate_content(
+                    prompt,
+                    generation_config={
+                        "temperature": 0.2,
+                        "max_output_tokens": 8000
+                    }
+                )
+                response_text = (message.text or "").strip()
+            else:
+                response = self.client.messages.create(
+                    model=self.model_name,
+                    max_tokens=8000,
+                    temperature=0.2,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                response_text = "".join(
+                    block.text for block in (response.content or []) if hasattr(block, "text")
+                ).strip()
             
             # Aggressive cleaning
             # Remove any markdown code blocks
@@ -536,7 +556,8 @@ def main():
     parser.add_argument('--downloads', default=default_downloads,
                        help=f'Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--api-key', help='Gemini API key')
+    parser.add_argument('--provider', choices=['gemini', 'anthropic'], default='gemini', help='AI provider to use')
+    parser.add_argument('--api-key', help='API key for the selected provider')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')
 
@@ -554,6 +575,7 @@ def main():
         downloads_folder=args.downloads,
         ebooks_folder=args.ebooks,
         api_key=args.api_key,
+        provider=args.provider,
         dry_run=args.dry_run,
         category_template=args.category_template
     ) as organizer:
