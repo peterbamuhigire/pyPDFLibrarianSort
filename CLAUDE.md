@@ -1,29 +1,66 @@
 # CLAUDE.md
 
-This file provides guidance to AI coding assistants when working with code in this repository.
+AI coding assistant guidance for pyPDFLibrarianSort project.
 
 ## Project Overview
 
-pyPDFLibrarianSort is an AI-powered PDF library organizer that uses AI (Gemini, Anthropic, or DeepSeek) to automatically categorize and organize PDFs. The key innovation is **batch processing**: processing 200 PDFs in one API call costs $0.10 vs $10 for individual processing (100x cost savings).
+**AI-powered PDF library organizer** with three AI provider options (Gemini, Anthropic, DeepSeek), featuring batch processing for 98% cost savings, automated watch mode, modern web interface, and intelligent content analysis.
+
+**Key Innovation**: Batch processing - 200 PDFs in one API call ($0.10) vs individual processing ($10).
+
+## Documentation Structure
+
+**Follow the documentation organization rule:**
+All detailed documentation lives in `docs/` with semantic subdirectories. Root README.md is a landing page that points to docs/.
+
+```
+docs/
+├── guides/          # User guides (setup, usage)
+├── features/        # Feature documentation
+├── overview/        # Project summaries
+└── reference/       # Technical reference
+```
+
+## Available Skills
+
+The `skills/` directory contains reusable development skills for Claude Code:
+
+- **`update-claude-documentation/`** - Systematic documentation update workflow
+- **`skill-writing/`** (skill-creator) - Guide for creating effective skills
+- **`doc-architect/`** - Generate Triple-Layer AGENTS.md documentation
+
+**When to use skills:**
+- Reference skills explicitly when needed: "Using update-claude-documentation, update all docs"
+- Skills loaded only when mentioned (saves tokens)
+- See `skills/CLAUDE.md` and `skills/README.md` for complete skill documentation
 
 ## Core Architecture
 
-### Two Processing Modes
+### Four Processing Modes
 
-**Single Mode (`pdf_organizer.py`)**
+**1. Web Interface (`web_interface.py`)** - Recommended for most users
+- Modern Flask-based web UI with drag & drop
+- Real-time categorization preview
+- Visual approval/rejection workflow
+- Browse organized library
+- Runs on http://localhost:5000
 
-- Processes PDFs one at a time with individual API calls
+**2. Watch Mode (`watch_organizer.py`)** - Set and forget
+- Monitors Downloads folder 24/7
+- Auto-organizes PDFs as they arrive
+- Smart batching (groups PDFs within delay window)
+- Background operation with statistics tracking
+
+**3. Batch Mode (`pdf_organizer_batch.py`)** - Cost-effective one-time
+- Processes ALL PDFs in single API call
+- Cost: $0.05-0.10 for 200+ PDFs
+- Automatic chunking for 500+ PDFs
+- 90-95% accuracy
+
+**4. Single Mode (`pdf_organizer.py`)** - Maximum accuracy
+- Individual API call per PDF
 - Higher accuracy (95%) but expensive ($0.05 per PDF)
-- Uses `PDFOrganizer` class
-- Best for important documents requiring precision
-
-**Batch Mode (`pdf_organizer_batch.py`)** (Recommended)
-
-- Processes ALL PDFs in a single API call
-- Cost-effective ($0.05-0.10 for 200+ PDFs)
-- Uses `BatchPDFOrganizer` class
-- Handles automatic chunking for large batches (500+ PDFs)
-- 90-95% accuracy with massive cost savings
+- Best for critical documents
 
 ### Key Components
 
@@ -34,11 +71,17 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses AI (Gemini, 
 
 **Interactive Launchers:**
 
-- `organize_simple.py` - Interactive setup for single mode
-- `organize_batch.py` - Interactive setup for batch mode (recommended)
+- `web_interface.py` - Modern web UI with drag & drop (RECOMMENDED)
 - `watch_setup.py` - Interactive setup for watch mode (auto-organize)
-- `watch_organizer.py` - Watch mode script (monitors folder for new PDFs)
-- `web_interface.py` - Modern web UI with drag & drop (NEW!)
+- `organize_batch.py` - Interactive setup for batch mode
+- `organize_simple.py` - Interactive setup for single mode
+
+**Core Processing Engines:**
+
+- `BatchPDFOrganizer` (pdf_organizer_batch.py) - Batch processing engine
+- `PDFOrganizer` (pdf_organizer.py) - Single-file processing engine
+- `PDFWatcher` (watch_organizer.py) - File system monitoring for auto-organization
+- Flask app (web_interface.py) - Web interface with RESTful API
 
 **Category System:**
 
@@ -46,21 +89,38 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses AI (Gemini, 
 - `fetch-categories.py` - Generates category template from existing ebooks folder
 - Both organizers analyze existing folder structure and preserve deep hierarchies (up to 3+ levels)
 
-**Other Tools:**
+**Content Analysis:**
 
-- `pdf_organizer_gui.py` - Tkinter GUI interface (legacy)
-- `test_basic.py` - Diagnostic tests for dependencies and basic functionality
-- `diagnose.py` - System diagnostic tool
-- `setup.py` - Interactive setup wizard
+- `pdf_content_analyzer.py` - Detects gibberish filenames, extracts PDF content
+- `PDFContentAnalyzer` class - Analyzes first 3 pages for better categorization
+
+**Support Tools:**
+
+- `test_basic.py` - Diagnostic tests
+- `setup.py` - Setup wizard
+- `fetch-categories.py` - Category template generator
+
+**Templates & Static Files:**
+
+- `templates/` - HTML templates for web interface
+- `static/` - CSS, JavaScript for web UI
 
 ### Data Flow
 
 1. **Discovery**: Recursively find PDFs in Downloads folder
-2. **Metadata Extraction**: Use pypdf to extract title, author from PDF metadata
+2. **Content Analysis**:
+   - Extract PDF metadata (title, author, subject)
+   - Detect gibberish filenames (PDFContentAnalyzer)
+   - Read first 3 pages of content for gibberish files
 3. **Structure Analysis**: Scan existing ebooks folder hierarchy OR load category_template.json
-4. **AI Categorization**: Send batch of filenames + metadata + category structure to Gemini
-5. **Response Parsing**: AI returns JSON with category paths and suggested filenames
-6. **File Operations**: Move PDFs to appropriate folders with smart renaming
+4. **AI Categorization**:
+   - Send batch of filenames + metadata + content previews + category structure
+   - Supports Gemini, Anthropic, or DeepSeek
+   - Returns JSON with category paths and suggested filenames
+5. **Response Parsing**: Parse JSON, validate categories
+6. **User Review** (web interface): Preview and approve/reject suggestions
+7. **File Operations**: Move PDFs to appropriate folders with smart renaming
+8. **Logging**: Record all operations in organization_log.json
 
 ### Category Template System
 
@@ -87,7 +147,49 @@ python /path/to/pyPDFLibrarianSort/fetch-categories.py
 
 Both `PDFOrganizer` and `BatchPDFOrganizer` support `category_template` parameter.
 
+### Smart Content Analysis
+
+The system includes intelligent gibberish filename detection:
+
+**Detection Criteria** (2+ triggers = gibberish):
+- Too short (< 5 characters)
+- Mostly numbers (> 60% digits)
+- All numbers
+- Random case mixing
+- Temp file patterns (temp*, tmp*, download*)
+- No vowels
+
+**When gibberish detected:**
+1. Extract PDF metadata (title, author)
+2. Read first 3 pages of content
+3. Send content preview to AI (max 1000 chars for batch mode)
+4. AI suggests better filename based on content
+
+**Example:**
+```
+Input: SAJSABC4345.pdf
+Metadata: "A Study of Eastern Rabbits"
+Content: "This research paper examines behavioral patterns..."
+→ Output: Science/Biology/Zoology/A Study of Eastern Rabbits.pdf
+```
+
 ## Common Commands
+
+### Usage
+
+```bash
+# Web interface (recommended)
+python web_interface.py
+
+# Watch mode (auto-organize)
+python watch_setup.py
+
+# Batch mode (one-time)
+python organize_batch.py
+
+# Single mode (max accuracy)
+python organize_simple.py
+```
 
 ### Development
 
@@ -202,11 +304,43 @@ Runtime dependencies (see requirements.txt):
 - `flask>=3.0.0` - Web framework (for web interface)
 - `flask-cors>=4.0.0` - CORS support (for web interface)
 
-Optional (for legacy GUI):
+## Documentation Maintenance
 
-- `tkinter` - Usually included with Python
+**When making significant changes**, use the `update-claude-documentation` skill to systematically update all docs:
 
-Note: `pdfplumber` is imported in test_basic.py but not used in production code.
+```
+Using update-claude-documentation skill, update all documentation for [change description]
+```
+
+**Documentation files to update:**
+- `PROJECT_BRIEF.md` - 30-second overview (update for major features)
+- `README.md` - Landing page (keep concise, point to docs/)
+- `CLAUDE.md` - This file (update for architecture/pattern changes)
+- `docs/guides/` - User guides (update for feature changes)
+- `docs/features/FEATURES_SUMMARY.md` - Feature list
+- `docs/reference/` - Technical references
+
+**Documentation organization principle:**
+- Root README.md = Landing page with links
+- Detailed docs = `docs/` subdirectories
+- AI guidance = `CLAUDE.md`
+- Skills = `skills/` directory
+
+## Working with Skills
+
+The `skills/` directory contains development skills for Claude Code. To use them:
+
+**Available skills:**
+- `update-claude-documentation` - Systematic doc updates
+- `skill-writing` - Creating new skills
+- `doc-architect` - Generate AGENTS.md files
+
+**Usage pattern:**
+```
+Using [skill-name], [task description]
+```
+
+See `skills/README.md` for complete skill documentation.
 
 ## Configuration Files
 
