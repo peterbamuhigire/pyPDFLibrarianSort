@@ -38,6 +38,7 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses AI (Gemini, 
 - `organize_batch.py` - Interactive setup for batch mode (recommended)
 - `watch_setup.py` - Interactive setup for watch mode (auto-organize)
 - `watch_organizer.py` - Watch mode script (monitors folder for new PDFs)
+- `web_interface.py` - Modern web UI with drag & drop (NEW!)
 
 **Category System:**
 
@@ -107,6 +108,10 @@ python setup.py
 ### Usage
 
 ```bash
+# Web Interface (recommended for best user experience) ✨ NEW!
+python web_interface.py
+# Then open browser to http://localhost:5000
+
 # Batch mode (recommended for one-time organization)
 python organize_batch.py
 
@@ -118,7 +123,7 @@ python watch_setup.py
 # Or directly:
 python watch_organizer.py --ebooks F:/ebooks --provider gemini --api-key YOUR_KEY
 
-# GUI mode
+# GUI mode (legacy)
 python pdf_organizer_gui.py
 
 # Direct invocation (batch)
@@ -194,8 +199,10 @@ Runtime dependencies (see requirements.txt):
 - `openai>=1.0.0` - OpenAI-compatible client (for DeepSeek)
 - `pypdf>=3.17.0` - PDF metadata extraction
 - `watchdog>=3.0.0` - File system monitoring (for watch mode)
+- `flask>=3.0.0` - Web framework (for web interface)
+- `flask-cors>=4.0.0` - CORS support (for web interface)
 
-Optional (for GUI):
+Optional (for legacy GUI):
 
 - `tkinter` - Usually included with Python
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Organizer - AI-Powered Library Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📚 PDF Organizer</h1>
+            <p class="tagline">AI-Powered Library Management with Drag & Drop</p>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="showSettings()">⚙️ Settings</button>
+                <button class="btn btn-secondary" onclick="showBrowser()">📁 Browse Library</button>
+                <button class="btn btn-secondary" onclick="showStats()">📊 Statistics</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="mainContent">
+            <!-- Upload Section -->
+            <section id="uploadSection" class="section">
+                <div class="upload-area" id="dropZone">
+                    <div class="upload-icon">📄</div>
+                    <h2>Drag & Drop PDFs Here</h2>
+                    <p>or click to browse</p>
+                    <input type="file" id="fileInput" multiple accept=".pdf" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        Choose Files
+                    </button>
+                </div>
+
+                <!-- File List -->
+                <div id="fileList" class="file-list" style="display: none;">
+                    <h3>Uploaded Files (<span id="fileCount">0</span>)</h3>
+                    <div id="files"></div>
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="analyzeFiles()">
+                            🤖 Analyze & Categorize
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearFiles()">
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Results -->
+            <section id="resultsSection" class="section" style="display: none;">
+                <h2>📋 Categorization Results</h2>
+                <p class="subtitle">Review and approve suggestions before organizing</p>
+
+                <div class="results-actions">
+                    <button class="btn btn-success" onclick="approveAll()">✓ Approve All</button>
+                    <button class="btn btn-danger" onclick="rejectAll()">✗ Reject All</button>
+                    <button class="btn btn-primary" onclick="organizeApproved()">
+                        📦 Organize Approved Files
+                    </button>
+                </div>
+
+                <div id="results" class="results-grid"></div>
+            </section>
+
+            <!-- Settings Panel -->
+            <section id="settingsSection" class="section" style="display: none;">
+                <h2>⚙️ Settings</h2>
+
+                <div class="form-group">
+                    <label for="ebooksFolder">Ebooks Folder</label>
+                    <input type="text" id="ebooksFolder" placeholder="F:\ebooks" class="input">
+                    <small>Where organized PDFs will be stored</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="provider">AI Provider</label>
+                    <select id="provider" class="input">
+                        <option value="gemini">Gemini (Google)</option>
+                        <option value="anthropic">Anthropic (Claude)</option>
+                        <option value="deepseek">DeepSeek</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiKey">API Key</label>
+                    <input type="password" id="apiKey" placeholder="Enter your API key" class="input">
+                    <small id="apiKeyHelp">Get your key at: <a href="#" id="apiKeyLink" target="_blank">...</a></small>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                    <button class="btn btn-secondary" onclick="showUpload()">Cancel</button>
+                </div>
+            </section>
+
+            <!-- Library Browser -->
+            <section id="browserSection" class="section" style="display: none;">
+                <h2>📁 Library Browser</h2>
+                <div id="libraryStats" class="stats-bar"></div>
+                <div id="libraryTree" class="library-tree"></div>
+                <button class="btn btn-secondary" onclick="showUpload()">Back to Upload</button>
+            </section>
+
+            <!-- Statistics -->
+            <section id="statsSection" class="section" style="display: none;">
+                <h2>📊 Statistics</h2>
+                <div id="statsContent" class="stats-grid"></div>
+                <button class="btn btn-secondary" onclick="showUpload()">Back to Upload</button>
+            </section>
+        </main>
+
+        <!-- Progress Indicator -->
+        <div id="progressOverlay" class="overlay" style="display: none;">
+            <div class="progress-card">
+                <div class="spinner"></div>
+                <h3 id="progressMessage">Processing...</h3>
+                <p id="progressDetail"></p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
