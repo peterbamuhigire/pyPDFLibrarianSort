@@ -12,6 +12,7 @@ from datetime import datetime
 from pypdf import PdfReader
 import google.generativeai as genai
 from anthropic import Anthropic
+from openai import OpenAI
 from collections import defaultdict
 import argparse
 
@@ -44,6 +45,8 @@ class PDFOrganizer:
             self.model_name = model_name or "gemini-1.5-flash"
         elif self.provider == "anthropic":
             self.model_name = model_name or "claude-3-5-sonnet-20240620"
+        elif self.provider == "deepseek":
+            self.model_name = model_name or "deepseek-chat"
         else:
             raise ValueError(f"Unsupported provider: {provider}")
 
@@ -54,8 +57,13 @@ class PDFOrganizer:
             if self.provider == "gemini":
                 genai.configure(api_key=self.api_key)
                 self.client = genai.GenerativeModel(self.model_name)
-            else:
+            elif self.provider == "anthropic":
                 self.client = Anthropic(api_key=self.api_key)
+            else:  # deepseek
+                self.client = OpenAI(
+                    api_key=self.api_key,
+                    base_url="https://api.deepseek.com"
+                )
         else:
             self.client = None
         self.log_file = self.ebooks_folder / "organization_log.json"
@@ -379,7 +387,7 @@ Respond ONLY with a JSON object in this exact format:
                     }
                 )
                 response_text = message.text or ""
-            else:
+            elif self.provider == "anthropic":
                 response = self.client.messages.create(
                     model=self.model_name,
                     max_tokens=700,
@@ -389,6 +397,14 @@ Respond ONLY with a JSON object in this exact format:
                 response_text = "".join(
                     block.text for block in (response.content or []) if hasattr(block, "text")
                 )
+            else:  # deepseek
+                response = self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.2,
+                    max_tokens=700
+                )
+                response_text = response.choices[0].message.content
             
             # Parse JSON response
             if "```json" in response_text:
@@ -750,7 +766,7 @@ Examples:
                        default=default_downloads,
                        help=f'Path to Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Path to ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--provider', choices=['gemini', 'anthropic'], default='gemini', help='AI provider to use')
+    parser.add_argument('--provider', choices=['gemini', 'anthropic', 'deepseek'], default='gemini', help='AI provider to use')
     parser.add_argument('--api-key', help='API key for the selected provider')
     parser.add_argument('--dry-run', action='store_true', help='Show what would be done without moving files')
     parser.add_argument('--no-confirm', action='store_true', help='Skip confirmation prompt')

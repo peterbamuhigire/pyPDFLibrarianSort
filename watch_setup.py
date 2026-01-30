@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
 """
-PDF Organizer - Batch Mode Launcher
-ONE API call for ALL PDFs = massive cost savings!
+Watch Mode Setup - Interactive configuration
 """
 
 import os
 import sys
+import json
 from pathlib import Path
 
 def main():
     print("="*70)
-    print("  PDF Organizer - BATCH MODE (Cost-Effective)")
+    print("  PDF Organizer - Watch Mode Setup")
     print("="*70)
     print()
-    print("💰 Cost Comparison:")
-    print("   Old way: $0.05 per PDF  → 200 PDFs = $10")
-    print("   Batch:   $0.05-0.10 total → 200 PDFs = $0.10!")
+    print("This will configure automatic PDF organization.")
+    print("The watcher will run in the background and organize PDFs")
+    print("as they arrive in your Downloads folder.")
     print()
-    print("   100x COST SAVINGS! 🎉")
-    print()
-    
+
     # Check packages
     print("Checking dependencies...")
     try:
@@ -27,29 +25,31 @@ def main():
         import anthropic
         import openai
         from pypdf import PdfReader
+        from watchdog.observers import Observer
         print("  ✓ All packages installed")
     except ImportError as e:
         print(f"  ❌ Missing package: {e}")
         print("\nInstalling...")
-        os.system(f'"{sys.executable}" -m pip install anthropic google-generativeai openai pypdf --quiet')
+        os.system(f'"{sys.executable}" -m pip install anthropic google-generativeai openai pypdf watchdog --quiet')
         try:
             import google.generativeai
             import anthropic
             import openai
             from pypdf import PdfReader
+            from watchdog.observers import Observer
             print("  ✓ Installed")
         except ImportError as e2:
             print(f"  ❌ Install failed: {e2}")
             print("  Please run: python -m pip install -r requirements.txt")
             input("Press Enter to exit...")
             return
-    
+
     print()
-    
+
     # Get Downloads folder
     auto_downloads = str(Path.home() / "Downloads")
     print(f"Downloads folder: {auto_downloads}")
-    
+
     if Path(auto_downloads).exists():
         use_auto = input("Use this folder? (Y/n): ").strip().lower()
         if use_auto in ['', 'y', 'yes']:
@@ -58,17 +58,17 @@ def main():
             downloads = input("Enter Downloads path: ").strip()
     else:
         downloads = input("Enter Downloads path: ").strip()
-    
-    # Get Ebooks folder  
+
+    # Get Ebooks folder
     print()
     ebooks = input("Enter Ebooks folder path (e.g., F:\\ebooks): ").strip()
-    
+
     if not Path(ebooks).exists():
         create = input(f"\nCreate {ebooks}? (Y/n): ").strip().lower()
         if create in ['', 'y', 'yes']:
             Path(ebooks).mkdir(parents=True, exist_ok=True)
             print(f"✓ Created")
-    
+
     # Choose provider
     print()
     print("Choose AI Provider:")
@@ -92,66 +92,82 @@ def main():
         api_key = input("Enter DeepSeek API key: ").strip()
     else:
         api_key = input("Enter Gemini API key: ").strip()
-    
+
     if not api_key or api_key.strip() == "":
         print("❌ ERROR: API key is required")
         input("Press Enter to exit...")
         return
 
+    # Batch delay
+    print()
+    print("Batch Delay: How long to wait for more PDFs before processing")
+    print("  - Shorter delay (5-10s): Faster organization")
+    print("  - Longer delay (20-30s): Better batching, lower API costs")
+    delay = input("Enter delay in seconds [10]: ").strip()
+    delay = int(delay) if delay else 10
+
     # Summary
     print()
     print("="*70)
-    print("  Configuration")
+    print("  Configuration Summary")
     print("="*70)
     print(f"Downloads: {downloads}")
     print(f"Ebooks:    {ebooks}")
     print(f"Provider:  {provider.title()}")
     print(f"API Key:   {api_key[:10]}...{api_key[-4:]}")
+    print(f"Delay:     {delay} seconds")
     print()
-    
-    # Count PDFs
-    pdf_count = 0
-    for root, dirs, files in os.walk(downloads):
-        pdf_count += len([f for f in files if f.lower().endswith('.pdf')])
-    
-    print(f"📚 Found {pdf_count} PDFs")
+    print("💡 Watch mode will:")
+    print(f"   • Monitor {downloads} for new PDFs")
+    print(f"   • Wait {delay} seconds to batch multiple PDFs together")
+    print(f"   • Organize them to {ebooks}")
+    print(f"   • Run continuously until you stop it (Ctrl+C)")
     print()
-    print(f"💰 Estimated cost: $0.05-0.10 (vs ${pdf_count * 0.05:.2f} old way)")
-    print(f"💵 You'll save: ${(pdf_count * 0.05) - 0.10:.2f}!")
-    print()
-    
-    proceed = input("Start batch organization? (Y/n): ").strip().lower()
+
+    # Confirm and start
+    proceed = input("Start watch mode? (Y/n): ").strip().lower()
     if proceed not in ['', 'y', 'yes']:
         print("Cancelled")
         return
-    
+
     # Import and run
     print()
     print("="*70)
-    print("  Processing...")
+    print("  Starting Watch Mode")
     print("="*70)
     print()
-    
-    try:
-        from pdf_organizer_batch import BatchPDFOrganizer
 
-        # Use context manager to ensure API key cleanup
-        with BatchPDFOrganizer(
+    try:
+        from watch_organizer import PDFWatcher
+        from watchdog.observers import Observer
+        import time
+
+        # Create event handler
+        event_handler = PDFWatcher(
             downloads_folder=downloads,
             ebooks_folder=ebooks,
             api_key=api_key,
             provider=provider,
-            dry_run=False
-        ) as organizer:
-            organizer.organize_pdfs()
+            batch_delay=delay
+        )
 
-            print()
-            print("="*70)
-            print("  Complete!")
-            print("="*70)
-            print(f"\n✓ Check: {ebooks}")
+        # Create observer
+        observer = Observer()
+        observer.schedule(event_handler, downloads, recursive=True)
+        observer.start()
 
-        # API key is now cleared from memory
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print(f"\n\n{'='*70}")
+            print("  🛑 Stopping watch mode...")
+            print(f"{'='*70}\n")
+            observer.stop()
+            event_handler._print_stats()
+            print("\n👋 Watch mode stopped. Goodbye!\n")
+
+        observer.join()
 
     except Exception as e:
         print()
@@ -163,7 +179,7 @@ def main():
         import traceback
         print("\nFull traceback:")
         print(traceback.format_exc())
-    
+
     print()
     input("Press Enter to exit...")
 

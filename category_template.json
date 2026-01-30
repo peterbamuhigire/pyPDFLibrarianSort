@@ -1,12 +1,27 @@
 {
-  "generated_at": "2026-01-26T01:04:28.104033",
+  "generated_at": "2026-01-31T01:06:26.429962",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 591,
+  "category_count": 601,
   "categories": [
     {
       "path": "Biographies",
       "depth": 1,
       "count": 3
+    },
+    {
+      "path": "Business",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Business/Accounting",
+      "depth": 2,
+      "count": 3
+    },
+    {
+      "path": "Business/General",
+      "depth": 2,
+      "count": 15
     },
     {
       "path": "Computer & ICT",
@@ -2369,6 +2384,21 @@
       "count": 6
     },
     {
+      "path": "Computer & ICT/Programming",
+      "depth": 2,
+      "count": 0
+    },
+    {
+      "path": "Computer & ICT/Programming/Java",
+      "depth": 3,
+      "count": 1
+    },
+    {
+      "path": "Computer & ICT/Programming/Python",
+      "depth": 3,
+      "count": 2
+    },
+    {
       "path": "Computer & ICT/Software Development",
       "depth": 2,
       "count": 0
@@ -2407,6 +2437,11 @@
       "path": "Computer & ICT/Systems Analysis, Design and BPM",
       "depth": 2,
       "count": 26
+    },
+    {
+      "path": "Computer & ICT/Web Development",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing",
@@ -2947,6 +2982,21 @@
       "path": "Religion & Spirituality/Occult & New Age Stuff",
       "depth": 2,
       "count": 30
+    },
+    {
+      "path": "Science",
+      "depth": 1,
+      "count": 0
+    },
+    {
+      "path": "Science/General",
+      "depth": 2,
+      "count": 4
+    },
+    {
+      "path": "Science/Mathematics",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Ugandan Books, Laws, History",

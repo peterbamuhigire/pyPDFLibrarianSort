@@ -17,12 +17,13 @@ print("Test 1: Checking imports...")
 try:
     import google.generativeai
     import anthropic
+    import openai
     from pypdf import PdfReader
     import pdfplumber
     print("✓ All imports successful")
 except ImportError as e:
     print(f"❌ Import failed: {e}")
-    print("\nRun: pip install google-generativeai pypdf pdfplumber")
+    print("\nRun: pip install -r requirements.txt")
     input("\nPress Enter to exit...")
     sys.exit(1)
 
@@ -31,11 +32,20 @@ print("\nTest 2: Checking API key...")
 print("Select provider for API test:")
 print("1) Gemini")
 print("2) Anthropic")
+print("3) DeepSeek")
 provider_choice = input("Select provider [1]: ").strip().lower()
-provider = "anthropic" if provider_choice in ['2', 'anthropic', 'a'] else "gemini"
+
+if provider_choice in ['2', 'anthropic', 'a']:
+    provider = "anthropic"
+elif provider_choice in ['3', 'deepseek', 'd']:
+    provider = "deepseek"
+else:
+    provider = "gemini"
 
 if provider == "anthropic":
     api_key = input("Enter your Anthropic API key (or press Enter to skip): ").strip()
+elif provider == "deepseek":
+    api_key = input("Enter your DeepSeek API key (or press Enter to skip): ").strip()
 else:
     api_key = input("Enter your Gemini API key (or press Enter to skip): ").strip()
 

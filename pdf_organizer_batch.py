@@ -13,11 +13,13 @@ from datetime import datetime
 from pypdf import PdfReader
 import google.generativeai as genai
 from anthropic import Anthropic
+from openai import OpenAI
 from collections import defaultdict
 import argparse
+from pdf_content_analyzer import PDFContentAnalyzer
 
 class BatchPDFOrganizer:
-    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, provider="gemini", model_name=None):
+    def __init__(self, downloads_folder, ebooks_folder, api_key=None, dry_run=False, category_template=None, provider="gemini", model_name=None, use_content_analysis=True):
         """Initialize batch PDF organizer"""
         if not ebooks_folder:
             raise ValueError("ebooks_folder is required")
@@ -31,10 +33,14 @@ class BatchPDFOrganizer:
         self.category_template_path = Path(category_template) if category_template else default_template
         self.api_key = api_key
         self.provider = (provider or "gemini").strip().lower()
+        self.use_content_analysis = use_content_analysis
+        self.content_analyzer = PDFContentAnalyzer() if use_content_analysis else None
         if self.provider == "gemini":
             self.model_name = model_name or "gemini-1.5-flash"
         elif self.provider == "anthropic":
             self.model_name = model_name or "claude-3-5-sonnet-20240620"
+        elif self.provider == "deepseek":
+            self.model_name = model_name or "deepseek-chat"
         else:
             raise ValueError(f"Unsupported provider: {provider}")
 
@@ -44,8 +50,13 @@ class BatchPDFOrganizer:
         if self.provider == "gemini":
             genai.configure(api_key=self.api_key)
             self.client = genai.GenerativeModel(self.model_name)
-        else:
+        elif self.provider == "anthropic":
             self.client = Anthropic(api_key=self.api_key)
+        else:  # deepseek
+            self.client = OpenAI(
+                api_key=self.api_key,
+                base_url="https://api.deepseek.com"
+            )
         self.log_file = self.ebooks_folder / "organization_log.json"
         self.load_log()
 
@@ -167,23 +178,41 @@ class BatchPDFOrganizer:
         return self.analyze_existing_structure()
     
     def get_pdf_info(self, pdf_path):
-        """Get basic info from PDF"""
-        try:
-            reader = PdfReader(pdf_path)
-            meta = reader.metadata
-            title = meta.title if meta and meta.title else pdf_path.stem
-            author = meta.author if meta and meta.author else ""
-        except:
-            title = pdf_path.stem
-            author = ""
-        
-        return {
-            'path': str(pdf_path),
-            'filename': pdf_path.name,
-            'stem': pdf_path.stem,
-            'title': title,
-            'author': author
-        }
+        """Get enhanced info from PDF with content analysis"""
+        if self.use_content_analysis and self.content_analyzer:
+            # Use enhanced content analysis
+            data = self.content_analyzer.build_enhanced_prompt_data(pdf_path)
+            return {
+                'path': str(pdf_path),
+                'filename': pdf_path.name,
+                'stem': pdf_path.stem,
+                'title': data['metadata'].get('title') or pdf_path.stem,
+                'author': data['metadata'].get('author') or "",
+                'is_gibberish': data['is_gibberish'],
+                'text_content': data['text_content'][:1000] if data['has_content'] else "",  # Limit to 1000 chars for batch
+                'has_content': data['has_content']
+            }
+        else:
+            # Basic metadata extraction (old method)
+            try:
+                reader = PdfReader(pdf_path)
+                meta = reader.metadata
+                title = meta.title if meta and meta.title else pdf_path.stem
+                author = meta.author if meta and meta.author else ""
+            except:
+                title = pdf_path.stem
+                author = ""
+
+            return {
+                'path': str(pdf_path),
+                'filename': pdf_path.name,
+                'stem': pdf_path.stem,
+                'title': title,
+                'author': author,
+                'is_gibberish': False,
+                'text_content': '',
+                'has_content': False
+            }
     
     def batch_categorize_all(self, pdf_list, categories):
         """Categorize ALL PDFs in a single API call"""
@@ -191,21 +220,29 @@ class BatchPDFOrganizer:
         # Build category structure text
         category_text = self.build_category_text(categories)
         
-        # Build PDF list for prompt
+        # Build PDF list for prompt with enhanced content info
         pdf_descriptions = []
         for i, pdf_info in enumerate(pdf_list, 1):
             # Clean filename for better parsing
             name = pdf_info['filename'][:100]  # Limit length
             desc = f"{i}. {name}"
+
+            # Add title if different from filename
             if pdf_info['title'] and pdf_info['title'] != pdf_info['stem']:
                 title = str(pdf_info['title'])[:100]
                 desc += f" | Title: {title}"
+
+            # Add content preview for gibberish filenames
+            if pdf_info.get('is_gibberish') and pdf_info.get('has_content'):
+                content_preview = pdf_info['text_content'][:200].replace('\n', ' ')
+                desc += f" | Content: {content_preview}..."
+
             pdf_descriptions.append(desc)
-        
+
         pdf_list_text = "\n".join(pdf_descriptions)
         
         # Create mega-prompt with explicit formatting
-        prompt = f"""You are organizing {len(pdf_list)} PDFs. Categorize each one.
+        prompt = f"""You are organizing {len(pdf_list)} PDFs. Categorize each one and suggest better filenames for gibberish names.
 
 EXISTING CATEGORIES:
 {category_text}
@@ -219,14 +256,21 @@ For each PDF, provide:
 - number: PDF number (1-{len(pdf_list)})
 - category: matching existing category structure (e.g., "Computer & ICT/Programming/Python")
 - confidence: "high" or "medium" or "low"
+- rename: suggested filename (WITHOUT .pdf extension) if current name is gibberish/unclear, otherwise null
+
+GUIDELINES:
+- Use the title metadata if available
+- Use content preview to understand what the PDF is about when filename is gibberish
+- Suggest clear, descriptive filenames for PDFs with meaningless names
+- Keep existing filenames if they're already descriptive
 
 Return a JSON array like this (NO markdown, NO backticks, ONLY JSON):
 [
-{{"number":1,"category":"Computer & ICT/Programming","confidence":"high"}},
-{{"number":2,"category":"Business/Finance","confidence":"medium"}}
+{{"number":1,"category":"Computer & ICT/Programming","confidence":"high","rename":"Python Machine Learning Guide"}},
+{{"number":2,"category":"Business/Finance","confidence":"medium","rename":null}}
 ]
 
-CRITICAL: 
+CRITICAL:
 - Return ONLY the JSON array
 - No markdown code blocks
 - No explanations
@@ -245,7 +289,7 @@ CRITICAL:
                     }
                 )
                 response_text = (message.text or "").strip()
-            else:
+            elif self.provider == "anthropic":
                 response = self.client.messages.create(
                     model=self.model_name,
                     max_tokens=8000,
@@ -255,6 +299,14 @@ CRITICAL:
                 response_text = "".join(
                     block.text for block in (response.content or []) if hasattr(block, "text")
                 ).strip()
+            else:  # deepseek
+                response = self.client.chat.completions.create(
+                    model=self.model_name,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.2,
+                    max_tokens=8000
+                )
+                response_text = response.choices[0].message.content.strip()
             
             # Aggressive cleaning
             # Remove any markdown code blocks
@@ -556,7 +608,7 @@ def main():
     parser.add_argument('--downloads', default=default_downloads,
                        help=f'Downloads folder (default: {default_downloads})')
     parser.add_argument('--ebooks', required=True, help='Ebooks folder (e.g., F:/ebooks)')
-    parser.add_argument('--provider', choices=['gemini', 'anthropic'], default='gemini', help='AI provider to use')
+    parser.add_argument('--provider', choices=['gemini', 'anthropic', 'deepseek'], default='gemini', help='AI provider to use')
     parser.add_argument('--api-key', help='API key for the selected provider')
     parser.add_argument('--dry-run', action='store_true', help='Preview only')
     parser.add_argument('--category-template', help='Path to category template JSON (default: project_root/category_template.json)')

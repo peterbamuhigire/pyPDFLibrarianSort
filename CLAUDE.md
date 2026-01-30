@@ -4,7 +4,7 @@ This file provides guidance to AI coding assistants when working with code in th
 
 ## Project Overview
 
-pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Gemini AI to automatically categorize and organize PDFs. The key innovation is **batch processing**: processing 200 PDFs in one API call costs $0.10 vs $10 for individual processing (100x cost savings).
+pyPDFLibrarianSort is an AI-powered PDF library organizer that uses AI (Gemini, Anthropic, or DeepSeek) to automatically categorize and organize PDFs. The key innovation is **batch processing**: processing 200 PDFs in one API call costs $0.10 vs $10 for individual processing (100x cost savings).
 
 ## Core Architecture
 
@@ -36,6 +36,8 @@ pyPDFLibrarianSort is an AI-powered PDF library organizer that uses Gemini AI to
 
 - `organize_simple.py` - Interactive setup for single mode
 - `organize_batch.py` - Interactive setup for batch mode (recommended)
+- `watch_setup.py` - Interactive setup for watch mode (auto-organize)
+- `watch_organizer.py` - Watch mode script (monitors folder for new PDFs)
 
 **Category System:**
 
@@ -89,7 +91,7 @@ Both `PDFOrganizer` and `BatchPDFOrganizer` support `category_template` paramete
 ### Development
 
 ```bash
-# Install dependencies (only 2 packages!)
+# Install dependencies
 pip install -r requirements.txt
 
 # Run tests
@@ -105,11 +107,16 @@ python setup.py
 ### Usage
 
 ```bash
-# Batch mode (recommended)
+# Batch mode (recommended for one-time organization)
 python organize_batch.py
 
 # Single mode
 python organize_simple.py
+
+# Watch mode (recommended for continuous auto-organization)
+python watch_setup.py
+# Or directly:
+python watch_organizer.py --ebooks F:/ebooks --provider gemini --api-key YOUR_KEY
 
 # GUI mode
 python pdf_organizer_gui.py
@@ -137,15 +144,19 @@ copy category_template.json C:/path/to/pyPDFLibrarianSort/
 
 ### API Key Management
 
-- Reads from `GEMINI_API_KEY` environment variable
-- Can be passed as parameter: `PDFOrganizer(api_key="sk-...")`
-- Interactive launchers prompt for key if not found
+- Supports three AI providers: Gemini, Anthropic (Claude), and DeepSeek
+- Interactive launchers prompt for provider selection and corresponding API key
+- Can be passed as parameter: `PDFOrganizer(api_key="...", provider="gemini")`
 - Can optionally be stored in `~/.pdf_organizer_settings.json` (by setup.py)
+- Provider-specific API key URLs:
+  - Gemini: https://aistudio.google.com/app/apikey
+  - Anthropic: https://console.anthropic.com/
+  - DeepSeek: https://platform.deepseek.com/
 
 ### File Operations
 
 - All operations are local - PDFs never uploaded to API
-- Only filenames and metadata sent to Gemini
+- Only filenames and metadata sent to AI provider (Gemini, Anthropic, or DeepSeek)
 - Uses `shutil.move()` for file operations
 - Maintains `organization_log.json` in ebooks folder for tracking
 - Dry-run mode available: `PDFOrganizer(dry_run=True)`
@@ -176,10 +187,13 @@ python -c "from pdf_organizer import PDFOrganizer; o = PDFOrganizer('downloads',
 
 ## Dependencies
 
-Only 2 runtime dependencies (see requirements.txt):
+Runtime dependencies (see requirements.txt):
 
 - `google-generativeai>=0.7.2` - Gemini AI API client
+- `anthropic>=0.36.0` - Anthropic (Claude) API client
+- `openai>=1.0.0` - OpenAI-compatible client (for DeepSeek)
 - `pypdf>=3.17.0` - PDF metadata extraction
+- `watchdog>=3.0.0` - File system monitoring (for watch mode)
 
 Optional (for GUI):
 

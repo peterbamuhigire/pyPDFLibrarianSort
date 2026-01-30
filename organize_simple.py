@@ -107,8 +107,15 @@ def main():
     print("-" * 70)
     print("1) Gemini")
     print("2) Anthropic")
+    print("3) DeepSeek")
     provider_choice = input("Select provider [1]: ").strip().lower()
-    provider = "anthropic" if provider_choice in ['2', 'anthropic', 'a'] else "gemini"
+
+    if provider_choice in ['2', 'anthropic', 'a']:
+        provider = "anthropic"
+    elif provider_choice in ['3', 'deepseek', 'd']:
+        provider = "deepseek"
+    else:
+        provider = "gemini"
 
     # Step 5: Get API Key
     print()
@@ -118,6 +125,9 @@ def main():
     if provider == "anthropic":
         print("Get your API key at: https://console.anthropic.com/")
         api_key = input("Enter your Anthropic API key: ").strip()
+    elif provider == "deepseek":
+        print("Get your API key at: https://platform.deepseek.com/")
+        api_key = input("Enter your DeepSeek API key: ").strip()
     else:
         print("Get your API key at: https://aistudio.google.com/app/apikey")
         api_key = input("Enter your Gemini API key: ").strip()
