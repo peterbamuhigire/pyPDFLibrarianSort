@@ -1,12 +1,13 @@
-# 🎉 PDF Organizer - Complete Features Summary
+# 🎉 PDF Management Platform - Complete Features Summary
 
 ## What We've Built
 
-Your PDF organizer now has **THREE MAJOR NEW FEATURES**:
+Your PDF management platform now has **FOUR MAJOR FEATURES**:
 
 ### 1. ✅ DeepSeek AI Provider Support
 ### 2. 👀 Watch Mode (Auto-Organization)
 ### 3. 🌐 Web Interface with Drag & Drop
+### 4. ✍️ PDF Signature Tool (No AI Credits)
 
 ---
 

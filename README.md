@@ -1,12 +1,12 @@
 # 📚 pyPDFLibrarianSort
 
-**AI-powered PDF organization with 100x cost savings** - Automatically categorize, rename, and organize your PDF library using AI (Gemini, Anthropic, or DeepSeek).
+**Modern web-based PDF management platform** - AI-powered organization with 98% cost savings + digital signatures with zero AI credits.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Multi-AI](https://img.shields.io/badge/AI-Gemini%20%7C%20Anthropic%20%7C%20DeepSeek-blueviolet)](https://ai.google.dev/)
 
-> **Your AI librarian with batch processing, auto-organization, and a modern web interface**
+> **Complete PDF management: AI organization + digital signatures, all in one modern web interface**
 
 ## 🎯 Key Features
 
@@ -80,25 +80,29 @@ See [docs/guides/GET_STARTED.md](docs/guides/GET_STARTED.md) for detailed setup 
 
 ## 🚀 Quick Start
 
-**Web Interface (Recommended):**
+**Web Interface (Recommended - All Features):**
 ```bash
 python web_interface.py
 # Opens http://localhost:5000 automatically
+# Access: PDF Organization + PDF Signatures
 ```
 
-**Batch Mode (Cost-Effective):**
-```bash
-python organize_batch.py
-```
+**PDF Organization:**
+- **Batch Mode**: `python organize_batch.py` (cost-effective)
+- **Watch Mode**: `python watch_setup.py` (auto-organize 24/7)
 
-**Watch Mode (Auto-Organize):**
+**PDF Signatures (No AI Credits):**
 ```bash
-python watch_setup.py
+python sign_setup.py  # Interactive wizard
+# OR
+python sign_batch.py --signature sig.png --input document.pdf
 ```
 
 See [docs/guides/QUICK_START.md](docs/guides/QUICK_START.md) for detailed usage.
 
-## 📖 Usage Modes
+## 📖 Features & Usage Modes
+
+### PDF Organization (AI-Powered)
 
 | Mode | Best For | Cost (200 PDFs) | Command |
 |------|----------|-----------------|---------|
@@ -106,6 +110,16 @@ See [docs/guides/QUICK_START.md](docs/guides/QUICK_START.md) for detailed usage.
 | **Watch Mode** | Auto-organize 24/7 | $0.10-0.20 | `python watch_setup.py` |
 | **Batch Mode** | One-time organization | $0.10 | `python organize_batch.py` |
 | **Single Mode** | Maximum accuracy | $10.00 | `python organize_simple.py` |
+
+### PDF Signatures (No AI Credits)
+
+| Mode | Best For | Cost | Command |
+|------|----------|------|---------|
+| **Web Interface** | Interactive signing with preview | $0 | `python web_interface.py` |
+| **Interactive CLI** | Step-by-step configuration | $0 | `python sign_setup.py` |
+| **Direct CLI** | Scripting & automation | $0 | `python sign_batch.py` |
+
+**Signature Features**: 4 corner positions • Page selection (all/first/last/odd/even/ranges) • Size control (10-100%) • Opacity (10-100%) • Rotation (0-360°) • Batch processing
 
 See [docs/features/FEATURES_SUMMARY.md](docs/features/FEATURES_SUMMARY.md) for detailed comparisons.
 
@@ -131,8 +145,9 @@ Free to use, modify, and distribute!
 
 ## 🙏 Credits
 
-- Powered by [Google Gemini](https://ai.google.dev/) AI
-- Built with ❤️ for PDF organization enthusiasts
+- **AI Organization**: Powered by [Google Gemini](https://ai.google.dev/), [Anthropic Claude](https://www.anthropic.com/), and [DeepSeek](https://www.deepseek.com/)
+- **PDF Processing**: ReportLab, PyPDF, Pillow
+- Built with ❤️ for PDF management needs
 - Thanks to all contributors!
 
 ## 🔗 Links
