@@ -5,3 +5,5 @@ openai>=1.0.0
 watchdog>=3.0.0
 flask>=3.0.0
 flask-cors>=4.0.0
+pillow>=10.0.0
+reportlab>=4.0.0

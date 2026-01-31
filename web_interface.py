@@ -15,6 +15,7 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 from werkzeug.utils import secure_filename
 from pdf_organizer_batch import BatchPDFOrganizer
 from pdf_content_analyzer import PDFContentAnalyzer
+from pdf_signature import PDFSignature
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -25,6 +26,7 @@ app.config['UPLOAD_FOLDER'].mkdir(exist_ok=True)
 # In-memory storage for session data (use Redis in production)
 pending_pdfs = {}
 analysis_results = {}
+signature_uploads = {}  # Store uploaded signatures by session
 
 
 @app.route('/')
@@ -339,6 +341,182 @@ def get_categories():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/signature/upload-image', methods=['POST'])
+def upload_signature_image():
+    """Upload signature PNG image"""
+    if 'signature' not in request.files:
+        return jsonify({'error': 'No signature file provided'}), 400
+
+    file = request.files['signature']
+
+    if not file or not file.filename.lower().endswith('.png'):
+        return jsonify({'error': 'File must be PNG format'}), 400
+
+    try:
+        # Validate it's a readable PNG
+        from PIL import Image
+        img = Image.open(file.stream)
+        if img.format != 'PNG':
+            return jsonify({'error': 'File must be PNG format'}), 400
+
+        width, height = img.size
+        img.close()
+
+        # Save to uploads folder
+        filename = secure_filename(file.filename)
+        sig_folder = app.config['UPLOAD_FOLDER'] / 'signatures'
+        sig_folder.mkdir(exist_ok=True)
+
+        filepath = sig_folder / filename
+
+        # Re-open and save
+        file.stream.seek(0)
+        with open(filepath, 'wb') as f:
+            f.write(file.stream.read())
+
+        # Store in session
+        session_id = session.get('session_id', str(datetime.now().timestamp()))
+        session['session_id'] = session_id
+        session['signature_path'] = str(filepath)
+        session['signature_filename'] = filename
+
+        return jsonify({
+            'success': True,
+            'filename': filename,
+            'dimensions': {'width': width, 'height': height}
+        })
+
+    except Exception as e:
+        return jsonify({'error': f'Failed to process signature: {str(e)}'}), 500
+
+
+@app.route('/api/signature/upload-pdfs', methods=['POST'])
+def upload_pdfs_for_signing():
+    """Upload PDFs to be signed"""
+    if 'files' not in request.files:
+        return jsonify({'error': 'No files provided'}), 400
+
+    files = request.files.getlist('files')
+    uploaded = []
+
+    for file in files:
+        if file and file.filename.lower().endswith('.pdf'):
+            filename = secure_filename(file.filename)
+            pdf_folder = app.config['UPLOAD_FOLDER'] / 'sign_pdfs'
+            pdf_folder.mkdir(exist_ok=True)
+
+            filepath = pdf_folder / filename
+            file.save(filepath)
+
+            uploaded.append({
+                'filename': filename,
+                'path': str(filepath),
+                'size': filepath.stat().st_size
+            })
+
+    return jsonify({
+        'success': True,
+        'files': uploaded
+    })
+
+
+@app.route('/api/signature/process', methods=['POST'])
+def process_signature():
+    """Sign PDFs with configured signature"""
+    data = request.json
+
+    signature_path = session.get('signature_path')
+    if not signature_path or not Path(signature_path).exists():
+        return jsonify({'error': 'Signature image not uploaded'}), 400
+
+    pdf_files = data.get('files', [])
+    if not pdf_files:
+        return jsonify({'error': 'No PDF files to sign'}), 400
+
+    # Get configuration
+    config = data.get('config', {})
+    position = config.get('position', 'bottom-right')
+    scale = config.get('scale', 0.25)
+    x_offset = config.get('xOffset', 0.5)
+    y_offset = config.get('yOffset', 0.5)
+    opacity = config.get('opacity', 1.0)
+    rotation = config.get('rotation', 0)
+    pages = config.get('pages', 'all')
+
+    try:
+        # Create signer
+        signer = PDFSignature(
+            signature_image_path=signature_path,
+            position=position,
+            scale=scale,
+            x_offset=x_offset,
+            y_offset=y_offset,
+            opacity=opacity,
+            rotation=rotation,
+            pages=pages
+        )
+
+        # Create output folder
+        signed_folder = app.config['UPLOAD_FOLDER'] / 'signed'
+        signed_folder.mkdir(exist_ok=True)
+
+        signed_files = []
+        failed_files = []
+
+        # Process each PDF
+        for pdf_info in pdf_files:
+            pdf_path = pdf_info['path']
+            if not Path(pdf_path).exists():
+                failed_files.append({
+                    'filename': pdf_info['filename'],
+                    'error': 'File not found'
+                })
+                continue
+
+            try:
+                # Output path
+                output_filename = f"{Path(pdf_info['filename']).stem}_signed.pdf"
+                output_path = signed_folder / output_filename
+
+                # Sign PDF
+                result = signer.add_signature_to_pdf(pdf_path, str(output_path))
+
+                if result['success']:
+                    signed_files.append({
+                        'filename': output_filename,
+                        'path': str(output_path),
+                        'total_pages': result['total_pages'],
+                        'pages_signed': result['pages_signed']
+                    })
+                else:
+                    failed_files.append({
+                        'filename': pdf_info['filename'],
+                        'error': result['error']
+                    })
+
+            except Exception as e:
+                failed_files.append({
+                    'filename': pdf_info['filename'],
+                    'error': str(e)
+                })
+
+        return jsonify({
+            'success': True,
+            'signed': signed_files,
+            'failed': failed_files
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/signature/download/<filename>')
+def download_signed_pdf(filename):
+    """Download signed PDF"""
+    signed_folder = app.config['UPLOAD_FOLDER'] / 'signed'
+    return send_from_directory(signed_folder, filename, as_attachment=True)
 
 
 def open_browser():

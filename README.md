@@ -13,6 +13,7 @@
 - 🤖 **Three AI Providers** - Choose Gemini, Anthropic (Claude), or DeepSeek
 - 💰 **98% Cost Savings** - Batch processing: $0.10 for 200 PDFs vs $10 individual
 - 🌐 **Modern Web Interface** - Drag & drop, real-time preview, visual approval
+- ✍️ **PDF Signature Tool** - Add signatures to PDFs with NO AI credits (web + CLI)
 - 👀 **Watch Mode** - Auto-organize PDFs as they arrive (24/7 background mode)
 - 🔍 **Smart Renaming** - Detects gibberish filenames, reads content, suggests better names
 - 🌲 **Deep Hierarchy** - Preserves multi-level folder structures (3+ levels)
@@ -39,6 +40,7 @@
 
 ### User Guides
 - **[Web Interface Guide](docs/guides/WEB_INTERFACE_GUIDE.md)** - Using the web UI
+- **[PDF Signature Guide](docs/guides/SIGNATURE_GUIDE.md)** - Sign PDFs with no AI credits
 - **[Watch Mode](docs/guides/WATCH_MODE_README.md)** - Auto-organization setup
 - **[Smart Renaming](docs/guides/SMART_RENAMING_GUIDE.md)** - How gibberish detection works
 - **[Features Summary](docs/features/FEATURES_SUMMARY.md)** - Complete feature list

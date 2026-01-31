@@ -509,3 +509,447 @@ function formatBytes(bytes) {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 }
+
+// ========================================
+// PDF SIGNATURE TOOL
+// ========================================
+
+let signatureConfig = {
+    signatureImage: null,
+    signatureImageName: '',
+    signatureDimensions: null,
+    pages: 'all',
+    position: 'bottom-left',
+    scale: 0.25,
+    xOffset: 0.5,
+    yOffset: 0.5,
+    opacity: 1.0,
+    rotation: 0,
+    pdfs: []
+};
+
+function showSignature() {
+    hideAllSections();
+    document.getElementById('signatureSection').style.display = 'block';
+    setupSignatureDragDrop();
+}
+
+function setupSignatureDragDrop() {
+    // Signature image drop zone
+    const sigDropZone = document.getElementById('signatureDropZone');
+    const sigInput = document.getElementById('signatureInput');
+
+    sigInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            uploadSignatureImage(e.target.files[0]);
+        }
+    });
+
+    sigDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        sigDropZone.classList.add('drag-over');
+    });
+
+    sigDropZone.addEventListener('dragleave', () => {
+        sigDropZone.classList.remove('drag-over');
+    });
+
+    sigDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        sigDropZone.classList.remove('drag-over');
+
+        const file = e.dataTransfer.files[0];
+        if (file && file.name.toLowerCase().endsWith('.png')) {
+            uploadSignatureImage(file);
+        } else {
+            showToast('Please upload a PNG image', 'warning');
+        }
+    });
+
+    // PDF drop zone
+    const pdfDropZone = document.getElementById('pdfSignDropZone');
+    const pdfInput = document.getElementById('pdfSignInput');
+
+    pdfInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            uploadPdfsForSigning(Array.from(e.target.files));
+        }
+    });
+
+    pdfDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        pdfDropZone.classList.add('drag-over');
+    });
+
+    pdfDropZone.addEventListener('dragleave', () => {
+        pdfDropZone.classList.remove('drag-over');
+    });
+
+    pdfDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        pdfDropZone.classList.remove('drag-over');
+
+        const files = Array.from(e.dataTransfer.files).filter(f =>
+            f.name.toLowerCase().endsWith('.pdf')
+        );
+
+        if (files.length > 0) {
+            uploadPdfsForSigning(files);
+        } else {
+            showToast('Please drop PDF files only', 'warning');
+        }
+    });
+
+    // Page selection handler
+    document.getElementById('pagesSelect').addEventListener('change', (e) => {
+        const rangeGroup = document.getElementById('pagesRangeGroup');
+        if (e.target.value === 'range') {
+            rangeGroup.style.display = 'block';
+            signatureConfig.pages = document.getElementById('pagesRange').value || '1';
+        } else {
+            rangeGroup.style.display = 'none';
+            signatureConfig.pages = e.target.value;
+        }
+        renderPreviewCanvas();
+    });
+}
+
+async function uploadSignatureImage(file) {
+    const formData = new FormData();
+    formData.append('signature', file);
+
+    try {
+        showProgress('Uploading signature...', 'Processing image');
+
+        const response = await fetch('/api/signature/upload-image', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            signatureConfig.signatureImageName = result.filename;
+            signatureConfig.signatureDimensions = result.dimensions;
+
+            // Show preview
+            document.getElementById('signaturePreviewArea').style.display = 'block';
+            document.getElementById('signatureFilename').textContent = result.filename;
+            document.getElementById('signatureDimensions').textContent =
+                `${result.dimensions.width} x ${result.dimensions.height} px`;
+
+            // Show config step
+            document.getElementById('signatureConfigStep').style.display = 'block';
+            document.getElementById('signaturePdfStep').style.display = 'block';
+
+            // Render preview
+            renderPreviewCanvas();
+
+            showToast('Signature uploaded successfully', 'success');
+        } else {
+            showToast('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showToast('Upload failed: ' + error.message, 'error');
+    } finally {
+        hideProgress();
+    }
+}
+
+async function uploadPdfsForSigning(files) {
+    const formData = new FormData();
+    files.forEach(file => formData.append('files', file));
+
+    try {
+        showProgress('Uploading PDFs...', `Uploading ${files.length} files`);
+
+        const response = await fetch('/api/signature/upload-pdfs', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            signatureConfig.pdfs = result.files;
+
+            // Update UI
+            const pdfList = document.getElementById('signPdfList');
+            const pdfFiles = document.getElementById('signPdfFiles');
+            const pdfCount = document.getElementById('signPdfCount');
+
+            pdfCount.textContent = result.files.length;
+            pdfFiles.innerHTML = result.files.map(file => `
+                <div class="file-card">
+                    <div class="file-info">
+                        <strong>${file.filename}</strong>
+                        <small>${formatBytes(file.size)}</small>
+                    </div>
+                </div>
+            `).join('');
+
+            pdfList.style.display = 'block';
+
+            showToast(`${result.files.length} PDFs ready to sign`, 'success');
+        } else {
+            showToast('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showToast('Upload failed: ' + error.message, 'error');
+    } finally {
+        hideProgress();
+    }
+}
+
+function selectPosition(position) {
+    signatureConfig.position = position;
+
+    // Update UI
+    document.querySelectorAll('.position-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.position === position) {
+            btn.classList.add('active');
+        }
+    });
+
+    renderPreviewCanvas();
+}
+
+function updateScale(value) {
+    signatureConfig.scale = value / 100.0;
+    document.getElementById('scaleValue').textContent = value;
+    renderPreviewCanvas();
+}
+
+function updateXOffset(value) {
+    signatureConfig.xOffset = parseFloat(value);
+    document.getElementById('xOffsetValue').textContent = value;
+    renderPreviewCanvas();
+}
+
+function updateYOffset(value) {
+    signatureConfig.yOffset = parseFloat(value);
+    document.getElementById('yOffsetValue').textContent = value;
+    renderPreviewCanvas();
+}
+
+function updateOpacity(value) {
+    signatureConfig.opacity = value / 100.0;
+    document.getElementById('opacityValue').textContent = value;
+    renderPreviewCanvas();
+}
+
+function updateRotation(value) {
+    signatureConfig.rotation = parseInt(value);
+    document.getElementById('rotationValue').textContent = value;
+    renderPreviewCanvas();
+}
+
+function updateSignatureConfig() {
+    const pagesSelect = document.getElementById('pagesSelect').value;
+    if (pagesSelect === 'range') {
+        signatureConfig.pages = document.getElementById('pagesRange').value || '1';
+    } else {
+        signatureConfig.pages = pagesSelect;
+    }
+    renderPreviewCanvas();
+}
+
+function renderPreviewCanvas() {
+    const canvas = document.getElementById('signaturePreviewCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+
+    // Clear canvas
+    ctx.fillStyle = '#f5f5f5';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw page outline
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+    // Draw page label
+    ctx.fillStyle = '#666';
+    ctx.font = '12px Arial';
+    ctx.fillText('Sample Page', 20, 30);
+
+    // Calculate signature dimensions
+    const pageWidth = canvas.width - 20;
+    const pageHeight = canvas.height - 20;
+    const sigWidth = pageWidth * signatureConfig.scale;
+    const sigHeight = sigWidth * 0.5; // Assume 2:1 aspect ratio for preview
+
+    // Convert offsets to pixels
+    const xOffsetPx = signatureConfig.xOffset * 20; // Rough conversion
+    const yOffsetPx = signatureConfig.yOffset * 20;
+
+    // Calculate position
+    let x, y;
+    if (signatureConfig.position === 'bottom-right') {
+        x = canvas.width - 10 - sigWidth - xOffsetPx;
+        y = canvas.height - 10 - sigHeight - yOffsetPx;
+    } else if (signatureConfig.position === 'bottom-left') {
+        x = 10 + xOffsetPx;
+        y = canvas.height - 10 - sigHeight - yOffsetPx;
+    } else if (signatureConfig.position === 'top-right') {
+        x = canvas.width - 10 - sigWidth - xOffsetPx;
+        y = 10 + yOffsetPx;
+    } else if (signatureConfig.position === 'top-left') {
+        x = 10 + xOffsetPx;
+        y = 10 + yOffsetPx;
+    }
+
+    // Draw signature placeholder with rotation and opacity
+    ctx.save();
+    ctx.globalAlpha = signatureConfig.opacity;
+
+    // Apply rotation
+    if (signatureConfig.rotation !== 0) {
+        const centerX = x + sigWidth / 2;
+        const centerY = y + sigHeight / 2;
+        ctx.translate(centerX, centerY);
+        ctx.rotate((signatureConfig.rotation * Math.PI) / 180);
+        ctx.translate(-centerX, -centerY);
+    }
+
+    ctx.fillStyle = '#4285f4';
+    ctx.fillRect(x, y, sigWidth, sigHeight);
+
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 14px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Signature', x + sigWidth / 2, y + sigHeight / 2 + 5);
+
+    ctx.restore();
+}
+
+async function processSignature() {
+    if (!signatureConfig.signatureImageName) {
+        showToast('Please upload a signature image first', 'warning');
+        return;
+    }
+
+    if (signatureConfig.pdfs.length === 0) {
+        showToast('Please upload PDFs to sign', 'warning');
+        return;
+    }
+
+    try {
+        showProgress('Signing PDFs...', `Processing ${signatureConfig.pdfs.length} files`);
+
+        const response = await fetch('/api/signature/process', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                files: signatureConfig.pdfs,
+                config: {
+                    pages: signatureConfig.pages,
+                    position: signatureConfig.position,
+                    scale: signatureConfig.scale,
+                    xOffset: signatureConfig.xOffset,
+                    yOffset: signatureConfig.yOffset,
+                    opacity: signatureConfig.opacity,
+                    rotation: signatureConfig.rotation
+                }
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // Show results
+            const resultsDiv = document.getElementById('signatureResults');
+            const filesList = document.getElementById('signedFilesList');
+
+            filesList.innerHTML = `
+                <div class="result-summary">
+                    <p><strong>Successfully signed: ${result.signed.length} PDFs</strong></p>
+                    ${result.failed.length > 0 ? `<p class="error">Failed: ${result.failed.length} PDFs</p>` : ''}
+                </div>
+                <div class="signed-files">
+                    ${result.signed.map(file => `
+                        <div class="file-card">
+                            <div class="file-info">
+                                <strong>${file.filename}</strong>
+                                <small>Pages signed: ${file.pages_signed} / ${file.total_pages}</small>
+                            </div>
+                            <a href="/api/signature/download/${file.filename}" class="btn btn-sm btn-primary" download>
+                                Download
+                            </a>
+                        </div>
+                    `).join('')}
+                    ${result.failed.length > 0 ? `
+                        <div class="failed-files">
+                            <h4>Failed Files:</h4>
+                            ${result.failed.map(file => `
+                                <div class="file-card error">
+                                    <strong>${file.filename}</strong>
+                                    <small>${file.error}</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            resultsDiv.style.display = 'block';
+            document.getElementById('signaturePdfStep').style.display = 'none';
+
+            showToast(`Successfully signed ${result.signed.length} PDFs`, 'success');
+        } else {
+            showToast('Error: ' + result.error, 'error');
+        }
+    } catch (error) {
+        showToast('Processing failed: ' + error.message, 'error');
+    } finally {
+        hideProgress();
+    }
+}
+
+function clearSignPdfs() {
+    signatureConfig.pdfs = [];
+    document.getElementById('signPdfList').style.display = 'none';
+    document.getElementById('pdfSignInput').value = '';
+}
+
+function resetSignature() {
+    signatureConfig = {
+        signatureImage: null,
+        signatureImageName: '',
+        signatureDimensions: null,
+        pages: 'all',
+        position: 'bottom-left',
+        scale: 0.25,
+        xOffset: 0.5,
+        yOffset: 0.5,
+        opacity: 1.0,
+        rotation: 0,
+        pdfs: []
+    };
+
+    document.getElementById('signaturePreviewArea').style.display = 'none';
+    document.getElementById('signatureConfigStep').style.display = 'none';
+    document.getElementById('signaturePdfStep').style.display = 'none';
+    document.getElementById('signatureResults').style.display = 'none';
+    document.getElementById('signPdfList').style.display = 'none';
+
+    document.getElementById('signatureInput').value = '';
+    document.getElementById('pdfSignInput').value = '';
+
+    // Reset sliders
+    document.getElementById('scaleSlider').value = 25;
+    document.getElementById('xOffsetSlider').value = 0.5;
+    document.getElementById('yOffsetSlider').value = 0.5;
+    document.getElementById('opacitySlider').value = 100;
+    document.getElementById('rotationSlider').value = 0;
+
+    updateScale(25);
+    updateXOffset(0.5);
+    updateYOffset(0.5);
+    updateOpacity(100);
+    updateRotation(0);
+}

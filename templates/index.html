@@ -14,6 +14,7 @@
             <p class="tagline">AI-Powered Library Management with Drag & Drop</p>
             <div class="header-actions">
                 <button class="btn btn-secondary" onclick="showSettings()">⚙️ Settings</button>
+                <button class="btn btn-secondary" onclick="showSignature()">✍️ Sign PDFs</button>
                 <button class="btn btn-secondary" onclick="showBrowser()">📁 Browse Library</button>
                 <button class="btn btn-secondary" onclick="showStats()">📊 Statistics</button>
             </div>
@@ -108,6 +109,139 @@
                 <h2>📊 Statistics</h2>
                 <div id="statsContent" class="stats-grid"></div>
                 <button class="btn btn-secondary" onclick="showUpload()">Back to Upload</button>
+            </section>
+
+            <!-- PDF Signature Tool -->
+            <section id="signatureSection" class="section" style="display: none;">
+                <h2>✍️ Sign PDFs</h2>
+                <p class="subtitle">Add your signature to PDFs - No AI credits required!</p>
+
+                <!-- Signature Upload -->
+                <div class="signature-step">
+                    <h3>Step 1: Upload Signature Image</h3>
+                    <div class="signature-upload-zone" id="signatureDropZone">
+                        <div class="upload-icon">🖼️</div>
+                        <p>Drag & drop signature PNG here or click to browse</p>
+                        <input type="file" id="signatureInput" accept=".png" hidden>
+                        <button class="btn btn-primary" onclick="document.getElementById('signatureInput').click()">
+                            Choose Signature PNG
+                        </button>
+                    </div>
+                    <div id="signaturePreviewArea" style="display: none;">
+                        <p><strong>Signature loaded:</strong> <span id="signatureFilename"></span></p>
+                        <p><small>Dimensions: <span id="signatureDimensions"></span></small></p>
+                    </div>
+                </div>
+
+                <!-- Page Selection -->
+                <div class="signature-step" id="signatureConfigStep" style="display: none;">
+                    <h3>Step 2: Configure Signature</h3>
+
+                    <div class="form-group">
+                        <label for="pagesSelect">Pages to Sign</label>
+                        <select id="pagesSelect" class="input" onchange="updateSignatureConfig()">
+                            <option value="all">All pages</option>
+                            <option value="first">First page only</option>
+                            <option value="last">Last page only</option>
+                            <option value="odd">Odd pages only</option>
+                            <option value="even">Even pages only</option>
+                            <option value="range">Custom range (e.g., 1-5,10)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="pagesRangeGroup" style="display: none;">
+                        <label for="pagesRange">Page Range</label>
+                        <input type="text" id="pagesRange" class="input" placeholder="e.g., 1-5,10,15-20" onchange="updateSignatureConfig()">
+                        <small>Enter page numbers and ranges, separated by commas</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Position</label>
+                        <div class="position-selector">
+                            <button class="position-btn" data-position="top-left" onclick="selectPosition('top-left')">
+                                <span>3</span><br>Top-Left
+                            </button>
+                            <button class="position-btn" data-position="top-right" onclick="selectPosition('top-right')">
+                                <span>4</span><br>Top-Right
+                            </button>
+                            <button class="position-btn active" data-position="bottom-left" onclick="selectPosition('bottom-left')">
+                                <span>1</span><br>Bottom-Left
+                            </button>
+                            <button class="position-btn" data-position="bottom-right" onclick="selectPosition('bottom-right')">
+                                <span>2</span><br>Bottom-Right
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scaleSlider">Size (<span id="scaleValue">25</span>% of page width)</label>
+                        <input type="range" id="scaleSlider" class="slider" min="10" max="100" value="25" oninput="updateScale(this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="xOffsetSlider">Horizontal Margin (<span id="xOffsetValue">0.5</span> inches)</label>
+                        <input type="range" id="xOffsetSlider" class="slider" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateXOffset(this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="yOffsetSlider">Vertical Margin (<span id="yOffsetValue">0.5</span> inches)</label>
+                        <input type="range" id="yOffsetSlider" class="slider" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateYOffset(this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="opacitySlider">Opacity (<span id="opacityValue">100</span>%)</label>
+                        <input type="range" id="opacitySlider" class="slider opacity-slider" min="10" max="100" value="100" oninput="updateOpacity(this.value)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rotationSlider">Rotation (<span id="rotationValue">0</span>°)</label>
+                        <input type="range" id="rotationSlider" class="slider rotation-slider" min="0" max="360" value="0" oninput="updateRotation(this.value)">
+                    </div>
+
+                    <!-- Preview Canvas -->
+                    <div class="signature-preview-container">
+                        <h4>Preview</h4>
+                        <canvas id="signaturePreviewCanvas" width="400" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- PDF Upload for Signing -->
+                <div class="signature-step" id="signaturePdfStep" style="display: none;">
+                    <h3>Step 3: Upload PDFs to Sign</h3>
+                    <div class="signature-upload-zone" id="pdfSignDropZone">
+                        <div class="upload-icon">📄</div>
+                        <p>Drag & drop PDFs here or click to browse</p>
+                        <input type="file" id="pdfSignInput" multiple accept=".pdf" hidden>
+                        <button class="btn btn-primary" onclick="document.getElementById('pdfSignInput').click()">
+                            Choose PDF Files
+                        </button>
+                    </div>
+
+                    <div id="signPdfList" class="file-list" style="display: none;">
+                        <h4>PDFs to Sign (<span id="signPdfCount">0</span>)</h4>
+                        <div id="signPdfFiles"></div>
+                        <div class="actions">
+                            <button class="btn btn-success" onclick="processSignature()">
+                                ✍️ Sign PDFs
+                            </button>
+                            <button class="btn btn-secondary" onclick="clearSignPdfs()">
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="signatureResults" style="display: none;">
+                    <h3>✓ Signature Complete</h3>
+                    <div id="signedFilesList"></div>
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="resetSignature()">Sign More PDFs</button>
+                        <button class="btn btn-secondary" onclick="showUpload()">Back to Main</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="showUpload()">Back to Main</button>
             </section>
         </main>
 

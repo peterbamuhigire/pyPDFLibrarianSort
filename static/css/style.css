@@ -504,6 +504,171 @@ body {
     }
 }
 
+/* PDF Signature Tool */
+.signature-section {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.signature-step {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.signature-step h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.signature-upload-zone {
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.signature-upload-zone:hover {
+    border-color: var(--primary);
+    background: var(--card-bg);
+}
+
+.signature-upload-zone .upload-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.position-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 400px;
+}
+
+.position-btn {
+    padding: 15px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.position-btn:hover {
+    border-color: var(--primary);
+    background: var(--card-bg);
+}
+
+.position-btn.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.position-btn span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: none;
+}
+
+.opacity-slider::-webkit-slider-thumb {
+    background: var(--warning);
+}
+
+.opacity-slider::-moz-range-thumb {
+    background: var(--warning);
+}
+
+.rotation-slider::-webkit-slider-thumb {
+    background: var(--success);
+}
+
+.rotation-slider::-moz-range-thumb {
+    background: var(--success);
+}
+
+.signature-preview-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.signature-preview-container h4 {
+    margin-top: 0;
+    color: var(--text);
+}
+
+#signaturePreviewCanvas {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+#signaturePreviewArea {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.signed-files,
+.failed-files {
+    margin-top: 20px;
+}
+
+.result-summary {
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {
@@ -526,5 +691,13 @@ body {
     .btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .position-selector {
+        max-width: 100%;
+    }
+
+    #signaturePreviewCanvas {
+        max-width: 100%;
     }
 }

@@ -36,28 +36,39 @@ The `skills/` directory contains reusable development skills for Claude Code:
 
 ## Core Architecture
 
-### Four Processing Modes
+### Five Processing Modes
 
 **1. Web Interface (`web_interface.py`)** - Recommended for most users
 - Modern Flask-based web UI with drag & drop
 - Real-time categorization preview
 - Visual approval/rejection workflow
 - Browse organized library
+- PDF signature tool integrated
 - Runs on http://localhost:5000
 
-**2. Watch Mode (`watch_organizer.py`)** - Set and forget
+**2. PDF Signature (`pdf_signature.py`)** - No AI credits required
+- Add PNG signatures to PDFs
+- 4 corner positions, adjustable size and margins
+- Page selection (all, first, last, odd, even, ranges)
+- Opacity control (10-100%)
+- Rotation (0-360 degrees)
+- Batch processing support
+- Web interface + CLI tools
+- Pure PDF manipulation, no API calls
+
+**3. Watch Mode (`watch_organizer.py`)** - Set and forget
 - Monitors Downloads folder 24/7
 - Auto-organizes PDFs as they arrive
 - Smart batching (groups PDFs within delay window)
 - Background operation with statistics tracking
 
-**3. Batch Mode (`pdf_organizer_batch.py`)** - Cost-effective one-time
+**4. Batch Mode (`pdf_organizer_batch.py`)** - Cost-effective one-time
 - Processes ALL PDFs in single API call
 - Cost: $0.05-0.10 for 200+ PDFs
 - Automatic chunking for 500+ PDFs
 - 90-95% accuracy
 
-**4. Single Mode (`pdf_organizer.py`)** - Maximum accuracy
+**5. Single Mode (`pdf_organizer.py`)** - Maximum accuracy
 - Individual API call per PDF
 - Higher accuracy (95%) but expensive ($0.05 per PDF)
 - Best for critical documents
@@ -72,12 +83,14 @@ The `skills/` directory contains reusable development skills for Claude Code:
 **Interactive Launchers:**
 
 - `web_interface.py` - Modern web UI with drag & drop (RECOMMENDED)
+- `sign_setup.py` - Interactive PDF signature setup (no AI credits)
 - `watch_setup.py` - Interactive setup for watch mode (auto-organize)
 - `organize_batch.py` - Interactive setup for batch mode
 - `organize_simple.py` - Interactive setup for single mode
 
 **Core Processing Engines:**
 
+- `PDFSignature` (pdf_signature.py) - PDF signature placement engine (no AI)
 - `BatchPDFOrganizer` (pdf_organizer_batch.py) - Batch processing engine
 - `PDFOrganizer` (pdf_organizer.py) - Single-file processing engine
 - `PDFWatcher` (watch_organizer.py) - File system monitoring for auto-organization
@@ -97,13 +110,18 @@ The `skills/` directory contains reusable development skills for Claude Code:
 **Support Tools:**
 
 - `test_basic.py` - Diagnostic tests
+- `test_signature.py` - PDF signature unit tests
 - `setup.py` - Setup wizard
 - `fetch-categories.py` - Category template generator
+- `sign_batch.py` - Direct CLI for PDF signing (for scripting)
 
 **Templates & Static Files:**
 
 - `templates/` - HTML templates for web interface
+  - `index.html` - Main template with signature section
 - `static/` - CSS, JavaScript for web UI
+  - `static/css/style.css` - Includes signature tool styling
+  - `static/js/app.js` - Includes signature tool JavaScript
 
 ### Data Flow
 
