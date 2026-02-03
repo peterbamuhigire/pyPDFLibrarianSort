@@ -47,7 +47,7 @@ class PDFSignature:
     VALID_POSITIONS = ['bottom-right', 'bottom-left', 'top-right', 'top-left']
     VALID_PAGE_OPTIONS = ['all', 'first', 'last', 'odd', 'even']
 
-    def __init__(self, signature_image_path, position='bottom-right',
+    def __init__(self, signature_image_path, position='bottom-left',
                  scale=0.3, x_offset=0.5, y_offset=0.5, opacity=1.0,
                  rotation=0, pages='all'):
         """
