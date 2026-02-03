@@ -11,6 +11,7 @@ import webbrowser
 import threading
 from pathlib import Path
 from datetime import datetime
+from io import BytesIO
 from flask import Flask, render_template, request, jsonify, send_from_directory, session
 from werkzeug.utils import secure_filename
 from pdf_organizer_batch import BatchPDFOrganizer
@@ -355,9 +356,13 @@ def upload_signature_image():
         return jsonify({'error': 'File must be PNG format'}), 400
 
     try:
-        # Validate it's a readable PNG
         from PIL import Image
-        img = Image.open(file.stream)
+
+        # Read file data once
+        file_data = file.stream.read()
+
+        # Validate it's a readable PNG
+        img = Image.open(BytesIO(file_data))
         if img.format != 'PNG':
             return jsonify({'error': 'File must be PNG format'}), 400
 
@@ -371,10 +376,9 @@ def upload_signature_image():
 
         filepath = sig_folder / filename
 
-        # Re-open and save
-        file.stream.seek(0)
+        # Write file data
         with open(filepath, 'wb') as f:
-            f.write(file.stream.read())
+            f.write(file_data)
 
         # Store in session
         session_id = session.get('session_id', str(datetime.now().timestamp()))
