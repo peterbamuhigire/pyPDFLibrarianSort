@@ -519,6 +519,7 @@ let signatureConfig = {
     signatureImageName: '',
     signatureDimensions: null,
     pages: 'all',
+    skipPages: '',
     position: 'bottom-left',
     scale: 0.25,
     xOffset: 0.5,
@@ -752,6 +753,10 @@ function updateSignatureConfig() {
     } else {
         signatureConfig.pages = pagesSelect;
     }
+
+    // Get skip pages value
+    signatureConfig.skipPages = document.getElementById('skipPages').value.trim();
+
     renderPreviewCanvas();
 }
 
@@ -848,6 +853,7 @@ async function processSignature() {
                 files: signatureConfig.pdfs,
                 config: {
                     pages: signatureConfig.pages,
+                    skipPages: signatureConfig.skipPages,
                     position: signatureConfig.position,
                     scale: signatureConfig.scale,
                     xOffset: signatureConfig.xOffset,

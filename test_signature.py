@@ -270,6 +270,65 @@ def test_page_filtering():
             pass
 
 
+def test_skip_pages():
+    """Test skipping specific pages"""
+    print("\n" + "=" * 60)
+    print("TEST: Skip Pages")
+    print("=" * 60)
+
+    sig_path = create_test_signature()
+    pdf_path = create_test_pdf(num_pages=10)
+
+    try:
+        # Test skip single page (sign all except page 5)
+        signer = PDFSignature(sig_path, pages='all', skip_pages='5')
+        output_path = pdf_path.replace('.pdf', '_skip_single.pdf')
+        result = signer.add_signature_to_pdf(pdf_path, output_path)
+
+        if result['success'] and result['pages_signed'] == 9:
+            print(f"  OK Skip single page: {result['pages_signed']} pages signed (10 - 1 = 9)")
+            os.unlink(output_path)
+        else:
+            print(f"  FAIL Skip single page test failed: {result['pages_signed']} signed")
+            return False
+
+        # Test skip range (sign all except pages 2-4)
+        signer = PDFSignature(sig_path, pages='all', skip_pages='2-4')
+        output_path = pdf_path.replace('.pdf', '_skip_range.pdf')
+        result = signer.add_signature_to_pdf(pdf_path, output_path)
+
+        if result['success'] and result['pages_signed'] == 7:  # Pages 1,5,6,7,8,9,10
+            print(f"  OK Skip range: {result['pages_signed']} pages signed (10 - 3 = 7)")
+            os.unlink(output_path)
+        else:
+            print(f"  FAIL Skip range test failed: {result['pages_signed']} signed")
+            return False
+
+        # Test skip multiple ranges and singles (sign odd pages except 1 and 5-7)
+        signer = PDFSignature(sig_path, pages='odd', skip_pages='1,5-7')
+        output_path = pdf_path.replace('.pdf', '_skip_complex.pdf')
+        result = signer.add_signature_to_pdf(pdf_path, output_path)
+
+        # Odd pages: 1,3,5,7,9 -> Skip 1,5,7 -> Only 3,9 remain
+        if result['success'] and result['pages_signed'] == 2:
+            print(f"  OK Skip with page filter: {result['pages_signed']} pages signed (odd except 1,5-7)")
+            os.unlink(output_path)
+            return True
+        else:
+            print(f"  FAIL Skip with page filter test failed: {result['pages_signed']} signed")
+            return False
+
+    finally:
+        try:
+            os.unlink(sig_path)
+        except (PermissionError, FileNotFoundError):
+            pass
+        try:
+            os.unlink(pdf_path)
+        except (PermissionError, FileNotFoundError):
+            pass
+
+
 def test_opacity_and_rotation():
     """Test opacity and rotation settings"""
     print("\n" + "=" * 60)
@@ -407,6 +466,7 @@ def main():
         ("Page Selection", test_page_selection),
         ("Single PDF Signing", test_single_pdf_signing),
         ("Page Filtering", test_page_filtering),
+        ("Skip Pages", test_skip_pages),
         ("Opacity & Rotation", test_opacity_and_rotation),
         ("Batch Processing", test_batch_processing),
         ("Error Handling", test_error_handling)

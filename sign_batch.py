@@ -42,6 +42,9 @@ Examples:
 
   # Sign page range with custom margins
   python sign_batch.py --signature sig.png --input doc.pdf --pages "1-5,10,15-20" --x-offset 0.3 --y-offset 0.3
+
+  # Sign all pages except specific pages
+  python sign_batch.py --signature sig.png --input doc.pdf --pages all --skip-pages "2,5-7,15"
         """
     )
 
@@ -56,6 +59,8 @@ Examples:
                        help='Output file/directory (default: input_signed.pdf or input/signed/)')
     parser.add_argument('--pages', default='all',
                        help='Pages to sign: all, first, last, odd, even, or range like "1-5,10" (default: all)')
+    parser.add_argument('--skip-pages', default='',
+                       help='Pages to skip (applied after --pages filter), range like "2,5-7,15" (default: none)')
     parser.add_argument('--position', default='bottom-right',
                        choices=['bottom-right', 'bottom-left', 'top-right', 'top-left'],
                        help='Signature position (default: bottom-right)')
@@ -115,6 +120,8 @@ Examples:
         print(f"Input:      {args.input}")
         print(f"Output:     {output_path}")
         print(f"Pages:      {args.pages}")
+        if args.skip_pages:
+            print(f"Skip pages: {args.skip_pages}")
         print(f"Position:   {args.position}")
         print(f"Scale:      {args.scale}")
         print(f"X Offset:   {args.x_offset}\"")
@@ -134,7 +141,8 @@ Examples:
             y_offset=args.y_offset,
             opacity=args.opacity,
             rotation=args.rotation,
-            pages=args.pages
+            pages=args.pages,
+            skip_pages=args.skip_pages
         )
 
         if is_directory:

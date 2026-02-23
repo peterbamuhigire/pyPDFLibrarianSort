@@ -292,6 +292,17 @@ def main():
     rotation = get_int("Rotation (degrees)", 0, 360, default=0)
     print(f"OK Rotation: {rotation}°")
 
+    # Step 10: Configure skip pages (optional)
+    print_header(10, "Skip Pages (Optional)")
+    print("Enter pages to exclude from signing (applied after page selection).")
+    print("Examples: '2,5' or '1-3,10' or leave empty to skip none")
+    print()
+    skip_pages = input("Skip pages (press Enter to skip none): ").strip()
+    if skip_pages:
+        print(f"OK Skip pages: {skip_pages}")
+    else:
+        print("OK No pages skipped")
+
     # Configuration summary
     print()
     print("=" * 60)
@@ -301,6 +312,8 @@ def main():
     print(f"Input:      {input_path}")
     print(f"Output:     {output_path}")
     print(f"Pages:      {pages}")
+    if skip_pages:
+        print(f"Skip pages: {skip_pages}")
     print(f"Position:   {position}")
     print(f"Size:       {scale_percent}% of page width")
     print(f"Margins:    {x_offset}\" H, {y_offset}\" V")
@@ -332,7 +345,8 @@ def main():
             y_offset=y_offset,
             opacity=opacity,
             rotation=rotation,
-            pages=pages
+            pages=pages,
+            skip_pages=skip_pages
         )
 
         if batch_mode:

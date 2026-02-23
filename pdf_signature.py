@@ -7,6 +7,7 @@ No AI credits required - pure PDF manipulation.
 Features:
 - 4 corner positions (bottom-right, bottom-left, top-right, top-left)
 - Page selection (all, first, last, odd, even, ranges)
+- Skip pages (exclude specific pages from signing)
 - Adjustable scaling (10-100% of page width)
 - Configurable margins (X/Y offsets in inches)
 - Opacity control (10-100% transparency)
@@ -49,7 +50,7 @@ class PDFSignature:
 
     def __init__(self, signature_image_path, position='bottom-left',
                  scale=0.3, x_offset=0.5, y_offset=0.5, opacity=1.0,
-                 rotation=0, pages='all'):
+                 rotation=0, pages='all', skip_pages=''):
         """
         Initialize PDF signature configuration.
 
@@ -62,6 +63,7 @@ class PDFSignature:
             opacity: Transparency level (0.1-1.0, where 1.0 is opaque)
             rotation: Rotation angle in degrees (0-360)
             pages: Page selection - 'all', 'first', 'last', 'odd', 'even', or range like '1-5,10,15-20'
+            skip_pages: Pages to skip - range format like '1-5,10,15-20' (applied after pages filter)
         """
         # Validate signature image
         if not os.path.exists(signature_image_path):
@@ -108,6 +110,10 @@ class PDFSignature:
         self.pages = pages
         self._validate_pages_format()
 
+        # Validate and parse skip_pages
+        self.skip_pages = skip_pages.strip() if skip_pages else ''
+        self._validate_skip_pages_format()
+
     def _validate_pages_format(self):
         """Validate the pages parameter format"""
         if self.pages in self.VALID_PAGE_OPTIONS:
@@ -117,9 +123,41 @@ class PDFSignature:
         if not re.match(r'^[\d\s,\-]+$', self.pages):
             raise ValueError(f"Invalid pages format. Use 'all', 'first', 'last', 'odd', 'even', or ranges like '1-5,10,15-20'")
 
+    def _validate_skip_pages_format(self):
+        """Validate the skip_pages parameter format"""
+        if not self.skip_pages:
+            return
+
+        # Check if it's a valid range format (e.g., "1-5,10,15-20")
+        if not re.match(r'^[\d\s,\-]+$', self.skip_pages):
+            raise ValueError(f"Invalid skip_pages format. Use ranges like '1-5,10,15-20'")
+
+    def _parse_page_range(self, page_range_str):
+        """
+        Parse a page range string into a set of page numbers.
+
+        Args:
+            page_range_str: String like "1-5,10,15-20"
+
+        Returns:
+            set: Set of page numbers
+        """
+        if not page_range_str:
+            return set()
+
+        page_set = set()
+        for part in page_range_str.split(','):
+            part = part.strip()
+            if '-' in part:
+                start, end = part.split('-')
+                page_set.update(range(int(start), int(end) + 1))
+            else:
+                page_set.add(int(part))
+        return page_set
+
     def _should_sign_page(self, page_num, total_pages):
         """
-        Determine if a page should be signed based on pages filter.
+        Determine if a page should be signed based on pages filter and skip_pages.
 
         Args:
             page_num: Current page number (1-indexed)
@@ -128,6 +166,13 @@ class PDFSignature:
         Returns:
             bool: True if page should be signed
         """
+        # First check if page is in skip list
+        if self.skip_pages:
+            skip_set = self._parse_page_range(self.skip_pages)
+            if page_num in skip_set:
+                return False
+
+        # Then apply pages filter
         if self.pages == 'all':
             return True
         elif self.pages == 'first':
@@ -140,14 +185,7 @@ class PDFSignature:
             return page_num % 2 == 0
         else:
             # Parse range format (e.g., "1-5,10,15-20")
-            page_set = set()
-            for part in self.pages.split(','):
-                part = part.strip()
-                if '-' in part:
-                    start, end = part.split('-')
-                    page_set.update(range(int(start), int(end) + 1))
-                else:
-                    page_set.add(int(part))
+            page_set = self._parse_page_range(self.pages)
             return page_num in page_set
 
     def _calculate_position(self, page_width, page_height, sig_width, sig_height):

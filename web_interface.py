@@ -448,6 +448,7 @@ def process_signature():
     opacity = config.get('opacity', 1.0)
     rotation = config.get('rotation', 0)
     pages = config.get('pages', 'all')
+    skip_pages = config.get('skipPages', '')
 
     try:
         # Create signer
@@ -459,7 +460,8 @@ def process_signature():
             y_offset=y_offset,
             opacity=opacity,
             rotation=rotation,
-            pages=pages
+            pages=pages,
+            skip_pages=skip_pages
         )
 
         # Create output folder
@@ -539,7 +541,7 @@ def main():
     print("Starting web server...")
     print()
     print("Your browser will open automatically to:")
-    print("  → http://localhost:5000")
+    print("  -> http://localhost:5000")
     print()
     print("Press Ctrl+C to stop the server")
     print("="*70)
