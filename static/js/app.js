@@ -784,7 +784,10 @@ function renderPreviewCanvas() {
     const pageWidth = canvas.width - 20;
     const pageHeight = canvas.height - 20;
     const sigWidth = pageWidth * signatureConfig.scale;
-    const sigHeight = sigWidth * 0.5; // Assume 2:1 aspect ratio for preview
+    const aspectRatio = signatureConfig.signatureDimensions
+        ? signatureConfig.signatureDimensions.height / signatureConfig.signatureDimensions.width
+        : 0.5;
+    const sigHeight = sigWidth * aspectRatio;
 
     // Convert offsets to pixels
     const xOffsetPx = signatureConfig.xOffset * 20; // Rough conversion

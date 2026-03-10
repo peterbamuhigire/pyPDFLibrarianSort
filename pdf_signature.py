@@ -63,7 +63,7 @@ class PDFSignature:
             opacity: Transparency level (0.1-1.0, where 1.0 is opaque)
             rotation: Rotation angle in degrees (0-360)
             pages: Page selection - 'all', 'first', 'last', 'odd', 'even', or range like '1-5,10,15-20'
-            skip_pages: Pages to skip - range format like '1-5,10,15-20' (applied after pages filter)
+            skip_pages: Pages to never sign even if selected, e.g. '3' or '1,5,10-12'
         """
         # Validate signature image
         if not os.path.exists(signature_image_path):
@@ -110,9 +110,8 @@ class PDFSignature:
         self.pages = pages
         self._validate_pages_format()
 
-        # Validate and parse skip_pages
-        self.skip_pages = skip_pages.strip() if skip_pages else ''
-        self._validate_skip_pages_format()
+        # Parse skip_pages into a set
+        self._skip_set = self._parse_page_range(skip_pages.strip()) if skip_pages and skip_pages.strip() else set()
 
     def _validate_pages_format(self):
         """Validate the pages parameter format"""
@@ -123,37 +122,20 @@ class PDFSignature:
         if not re.match(r'^[\d\s,\-]+$', self.pages):
             raise ValueError(f"Invalid pages format. Use 'all', 'first', 'last', 'odd', 'even', or ranges like '1-5,10,15-20'")
 
-    def _validate_skip_pages_format(self):
-        """Validate the skip_pages parameter format"""
-        if not self.skip_pages:
-            return
-
-        # Check if it's a valid range format (e.g., "1-5,10,15-20")
-        if not re.match(r'^[\d\s,\-]+$', self.skip_pages):
-            raise ValueError(f"Invalid skip_pages format. Use ranges like '1-5,10,15-20'")
-
-    def _parse_page_range(self, page_range_str):
-        """
-        Parse a page range string into a set of page numbers.
-
-        Args:
-            page_range_str: String like "1-5,10,15-20"
-
-        Returns:
-            set: Set of page numbers
-        """
-        if not page_range_str:
-            return set()
-
-        page_set = set()
-        for part in page_range_str.split(','):
+    @staticmethod
+    def _parse_page_range(range_str):
+        """Parse a range string like '1,3,5-10' into a set of page numbers."""
+        pages = set()
+        for part in range_str.split(','):
             part = part.strip()
+            if not part:
+                continue
             if '-' in part:
-                start, end = part.split('-')
-                page_set.update(range(int(start), int(end) + 1))
+                start, end = part.split('-', 1)
+                pages.update(range(int(start), int(end) + 1))
             else:
-                page_set.add(int(part))
-        return page_set
+                pages.add(int(part))
+        return pages
 
     def _should_sign_page(self, page_num, total_pages):
         """
@@ -166,13 +148,11 @@ class PDFSignature:
         Returns:
             bool: True if page should be signed
         """
-        # First check if page is in skip list
-        if self.skip_pages:
-            skip_set = self._parse_page_range(self.skip_pages)
-            if page_num in skip_set:
-                return False
+        # Skip pages are never signed regardless of other settings
+        if page_num in self._skip_set:
+            return False
 
-        # Then apply pages filter
+
         if self.pages == 'all':
             return True
         elif self.pages == 'first':
@@ -184,9 +164,7 @@ class PDFSignature:
         elif self.pages == 'even':
             return page_num % 2 == 0
         else:
-            # Parse range format (e.g., "1-5,10,15-20")
-            page_set = self._parse_page_range(self.pages)
-            return page_num in page_set
+            return page_num in self._parse_page_range(self.pages)
 
     def _calculate_position(self, page_width, page_height, sig_width, sig_height):
         """
@@ -217,65 +195,99 @@ class PDFSignature:
 
         return x, y
 
-    def _create_signature_overlay(self, page_width, page_height):
+    def _create_signature_overlay(self, page_width, page_height,
+                                   mediabox_left=0, mediabox_bottom=0,
+                                   page_rotation=0):
         """
         Create ReportLab canvas with positioned, rotated, transparent signature.
 
         Args:
-            page_width: Page width in points
-            page_height: Page height in points
+            page_width: Visible page width in points (mediabox right - left)
+            page_height: Visible page height in points (mediabox top - bottom)
+            mediabox_left: Left offset of mediabox from PDF origin (default 0)
+            mediabox_bottom: Bottom offset of mediabox from PDF origin (default 0)
+            page_rotation: Page rotation in degrees clockwise (0, 90, 180, 270)
 
         Returns:
             BytesIO: PDF overlay as bytes
-        """
-        # Create in-memory PDF
-        packet = BytesIO()
-        c = canvas.Canvas(packet, pagesize=(page_width, page_height))
 
-        # Calculate signature dimensions maintaining aspect ratio
-        sig_width = page_width * self.scale
+        Note on page_rotation:
+            PDF /Rotate specifies clockwise rotation applied by the viewer.
+            We apply the inverse transform so that the user's chosen position
+            (bottom-left, top-right, etc.) always matches the visual corner.
+
+            Transforms (visual → physical) per rotation:
+              90°  CW: translate(W, 0),  rotate(90)  → (W-vis_y, vis_x)
+              180°:    translate(W, H),  rotate(180) → (W-vis_x, H-vis_y)
+              270° CW: translate(0, H),  rotate(270) → (vis_y,   H-vis_x)
+        """
+        packet = BytesIO()
+
+        # Canvas must cover the full PDF coordinate space so the overlay
+        # merges correctly even when the mediabox has a non-zero origin.
+        canvas_width = mediabox_left + page_width
+        canvas_height = mediabox_bottom + page_height
+
+        # Visual dimensions depend on rotation (90/270 swap width and height)
+        if page_rotation in (90, 270):
+            vis_width = page_height
+            vis_height = page_width
+        else:
+            vis_width = page_width
+            vis_height = page_height
+
+        c = canvas.Canvas(packet, pagesize=(canvas_width, canvas_height))
+
+        # Shift origin to the mediabox lower-left corner
+        if mediabox_left != 0 or mediabox_bottom != 0:
+            c.translate(mediabox_left, mediabox_bottom)
+
+        # Apply inverse-rotation transform so all drawing uses visual coords
+        if page_rotation == 90:
+            c.translate(page_width, 0)
+            c.rotate(90)
+        elif page_rotation == 180:
+            c.translate(page_width, page_height)
+            c.rotate(180)
+        elif page_rotation == 270:
+            c.translate(0, page_height)
+            c.rotate(270)
+
+        # Calculate signature dimensions using visual page width
+        sig_width = vis_width * self.scale
         sig_height = sig_width * (self.signature_image.height / self.signature_image.width)
 
         # Warn if signature is too large
-        if sig_width > page_width * 0.5 or sig_height > page_height * 0.5:
-            print(f"Warning: Signature is large ({sig_width:.0f}x{sig_height:.0f} pts on {page_width:.0f}x{page_height:.0f} page)")
+        if sig_width > vis_width * 0.5 or sig_height > vis_height * 0.5:
+            print(f"Warning: Signature is large ({sig_width:.0f}x{sig_height:.0f} pts "
+                  f"on {vis_width:.0f}x{vis_height:.0f} page)")
 
-        # Calculate position
-        x, y = self._calculate_position(page_width, page_height, sig_width, sig_height)
+        # Calculate position using visual dimensions
+        x, y = self._calculate_position(vis_width, vis_height, sig_width, sig_height)
 
         # Apply opacity
         c.setFillAlpha(self.opacity)
 
-        # Handle rotation
+        # Handle user-requested signature rotation
         if self.rotation != 0:
-            # Save state
             c.saveState()
-
-            # Move to center of signature
             center_x = x + sig_width / 2
             center_y = y + sig_height / 2
-
-            # Translate to center, rotate, translate back
             c.translate(center_x, center_y)
             c.rotate(self.rotation)
             c.translate(-sig_width / 2, -sig_height / 2)
-
-            # Draw signature
             c.drawImage(ImageReader(self.signature_image),
                        0, 0,
                        width=sig_width,
                        height=sig_height,
-                       mask='auto')  # Preserve PNG transparency
-
-            # Restore state
+                       mask='auto')
             c.restoreState()
         else:
-            # Draw signature without rotation
             c.drawImage(ImageReader(self.signature_image),
                        x, y,
                        width=sig_width,
                        height=sig_height,
-                       mask='auto')  # Preserve PNG transparency
+                       mask='auto')
 
         c.save()
         packet.seek(0)
@@ -325,12 +337,25 @@ class PDFSignature:
             for page_num, page in enumerate(reader.pages, start=1):
                 # Check if this page should be signed
                 if self._should_sign_page(page_num, total_pages):
-                    # Get page dimensions
-                    page_width = float(page.mediabox.width)
-                    page_height = float(page.mediabox.height)
+                    # Get page dimensions and position from mediabox
+                    mediabox = page.mediabox
+                    mediabox_left = float(mediabox.left)
+                    mediabox_bottom = float(mediabox.bottom)
+                    page_width = float(mediabox.right) - mediabox_left
+                    page_height = float(mediabox.top) - mediabox_bottom
+
+                    # Read page rotation so positions match what the user sees
+                    try:
+                        page_rotation = int(page.rotation) % 360
+                    except (AttributeError, TypeError):
+                        page_rotation = 0
 
                     # Create signature overlay
-                    overlay_pdf = self._create_signature_overlay(page_width, page_height)
+                    overlay_pdf = self._create_signature_overlay(
+                        page_width, page_height,
+                        mediabox_left, mediabox_bottom,
+                        page_rotation
+                    )
                     overlay_reader = PdfReader(overlay_pdf)
 
                     # Merge signature with page
@@ -453,6 +478,349 @@ class PDFSignature:
             json.dump(log_data, f, indent=2)
 
 
+def main():
+    """Launch the tkinter GUI for signing PDFs."""
+    import sys
+    import threading
+    import tkinter as tk
+    from tkinter import ttk, filedialog, messagebox
+
+    missing = check_dependencies()
+    if missing:
+        print(f"ERROR: Missing dependencies: {', '.join(missing)}")
+        print(f"Install with: pip install {' '.join(missing)}")
+        sys.exit(1)
+
+    class SignatureGUI:
+        POSITIONS = [
+            ('↖', 'top-left',     0, 0),
+            ('↗', 'top-right',    0, 1),
+            ('↙', 'bottom-left',  1, 0),
+            ('↘', 'bottom-right', 1, 1),
+        ]
+
+        def __init__(self, root):
+            self.root = root
+            self.root.title('PDF Signature Tool')
+            self.root.resizable(False, False)
+
+            self.sig_path   = tk.StringVar()
+            self.input_path = tk.StringVar()
+            self.output_path = tk.StringVar()
+            self.batch_mode  = tk.BooleanVar(value=False)
+            self.pages_var   = tk.StringVar(value='all')
+            self.range_var   = tk.StringVar(value='1')
+            self.skip_var  = tk.StringVar(value='')
+            self.position    = tk.StringVar(value='bottom-left')
+            self.scale       = tk.DoubleVar(value=25)
+            self.x_offset    = tk.DoubleVar(value=0.5)
+            self.y_offset    = tk.DoubleVar(value=0.5)
+            self.opacity     = tk.DoubleVar(value=100)
+            self.rotation    = tk.IntVar(value=0)
+
+            self._pos_buttons = {}
+            self._build()
+            self._update_preview()
+
+        # ── layout ──────────────────────────────────────────────
+
+        def _build(self):
+            pad = dict(padx=8, pady=4)
+
+            # ── Files ────────────────────────────────────────────
+            f_files = ttk.LabelFrame(self.root, text=' Files ', padding=6)
+            f_files.grid(row=0, column=0, columnspan=2, sticky='ew', **pad)
+
+            self._file_row(f_files, 0, 'Signature PNG:', self.sig_path,
+                           self._browse_sig)
+            self._file_row(f_files, 1, 'Input PDF / folder:', self.input_path,
+                           self._browse_input)
+            self._file_row(f_files, 2, 'Output:', self.output_path,
+                           self._browse_output)
+            ttk.Checkbutton(f_files, text='Batch mode (sign all PDFs in folder)',
+                            variable=self.batch_mode,
+                            command=self._on_batch_toggle
+                            ).grid(row=3, column=0, columnspan=3, sticky='w', pady=2)
+
+            # ── Config ───────────────────────────────────────────
+            f_cfg = ttk.LabelFrame(self.root, text=' Configuration ', padding=6)
+            f_cfg.grid(row=1, column=0, sticky='nsew', **pad)
+
+            # pages
+            ttk.Label(f_cfg, text='Pages:').grid(row=0, column=0, sticky='w')
+            pages_cb = ttk.Combobox(f_cfg, textvariable=self.pages_var, width=10,
+                                    state='readonly',
+                                    values=['all','first','last','odd','even','range'])
+            pages_cb.grid(row=0, column=1, sticky='w', padx=4)
+            pages_cb.bind('<<ComboboxSelected>>', self._on_pages_change)
+            self._range_label = ttk.Label(f_cfg, text='Range:')
+            self._range_entry = ttk.Entry(f_cfg, textvariable=self.range_var, width=12)
+
+            ttk.Label(f_cfg, text='Exempt pages:').grid(
+                row=2, column=0, sticky='w', pady=2)
+            ttk.Entry(f_cfg, textvariable=self.skip_var, width=16).grid(
+                row=2, column=1, sticky='w', padx=4)
+            ttk.Label(f_cfg, text='e.g. 3  or  1,5,9-12',
+                      foreground='#888').grid(row=2, column=2, sticky='w')
+
+            # position grid
+            ttk.Label(f_cfg, text='Position:').grid(row=3, column=0, sticky='w', pady=(8,2))
+            pos_frame = ttk.Frame(f_cfg)
+            pos_frame.grid(row=3, column=1, sticky='w', padx=4)
+            for (arrow, pos, r, c) in self.POSITIONS:
+                btn = tk.Button(pos_frame, text=f'{arrow}\n{pos}',
+                                width=9, height=2, relief='raised',
+                                command=lambda p=pos: self._select_pos(p))
+                btn.grid(row=r, column=c, padx=2, pady=2)
+                self._pos_buttons[pos] = btn
+            self._select_pos('bottom-left')
+
+            # sliders
+            sliders = [
+                ('Size (% of page width):', self.scale,    10, 100, 1),
+                ('H margin (inches):',       self.x_offset, 0.1, 2.0, 0.1),
+                ('V margin (inches):',       self.y_offset, 0.1, 2.0, 0.1),
+                ('Opacity (%):',             self.opacity,  10, 100, 1),
+                ('Rotation (°):',            self.rotation, 0,  360, 1),
+            ]
+            for i, (label, var, lo, hi, res) in enumerate(sliders, start=5):
+                ttk.Label(f_cfg, text=label).grid(row=i, column=0, sticky='w', pady=2)
+                val_lbl = ttk.Label(f_cfg, width=5, anchor='e')
+                val_lbl.grid(row=i, column=2, padx=(0,4))
+                sl = ttk.Scale(f_cfg, from_=lo, to=hi, variable=var,
+                               orient='horizontal', length=160,
+                               command=lambda v, lbl=val_lbl, res=res:
+                                   self._on_slider(v, lbl, res))
+                sl.grid(row=i, column=1, padx=4)
+                self._on_slider(var.get(), val_lbl, res)
+
+            # ── Preview ──────────────────────────────────────────
+            f_prev = ttk.LabelFrame(self.root, text=' Preview ', padding=6)
+            f_prev.grid(row=1, column=1, sticky='nsew', **pad)
+
+            self._canvas = tk.Canvas(f_prev, width=220, height=280,
+                                     bg='#e8e8e8', highlightthickness=1,
+                                     highlightbackground='#999')
+            self._canvas.pack()
+
+            # Trace all config vars → redraw preview
+            for var in (self.position, self.scale, self.x_offset,
+                        self.y_offset, self.opacity, self.rotation,
+                        self.pages_var):
+                var.trace_add('write', lambda *_: self._update_preview())
+
+            # ── Sign button + log ─────────────────────────────────
+            ttk.Button(self.root, text='✍  Sign PDF(s)',
+                       command=self._sign).grid(
+                row=2, column=0, columnspan=2, pady=6, ipadx=20, ipady=6)
+
+            self._log = tk.Text(self.root, height=6, width=70,
+                                state='disabled', font=('Consolas', 9))
+            self._log.grid(row=3, column=0, columnspan=2,
+                           padx=8, pady=(0, 8), sticky='ew')
+
+        def _file_row(self, parent, row, label, var, cmd):
+            ttk.Label(parent, text=label).grid(row=row, column=0, sticky='w', pady=2)
+            ttk.Entry(parent, textvariable=var, width=38).grid(
+                row=row, column=1, padx=4)
+            ttk.Button(parent, text='Browse', command=cmd).grid(
+                row=row, column=2)
+
+        # ── event handlers ───────────────────────────────────────
+
+        def _browse_sig(self):
+            p = filedialog.askopenfilename(title='Select signature PNG',
+                                           filetypes=[('PNG image', '*.png')])
+            if p:
+                self.sig_path.set(p)
+
+        def _browse_input(self):
+            if self.batch_mode.get():
+                p = filedialog.askdirectory(title='Select folder of PDFs')
+            else:
+                p = filedialog.askopenfilename(title='Select PDF',
+                                               filetypes=[('PDF', '*.pdf')])
+            if p:
+                self.input_path.set(p)
+                self._auto_output(p)
+
+        def _browse_output(self):
+            if self.batch_mode.get():
+                p = filedialog.askdirectory(title='Select output folder')
+            else:
+                p = filedialog.asksaveasfilename(
+                    title='Save signed PDF as',
+                    defaultextension='.pdf',
+                    filetypes=[('PDF', '*.pdf')])
+            if p:
+                self.output_path.set(p)
+
+        def _auto_output(self, inp):
+            from pathlib import Path as _Path
+            if self.batch_mode.get():
+                self.output_path.set(str(_Path(inp) / 'signed'))
+            else:
+                p = _Path(inp)
+                self.output_path.set(str(p.parent / f'{p.stem}_signed.pdf'))
+
+        def _on_batch_toggle(self):
+            inp = self.input_path.get()
+            if inp:
+                self._auto_output(inp)
+
+        def _on_pages_change(self, _=None):
+            if self.pages_var.get() == 'range':
+                self._range_label.grid(row=1, column=0, sticky='w')
+                self._range_entry.grid(row=1, column=1, sticky='w', padx=4)
+            else:
+                self._range_label.grid_remove()
+                self._range_entry.grid_remove()
+
+        def _select_pos(self, pos):
+            self.position.set(pos)
+            for p, btn in self._pos_buttons.items():
+                btn.config(relief='sunken' if p == pos else 'raised',
+                           bg='#4a90d9' if p == pos else 'SystemButtonFace',
+                           fg='white' if p == pos else 'black')
+
+        def _on_slider(self, val, label, res):
+            v = float(val)
+            label.config(text=f'{v:.1f}' if res < 1 else str(int(round(v))))
+            self._update_preview()
+
+        # ── preview canvas ───────────────────────────────────────
+
+        def _update_preview(self):
+            if not hasattr(self, '_canvas'):
+                return
+            c = self._canvas
+            c.delete('all')
+
+            cw, ch = 220, 280
+            margin = 14
+
+            # Page rect
+            c.create_rectangle(margin, margin, cw - margin, ch - margin,
+                                fill='white', outline='#444', width=2)
+
+            pw = cw - 2 * margin
+            ph = ch - 2 * margin
+
+            scale     = self.scale.get() / 100
+            x_off_px  = self.x_offset.get() * 20
+            y_off_px  = self.y_offset.get() * 20
+            sig_w     = pw * scale
+            sig_h     = sig_w * 0.4       # preview aspect ratio
+            alpha     = self.opacity.get() / 100
+            rot       = self.rotation.get()
+            pos       = self.position.get()
+
+            # Position in page-local coords (top-left origin for canvas)
+            if pos == 'bottom-left':
+                sx = margin + x_off_px
+                sy = ch - margin - y_off_px - sig_h
+            elif pos == 'bottom-right':
+                sx = cw - margin - x_off_px - sig_w
+                sy = ch - margin - y_off_px - sig_h
+            elif pos == 'top-left':
+                sx = margin + x_off_px
+                sy = margin + y_off_px
+            else:  # top-right
+                sx = cw - margin - x_off_px - sig_w
+                sy = margin + y_off_px
+
+            # Draw a blue rectangle for the signature (with simple opacity via stipple)
+            fill = '#4a90d9'
+            stipple = '' if alpha > 0.7 else ('gray50' if alpha > 0.4 else 'gray25')
+            cx2 = sx + sig_w
+            cy2 = sy + sig_h
+
+            if rot != 0:
+                import math
+                cx = sx + sig_w / 2
+                cy = sy + sig_h / 2
+                corners = [(sx, sy), (cx2, sy), (cx2, cy2), (sx, cy2)]
+                rad = math.radians(rot)
+                cos_r, sin_r = math.cos(rad), math.sin(rad)
+                pts = []
+                for (x, y) in corners:
+                    dx, dy = x - cx, y - cy
+                    pts += [cx + dx * cos_r - dy * sin_r,
+                            cy + dx * sin_r + dy * cos_r]
+                c.create_polygon(pts, fill=fill, outline='#2060a0',
+                                 width=1, stipple=stipple)
+            else:
+                c.create_rectangle(sx, sy, cx2, cy2,
+                                   fill=fill, outline='#2060a0',
+                                   width=1, stipple=stipple)
+
+            c.create_text(cw // 2, ch // 2 + 8,
+                          text='Preview', fill='#bbb', font=('Arial', 9))
+
+        # ── signing ──────────────────────────────────────────────
+
+        def _log_write(self, msg):
+            self._log.config(state='normal')
+            self._log.insert('end', msg + '\n')
+            self._log.see('end')
+            self._log.config(state='disabled')
+
+        def _sign(self):
+            sig   = self.sig_path.get().strip()
+            inp   = self.input_path.get().strip()
+            out   = self.output_path.get().strip()
+            pages = (self.range_var.get().strip()
+                     if self.pages_var.get() == 'range'
+                     else self.pages_var.get())
+
+            if not sig:
+                messagebox.showerror('Missing', 'Please select a signature PNG.')
+                return
+            if not inp:
+                messagebox.showerror('Missing', 'Please select an input PDF or folder.')
+                return
+            if not out:
+                messagebox.showerror('Missing', 'Please set an output path.')
+                return
+
+            def run():
+                try:
+                    signer = PDFSignature(
+                        signature_image_path=sig,
+                        position=self.position.get(),
+                        scale=self.scale.get() / 100,
+                        x_offset=self.x_offset.get(),
+                        y_offset=self.y_offset.get(),
+                        opacity=self.opacity.get() / 100,
+                        rotation=self.rotation.get(),
+                        pages=pages,
+                        skip_pages=self.skip_var.get().strip(),
+                    )
+                    if self.batch_mode.get():
+                        self._log_write(f'Batch signing: {inp} → {out}')
+                        res = signer.batch_sign_pdfs(inp, out)
+                        self._log_write(
+                            f'Done — {res["successful"]} signed, '
+                            f'{res["failed"]} failed  |  log: {res["log_path"]}')
+                    else:
+                        self._log_write(f'Signing: {inp}')
+                        res = signer.add_signature_to_pdf(inp, out)
+                        if res['success']:
+                            self._log_write(
+                                f'Done — {res["pages_signed"]}/{res["total_pages"]} '
+                                f'pages signed  |  output: {res["output_path"]}')
+                        else:
+                            self._log_write(f'ERROR: {res["error"]}')
+                except Exception as e:
+                    self._log_write(f'ERROR: {e}')
+
+            threading.Thread(target=run, daemon=True).start()
+
+    root = tk.Tk()
+    SignatureGUI(root)
+    root.mainloop()
+
+
 def check_dependencies():
     """Check if required dependencies are installed"""
     missing = []
@@ -473,3 +841,7 @@ def check_dependencies():
         missing.append('pypdf')
 
     return missing
+
+
+if __name__ == '__main__':
+    main()
