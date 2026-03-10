@@ -1,27 +1,12 @@
 {
-  "generated_at": "2026-02-01T00:16:44.231246",
+  "generated_at": "2026-03-01T21:06:54.018394",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 606,
+  "category_count": 611,
   "categories": [
     {
       "path": "Biographies",
       "depth": 1,
       "count": 6
-    },
-    {
-      "path": "Business",
-      "depth": 1,
-      "count": 0
-    },
-    {
-      "path": "Business/Accounting",
-      "depth": 2,
-      "count": 3
-    },
-    {
-      "path": "Business/General",
-      "depth": 2,
-      "count": 15
     },
     {
       "path": "Computer & ICT",
@@ -36,32 +21,32 @@
     {
       "path": "Computer & ICT/AI/AI Concepts",
       "depth": 3,
-      "count": 0
+      "count": 23
     },
     {
       "path": "Computer & ICT/AI/AI Engineering",
       "depth": 3,
-      "count": 0
+      "count": 8
     },
     {
       "path": "Computer & ICT/AI/AI for Creativity",
       "depth": 3,
-      "count": 0
+      "count": 1
     },
     {
       "path": "Computer & ICT/AI/AI in Business Management",
       "depth": 3,
-      "count": 15
+      "count": 32
     },
     {
       "path": "Computer & ICT/AI/Prompting",
       "depth": 3,
-      "count": 18
+      "count": 24
     },
     {
       "path": "Computer & ICT/AI/Software Development with AI",
       "depth": 3,
-      "count": 15
+      "count": 25
     },
     {
       "path": "Computer & ICT/Books, Profiles and Biographies",
@@ -81,7 +66,7 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/C#",
       "depth": 3,
-      "count": 16
+      "count": 17
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/C++",
@@ -2246,17 +2231,17 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/Javascript",
       "depth": 3,
-      "count": 6
+      "count": 7
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Mobile Development",
       "depth": 3,
-      "count": 9
+      "count": 21
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/PHP",
       "depth": 3,
-      "count": 14
+      "count": 16
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/PHP/Shanker S. Building Dynamic Web Experiences with PHP...2024",
@@ -2271,12 +2256,12 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/Python",
       "depth": 3,
-      "count": 14
+      "count": 16
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Robotics & IOT",
       "depth": 3,
-      "count": 2
+      "count": 3
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Web Development",
@@ -2291,52 +2276,52 @@
     {
       "path": "Computer & ICT/Computer Science Concepts",
       "depth": 2,
-      "count": 20
+      "count": 21
     },
     {
       "path": "Computer & ICT/Cyber Security",
       "depth": 2,
-      "count": 36
+      "count": 39
     },
     {
       "path": "Computer & ICT/Data Science, Analytics & Visualization",
       "depth": 2,
-      "count": 17
+      "count": 27
     },
     {
       "path": "Computer & ICT/Databases",
       "depth": 2,
-      "count": 10
+      "count": 17
     },
     {
       "path": "Computer & ICT/Design",
       "depth": 2,
-      "count": 10
+      "count": 15
     },
     {
       "path": "Computer & ICT/ERP",
       "depth": 2,
-      "count": 11
+      "count": 9
     },
     {
       "path": "Computer & ICT/GIS",
       "depth": 2,
-      "count": 4
+      "count": 8
     },
     {
       "path": "Computer & ICT/IT Policy & Management",
       "depth": 2,
-      "count": 16
+      "count": 21
     },
     {
       "path": "Computer & ICT/IT Products, Business, Projects & Consulting",
       "depth": 2,
-      "count": 18
+      "count": 21
     },
     {
       "path": "Computer & ICT/Magazines & Periodicals",
       "depth": 2,
-      "count": 2
+      "count": 3
     },
     {
       "path": "Computer & ICT/Magazines & Periodicals/Hackercool 2018 Complete",
@@ -2349,6 +2334,11 @@
       "count": 6
     },
     {
+      "path": "Computer & ICT/Magazines & Periodicals/PC Pro - Full Year Collection 2025",
+      "depth": 3,
+      "count": 12
+    },
+    {
       "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing",
       "depth": 2,
       "count": 5
@@ -2356,12 +2346,12 @@
     {
       "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing/Networking",
       "depth": 3,
-      "count": 14
+      "count": 15
     },
     {
       "path": "Computer & ICT/Networking, Hardware, System Admin, Cloud Computing/PC Hardware",
       "depth": 3,
-      "count": 11
+      "count": 10
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals",
@@ -2371,7 +2361,7 @@
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Linux",
       "depth": 3,
-      "count": 49
+      "count": 53
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Linux/Linux USA 2025 Complete",
@@ -2414,9 +2404,14 @@
       "count": 2
     },
     {
+      "path": "Computer & ICT/Software Architecture",
+      "depth": 2,
+      "count": 5
+    },
+    {
       "path": "Computer & ICT/Software Development",
       "depth": 2,
-      "count": 0
+      "count": 1
     },
     {
       "path": "Computer & ICT/Software Development/Development Tools & Frameworks",
@@ -2431,27 +2426,32 @@
     {
       "path": "Computer & ICT/Software Development/Software Architecture",
       "depth": 3,
-      "count": 7
+      "count": 8
     },
     {
       "path": "Computer & ICT/Software Development/Software Design",
       "depth": 3,
-      "count": 10
+      "count": 11
     },
     {
       "path": "Computer & ICT/Software Development/Software Engineering",
       "depth": 3,
-      "count": 20
+      "count": 26
     },
     {
       "path": "Computer & ICT/Software Development/Software Requirements",
       "depth": 3,
-      "count": 6
+      "count": 12
+    },
+    {
+      "path": "Computer & ICT/Software Requirements",
+      "depth": 2,
+      "count": 2
     },
     {
       "path": "Computer & ICT/Systems Analysis, Design and BPM",
       "depth": 2,
-      "count": 30
+      "count": 34
     },
     {
       "path": "Computer & ICT/Web Development",
@@ -2461,12 +2461,12 @@
     {
       "path": "Computer & ICT/Web and Digital Marketing",
       "depth": 2,
-      "count": 1
+      "count": 0
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing/Search Engine Optimization",
       "depth": 3,
-      "count": 16
+      "count": 17
     },
     {
       "path": "Economics, Business & Management",
@@ -2476,12 +2476,12 @@
     {
       "path": "Economics, Business & Management/Accounting & Finance",
       "depth": 2,
-      "count": 30
+      "count": 40
     },
     {
       "path": "Economics, Business & Management/Business",
       "depth": 2,
-      "count": 8
+      "count": 11
     },
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas",
@@ -2491,12 +2491,12 @@
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas/Ideas",
       "depth": 3,
-      "count": 70
+      "count": 71
     },
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas/Plans & Proposals Writing",
       "depth": 3,
-      "count": 4
+      "count": 5
     },
     {
       "path": "Economics, Business & Management/Business Statistics & Analytics",
@@ -2531,7 +2531,7 @@
     {
       "path": "Economics, Business & Management/Consulting",
       "depth": 2,
-      "count": 31
+      "count": 32
     },
     {
       "path": "Economics, Business & Management/Consulting/Consulting Playbooks",
@@ -2561,12 +2561,12 @@
     {
       "path": "Economics, Business & Management/Economics",
       "depth": 2,
-      "count": 12
+      "count": 13
     },
     {
       "path": "Economics, Business & Management/Entreprenuership & Startups",
       "depth": 2,
-      "count": 26
+      "count": 35
     },
     {
       "path": "Economics, Business & Management/HRM, Performance & Payroll",
@@ -2576,27 +2576,32 @@
     {
       "path": "Economics, Business & Management/Harvard Business Review",
       "depth": 2,
-      "count": 18
+      "count": 19
     },
     {
       "path": "Economics, Business & Management/Innovation, Ideas & Change Management",
       "depth": 2,
-      "count": 10
+      "count": 15
+    },
+    {
+      "path": "Economics, Business & Management/Investing",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Leadership",
       "depth": 2,
-      "count": 8
+      "count": 9
     },
     {
       "path": "Economics, Business & Management/Management - General",
       "depth": 2,
-      "count": 32
+      "count": 37
     },
     {
       "path": "Economics, Business & Management/Marketing & Sales",
       "depth": 2,
-      "count": 33
+      "count": 47
     },
     {
       "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing Secrets Collection",
@@ -2616,22 +2621,27 @@
     {
       "path": "Economics, Business & Management/Production, Operations & Manufacturing",
       "depth": 2,
-      "count": 9
+      "count": 10
     },
     {
       "path": "Economics, Business & Management/Project Management",
       "depth": 2,
-      "count": 22
+      "count": 23
     },
     {
       "path": "Economics, Business & Management/Retail & Small Business",
       "depth": 2,
-      "count": 11
+      "count": 12
+    },
+    {
+      "path": "Economics, Business & Management/Sales",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Specific Industries",
       "depth": 2,
-      "count": 15
+      "count": 19
     },
     {
       "path": "Economics, Business & Management/Specific Industries/AgriBusiness",
@@ -2646,12 +2656,12 @@
     {
       "path": "Economics, Business & Management/Strategy & Competitiveness",
       "depth": 2,
-      "count": 14
+      "count": 22
     },
     {
       "path": "Forms and Documents",
       "depth": 1,
-      "count": 3
+      "count": 8
     },
     {
       "path": "Health, Food & Wellness",
@@ -2671,7 +2681,7 @@
     {
       "path": "Health, Food & Wellness/Herbal Medicine",
       "depth": 2,
-      "count": 33
+      "count": 35
     },
     {
       "path": "Health, Food & Wellness/History & Knowledge",
@@ -2696,7 +2706,7 @@
     {
       "path": "History, Military and Politics/African History",
       "depth": 2,
-      "count": 9
+      "count": 11
     },
     {
       "path": "History, Military and Politics/American History",
@@ -2706,7 +2716,7 @@
     {
       "path": "History, Military and Politics/Ancient History",
       "depth": 2,
-      "count": 11
+      "count": 12
     },
     {
       "path": "History, Military and Politics/Crime",
@@ -2721,7 +2731,7 @@
     {
       "path": "History, Military and Politics/History & Political Books",
       "depth": 2,
-      "count": 7
+      "count": 8
     },
     {
       "path": "History, Military and Politics/Military & Intelligence",
@@ -2736,7 +2746,7 @@
     {
       "path": "History, Military and Politics/Politics",
       "depth": 2,
-      "count": 1
+      "count": 3
     },
     {
       "path": "Hobbies & Interests",
@@ -2769,6 +2779,11 @@
       "count": 1
     },
     {
+      "path": "Hobbies & Interests/Transport",
+      "depth": 2,
+      "count": 1
+    },
+    {
       "path": "Knowledge & Academic Subjects",
       "depth": 1,
       "count": 0
@@ -2786,7 +2801,7 @@
     {
       "path": "Knowledge & Academic Subjects/Biology",
       "depth": 2,
-      "count": 9
+      "count": 10
     },
     {
       "path": "Knowledge & Academic Subjects/Climate & Environment",
@@ -2816,7 +2831,7 @@
     {
       "path": "Knowledge & Academic Subjects/Interesting & Unconventional stuff",
       "depth": 2,
-      "count": 2
+      "count": 5
     },
     {
       "path": "Knowledge & Academic Subjects/Mental Models",
@@ -2836,7 +2851,7 @@
     {
       "path": "Knowledge & Academic Subjects/Science & Technology",
       "depth": 2,
-      "count": 13
+      "count": 16
     },
     {
       "path": "Knowledge & Academic Subjects/Science & Technology/General",
@@ -2849,34 +2864,39 @@
       "count": 6
     },
     {
-      "path": "Literature & Novels",
+      "path": "Literature, Writing & Novels",
       "depth": 1,
       "count": 5
     },
     {
-      "path": "Literature & Novels/Comics & Classics",
+      "path": "Literature, Writing & Novels/Comics & Classics",
       "depth": 2,
       "count": 0
     },
     {
-      "path": "Literature & Novels/Comics & Classics/TinTin -- Collector's Edition",
+      "path": "Literature, Writing & Novels/Comics & Classics/TinTin -- Collector's Edition",
       "depth": 3,
       "count": 27
     },
     {
-      "path": "Literature & Novels/Complete Collections",
+      "path": "Literature, Writing & Novels/Complete Collections",
       "depth": 2,
       "count": 2
     },
     {
-      "path": "Literature & Novels/JRR Tolkein",
+      "path": "Literature, Writing & Novels/JRR Tolkein",
       "depth": 2,
       "count": 3
     },
     {
-      "path": "Literature & Novels/Victorian Novels",
+      "path": "Literature, Writing & Novels/Victorian Novels",
       "depth": 2,
       "count": 3
+    },
+    {
+      "path": "Literature, Writing & Novels/Writing & Authoring",
+      "depth": 2,
+      "count": 0
     },
     {
       "path": "Magazines, Journals & Periodicals",
@@ -2901,7 +2921,7 @@
     {
       "path": "Nature, Gardening & Farming",
       "depth": 1,
-      "count": 21
+      "count": 23
     },
     {
       "path": "Personal Development",
@@ -2911,7 +2931,7 @@
     {
       "path": "Personal Development/Creativity, Thinking & Learning",
       "depth": 2,
-      "count": 34
+      "count": 36
     },
     {
       "path": "Personal Development/Japanese Philosophy",
@@ -2921,27 +2941,27 @@
     {
       "path": "Personal Development/Motivation, Confidence & Goals",
       "depth": 2,
-      "count": 23
+      "count": 25
     },
     {
       "path": "Personal Development/Negotiations & Decision Making",
       "depth": 2,
-      "count": 7
+      "count": 8
     },
     {
       "path": "Personal Development/People Skills",
       "depth": 2,
-      "count": 12
+      "count": 13
     },
     {
       "path": "Personal Development/Personal Branding & Strategy",
       "depth": 2,
-      "count": 10
+      "count": 13
     },
     {
       "path": "Personal Development/Psychology & Thought Process",
       "depth": 2,
-      "count": 30
+      "count": 31
     },
     {
       "path": "Personal Development/Survival Guides",
@@ -2951,12 +2971,12 @@
     {
       "path": "Personal Development/Wealth and Prosperity",
       "depth": 2,
-      "count": 12
+      "count": 13
     },
     {
       "path": "Personal Development/Work, Performance and Success",
       "depth": 2,
-      "count": 30
+      "count": 34
     },
     {
       "path": "Philosophy and Thought",
@@ -2977,6 +2997,11 @@
       "path": "Philosophy and Thought/Immanuel Kant",
       "depth": 2,
       "count": 6
+    },
+    {
+      "path": "Philosophy and Thought/Jean-Jacques Rousseau",
+      "depth": 2,
+      "count": 24
     },
     {
       "path": "Philosophy and Thought/Plato",
@@ -3006,7 +3031,7 @@
     {
       "path": "Religion & Spirituality/Occult & New Age Stuff",
       "depth": 2,
-      "count": 30
+      "count": 32
     },
     {
       "path": "Science",
@@ -3016,7 +3041,7 @@
     {
       "path": "Science/General",
       "depth": 2,
-      "count": 4
+      "count": 21
     },
     {
       "path": "Science/Mathematics",
