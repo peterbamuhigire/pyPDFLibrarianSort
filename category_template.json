@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-16T22:19:24.293539",
+  "generated_at": "2026-03-19T18:51:13.709461",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 619,
+  "category_count": 629,
   "categories": [
     {
       "path": "Biographies",
@@ -36,7 +36,7 @@
     {
       "path": "Computer & ICT/AI/AI in Business Management",
       "depth": 3,
-      "count": 42
+      "count": 50
     },
     {
       "path": "Computer & ICT/AI/Prompting",
@@ -2286,7 +2286,7 @@
     {
       "path": "Computer & ICT/Data Science, Analytics & Visualization",
       "depth": 2,
-      "count": 29
+      "count": 35
     },
     {
       "path": "Computer & ICT/Databases",
@@ -2296,7 +2296,7 @@
     {
       "path": "Computer & ICT/Design",
       "depth": 2,
-      "count": 18
+      "count": 21
     },
     {
       "path": "Computer & ICT/ERP",
@@ -2416,7 +2416,7 @@
     {
       "path": "Computer & ICT/Software Development",
       "depth": 2,
-      "count": 1
+      "count": 4
     },
     {
       "path": "Computer & ICT/Software Development/Development Tools & Frameworks",
@@ -2471,7 +2471,7 @@
     {
       "path": "Computer & ICT/Web and Digital Marketing",
       "depth": 2,
-      "count": 0
+      "count": 1
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing/Search Engine Optimization",
@@ -2541,12 +2541,12 @@
     {
       "path": "Economics, Business & Management/Consulting",
       "depth": 2,
-      "count": 50
+      "count": 54
     },
     {
       "path": "Economics, Business & Management/Consulting/Consulting Playbooks",
       "depth": 3,
-      "count": 11
+      "count": 18
     },
     {
       "path": "Economics, Business & Management/Consulting/Cost Cutting",
@@ -2591,12 +2591,17 @@
     {
       "path": "Economics, Business & Management/HRM, Performance & Payroll",
       "depth": 2,
-      "count": 30
+      "count": 33
     },
     {
       "path": "Economics, Business & Management/Harvard Business Review",
       "depth": 2,
       "count": 19
+    },
+    {
+      "path": "Economics, Business & Management/IT Policy & Management",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Innovation, Ideas & Change Management",
@@ -2606,7 +2611,7 @@
     {
       "path": "Economics, Business & Management/Investing",
       "depth": 2,
-      "count": 2
+      "count": 3
     },
     {
       "path": "Economics, Business & Management/Leadership",
@@ -2616,17 +2621,17 @@
     {
       "path": "Economics, Business & Management/Management - General",
       "depth": 2,
-      "count": 43
+      "count": 67
     },
     {
       "path": "Economics, Business & Management/Marketing & Sales",
       "depth": 2,
-      "count": 64
+      "count": 73
     },
     {
-      "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing Secrets Collection",
+      "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing",
       "depth": 3,
-      "count": 67
+      "count": 0
     },
     {
       "path": "Economics, Business & Management/Papers & Publications",
@@ -2646,7 +2651,7 @@
     {
       "path": "Economics, Business & Management/Project Management",
       "depth": 2,
-      "count": 31
+      "count": 37
     },
     {
       "path": "Economics, Business & Management/Retail & Small Business",
@@ -2661,7 +2666,7 @@
     {
       "path": "Economics, Business & Management/Specific Industries",
       "depth": 2,
-      "count": 24
+      "count": 25
     },
     {
       "path": "Economics, Business & Management/Specific Industries/AgriBusiness",
@@ -2681,12 +2686,57 @@
     {
       "path": "Economics, Business & Management/Web and Digital Marketing",
       "depth": 2,
-      "count": 20
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Blogging",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Email",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Facebook",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Google",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Instagram",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Tiktok",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Twitter X",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Whatsapp",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Web and Digital Marketing/Youtube",
+      "depth": 3,
+      "count": 0
     },
     {
       "path": "Forms and Documents",
       "depth": 1,
-      "count": 34
+      "count": 37
     },
     {
       "path": "Health, Food & Wellness",
@@ -2831,7 +2881,7 @@
     {
       "path": "Knowledge & Academic Subjects/Climate & Environment",
       "depth": 2,
-      "count": 6
+      "count": 20
     },
     {
       "path": "Knowledge & Academic Subjects/Engineering, Electronics & Architecture",
@@ -2951,7 +3001,7 @@
     {
       "path": "Nature, Gardening & Farming",
       "depth": 1,
-      "count": 51
+      "count": 52
     },
     {
       "path": "Personal Development",
@@ -2961,7 +3011,7 @@
     {
       "path": "Personal Development/Creativity, Thinking & Learning",
       "depth": 2,
-      "count": 38
+      "count": 40
     },
     {
       "path": "Personal Development/Japanese Philosophy",
@@ -3006,7 +3056,7 @@
     {
       "path": "Personal Development/Work, Performance and Success",
       "depth": 2,
-      "count": 38
+      "count": 39
     },
     {
       "path": "Philosophy and Thought",
@@ -3086,7 +3136,7 @@
     {
       "path": "Ugandan Books, Laws, History",
       "depth": 1,
-      "count": 7
+      "count": 8
     },
     {
       "path": "Ugandan Books, Laws, History/Statistics and Info",
