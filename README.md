@@ -23,13 +23,13 @@
 
 ## 💰 Cost Comparison
 
-| PDFs | Single Mode | Batch Mode | **Savings** |
+| PDFs | Traditional | Batch | **Savings** |
 |------|------------|------------|-------------|
 | 50   | $2.50      | $0.05      | **98%** ✅  |
 | 200  | $10.00     | $0.10      | **99%** ✅  |
 | 500  | $25.00     | $0.15      | **99%** ✅  |
 
-**Why such huge savings?** Batch mode processes ALL PDFs in a single API call instead of one call per PDF!
+**Why such huge savings?** The organizer batches many PDFs into a single AI request instead of making one request per file.
 
 ## 📖 Documentation
 
@@ -88,14 +88,12 @@ python web_interface.py
 ```
 
 **PDF Organization:**
-- **Batch Mode**: `python organize_batch.py` (cost-effective)
+- **Organizer GUI / CLI**: `python organize_batch.py`
 - **Watch Mode**: `python watch_setup.py` (auto-organize 24/7)
 
 **PDF Signatures (No AI Credits):**
 ```bash
-python sign_setup.py  # Interactive wizard
-# OR
-python sign_batch.py --signature sig.png --input document.pdf
+python pdf_signature.py
 ```
 
 See [docs/guides/QUICK_START.md](docs/guides/QUICK_START.md) for detailed usage.
@@ -108,16 +106,14 @@ See [docs/guides/QUICK_START.md](docs/guides/QUICK_START.md) for detailed usage.
 |------|----------|-----------------|---------|
 | **Web Interface** | Interactive use, visual review | $0.10 | `python web_interface.py` |
 | **Watch Mode** | Auto-organize 24/7 | $0.10-0.20 | `python watch_setup.py` |
-| **Batch Mode** | One-time organization | $0.10 | `python organize_batch.py` |
-| **Single Mode** | Maximum accuracy | $10.00 | `python organize_simple.py` |
+| **Organizer GUI / CLI** | One-time organization | $0.10 | `python organize_batch.py` |
 
 ### PDF Signatures (No AI Credits)
 
 | Mode | Best For | Cost | Command |
 |------|----------|------|---------|
 | **Web Interface** | Interactive signing with preview | $0 | `python web_interface.py` |
-| **Interactive CLI** | Step-by-step configuration | $0 | `python sign_setup.py` |
-| **Direct CLI** | Scripting & automation | $0 | `python sign_batch.py` |
+| **Signature Tool** | Interactive signing | $0 | `python pdf_signature.py` |
 
 **Signature Features**: 4 corner positions • Page selection (all/first/last/odd/even/ranges) • Size control (10-100%) • Opacity (10-100%) • Rotation (0-360°) • Batch processing
 

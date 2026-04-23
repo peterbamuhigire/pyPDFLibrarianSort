@@ -5,7 +5,7 @@
 You're seeing this error:
 
 ```
-python: can't open file 'C:\Windows\System32\pdf_organizer_gui.py': 
+python: can't open file 'C:\Windows\System32\organize_batch.py': 
 [Errno 2] No such file or directory
 ```
 
@@ -35,7 +35,7 @@ This new launcher:
 
 1. **Open File Explorer** and navigate to the folder with your PDF Organizer files
 2. **Type `cmd`** in the address bar and press Enter
-3. **Run:** `python pdf_organizer_gui.py`
+3. **Run:** `python organize_batch.py`
 
 This guarantees you're in the right directory.
 
@@ -51,13 +51,13 @@ The updated `run_gui.bat` should work now. If you downloaded it again, try:
 
 ### Option 3: Create a Shortcut (Best for Desktop)
 
-1. **Right-click** on `pdf_organizer_gui.py`
+1. **Right-click** on `organize_batch.py`
 2. Select **"Create shortcut"**
 3. **Right-click** the shortcut → **Properties**
 4. In **"Target"** field, change it to:
 
    ```
-   python "C:\full\path\to\your\folder\pdf_organizer_gui.py"
+   python "C:\full\path\to\your\folder\organize_batch.py"
    ```
 
    (Replace with your actual path)
@@ -84,8 +84,8 @@ If nothing else works, use the PowerShell installer:
 
 All these files must be in the **SAME FOLDER**:
 
-- ✓ pdf_organizer_gui.py
-- ✓ pdf_organizer.py  
+- ✓ organize_batch.py
+- ✓ organize_batch.py
 - ✓ requirements.txt
 - ✓ setup.py
 - ✓ START_HERE.bat (or run_gui.bat)
@@ -115,8 +115,8 @@ If you want to start clean:
    ```
 
 2. **Move ALL these files** into that folder:
-   - pdf_organizer_gui.py
-   - pdf_organizer.py
+   - organize_batch.py
+   - organize_batch.py
    - requirements.txt
    - setup.py
    - START_HERE.bat
@@ -143,7 +143,7 @@ If you want to start clean:
 6. **Launch the GUI:**
 
    ```
-   python pdf_organizer_gui.py
+   python organize_batch.py
    ```
 
 Or just double-click `START_HERE.bat`!
@@ -202,7 +202,7 @@ python -c "import google.generativeai; import pdfplumber; import pypdf; print('A
 If you see "All good!" - you're ready to run the GUI!
 
 ```
-python pdf_organizer_gui.py
+python organize_batch.py
 ```
 
 ---

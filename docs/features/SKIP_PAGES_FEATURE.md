@@ -39,17 +39,17 @@ The `skip_pages` parameter allows you to exclude specific pages from signing, **
    - Mixed: `1,3-5,10,15-20`
 5. Upload PDFs and sign
 
-### CLI - sign_batch.py
+### CLI - pdf_signature.py
 
 ```bash
 # Sign all pages except page 2
-python sign_batch.py --signature sig.png --input doc.pdf --pages all --skip-pages "2"
+python pdf_signature.py --signature sig.png --input doc.pdf --pages all --skip-pages "2"
 
 # Sign odd pages except first and last
-python sign_batch.py --signature sig.png --input doc.pdf --pages odd --skip-pages "1,10"
+python pdf_signature.py --signature sig.png --input doc.pdf --pages odd --skip-pages "1,10"
 
 # Sign all pages except pages 2, 5-7, and 15
-python sign_batch.py --signature sig.png --input doc.pdf --skip-pages "2,5-7,15"
+python pdf_signature.py --signature sig.png --input doc.pdf --skip-pages "2,5-7,15"
 ```
 
 ### Interactive Setup - sign_setup.py

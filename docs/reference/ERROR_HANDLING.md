@@ -135,7 +135,7 @@ pip install pdfplumber pypdf google-generativeai
 3. **Or pass as argument:**
 
    ```bash
-   python pdf_organizer.py --ebooks "F:\ebooks" --api-key "your-key"
+   python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key"
    ```
 
 ---
@@ -240,7 +240,7 @@ Check this file to see:
 1. ✅ **Dry run first:**
 
    ```bash
-   python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
+   python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key" --dry-run
    ```
 
 2. ✅ **Close all PDFs:**
@@ -291,7 +291,7 @@ For detailed error information:
 
 ```bash
 # Run with verbose output
-python pdf_organizer.py --ebooks "F:\ebooks" --dry-run 2>&1 | tee debug.log
+python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key" --dry-run 2>&1 | tee debug.log
 ```
 
 This saves all output to `debug.log` for troubleshooting.

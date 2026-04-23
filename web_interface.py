@@ -14,7 +14,7 @@ from datetime import datetime
 from io import BytesIO
 from flask import Flask, render_template, request, jsonify, send_from_directory, session
 from werkzeug.utils import secure_filename
-from pdf_organizer_batch import BatchPDFOrganizer
+from organize_batch import BatchPDFOrganizer
 from pdf_content_analyzer import PDFContentAnalyzer
 from pdf_signature import PDFSignature
 

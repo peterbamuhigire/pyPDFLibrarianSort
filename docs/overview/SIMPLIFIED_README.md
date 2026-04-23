@@ -61,7 +61,7 @@ pip install google-generativeai pypdf
 ### Run
 
 ```bash
-python organize_simple.py
+python organize_batch.py
 ```
 
 Follow the prompts - that's it!
@@ -212,8 +212,8 @@ But honestly, **filename-based works great** for 95% of cases and is much faster
 
 ### Essential
 
-- `pdf_organizer.py` - Main organizer (simplified)
-- `organize_simple.py` - Interactive launcher
+- `organize_batch.py` - Main organizer (GUI + CLI)
+- `organize_batch.py` - Interactive launcher
 - `requirements.txt` - Just 2 packages now!
 
 ### Optional
@@ -232,7 +232,7 @@ But honestly, **filename-based works great** for 95% of cases and is much faster
 ## 🎓 Example Full Session
 
 ```bash
-$ python organize_simple.py
+$ python organize_batch.py
 
 Step 1: Checking dependencies...
   ✓ google-generativeai

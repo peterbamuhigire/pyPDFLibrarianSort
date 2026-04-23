@@ -62,37 +62,28 @@ The `skills/` directory contains reusable development skills for Claude Code:
 - Smart batching (groups PDFs within delay window)
 - Background operation with statistics tracking
 
-**4. Batch Mode (`pdf_organizer_batch.py`)** - Cost-effective one-time
-- Processes ALL PDFs in single API call
-- Cost: $0.05-0.10 for 200+ PDFs
-- Automatic chunking for 500+ PDFs
-- 90-95% accuracy
-
-**5. Single Mode (`pdf_organizer.py`)** - Maximum accuracy
-- Individual API call per PDF
-- Higher accuracy (95%) but expensive ($0.05 per PDF)
-- Best for critical documents
+**4. Organizer (`organize_batch.py`)** - Canonical organizer
+- Single organizer implementation for GUI and CLI
+- Batch categorization with low-cost bulk processing
+- Automatic chunking for large libraries
 
 ### Key Components
 
 **Main Classes:**
 
-- `PDFOrganizer` (pdf_organizer.py) - Single-file processing engine
-- `BatchPDFOrganizer` (pdf_organizer_batch.py) - Batch processing engine
+- `BatchPDFOrganizer` (organize_batch.py) - Canonical organizer backend
 
 **Interactive Launchers:**
 
 - `web_interface.py` - Modern web UI with drag & drop (RECOMMENDED)
 - `sign_setup.py` - Interactive PDF signature setup (no AI credits)
 - `watch_setup.py` - Interactive setup for watch mode (auto-organize)
-- `organize_batch.py` - Interactive setup for batch mode
-- `organize_simple.py` - Interactive setup for single mode
+- `organize_batch.py` - Canonical organizer entrypoint with GUI and CLI
 
 **Core Processing Engines:**
 
 - `PDFSignature` (pdf_signature.py) - PDF signature placement engine (no AI)
-- `BatchPDFOrganizer` (pdf_organizer_batch.py) - Batch processing engine
-- `PDFOrganizer` (pdf_organizer.py) - Single-file processing engine
+- `BatchPDFOrganizer` (organize_batch.py) - Canonical organizer backend
 - `PDFWatcher` (watch_organizer.py) - File system monitoring for auto-organization
 - Flask app (web_interface.py) - Web interface with RESTful API
 
@@ -113,7 +104,7 @@ The `skills/` directory contains reusable development skills for Claude Code:
 - `test_signature.py` - PDF signature unit tests
 - `setup.py` - Setup wizard
 - `fetch-categories.py` - Category template generator
-- `sign_batch.py` - Direct CLI for PDF signing (for scripting)
+- `pdf_signature.py` - Canonical PDF signing tool
 
 **Templates & Static Files:**
 
@@ -205,8 +196,8 @@ python watch_setup.py
 # Batch mode (one-time)
 python organize_batch.py
 
-# Single mode (max accuracy)
-python organize_simple.py
+# Organizer
+python organize_batch.py
 ```
 
 ### Development
@@ -235,22 +226,16 @@ python web_interface.py
 # Batch mode (recommended for one-time organization)
 python organize_batch.py
 
-# Single mode
-python organize_simple.py
-
 # Watch mode (recommended for continuous auto-organization)
 python watch_setup.py
 # Or directly:
 python watch_organizer.py --ebooks F:/ebooks --provider gemini --api-key YOUR_KEY
 
-# GUI mode (legacy)
-python pdf_organizer_gui.py
+# Organizer GUI / CLI
+python organize_batch.py
 
-# Direct invocation (batch)
-python pdf_organizer_batch.py
-
-# Direct invocation (single)
-python pdf_organizer.py --downloads /path/to/downloads --ebooks /path/to/ebooks
+# Direct invocation
+python organize_batch.py --downloads /path/to/downloads --ebooks /path/to/ebooks --api-key <key>
 ```
 
 ### Generate category template
@@ -307,7 +292,7 @@ copy category_template.json C:/path/to/pyPDFLibrarianSort/
 python test_basic.py
 
 # Test with dry-run (no files moved)
-python -c "from pdf_organizer import PDFOrganizer; o = PDFOrganizer('downloads', 'ebooks', dry_run=True); o.organize_pdfs()"
+python -c "from organize_batch import BatchPDFOrganizer; o = BatchPDFOrganizer('downloads', 'ebooks', api_key='key', dry_run=True); o.organize_pdfs()"
 ```
 
 ## Dependencies

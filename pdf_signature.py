@@ -75,10 +75,10 @@ class PDFSignature:
             raise ValueError(f"Signature image not found: {signature_image_path}")
 
         try:
-            img = Image.open(signature_image_path)
-            if img.format != 'PNG':
-                raise ValueError("Signature must be PNG format")
-            self.signature_image = img
+            with Image.open(signature_image_path) as img:
+                if img.format != 'PNG':
+                    raise ValueError("Signature must be PNG format")
+                self.signature_image = img.copy()
             self.signature_path = signature_image_path
         except Exception as e:
             raise ValueError(f"Failed to load signature image: {e}")

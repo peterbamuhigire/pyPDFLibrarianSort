@@ -331,7 +331,7 @@ Most effective structure: 2-3 levels deep
 ### 4. Review New Categories
 Check new categories in dry-run mode:
 ```bash
-python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
+python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key" --dry-run
 ```
 
 ### 5. Refine Structure

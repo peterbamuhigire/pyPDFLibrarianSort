@@ -1,6 +1,6 @@
 # Portable Usage Guide
 
-## 🎒 Using PDF Organizer from Any Location
+## Ã°Å¸Å½â€™ Using PDF Organizer from Any Location
 
 The PDF Organizer is now fully portable! You can run it from:
 
@@ -18,7 +18,7 @@ The tool **automatically detects** the current user's Downloads folder, so it wo
 
 ---
 
-## 🚀 Quick Start (Portable Mode)
+## Ã°Å¸Å¡â‚¬ Quick Start (Portable Mode)
 
 ### Step 1: Copy All Files
 
@@ -127,8 +127,8 @@ USB-Drive:\
 ├── PDF-Organizer\          ← All tool files here
 │   ├── PORTABLE_LAUNCHER.bat
 │   ├── INSTALL_DEPENDENCIES.bat
-│   ├── pdf_organizer_gui.py
-│   ├── pdf_organizer.py
+│   ├── organize_batch.py
+│   ├── organize_batch.py
 │   └── requirements.txt
 │
 └── MyEbooks\               ← Optional: Store ebooks here too
@@ -159,18 +159,18 @@ The command-line version also auto-detects:
 
 ```bash
 # Auto-detects current user's Downloads
-python pdf_organizer.py --ebooks "F:\ebooks"
+python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key"
 
 # Specify custom Downloads if needed
-python pdf_organizer.py --downloads "D:\MyDownloads" --ebooks "F:\ebooks"
+python organize_batch.py --downloads "D:\MyDownloads" --ebooks "F:\ebooks" --api-key "your-key-here"
 
 # Dry run
-python pdf_organizer.py --ebooks "F:\ebooks" --dry-run
+python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key" --dry-run
 ```
 
 ---
 
-## 🎯 Use Cases
+## Ã°Å¸Å½Â¯ Use Cases
 
 ### 1. Work + Home
 
@@ -212,7 +212,7 @@ If you need to organize a folder other than Downloads:
 ### Command-Line Method
 
 ```bash
-python pdf_organizer.py --downloads "C:\MyFolder" --ebooks "F:\ebooks"
+python organize_batch.py --downloads "C:\MyFolder" --ebooks "F:\ebooks" --api-key "your-key-here"
 ```
 
 ---
@@ -296,7 +296,7 @@ Ready to use on other computers!
 
 ---
 
-## 🎓 How Auto-Detection Works
+## Ã°Å¸Å½â€œ How Auto-Detection Works
 
 ```python
 # The tool uses Python's pathlib to detect user home
@@ -309,7 +309,7 @@ downloads = Path.home() / "Downloads"
 # Linux: /home/peter/Downloads
 ```
 
-This ensures it works for **any user** on **any computer**! 🎉
+This ensures it works for **any user** on **any computer**! Ã°Å¸Å½â€°
 
 ---
 

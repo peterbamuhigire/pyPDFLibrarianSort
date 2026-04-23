@@ -26,7 +26,7 @@
 - 200 PDFs = 200 API calls
 - Cost: **$10.00**
 
-### After (Batch Mode)
+### After (Organizer Batch Processing)
 
 - Process all PDFs in one request
 - 200 PDFs = 1 API call
@@ -40,12 +40,10 @@
 
 ### Core Scripts
 
-1. **organize_batch.py** - Interactive batch launcher (RECOMMENDED)
-2. **pdf_organizer_batch.py** - Batch processing engine
-3. **organize_simple.py** - Interactive single-file launcher
-4. **pdf_organizer.py** - Single-file processing engine
-5. **test_basic.py** - Diagnostic and testing tool
-6. **diagnose.py** - System diagnostics
+1. **organize_batch.py** - Canonical organizer with GUI and CLI
+2. **pdf_signature.py** - Canonical PDF signing tool
+3. **test_basic.py** - Diagnostic and testing tool
+4. **diagnose.py** - System diagnostics
 
 ### Documentation
 
@@ -85,8 +83,8 @@ python organize_batch.py
 
 ## 📊 Feature Comparison
 
-| Feature | Single Mode | Batch Mode |
-|---------|------------|------------|
+| Feature | Traditional Per-File | Organizer Batch |
+|---------|----------------------|-----------------|
 | **Cost (200 PDFs)** | $10.00 | $0.10 |
 | **Speed** | 15-20 min | 2-3 min |
 | **API Calls** | 200 | 1-2 |
@@ -135,7 +133,7 @@ F:\ebooks\
 - ✅ Only filenames and metadata sent to API
 - ✅ PDF content never uploaded
 - ✅ All file operations are local
-- ✅ API key stored locally
+- ✅ API key entered at runtime
 - ✅ No data collection
 
 ---

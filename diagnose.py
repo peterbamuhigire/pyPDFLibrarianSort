@@ -7,10 +7,16 @@ Run this to check your configuration and identify issues
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 print("="*70)
 print("  PDF Organizer - Diagnostic Tool")
 print("="*70)
 print()
+api_key = None
 
 # Check Python version
 print("1. Python Version:")
@@ -104,14 +110,14 @@ print()
 # Test PDF Organizer import
 print("6. Testing PDF Organizer:")
 try:
-    from pdf_organizer import PDFOrganizer
-    print("   ✓ PDFOrganizer class imported successfully")
+    from organize_batch import BatchPDFOrganizer
+    print("   ✓ BatchPDFOrganizer class imported successfully")
     
     # Test with minimal params
     print()
     print("   Testing validation...")
     try:
-        organizer = PDFOrganizer(
+        organizer = BatchPDFOrganizer(
             downloads_folder=None,
             ebooks_folder=None,
             api_key="test-key",
@@ -124,8 +130,8 @@ try:
         print(f"   ⚠ Unexpected error: {e}")
     
 except ImportError as e:
-    print(f"   ❌ Cannot import PDFOrganizer: {e}")
-    print("   Make sure pdf_organizer.py is in the same directory")
+    print(f"   ❌ Cannot import BatchPDFOrganizer: {e}")
+    print("   Make sure organize_batch.py is in the same directory")
 except Exception as e:
     print(f"   ❌ Error: {e}")
 print()
@@ -140,7 +146,7 @@ if all_ok and api_key:
     print("✓ All checks passed!")
     print()
     print("You should be ready to run:")
-    print("  python pdf_organizer_gui.py")
+    print("  python organize_batch.py")
 else:
     print("⚠ Some issues found. Please address them:")
     print()
@@ -149,7 +155,7 @@ else:
     if not api_key:
         print("  - Set API key or enter it in the GUI")
     print()
-    print("Then run: python pdf_organizer_gui.py")
+    print("Then run: python organize_batch.py")
 
 print()
 print("="*70)

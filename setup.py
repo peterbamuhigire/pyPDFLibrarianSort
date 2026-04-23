@@ -8,6 +8,11 @@ import sys
 import subprocess
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 def print_header(text):
     print("\n" + "="*70)
     print(f"  {text}")
@@ -144,7 +149,7 @@ def run_test():
     
     print("Testing PDF organizer import...")
     try:
-        from pdf_organizer import PDFOrganizer
+        from organize_batch import BatchPDFOrganizer
         print("✅ PDF organizer module loaded successfully")
         return True
     except Exception as e:
@@ -190,9 +195,9 @@ def main():
     print_header("Setup Complete!")
     print("\nYou're all set! Here's how to use the tool:\n")
     print("GUI Version (Recommended):")
-    print("  python pdf_organizer_gui.py")
+    print("  python organize_batch.py")
     print("\nCommand Line:")
-    print("  python pdf_organizer.py --downloads <path> --ebooks <path>")
+    print("  python organize_batch.py --downloads <path> --ebooks <path> --api-key <key>")
     print("\nFor more information, see README.md")
     print("\n" + "="*70)
 

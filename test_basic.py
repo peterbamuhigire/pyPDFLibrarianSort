@@ -7,6 +7,11 @@ Tests the basic functionality step by step
 import sys
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 print("="*70)
 print("  PDF Organizer - Basic Test")
 print("="*70)
@@ -74,15 +79,15 @@ except Exception as e:
 # Test 4: Test PDFOrganizer initialization
 print("\nTest 4: Testing PDFOrganizer class...")
 try:
-    from pdf_organizer import PDFOrganizer
-    print("✓ PDFOrganizer imported")
+    from organize_batch import BatchPDFOrganizer
+    print("✓ BatchPDFOrganizer imported")
     
     # Test with valid paths but no API key
     if not api_key:
         print("⚠ Skipping initialization test (no API key)")
     else:
         try:
-            organizer = PDFOrganizer(
+            organizer = BatchPDFOrganizer(
                 downloads_folder=str(test_downloads),
                 ebooks_folder=str(test_ebooks),
                 api_key=api_key,
@@ -97,8 +102,8 @@ try:
             print(traceback.format_exc())
     
 except ImportError as e:
-    print(f"❌ Cannot import PDFOrganizer: {e}")
-    print("\nMake sure pdf_organizer.py is in the same folder")
+    print(f"❌ Cannot import BatchPDFOrganizer: {e}")
+    print("\nMake sure organize_batch.py is in the same folder")
 except Exception as e:
     print(f"❌ Unexpected error: {e}")
     import traceback
@@ -108,10 +113,10 @@ except Exception as e:
 # Test 5: Test with None values (should fail gracefully)
 print("\nTest 5: Testing validation...")
 try:
-    from pdf_organizer import PDFOrganizer
+    from organize_batch import BatchPDFOrganizer
     
     try:
-        bad_organizer = PDFOrganizer(
+        bad_organizer = BatchPDFOrganizer(
             downloads_folder=None,
             ebooks_folder=None,
             api_key="test",
@@ -146,8 +151,7 @@ print("If all tests passed, the organizer should work!")
 print()
 print("To use it:")
 print("1. Make sure you have PDFs in your Downloads folder")
-print("2. Run: python organize_simple.py")
-print("   OR: python pdf_organizer_gui.py")
+print("2. Run: python organize_batch.py")
 print()
 print("="*70)
 

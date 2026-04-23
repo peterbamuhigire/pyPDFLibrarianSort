@@ -59,13 +59,13 @@ Follow the step-by-step wizard:
 
 ```bash
 # Basic usage
-python sign_batch.py --signature sig.png --input document.pdf
+python pdf_signature.py --signature sig.png --input document.pdf
 
 # All PDFs in directory
-python sign_batch.py --signature sig.png --input docs/ --output signed/
+python pdf_signature.py --signature sig.png --input docs/ --output signed/
 
 # Custom configuration
-python sign_batch.py --signature sig.png --input doc.pdf \
+python pdf_signature.py --signature sig.png --input doc.pdf \
     --position top-right \
     --scale 0.2 \
     --pages "1,3,5-10" \
@@ -89,13 +89,13 @@ Sign specific pages or page ranges:
 **Examples:**
 ```bash
 # Sign only first page
-python sign_batch.py --signature sig.png --input doc.pdf --pages first
+python pdf_signature.py --signature sig.png --input doc.pdf --pages first
 
 # Sign odd pages
-python sign_batch.py --signature sig.png --input doc.pdf --pages odd
+python pdf_signature.py --signature sig.png --input doc.pdf --pages odd
 
 # Sign specific pages
-python sign_batch.py --signature sig.png --input doc.pdf --pages "1,3,5-10"
+python pdf_signature.py --signature sig.png --input doc.pdf --pages "1,3,5-10"
 ```
 
 ### Position Options
@@ -116,10 +116,10 @@ Four corner positions available:
 **Examples:**
 ```bash
 # Top-right corner
-python sign_batch.py --signature sig.png --input doc.pdf --position top-right
+python pdf_signature.py --signature sig.png --input doc.pdf --position top-right
 
 # Bottom-left corner
-python sign_batch.py --signature sig.png --input doc.pdf --position bottom-left
+python pdf_signature.py --signature sig.png --input doc.pdf --position bottom-left
 ```
 
 ### Size Control
@@ -134,10 +134,10 @@ Signature size as percentage of page width (10-100%):
 **Examples:**
 ```bash
 # Small signature (15% of page width)
-python sign_batch.py --signature sig.png --input doc.pdf --scale 0.15
+python pdf_signature.py --signature sig.png --input doc.pdf --scale 0.15
 
 # Large signature (50% of page width)
-python sign_batch.py --signature sig.png --input doc.pdf --scale 0.5
+python pdf_signature.py --signature sig.png --input doc.pdf --scale 0.5
 ```
 
 ### Margin Configuration
@@ -151,10 +151,10 @@ Distance from page edges in inches (0.1-2.0):
 **Examples:**
 ```bash
 # Close to edges (0.2 inches)
-python sign_batch.py --signature sig.png --input doc.pdf --x-offset 0.2 --y-offset 0.2
+python pdf_signature.py --signature sig.png --input doc.pdf --x-offset 0.2 --y-offset 0.2
 
 # Far from edges (1.5 inches)
-python sign_batch.py --signature sig.png --input doc.pdf --x-offset 1.5 --y-offset 1.5
+python pdf_signature.py --signature sig.png --input doc.pdf --x-offset 1.5 --y-offset 1.5
 ```
 
 ### Opacity Control
@@ -170,10 +170,10 @@ Preserves PNG transparency and adds additional opacity layer.
 **Examples:**
 ```bash
 # Semi-transparent signature
-python sign_batch.py --signature sig.png --input doc.pdf --opacity 0.5
+python pdf_signature.py --signature sig.png --input doc.pdf --opacity 0.5
 
 # Very transparent watermark
-python sign_batch.py --signature sig.png --input doc.pdf --opacity 0.2
+python pdf_signature.py --signature sig.png --input doc.pdf --opacity 0.2
 ```
 
 ### Rotation
@@ -188,10 +188,10 @@ Rotate signature 0-360 degrees:
 **Examples:**
 ```bash
 # Rotated 15 degrees
-python sign_batch.py --signature sig.png --input doc.pdf --rotation 15
+python pdf_signature.py --signature sig.png --input doc.pdf --rotation 15
 
 # Rotated 90 degrees
-python sign_batch.py --signature sig.png --input doc.pdf --rotation 90
+python pdf_signature.py --signature sig.png --input doc.pdf --rotation 90
 ```
 
 ## Advanced Usage
@@ -201,7 +201,7 @@ python sign_batch.py --signature sig.png --input doc.pdf --rotation 90
 Sign all PDFs in a directory:
 
 ```bash
-python sign_batch.py --signature sig.png --input /path/to/pdfs/ --output /path/to/signed/
+python pdf_signature.py --signature sig.png --input /path/to/pdfs/ --output /path/to/signed/
 ```
 
 Output structure preserves subdirectories.
@@ -211,7 +211,7 @@ Output structure preserves subdirectories.
 Combine all options:
 
 ```bash
-python sign_batch.py \
+python pdf_signature.py \
     --signature company_seal.png \
     --input contracts/ \
     --output signed_contracts/ \
@@ -238,7 +238,7 @@ This signs:
 Suppress progress output for scripting:
 
 ```bash
-python sign_batch.py --signature sig.png --input doc.pdf --quiet
+python pdf_signature.py --signature sig.png --input doc.pdf --quiet
 ```
 
 ## Use Cases
@@ -248,7 +248,7 @@ python sign_batch.py --signature sig.png --input doc.pdf --quiet
 Sign first page of contracts:
 
 ```bash
-python sign_batch.py \
+python pdf_signature.py \
     --signature signature.png \
     --input contracts/ \
     --pages first \
@@ -261,7 +261,7 @@ python sign_batch.py \
 Add company seal to all pages:
 
 ```bash
-python sign_batch.py \
+python pdf_signature.py \
     --signature company_seal.png \
     --input reports/ \
     --pages all \
@@ -275,7 +275,7 @@ python sign_batch.py \
 Add semi-transparent watermark:
 
 ```bash
-python sign_batch.py \
+python pdf_signature.py \
     --signature watermark.png \
     --input documents/ \
     --pages all \
@@ -289,7 +289,7 @@ python sign_batch.py \
 Sign last page of certificates:
 
 ```bash
-python sign_batch.py \
+python pdf_signature.py \
     --signature signature.png \
     --input certificates/ \
     --pages last \
@@ -336,7 +336,7 @@ python sign_batch.py \
 ```bash
 # Use a tool like qpdf to decrypt
 qpdf --decrypt --password=PASSWORD input.pdf decrypted.pdf
-python sign_batch.py --signature sig.png --input decrypted.pdf
+python pdf_signature.py --signature sig.png --input decrypted.pdf
 ```
 
 ### Memory Issues
@@ -347,7 +347,7 @@ python sign_batch.py --signature sig.png --input decrypted.pdf
 ```bash
 # Process 50 PDFs at a time
 for dir in batch_*; do
-    python sign_batch.py --signature sig.png --input "$dir" --output "signed/$dir"
+    python pdf_signature.py --signature sig.png --input "$dir" --output "signed/$dir"
 done
 ```
 
@@ -435,7 +435,7 @@ python sign_setup.py
 ### Batch CLI
 
 ```bash
-python sign_batch.py [OPTIONS]
+python pdf_signature.py [OPTIONS]
 
 Required:
   --signature PATH      PNG signature image
@@ -459,7 +459,7 @@ Optional:
 
 ```bash
 # Sign first page of contract
-python sign_batch.py \
+python pdf_signature.py \
     --signature my_signature.png \
     --input contract.pdf \
     --pages first
@@ -469,7 +469,7 @@ python sign_batch.py \
 
 ```bash
 # Add company seal to all pages
-python sign_batch.py \
+python pdf_signature.py \
     --signature company_seal.png \
     --input quarterly_reports/ \
     --output sealed_reports/ \
@@ -481,7 +481,7 @@ python sign_batch.py \
 
 ```bash
 # Add semi-transparent watermark
-python sign_batch.py \
+python pdf_signature.py \
     --signature watermark.png \
     --input confidential_docs/ \
     --pages all \
@@ -493,7 +493,7 @@ python sign_batch.py \
 
 ```bash
 # Sign only specific pages
-python sign_batch.py \
+python pdf_signature.py \
     --signature initials.png \
     --input agreement.pdf \
     --pages "1,5,10,15-20" \
@@ -504,7 +504,7 @@ python sign_batch.py \
 
 ```bash
 # Sign with rotated signature
-python sign_batch.py \
+python pdf_signature.py \
     --signature signature.png \
     --input document.pdf \
     --rotation 15 \

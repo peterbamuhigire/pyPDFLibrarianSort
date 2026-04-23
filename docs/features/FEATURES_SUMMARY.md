@@ -295,10 +295,10 @@ python sign_setup.py
 **Option 3: Direct CLI (for scripting)**
 ```bash
 # Basic usage
-python sign_batch.py --signature sig.png --input document.pdf
+python pdf_signature.py --signature sig.png --input document.pdf
 
 # Advanced usage
-python sign_batch.py --signature sig.png --input contracts/ \
+python pdf_signature.py --signature sig.png --input contracts/ \
     --pages "1,last" --position bottom-right \
     --scale 0.25 --opacity 0.9 --rotation 5
 ```
@@ -308,27 +308,27 @@ python sign_batch.py --signature sig.png --input contracts/ \
 **Legal Documents**:
 ```bash
 # Sign first page of contracts
-python sign_batch.py --signature signature.png --input contracts/ --pages first
+python pdf_signature.py --signature signature.png --input contracts/ --pages first
 ```
 
 **Official Stamps**:
 ```bash
 # Add company seal to all pages
-python sign_batch.py --signature seal.png --input reports/ \
+python pdf_signature.py --signature seal.png --input reports/ \
     --position top-right --scale 0.15 --opacity 0.8
 ```
 
 **Watermarks**:
 ```bash
 # Semi-transparent watermark
-python sign_batch.py --signature watermark.png --input docs/ \
+python pdf_signature.py --signature watermark.png --input docs/ \
     --opacity 0.3 --scale 0.4
 ```
 
 **Certificates**:
 ```bash
 # Sign last page only
-python sign_batch.py --signature signature.png --input certificates/ --pages last
+python pdf_signature.py --signature signature.png --input certificates/ --pages last
 ```
 
 ### Cost
@@ -442,7 +442,7 @@ python pdf_content_analyzer.py "path/to/gibberish.pdf"
    python sign_setup.py
 
    # Direct CLI for automation
-   python sign_batch.py --signature sig.png --input document.pdf
+   python pdf_signature.py --signature sig.png --input document.pdf
    ```
 
 ---

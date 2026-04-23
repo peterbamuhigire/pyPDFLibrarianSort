@@ -21,9 +21,9 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# Check if the GUI file exists
-if [ ! -f "pdf_organizer_gui.py" ]; then
-    echo "ERROR: pdf_organizer_gui.py not found in current directory"
+# Check if the organizer file exists
+if [ ! -f "organize_batch.py" ]; then
+    echo "ERROR: organize_batch.py not found in current directory"
     echo "Please make sure all files are in the same folder"
     echo "Current directory: $(pwd)"
     echo ""
@@ -35,7 +35,7 @@ echo "Starting PDF Organizer GUI..."
 echo ""
 
 # Run the GUI
-python3 pdf_organizer_gui.py
+python3 organize_batch.py
 
 if [ $? -ne 0 ]; then
     echo ""

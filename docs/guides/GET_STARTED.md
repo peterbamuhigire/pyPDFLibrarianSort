@@ -48,8 +48,8 @@ You only pay when the AI categorizes PDFs. Preview mode (dry run) is free.
 
 - `START_HERE.bat` - Launch the tool (GUI)
 - `INSTALL_DEPENDENCIES.bat` - One-time setup
-- `pdf_organizer_gui.py` - Main application (GUI version)
-- `pdf_organizer.py` - Core logic (CLI version)
+- `organize_batch.py` - Main application (GUI version)
+- `organize_batch.py` - Organizer (GUI + CLI)
 - `requirements.txt` - List of dependencies
 
 **Documentation:**

@@ -7,7 +7,7 @@
 **Just run this ONE command:**
 
 ```bash
-python organize_simple.py
+python organize_batch.py
 ```
 
 This will:
@@ -40,7 +40,7 @@ This verifies:
 **Step 2 - If tests pass, organize:**
 
 ```bash
-python organize_simple.py
+python organize_batch.py
 ```
 
 ---
@@ -50,7 +50,7 @@ python organize_simple.py
 **One command with everything specified:**
 
 ```bash
-python pdf_organizer.py --downloads "C:\Users\Peter\Downloads" --ebooks "F:\ebooks" --api-key "your-key-here"
+python organize_batch.py --downloads "C:\Users\Peter\Downloads" --ebooks "F:\ebooks" --api-key "your-key-here"
 ```
 
 Replace:
@@ -67,28 +67,28 @@ Replace:
 
 ```cmd
 set GEMINI_API_KEY=your-key-here
-python organize_simple.py
+python organize_batch.py
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
 $env:GEMINI_API_KEY="your-key-here"
-python organize_simple.py
+python organize_batch.py
 ```
 
 **Mac/Linux:**
 
 ```bash
 export GEMINI_API_KEY="your-key-here"
-python organize_simple.py
+python organize_batch.py
 ```
 
 ---
 
 ## 🔍 What's Different About These Approaches
 
-### organize_simple.py
+### organize_batch.py
 
 - **Interactive**: Asks questions step by step
 - **Auto-installs**: Installs missing packages
@@ -121,14 +121,14 @@ Copy your API key (starts with `AIza`)
 ### 3. Run Simple Script
 
 ```bash
-python organize_simple.py
+python organize_batch.py
 ```
 
 Follow the prompts!
 
 ---
 
-## 🎯 Step-by-Step: organize_simple.py
+## 🎯 Step-by-Step: organize_batch.py
 
 **What you'll see:**
 
@@ -199,19 +199,19 @@ pip install google-generativeai pdfplumber pypdf
 
 ### "Error: ebooks_folder is required"
 
-**Fix:** Use `organize_simple.py` - it will guide you through setup
+**Fix:** Use `organize_batch.py` - it will guide you through setup
 
 ### "API key not found"
 
-**Fix:** `organize_simple.py` will ask you for it
+**Fix:** `organize_batch.py` will ask you for it
 
 ### GUI not working
 
-**Fix:** Skip the GUI, use `organize_simple.py` instead
+**Fix:** Skip the GUI, use `organize_batch.py` instead
 
 ### Configuration confusing
 
-**Fix:** Ignore all config files, use `organize_simple.py`
+**Fix:** Ignore all config files, use `organize_batch.py`
 
 ---
 
@@ -233,7 +233,7 @@ Fix what `test_basic.py` reports.
 **Step 3:**
 
 ```bash
-python organize_simple.py
+python organize_batch.py
 ```
 
 **Step 4:**
@@ -241,9 +241,9 @@ If still failing, copy the FULL error message and check `ERROR_HANDLING.md`
 
 ---
 
-## 💡 Why organize_simple.py is Better
+## 💡 Why organize_batch.py is Better
 
-| Feature | organize_simple.py | GUI | Command Line |
+| Feature | organize_batch.py | GUI | Command Line |
 |---------|-------------------|-----|--------------|
 | Auto-installs packages | ✅ Yes | ❌ No | ❌ No |
 | Interactive setup | ✅ Yes | ⚠ Manual | ⚠ Manual |
@@ -258,7 +258,7 @@ If still failing, copy the FULL error message and check `ERROR_HANDLING.md`
 ## 🎓 Example Complete Session
 
 ```bash
-C:\Users\Peter\Downloads\files> python organize_simple.py
+C:\Users\Peter\Downloads\files> python organize_batch.py
 
 ======================================================================
   PDF Organizer - Interactive Setup
@@ -312,10 +312,10 @@ Press Enter to exit...
 ## ✅ Recommended Workflow
 
 1. **First time:** `python test_basic.py` (verify setup)
-2. **Every time:** `python organize_simple.py` (organize PDFs)
+2. **Every time:** `python organize_batch.py` (organize PDFs)
 
 That's it! No GUI, no complex config, just simple scripts that work.
 
 ---
 
-**TL;DR: Just run `python organize_simple.py` and answer the questions!** 🎯
+**TL;DR: Just run `python organize_batch.py` and answer the questions!** 🎯

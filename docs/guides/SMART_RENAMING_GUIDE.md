@@ -159,7 +159,7 @@ study reveals...
 If you want to skip content extraction:
 
 ```python
-from pdf_organizer_batch import BatchPDFOrganizer
+from organize_batch import BatchPDFOrganizer
 
 organizer = BatchPDFOrganizer(
     downloads_folder="~/Downloads",

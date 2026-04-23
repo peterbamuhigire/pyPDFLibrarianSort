@@ -16,10 +16,8 @@ pyPDFLibrarianSort/
 ├── .gitignore                   ✅ Git ignore file
 ├── requirements.txt             ✅ Dependencies
 ├── PROJECT_SUMMARY.md           ✅ Project overview
-├── pdf_organizer_batch.py       ✅ Batch processor
-├── organize_batch.py            ✅ Batch launcher (MAIN)
-├── pdf_organizer.py             ✅ Single processor
-├── organize_simple.py           ✅ Single launcher
+├── organize_batch.py            ✅ Canonical organizer (GUI + CLI)
+├── pdf_signature.py             ✅ Canonical signing tool
 ├── test_basic.py                ✅ Testing tool
 ├── diagnose.py                  ✅ Diagnostics
 └── docs/                        ✅ Documentation folder

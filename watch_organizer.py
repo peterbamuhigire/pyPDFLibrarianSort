@@ -14,6 +14,11 @@ from collections import defaultdict
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 class PDFWatcher(FileSystemEventHandler):
     """Watches for new PDF files and organizes them"""
 
@@ -138,7 +143,7 @@ class PDFWatcher(FileSystemEventHandler):
         # Create a temporary downloads folder with just these PDFs
         # Or process them directly
         try:
-            from pdf_organizer_batch import BatchPDFOrganizer
+            from organize_batch import BatchPDFOrganizer
 
             # Create organizer instance with content analysis enabled
             with BatchPDFOrganizer(
