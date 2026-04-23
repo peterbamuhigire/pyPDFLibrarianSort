@@ -29,6 +29,11 @@ except ImportError:
     raise
 
 try:
+    import fitz
+except ImportError:
+    fitz = None
+
+try:
     from reportlab.pdfgen import canvas
     from reportlab.lib.utils import ImageReader
 except ImportError:
@@ -293,6 +298,90 @@ class PDFSignature:
         packet.seek(0)
         return packet
 
+    @staticmethod
+    def _match_overlay_boxes(overlay_page, target_page):
+        """
+        Force the overlay page boxes to match the target page exactly.
+
+        Some PDFs use non-default media/crop boxes. If the stamp page keeps
+        ReportLab's default boxes, pypdf can merge the content onto a page
+        with mismatched boundaries, which may shift layout in some viewers.
+        """
+        for box_name in ('mediabox', 'cropbox', 'trimbox', 'bleedbox', 'artbox'):
+            target_box = getattr(target_page, box_name, None)
+            if target_box is not None:
+                setattr(overlay_page, box_name, target_box)
+
+    def _get_processed_signature_bytes(self):
+        """
+        Build the final PNG that will be stamped onto each page.
+
+        Opacity and user rotation are applied directly to the image so the PDF
+        page content can remain untouched and the signature behaves like a
+        visual overlay instead of inline page content.
+        """
+        image = self.signature_image.convert("RGBA").copy()
+
+        if self.opacity < 1.0:
+            alpha = image.getchannel("A")
+            alpha = alpha.point(lambda px: int(px * self.opacity))
+            image.putalpha(alpha)
+
+        if self.rotation:
+            # PIL rotates counter-clockwise; PDF UI convention is clockwise.
+            image = image.rotate(-self.rotation, expand=True, resample=Image.Resampling.BICUBIC)
+
+        output = BytesIO()
+        image.save(output, format="PNG")
+        return output.getvalue(), image.width, image.height
+
+    def _add_signature_to_pdf_with_pymupdf(self, input_pdf_path, output_pdf_path):
+        """Stamp the signature as an overlay using PyMuPDF."""
+        doc = fitz.open(input_pdf_path)
+
+        try:
+            total_pages = doc.page_count
+            pages_signed = 0
+            image_bytes, image_width, image_height = self._get_processed_signature_bytes()
+            image_ratio = image_height / image_width
+
+            for page_index in range(total_pages):
+                page_num = page_index + 1
+                if not self._should_sign_page(page_num, total_pages):
+                    continue
+
+                page = doc.load_page(page_index)
+                page_rect = page.rect
+                page_width = float(page_rect.width)
+                page_height = float(page_rect.height)
+
+                sig_width = page_width * self.scale
+                sig_height = sig_width * image_ratio
+
+                # PyMuPDF uses a top-left origin with y increasing downward.
+                if self.position == 'bottom-right':
+                    x = page_width - sig_width - self.x_offset
+                    y = page_height - sig_height - self.y_offset
+                elif self.position == 'bottom-left':
+                    x = self.x_offset
+                    y = page_height - sig_height - self.y_offset
+                elif self.position == 'top-right':
+                    x = page_width - sig_width - self.x_offset
+                    y = self.y_offset
+                else:  # top-left
+                    x = self.x_offset
+                    y = self.y_offset
+
+                rect = fitz.Rect(x, y, x + sig_width, y + sig_height)
+                page.insert_image(rect, stream=image_bytes, overlay=True, keep_proportion=False)
+                pages_signed += 1
+
+            os.makedirs(os.path.dirname(os.path.abspath(output_pdf_path)), exist_ok=True)
+            doc.save(output_pdf_path)
+            return total_pages, pages_signed
+        finally:
+            doc.close()
+
     def add_signature_to_pdf(self, input_pdf_path, output_pdf_path=None):
         """
         Sign a single PDF with page filtering.
@@ -324,6 +413,15 @@ class PDFSignature:
                 output_pdf_path = str(input_path.parent / f"{input_path.stem}_signed.pdf")
 
             result['output_path'] = output_pdf_path
+
+            if fitz is not None:
+                total_pages, pages_signed = self._add_signature_to_pdf_with_pymupdf(
+                    input_pdf_path, output_pdf_path
+                )
+                result['total_pages'] = total_pages
+                result['pages_signed'] = pages_signed
+                result['success'] = True
+                return result
 
             # Read input PDF
             reader = PdfReader(input_pdf_path)
@@ -357,9 +455,11 @@ class PDFSignature:
                         page_rotation
                     )
                     overlay_reader = PdfReader(overlay_pdf)
+                    overlay_page = overlay_reader.pages[0]
+                    self._match_overlay_boxes(overlay_page, page)
 
-                    # Merge signature with page
-                    page.merge_page(overlay_reader.pages[0])
+                    # Merge as a true overlay without allowing page expansion.
+                    page.merge_page(overlay_page, expand=False, over=True)
                     pages_signed += 1
 
                 # Add page to output (signed or unsigned)
