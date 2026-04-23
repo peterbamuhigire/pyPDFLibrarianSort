@@ -1,6 +1,6 @@
 # Quick Start Guide - Multiple Approaches
 
-## 🚨 If Nothing Else Works - Try These
+## ðŸš¨ If Nothing Else Works - Try These
 
 ### Method 1: Simple Interactive Script (EASIEST)
 
@@ -12,11 +12,11 @@ python organize_batch.py
 
 This will:
 
-- ✅ Check if packages are installed (installs them if missing)
-- ✅ Ask you step-by-step what you need
-- ✅ Auto-detect your Downloads folder
-- ✅ Guide you through setup
-- ✅ Start organizing
+- âœ… Check if packages are installed (installs them if missing)
+- âœ… Ask you step-by-step what you need
+- âœ… Auto-detect your Downloads folder
+- âœ… Guide you through setup
+- âœ… Start organizing
 
 **No configuration files, no GUI issues, just simple questions!**
 
@@ -86,7 +86,7 @@ python organize_batch.py
 
 ---
 
-## 🔍 What's Different About These Approaches
+## ðŸ” What's Different About These Approaches
 
 ### organize_batch.py
 
@@ -105,12 +105,12 @@ python organize_batch.py
 
 ---
 
-## 📋 Absolute Minimum Setup
+## ðŸ“‹ Absolute Minimum Setup
 
 ### 1. Install Python Packages
 
 ```bash
-pip install google-generativeai pdfplumber pypdf
+pip install google-genai pdfplumber pypdf
 ```
 
 ### 2. Get API Key
@@ -128,7 +128,7 @@ Follow the prompts!
 
 ---
 
-## 🎯 Step-by-Step: organize_batch.py
+## ðŸŽ¯ Step-by-Step: organize_batch.py
 
 **What you'll see:**
 
@@ -138,17 +138,17 @@ Follow the prompts!
 ======================================================================
 
 Step 1: Checking dependencies...
-  ✓ google-generativeai
-  ✓ pdfplumber
-  ✓ pypdf
+  âœ“ google-genai
+  âœ“ pdfplumber
+  âœ“ pypdf
 
 Step 2: Configure Downloads Folder
 ----------------------------------------------------------------------
 Auto-detected: C:\Users\Peter\Downloads
-✓ This folder exists
+âœ“ This folder exists
 
 Use this folder? (Y/n): y
-✓ Using: C:\Users\Peter\Downloads
+âœ“ Using: C:\Users\Peter\Downloads
 
 Step 3: Configure Ebooks Folder
 ----------------------------------------------------------------------
@@ -158,14 +158,14 @@ Example: F:\ebooks or C:\Users\Peter\Documents\eBooks
 Enter Ebooks folder path: F:\ebooks
 
 Folder doesn't exist. Create F:\ebooks? (Y/n): y
-✓ Created: F:\ebooks
+âœ“ Created: F:\ebooks
 
 Step 4: Configure API Key
 ----------------------------------------------------------------------
 Get your API key at: https://aistudio.google.com/app/apikey
 
 Enter your Gemini API key: AIza-your-key-here
-✓ API key configured
+âœ“ API key configured
 
 ======================================================================
   Configuration Summary
@@ -187,14 +187,14 @@ Start organizing? (Y/n): y
 
 ---
 
-## ❌ Common Issues & Quick Fixes
+## âŒ Common Issues & Quick Fixes
 
-### "ModuleNotFoundError: No module named 'google-generativeai'"
+### "ModuleNotFoundError: No module named 'google-genai'"
 
 **Fix:**
 
 ```bash
-pip install google-generativeai pdfplumber pypdf
+pip install google-genai pdfplumber pypdf
 ```
 
 ### "Error: ebooks_folder is required"
@@ -215,7 +215,7 @@ pip install google-generativeai pdfplumber pypdf
 
 ---
 
-## 🆘 Emergency Procedure
+## ðŸ†˜ Emergency Procedure
 
 If NOTHING works:
 
@@ -241,21 +241,21 @@ If still failing, copy the FULL error message and check `ERROR_HANDLING.md`
 
 ---
 
-## 💡 Why organize_batch.py is Better
+## ðŸ’¡ Why organize_batch.py is Better
 
 | Feature | organize_batch.py | GUI | Command Line |
 |---------|-------------------|-----|--------------|
-| Auto-installs packages | ✅ Yes | ❌ No | ❌ No |
-| Interactive setup | ✅ Yes | ⚠ Manual | ⚠ Manual |
-| Auto-detects paths | ✅ Yes | ⚠ Partial | ❌ No |
-| No config files needed | ✅ Yes | ❌ No | ✅ Yes |
-| Validates before running | ✅ Yes | ⚠ Partial | ❌ No |
-| Shows clear errors | ✅ Yes | ⚠ Sometimes | ✅ Yes |
-| Works when GUI fails | ✅ Yes | ❌ N/A | ✅ Yes |
+| Auto-installs packages | âœ… Yes | âŒ No | âŒ No |
+| Interactive setup | âœ… Yes | âš  Manual | âš  Manual |
+| Auto-detects paths | âœ… Yes | âš  Partial | âŒ No |
+| No config files needed | âœ… Yes | âŒ No | âœ… Yes |
+| Validates before running | âœ… Yes | âš  Partial | âŒ No |
+| Shows clear errors | âœ… Yes | âš  Sometimes | âœ… Yes |
+| Works when GUI fails | âœ… Yes | âŒ N/A | âœ… Yes |
 
 ---
 
-## 🎓 Example Complete Session
+## ðŸŽ“ Example Complete Session
 
 ```bash
 C:\Users\Peter\Downloads\files> python organize_batch.py
@@ -265,26 +265,26 @@ C:\Users\Peter\Downloads\files> python organize_batch.py
 ======================================================================
 
 Step 1: Checking dependencies...
-  ✓ google-generativeai
-  ✓ pdfplumber
-  ✓ pypdf
+  âœ“ google-genai
+  âœ“ pdfplumber
+  âœ“ pypdf
 
 Step 2: Configure Downloads Folder
 ----------------------------------------------------------------------
 Auto-detected: C:\Users\Peter\Downloads
-✓ This folder exists
+âœ“ This folder exists
 Use this folder? (Y/n): y
-✓ Using: C:\Users\Peter\Downloads
+âœ“ Using: C:\Users\Peter\Downloads
 
 Step 3: Configure Ebooks Folder
 ----------------------------------------------------------------------
 Enter Ebooks folder path: F:\ebooks
-✓ Using: F:\ebooks
+âœ“ Using: F:\ebooks
 
 Step 4: Configure API Key
 ----------------------------------------------------------------------
 Enter your Gemini API key: AIza-xxxxx
-✓ API key configured
+âœ“ API key configured
 
 ======================================================================
   Configuration Summary
@@ -301,7 +301,7 @@ Analyzing existing ebooks folder structure...
 Found 15 categories in your ebooks library:
 [Processing begins...]
 
-✓ Organized 23 PDFs
+âœ“ Organized 23 PDFs
 Check: F:\ebooks
 
 Press Enter to exit...
@@ -309,7 +309,7 @@ Press Enter to exit...
 
 ---
 
-## ✅ Recommended Workflow
+## âœ… Recommended Workflow
 
 1. **First time:** `python test_basic.py` (verify setup)
 2. **Every time:** `python organize_batch.py` (organize PDFs)
@@ -318,4 +318,4 @@ That's it! No GUI, no complex config, just simple scripts that work.
 
 ---
 
-**TL;DR: Just run `python organize_batch.py` and answer the questions!** 🎯
+**TL;DR: Just run `python organize_batch.py` and answer the questions!** ðŸŽ¯

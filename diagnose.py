@@ -30,7 +30,7 @@ print()
 # Check imports
 print("2. Checking Required Packages:")
 packages = {
-    'google.generativeai': 'google-generativeai',
+    'google.genai': 'google-genai',
     'anthropic': 'anthropic',
     'pdfplumber': 'pdfplumber',
     'pypdf': 'pypdf',
@@ -48,7 +48,7 @@ for module_name, display_name in packages.items():
 
 if not all_ok:
     print()
-    print("   Run: pip install google-generativeai pdfplumber pypdf")
+    print("   Run: pip install google-genai pdfplumber pypdf")
 print()
 
 # Check API key

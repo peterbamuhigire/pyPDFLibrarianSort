@@ -1,24 +1,24 @@
-# 📚 pyPDFLibrarianSort - Project Summary
+# ðŸ“š pyPDFLibrarianSort - Project Summary
 
 **Your AI librarian that organizes thousands of PDFs intelligently and economically!**
 
 ---
 
-## 🎯 Project Overview
+## ðŸŽ¯ Project Overview
 
 **pyPDFLibrarianSort** is an open-source Python tool that uses Gemini AI to automatically organize PDF libraries with intelligent categorization, smart renaming, and hierarchical folder structures.
 
 ### Key Highlights
 
-- 🤖 **AI-Powered** - Uses Google Gemini for intelligent categorization
-- 💰 **Cost-Effective** - 100x cheaper than traditional per-file processing
-- 🌲 **Smart Organization** - Preserves and creates deep folder hierarchies
-- 📝 **Auto-Renaming** - Uses PDF metadata to create descriptive filenames
-- 🚀 **Fast** - Processes 200 PDFs in 2-3 minutes
+- ðŸ¤– **AI-Powered** - Uses Google Gemini for intelligent categorization
+- ðŸ’° **Cost-Effective** - 100x cheaper than traditional per-file processing
+- ðŸŒ² **Smart Organization** - Preserves and creates deep folder hierarchies
+- ðŸ“ **Auto-Renaming** - Uses PDF metadata to create descriptive filenames
+- ðŸš€ **Fast** - Processes 200 PDFs in 2-3 minutes
 
 ---
 
-## 💰 The Cost Innovation
+## ðŸ’° The Cost Innovation
 
 ### Before (Traditional Approach)
 
@@ -32,11 +32,11 @@
 - 200 PDFs = 1 API call
 - Cost: **$0.10**
 
-**Savings: 99% (100x cheaper!)** 🎉
+**Savings: 99% (100x cheaper!)** ðŸŽ‰
 
 ---
 
-## 📦 What's Included
+## ðŸ“¦ What's Included
 
 ### Core Scripts
 
@@ -65,7 +65,7 @@
 
 ---
 
-## 🚀 Quick Start
+## ðŸš€ Quick Start
 
 ```bash
 # 1. Clone repository
@@ -81,7 +81,7 @@ python organize_batch.py
 
 ---
 
-## 📊 Feature Comparison
+## ðŸ“Š Feature Comparison
 
 | Feature | Traditional Per-File | Organizer Batch |
 |---------|----------------------|-----------------|
@@ -94,51 +94,51 @@ python organize_batch.py
 
 ---
 
-## 🎓 Example Transformation
+## ðŸŽ“ Example Transformation
 
 ### Before
 
 ```
 Downloads/
-├── 1221432HASdade.pdf
-├── Python_Tutorial.pdf
-├── book.pdf
-├── 2023_tax.pdf
-└── random_doc.pdf
+â”œâ”€â”€ 1221432HASdade.pdf
+â”œâ”€â”€ Python_Tutorial.pdf
+â”œâ”€â”€ book.pdf
+â”œâ”€â”€ 2023_tax.pdf
+â””â”€â”€ random_doc.pdf
 ```
 
 ### After
 
 ```
 F:\ebooks\
-├── Computer & ICT/
-│   └── Programming/
-│       └── Python/
-│           ├── Machine Learning Basics.pdf (renamed from 1221432HASdade.pdf)
-│           └── Python Tutorial.pdf
-├── Business/
-│   ├── Accounting/
-│   │   └── Tax/
-│   │       └── Tax Guide 2023.pdf (renamed from 2023_tax.pdf)
-│   └── Finance/
-│       └── Financial Planning Guide.pdf (renamed from book.pdf)
-└── Uncategorized/
-    └── random_doc.pdf
+â”œâ”€â”€ Computer & ICT/
+â”‚   â””â”€â”€ Programming/
+â”‚       â””â”€â”€ Python/
+â”‚           â”œâ”€â”€ Machine Learning Basics.pdf (renamed from 1221432HASdade.pdf)
+â”‚           â””â”€â”€ Python Tutorial.pdf
+â”œâ”€â”€ Business/
+â”‚   â”œâ”€â”€ Accounting/
+â”‚   â”‚   â””â”€â”€ Tax/
+â”‚   â”‚       â””â”€â”€ Tax Guide 2023.pdf (renamed from 2023_tax.pdf)
+â”‚   â””â”€â”€ Finance/
+â”‚       â””â”€â”€ Financial Planning Guide.pdf (renamed from book.pdf)
+â””â”€â”€ Uncategorized/
+    â””â”€â”€ random_doc.pdf
 ```
 
 ---
 
-## 🛡️ Privacy & Security
+## ðŸ›¡ï¸ Privacy & Security
 
-- ✅ Only filenames and metadata sent to API
-- ✅ PDF content never uploaded
-- ✅ All file operations are local
-- ✅ API key entered at runtime
-- ✅ No data collection
+- âœ… Only filenames and metadata sent to API
+- âœ… PDF content never uploaded
+- âœ… All file operations are local
+- âœ… API key entered at runtime
+- âœ… No data collection
 
 ---
 
-## 📈 Expected Impact
+## ðŸ“ˆ Expected Impact
 
 ### For Individuals
 
@@ -160,7 +160,7 @@ F:\ebooks\
 
 ---
 
-## 🎯 Publishing to GitHub
+## ðŸŽ¯ Publishing to GitHub
 
 ### Repository Details
 
@@ -184,7 +184,7 @@ https://github.com/peterbamuhigire/pyPDFLibrarianSort
 
 ---
 
-## 🌟 Marketing Message
+## ðŸŒŸ Marketing Message
 
 **One-liner:**
 > "Your AI librarian that organizes thousands of PDFs - 100x more economically!"
@@ -195,13 +195,13 @@ https://github.com/peterbamuhigire/pyPDFLibrarianSort
 **Twitter/Social Media:**
 
 ```
-🚀 Introducing pyPDFLibrarianSort!
+ðŸš€ Introducing pyPDFLibrarianSort!
 
 Your AI librarian for organizing PDFs:
-✨ Intelligent categorization  
-💰 100x more cost-effective
-🌲 Deep folder hierarchies
-📝 Smart auto-renaming
+âœ¨ Intelligent categorization  
+ðŸ’° 100x more cost-effective
+ðŸŒ² Deep folder hierarchies
+ðŸ“ Smart auto-renaming
 
 200 PDFs: $0.10 vs $10 traditional!
 
@@ -213,7 +213,7 @@ github.com/peterbamuhigire/pyPDFLibrarianSort
 
 ---
 
-## 📋 Publishing Checklist
+## ðŸ“‹ Publishing Checklist
 
 Before publishing to GitHub:
 
@@ -232,7 +232,7 @@ Before publishing to GitHub:
 
 ---
 
-## 🎉 Next Steps
+## ðŸŽ‰ Next Steps
 
 1. **Organize files** into proper structure
 2. **Create GitHub repository** named `pyPDFLibrarianSort`
@@ -244,7 +244,7 @@ Before publishing to GitHub:
 
 ---
 
-## 📞 Support Resources
+## ðŸ“ž Support Resources
 
 - **Documentation:** `/docs` folder
 - **Issues:** GitHub Issues
@@ -253,39 +253,39 @@ Before publishing to GitHub:
 
 ---
 
-## 🏆 Success Metrics
+## ðŸ† Success Metrics
 
 **Initial Goals (First Month):**
 
-- ⭐ 50-100 GitHub stars
-- 🍴 10-20 forks
-- 👀 500+ repository views
-- 💬 5-10 active discussions
-- 🐛 5-10 issues/feature requests
+- â­ 50-100 GitHub stars
+- ðŸ´ 10-20 forks
+- ðŸ‘€ 500+ repository views
+- ðŸ’¬ 5-10 active discussions
+- ðŸ› 5-10 issues/feature requests
 
 **Long-term Goals (6 Months):**
 
-- ⭐ 500+ stars
-- 🍴 50+ forks
-- 👥 5-10 regular contributors
-- 📦 100+ active users
-- 🌟 Featured in awesome-lists
+- â­ 500+ stars
+- ðŸ´ 50+ forks
+- ðŸ‘¥ 5-10 regular contributors
+- ðŸ“¦ 100+ active users
+- ðŸŒŸ Featured in awesome-lists
 
 ---
 
-## 📄 License
+## ðŸ“„ License
 
 MIT License - Free to use, modify, and distribute
 
 ---
 
-**Made with ❤️ for PDF organization enthusiasts**
+**Made with â¤ï¸ for PDF organization enthusiasts**
 
-**Intelligent • Economical • Fast • Open Source**
+**Intelligent â€¢ Economical â€¢ Fast â€¢ Open Source**
 
 ---
 
-## 🔗 Quick Links
+## ðŸ”— Quick Links
 
 - GitHub Repo: `https://github.com/peterbamuhigire/pyPDFLibrarianSort`
 - Documentation: `/docs`
@@ -293,10 +293,10 @@ MIT License - Free to use, modify, and distribute
 - Discussions: `/discussions`
 - License: MIT
 - Python Version: 3.8+
-- Dependencies: google-generativeai, pypdf
+- Dependencies: google-genai, pypdf
 
 ---
 
-**Ready to publish! 🚀**
+**Ready to publish! ðŸš€**
 
 Replace `peterbamuhigire` with your actual GitHub username and you're ready to go!

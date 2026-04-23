@@ -13,7 +13,7 @@ python: can't open file 'C:\Windows\System32\organize_batch.py':
 
 The batch file is running from the wrong directory (System32 instead of where your files are).
 
-## ✅ SOLUTION - Use START_HERE.bat
+## âœ… SOLUTION - Use START_HERE.bat
 
 **The easiest fix:** Use the new `START_HERE.bat` file instead of `run_gui.bat`
 
@@ -22,10 +22,10 @@ The batch file is running from the wrong directory (System32 instead of where yo
 
 This new launcher:
 
-- ✓ Shows you exactly where it's running from
-- ✓ Checks if all files are present
-- ✓ Offers to install dependencies if missing
-- ✓ Provides detailed error messages
+- âœ“ Shows you exactly where it's running from
+- âœ“ Checks if all files are present
+- âœ“ Offers to install dependencies if missing
+- âœ“ Provides detailed error messages
 
 ---
 
@@ -53,7 +53,7 @@ The updated `run_gui.bat` should work now. If you downloaded it again, try:
 
 1. **Right-click** on `organize_batch.py`
 2. Select **"Create shortcut"**
-3. **Right-click** the shortcut → **Properties**
+3. **Right-click** the shortcut â†’ **Properties**
 4. In **"Target"** field, change it to:
 
    ```
@@ -84,11 +84,11 @@ If nothing else works, use the PowerShell installer:
 
 All these files must be in the **SAME FOLDER**:
 
-- ✓ organize_batch.py
-- ✓ organize_batch.py
-- ✓ requirements.txt
-- ✓ setup.py
-- ✓ START_HERE.bat (or run_gui.bat)
+- âœ“ organize_batch.py
+- âœ“ organize_batch.py
+- âœ“ requirements.txt
+- âœ“ setup.py
+- âœ“ START_HERE.bat (or run_gui.bat)
 
 **Good locations:**
 
@@ -98,9 +98,9 @@ All these files must be in the **SAME FOLDER**:
 
 **Bad locations:**
 
-- ❌ Desktop (can work but not ideal)
-- ❌ Downloads (files might get mixed up)
-- ❌ System folders (C:\Windows, C:\Program Files)
+- âŒ Desktop (can work but not ideal)
+- âŒ Downloads (files might get mixed up)
+- âŒ System folders (C:\Windows, C:\Program Files)
 
 ---
 
@@ -168,7 +168,7 @@ If you see `'python' is not recognized`, then:
 **Fix:**
 
 - Reinstall Python from <https://www.python.org/>
-- ✅ CHECK "Add Python to PATH" during installation
+- âœ… CHECK "Add Python to PATH" during installation
 
 ### Check Dependencies
 
@@ -178,14 +178,14 @@ python -m pip list
 
 Look for:
 
-- google-generativeai
+- google-genai
 - pdfplumber
 - pypdf
 
 If missing, install:
 
 ```
-python -m pip install google-generativeai pdfplumber pypdf
+python -m pip install google-genai pdfplumber pypdf
 ```
 
 ---
@@ -196,7 +196,7 @@ To verify everything works:
 
 ```
 cd C:\PDF-Organizer
-python -c "import google.generativeai; import pdfplumber; import pypdf; print('All good!')"
+python -c "import google.genai; import pdfplumber; import pypdf; print('All good!')"
 ```
 
 If you see "All good!" - you're ready to run the GUI!

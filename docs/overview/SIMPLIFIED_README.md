@@ -1,18 +1,18 @@
 # PDF Organizer - Simplified Filename-Based Version
 
-## 🎯 What Changed?
+## ðŸŽ¯ What Changed?
 
 This version is **much simpler and faster** because it:
 
-- ✅ Uses **filenames** instead of reading PDF content
-- ✅ Only needs **2 packages** (google-generativeai, pypdf) instead of 5
-- ✅ Works **instantly** - no slow PDF text extraction
-- ✅ More **reliable** - fewer things to go wrong
-- ✅ Better for **large libraries** - processes 100x faster
+- âœ… Uses **filenames** instead of reading PDF content
+- âœ… Only needs **2 packages** (google-genai, pypdf) instead of 5
+- âœ… Works **instantly** - no slow PDF text extraction
+- âœ… More **reliable** - fewer things to go wrong
+- âœ… Better for **large libraries** - processes 100x faster
 
 ---
 
-## 📋 How It Works Now
+## ðŸ“‹ How It Works Now
 
 ### Old Approach (Slow)
 
@@ -35,13 +35,13 @@ This version is **much simpler and faster** because it:
 
 ---
 
-## 💡 Why Filenames Work Better
+## ðŸ’¡ Why Filenames Work Better
 
 Most PDFs already have descriptive names:
 
-- ✅ `Python_Programming_Guide.pdf` → Computer & ICT/Programming/Python
-- ✅ `Tax_Planning_2024.pdf` → Business & Finance/Accounting/Tax
-- ✅ `Quantum_Physics_Introduction.pdf` → Science/Physics/Quantum
+- âœ… `Python_Programming_Guide.pdf` â†’ Computer & ICT/Programming/Python
+- âœ… `Tax_Planning_2024.pdf` â†’ Business & Finance/Accounting/Tax
+- âœ… `Quantum_Physics_Introduction.pdf` â†’ Science/Physics/Quantum
 
 Even auto-generated names like `1221432HASdade.pdf` get:
 
@@ -50,12 +50,12 @@ Even auto-generated names like `1221432HASdade.pdf` get:
 
 ---
 
-## 🚀 Quick Start
+## ðŸš€ Quick Start
 
 ### Install (Only 2 Packages!)
 
 ```bash
-pip install google-generativeai pypdf
+pip install google-genai pypdf
 ```
 
 ### Run
@@ -68,11 +68,11 @@ Follow the prompts - that's it!
 
 ---
 
-## 📊 Performance Comparison
+## ðŸ“Š Performance Comparison
 
 | Feature | Old (Content-Based) | New (Filename-Based) |
 |---------|-------------------|---------------------|
-| Packages needed | 5 (google-generativeai, pypdf, pdfplumber, pdf2image, pytesseract) | 2 (google-generativeai, pypdf) |
+| Packages needed | 5 (google-genai, pypdf, pdfplumber, pdf2image, pytesseract) | 2 (google-genai, pypdf) |
 | Time per PDF | 5-10 seconds | 1-2 seconds |
 | 100 PDFs | 8-15 minutes | 2-3 minutes |
 | Fails on scanned PDFs | Yes | No |
@@ -80,7 +80,7 @@ Follow the prompts - that's it!
 
 ---
 
-## 🎓 Example Categorization
+## ðŸŽ“ Example Categorization
 
 ### Example 1: Well-Named File
 
@@ -89,24 +89,24 @@ Filename: Python_Web_Development_Django.pdf
 Metadata Title: Django Web Development
 
 AI Decision:
-📁 Computer & ICT/Programming & Development/Python
-💡 Reasoning: Python web development using Django framework
-📊 Confidence: high
+ðŸ“ Computer & ICT/Programming & Development/Python
+ðŸ’¡ Reasoning: Python web development using Django framework
+ðŸ“Š Confidence: high
 ```
 
-### Example 2: Poor Filename → Auto-Rename
+### Example 2: Poor Filename â†’ Auto-Rename
 
 ```
 Original: 1221432HASdade.pdf
 Metadata Title: Machine Learning Fundamentals
 
 Step 1 - Rename:
-📝 '1221432HASdade' → 'Machine Learning Fundamentals'
+ðŸ“ '1221432HASdade' â†’ 'Machine Learning Fundamentals'
 
 Step 2 - Categorize:
-📁 Computer & ICT/Artificial Intelligence
-💡 Reasoning: Machine learning educational material
-📊 Confidence: high
+ðŸ“ Computer & ICT/Artificial Intelligence
+ðŸ’¡ Reasoning: Machine learning educational material
+ðŸ“Š Confidence: high
 ```
 
 ### Example 3: Generic Name + Metadata
@@ -117,14 +117,14 @@ Metadata Title: Annual Tax Planning Guide
 Author: IRS Publications
 
 AI Decision:
-📁 Business & Finance/Accounting/Tax Planning
-💡 Reasoning: Tax planning guide from IRS
-📊 Confidence: high
+ðŸ“ Business & Finance/Accounting/Tax Planning
+ðŸ’¡ Reasoning: Tax planning guide from IRS
+ðŸ“Š Confidence: high
 ```
 
 ---
 
-## 🔧 What Gets Analyzed
+## ðŸ”§ What Gets Analyzed
 
 For each PDF:
 
@@ -138,7 +138,7 @@ That's it! No content reading needed.
 
 ---
 
-## ✅ Advantages
+## âœ… Advantages
 
 ### Speed
 
@@ -165,21 +165,21 @@ That's it! No content reading needed.
 
 ---
 
-## 🎯 Tips for Best Results
+## ðŸŽ¯ Tips for Best Results
 
 ### 1. Keep Descriptive Filenames
 
 Good filenames help:
 
-- ✅ `Python_Tutorial_2024.pdf`
-- ✅ `Business_Plan_Template.pdf`
-- ✅ `Quantum_Physics_Introduction.pdf`
+- âœ… `Python_Tutorial_2024.pdf`
+- âœ… `Business_Plan_Template.pdf`
+- âœ… `Quantum_Physics_Introduction.pdf`
 
 Poor filenames:
 
-- ❌ `doc.pdf`
-- ❌ `download.pdf`
-- ❌ `file123.pdf`
+- âŒ `doc.pdf`
+- âŒ `download.pdf`
+- âŒ `file123.pdf`
 
 **Solution:** Tool auto-renames these using metadata!
 
@@ -187,7 +187,7 @@ Poor filenames:
 
 When creating PDFs, set the title:
 
-- File → Properties → Title
+- File â†’ Properties â†’ Title
 - This helps auto-renaming
 
 ### 3. Let AI Learn
@@ -196,7 +196,7 @@ The more organized PDFs you have, the better AI gets at matching patterns.
 
 ---
 
-## 🔄 What About Content-Based?
+## ðŸ”„ What About Content-Based?
 
 If you **really** need content-based categorization:
 
@@ -208,7 +208,7 @@ But honestly, **filename-based works great** for 95% of cases and is much faster
 
 ---
 
-## 📦 Files You Need
+## ðŸ“¦ Files You Need
 
 ### Essential
 
@@ -229,14 +229,14 @@ But honestly, **filename-based works great** for 95% of cases and is much faster
 
 ---
 
-## 🎓 Example Full Session
+## ðŸŽ“ Example Full Session
 
 ```bash
 $ python organize_batch.py
 
 Step 1: Checking dependencies...
-  ✓ google-generativeai
-  ✓ pypdf
+  âœ“ google-genai
+  âœ“ pypdf
 
 Step 2: Configure Downloads Folder
 Auto-detected: C:\Users\Peter\Downloads
@@ -256,37 +256,37 @@ Analyzing ebooks structure...
 Found 23 categories
 
 [1/50] Python_Tutorial.pdf
-  📁 Computer & ICT/Programming & Development/Python
-  ✓ Confidence: high
+  ðŸ“ Computer & ICT/Programming & Development/Python
+  âœ“ Confidence: high
 
 [2/50] 1234556.pdf
-  📝 Rename: '1234556' → 'Tax Guide 2024'
-  📁 Business & Finance/Accounting/Tax Planning
-  ✓ Confidence: high
+  ðŸ“ Rename: '1234556' â†’ 'Tax Guide 2024'
+  ðŸ“ Business & Finance/Accounting/Tax Planning
+  âœ“ Confidence: high
 
 [Processing 3-50...]
 
-✓ Organized 50 PDFs in 2 minutes!
-✓ Renamed 12 files based on metadata
+âœ“ Organized 50 PDFs in 2 minutes!
+âœ“ Renamed 12 files based on metadata
 
 Check: F:\ebooks
 ```
 
 ---
 
-## 💯 Success Rate
+## ðŸ’¯ Success Rate
 
 Based on typical PDF libraries:
 
-- **70%** have descriptive filenames → Instant categorization
-- **20%** have poor names but good metadata → Auto-rename + categorize
-- **10%** have poor names and no metadata → Go to "Uncategorized"
+- **70%** have descriptive filenames â†’ Instant categorization
+- **20%** have poor names but good metadata â†’ Auto-rename + categorize
+- **10%** have poor names and no metadata â†’ Go to "Uncategorized"
 
 **Overall: 90-95% success rate** with 100x speed improvement!
 
 ---
 
-## 🆘 Troubleshooting
+## ðŸ†˜ Troubleshooting
 
 ### "Still too slow"
 
@@ -302,14 +302,14 @@ Files likely have poor names and no metadata - rename manually
 
 ---
 
-## ✨ Summary
+## âœ¨ Summary
 
 The simplified version:
 
-- 🚀 **100x faster** (1-2 sec vs 5-10 sec per PDF)
-- 🎯 **90-95% accurate** (vs 95% for content-based)
-- 💪 **More reliable** (no PDF parsing issues)
-- 🔧 **Simpler** (2 packages vs 5)
-- ✅ **Works better** for most users
+- ðŸš€ **100x faster** (1-2 sec vs 5-10 sec per PDF)
+- ðŸŽ¯ **90-95% accurate** (vs 95% for content-based)
+- ðŸ’ª **More reliable** (no PDF parsing issues)
+- ðŸ”§ **Simpler** (2 packages vs 5)
+- âœ… **Works better** for most users
 
-**Just use filenames - they're usually good enough!** 📚✨
+**Just use filenames - they're usually good enough!** ðŸ“šâœ¨

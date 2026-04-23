@@ -20,7 +20,7 @@ print()
 # Test 1: Imports
 print("Test 1: Checking imports...")
 try:
-    import google.generativeai
+    from google import genai as google_genai
     import anthropic
     import openai
     from pypdf import PdfReader

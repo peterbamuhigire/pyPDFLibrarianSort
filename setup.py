@@ -49,7 +49,7 @@ def test_imports():
     print_header("Testing Package Imports")
     
     packages = [
-        ('google.generativeai', 'google-generativeai'),
+        ('google.genai', 'google-genai'),
         ('anthropic', 'anthropic'),
         ('pdfplumber', 'pdfplumber'),
         ('pypdf', 'pypdf'),

@@ -23,7 +23,7 @@ from pathlib import Path
 from queue import Empty, Queue
 from typing import Callable
 
-import google.generativeai as genai
+from google import genai
 from anthropic import Anthropic
 from openai import OpenAI
 from pypdf import PdfReader
@@ -90,8 +90,7 @@ class BatchPDFOrganizer:
         self.client = None
         if self.api_key:
             if self.provider == "gemini":
-                genai.configure(api_key=self.api_key)
-                self.client = genai.GenerativeModel(self.model_name)
+                self.client = genai.Client(api_key=self.api_key)
             elif self.provider == "anthropic":
                 self.client = Anthropic(api_key=self.api_key)
             else:
@@ -305,9 +304,10 @@ Return ONLY the JSON array."""
         self._emit(f"Sending batch request to {self.provider.title()} for {len(pdf_list)} PDFs...")
 
         if self.provider == "gemini":
-            message = self.client.generate_content(
-                prompt,
-                generation_config={"temperature": 0.2, "max_output_tokens": 8000},
+            message = self.client.models.generate_content(
+                model=self.model_name,
+                contents=prompt,
+                config={"temperature": 0.2, "max_output_tokens": 8000},
             )
             response_text = (message.text or "").strip()
         elif self.provider == "anthropic":

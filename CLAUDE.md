@@ -15,10 +15,10 @@ All detailed documentation lives in `docs/` with semantic subdirectories. Root R
 
 ```
 docs/
-├── guides/          # User guides (setup, usage)
-├── features/        # Feature documentation
-├── overview/        # Project summaries
-└── reference/       # Technical reference
+â”œâ”€â”€ guides/          # User guides (setup, usage)
+â”œâ”€â”€ features/        # Feature documentation
+â”œâ”€â”€ overview/        # Project summaries
+â””â”€â”€ reference/       # Technical reference
 ```
 
 ## Available Skills
@@ -179,7 +179,7 @@ The system includes intelligent gibberish filename detection:
 Input: SAJSABC4345.pdf
 Metadata: "A Study of Eastern Rabbits"
 Content: "This research paper examines behavioral patterns..."
-→ Output: Science/Biology/Zoology/A Study of Eastern Rabbits.pdf
+â†’ Output: Science/Biology/Zoology/A Study of Eastern Rabbits.pdf
 ```
 
 ## Common Commands
@@ -219,7 +219,7 @@ python setup.py
 ### Usage
 
 ```bash
-# Web Interface (recommended for best user experience) ✨ NEW!
+# Web Interface (recommended for best user experience) âœ¨ NEW!
 python web_interface.py
 # Then open browser to http://localhost:5000
 
@@ -299,7 +299,7 @@ python -c "from organize_batch import BatchPDFOrganizer; o = BatchPDFOrganizer('
 
 Runtime dependencies (see requirements.txt):
 
-- `google-generativeai>=0.7.2` - Gemini AI API client
+- `google-genai>=0.7.2` - Gemini AI API client
 - `anthropic>=0.36.0` - Anthropic (Claude) API client
 - `openai>=1.0.0` - OpenAI-compatible client (for DeepSeek)
 - `pypdf>=3.17.0` - PDF metadata extraction

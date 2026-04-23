@@ -26,7 +26,7 @@ def main():
     # Check packages
     print("Checking dependencies...")
     try:
-        import google.generativeai
+        from google import genai as google_genai
         import anthropic
         import openai
         from pypdf import PdfReader
@@ -35,9 +35,9 @@ def main():
     except ImportError as e:
         print(f"  ❌ Missing package: {e}")
         print("\nInstalling...")
-        os.system(f'"{sys.executable}" -m pip install anthropic google-generativeai openai pypdf watchdog --quiet')
+        os.system(f'"{sys.executable}" -m pip install anthropic google-genai openai pypdf watchdog --quiet')
         try:
-            import google.generativeai
+            from google import genai as google_genai
             import anthropic
             import openai
             from pypdf import PdfReader

@@ -2,7 +2,7 @@
 
 ## Common Errors and Solutions
 
-### ❌ "unsupported operand type(s) for /: 'WindowsPath' and 'NoneType'"
+### âŒ "unsupported operand type(s) for /: 'WindowsPath' and 'NoneType'"
 
 **What it means:** The AI failed to provide a category path, or returned None/empty.
 
@@ -39,7 +39,7 @@
 
 ---
 
-### ❌ "No module named 'pdfplumber'"
+### âŒ "No module named 'pdfplumber'"
 
 **What it means:** Dependencies not installed
 
@@ -50,25 +50,25 @@
 INSTALL_DEPENDENCIES.bat
 
 # Or manually:
-pip install pdfplumber pypdf google-generativeai
+pip install pdfplumber pypdf google-genai
 ```
 
 ---
 
-### ❌ "Python is not recognized..."
+### âŒ "Python is not recognized..."
 
 **What it means:** Python not in PATH
 
 **Solution:**
 
 1. Reinstall Python from <https://python.org>
-2. ✅ CHECK "Add Python to PATH" during installation
+2. âœ… CHECK "Add Python to PATH" during installation
 3. Restart computer
 4. Try again
 
 ---
 
-### ❌ "Could not extract text from [file].pdf"
+### âŒ "Could not extract text from [file].pdf"
 
 **What it means:** PDF is image-based (scanned) or encrypted
 
@@ -91,7 +91,7 @@ pip install pdfplumber pypdf google-generativeai
 
 ---
 
-### ❌ "Permission denied" when moving files
+### âŒ "Permission denied" when moving files
 
 **What it means:** File in use or no write permission
 
@@ -103,7 +103,7 @@ pip install pdfplumber pypdf google-generativeai
 
 2. **Check permissions:**
    - Ensure you have write access to ebooks folder
-   - Try running as administrator (right-click → Run as Administrator)
+   - Try running as administrator (right-click â†’ Run as Administrator)
 
 3. **Check antivirus:**
    - Temporarily disable if it's blocking
@@ -111,7 +111,7 @@ pip install pdfplumber pypdf google-generativeai
 
 ---
 
-### ❌ "API key not found"
+### âŒ "API key not found"
 
 **What it means:** GEMINI_API_KEY not set
 
@@ -140,7 +140,7 @@ pip install pdfplumber pypdf google-generativeai
 
 ---
 
-### ❌ "Categorization error: 401 Unauthorized"
+### âŒ "Categorization error: 401 Unauthorized"
 
 **What it means:** Invalid API key
 
@@ -157,7 +157,7 @@ pip install pdfplumber pypdf google-generativeai
 
 ---
 
-### ⚠️ "Warning: AI response missing category_path"
+### âš ï¸ "Warning: AI response missing category_path"
 
 **What it means:** AI returned incomplete response
 
@@ -178,7 +178,7 @@ pip install pdfplumber pypdf google-generativeai
 
 ---
 
-### ❌ "Could not parse AI response as JSON"
+### âŒ "Could not parse AI response as JSON"
 
 **What it means:** AI returned malformed JSON
 
@@ -210,11 +210,11 @@ pip install pdfplumber pypdf google-generativeai
 
 The tool now includes automatic error recovery:
 
-1. **Missing category_path** → Uses "Uncategorized"
-2. **JSON parse error** → Uses "Uncategorized"
-3. **File move fails** → Logs error, continues with next file
-4. **Duplicate filename** → Adds "_1", "_2", etc.
-5. **Invalid characters** → Automatically cleaned from filenames
+1. **Missing category_path** â†’ Uses "Uncategorized"
+2. **JSON parse error** â†’ Uses "Uncategorized"
+3. **File move fails** â†’ Logs error, continues with next file
+4. **Duplicate filename** â†’ Adds "_1", "_2", etc.
+5. **Invalid characters** â†’ Automatically cleaned from filenames
 
 ### Logs
 
@@ -237,49 +237,49 @@ Check this file to see:
 
 ### Before Running
 
-1. ✅ **Dry run first:**
+1. âœ… **Dry run first:**
 
    ```bash
    python organize_batch.py --ebooks "F:\ebooks" --api-key "your-key" --dry-run
    ```
 
-2. ✅ **Close all PDFs:**
+2. âœ… **Close all PDFs:**
    - Exit PDF readers
    - Close browsers with PDFs open
 
-3. ✅ **Check API key:**
+3. âœ… **Check API key:**
    - Verify it's set and valid
    - Test with a small batch first
 
-4. ✅ **Backup important files:**
+4. âœ… **Backup important files:**
    - Just in case!
    - Or use dry-run mode
 
 ### During Operation
 
-1. 📊 **Watch for warnings:**
+1. ðŸ“Š **Watch for warnings:**
    - Yellow warnings are informational
    - Red errors need attention
 
-2. 🔄 **Don't interrupt:**
+2. ðŸ”„ **Don't interrupt:**
    - Let it finish processing
    - Ctrl+C if you need to stop
 
-3. 📝 **Review summary:**
+3. ðŸ“ **Review summary:**
    - Check categorizations before confirming
    - Verify renames look correct
 
 ### After Running
 
-1. ✅ **Verify results:**
+1. âœ… **Verify results:**
    - Spot-check a few categorized files
    - Make sure they're in right places
 
-2. 📋 **Check log:**
+2. ðŸ“‹ **Check log:**
    - Review organization_log.json
    - Look for any errors
 
-3. 🗂️ **Manual adjustments:**
+3. ðŸ—‚ï¸ **Manual adjustments:**
    - Move any mis-categorized files
    - Update structure if needed
 
@@ -326,7 +326,7 @@ python -c "import os; print('Set' if os.getenv('GEMINI_API_KEY') else 'Not Set')
 python -c "from pypdf import PdfReader; print('PDF library works')"
 
 # Test imports
-python -c "import google.generativeai, pdfplumber, pypdf; print('All imports OK')"
+python -c "import google.genai, pdfplumber, pypdf; print('All imports OK')"
 ```
 
 ---
