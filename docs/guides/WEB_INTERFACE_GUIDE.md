@@ -2,6 +2,8 @@
 
 # PDF Organizer - Web Interface
 
+This guide documents the legacy PDF web interface inside the broader `pyPDFLibrarianSort` Python tools workspace.
+
 A modern, beautiful web interface for organizing PDFs with drag & drop functionality, real-time categorization, and library browsing.
 
 ## 🚀 Quick Start

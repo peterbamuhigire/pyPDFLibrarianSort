@@ -1,302 +1,83 @@
-# ðŸ“š pyPDFLibrarianSort - Project Summary
+# pyPDFLibrarianSort - Project Summary
 
-**Your AI librarian that organizes thousands of PDFs intelligently and economically!**
+## Overview
 
----
+`pyPDFLibrarianSort` is now a Python tools workspace for practical document and content-processing tasks.
 
-## ðŸŽ¯ Project Overview
+The repository was originally centered on PDFs. That remains part of the codebase, but the project direction has changed: it will host multiple standalone utilities instead of being defined only by PDF workflows.
 
-**pyPDFLibrarianSort** is an open-source Python tool that uses Gemini AI to automatically organize PDF libraries with intelligent categorization, smart renaming, and hierarchical folder structures.
+## Current Tooling
 
-### Key Highlights
+### New General Tooling
 
-- ðŸ¤– **AI-Powered** - Uses Google Gemini for intelligent categorization
-- ðŸ’° **Cost-Effective** - 100x cheaper than traditional per-file processing
-- ðŸŒ² **Smart Organization** - Preserves and creates deep folder hierarchies
-- ðŸ“ **Auto-Renaming** - Uses PDF metadata to create descriptive filenames
-- ðŸš€ **Fast** - Processes 200 PDFs in 2-3 minutes
+1. `pptx_to_epub.py`
+   Converts PowerPoint presentations into EPUB books by extracting slide text and ignoring images.
 
----
+### Existing PDF Tooling
 
-## ðŸ’° The Cost Innovation
+1. `organize_batch.py`
+   AI-assisted PDF organization and renaming.
+2. `pdf_signature.py`
+   GUI and CLI tool for placing signatures on PDFs.
+3. `watch_organizer.py`
+   Watches a folder and runs PDF organization automatically.
 
-### Before (Traditional Approach)
+## PowerPoint To EPUB Tool
 
-- Process each PDF individually
-- 200 PDFs = 200 API calls
-- Cost: **$10.00**
+The first new non-PDF tool is designed for turning presentation decks into readable ebooks.
 
-### After (Organizer Batch Processing)
+Capabilities:
 
-- Process all PDFs in one request
-- 200 PDFs = 1 API call
-- Cost: **$0.10**
+- accepts one `.pptx` file or a whole directory
+- extracts only text content from slides
+- ignores images
+- creates structured EPUB output
+- preserves slide order
+- supports GUI and CLI usage
+- lets the user choose the output directory
 
-**Savings: 99% (100x cheaper!)** ðŸŽ‰
+## Why The Project Is Being Reframed
 
----
+The old positioning was too narrow for the direction of the repository. The codebase already contains several separate workflows, and future tools will expand beyond PDFs. Reframing the project now makes the repository structure, documentation, and user expectations align with the actual roadmap.
 
-## ðŸ“¦ What's Included
+## Repository Entry Points
 
-### Core Scripts
-
-1. **organize_batch.py** - Canonical organizer with GUI and CLI
-2. **pdf_signature.py** - Canonical PDF signing tool
-3. **test_basic.py** - Diagnostic and testing tool
-4. **diagnose.py** - System diagnostics
-
-### Documentation
-
-1. **README.md** - Main project documentation
-2. **COST_COMPARISON.md** - Detailed cost analysis
-3. **INSTALLATION.md** - Setup guide
-4. **QUICK_START.md** - Quick start guide
-5. **ERROR_HANDLING.md** - Troubleshooting
-6. **HIERARCHICAL_CATEGORIES.md** - Category system explained
-7. **GITHUB_SETUP.md** - Publishing guide
-8. **GIT_COMMANDS.md** - Git reference
-
-### Project Files
-
-1. **LICENSE** - MIT License
-2. **CONTRIBUTING.md** - Contribution guidelines
-3. **.gitignore** - Git ignore rules
-4. **requirements.txt** - Dependencies (only 2!)
-
----
-
-## ðŸš€ Quick Start
+### Recommended for the new tool
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/yourusername/pyPDFLibrarianSort.git
-cd pyPDFLibrarianSort
+python pptx_to_epub.py
+```
 
-# 2. Install dependencies
-pip install -r requirements.txt
+### Existing PDF utilities
 
-# 3. Run batch organizer
+```bash
 python organize_batch.py
+python pdf_signature.py
+python watch_setup.py
 ```
 
----
+## Dependencies
 
-## ðŸ“Š Feature Comparison
+For the PowerPoint-to-EPUB workflow:
 
-| Feature | Traditional Per-File | Organizer Batch |
-|---------|----------------------|-----------------|
-| **Cost (200 PDFs)** | $10.00 | $0.10 |
-| **Speed** | 15-20 min | 2-3 min |
-| **API Calls** | 200 | 1-2 |
-| **Accuracy** | 95% | 90-95% |
-| **Max PDFs** | Unlimited | 500+ (auto-chunks) |
-| **Best For** | Important docs | Large libraries |
+- `python-pptx`
+- `ebooklib`
 
----
+For legacy PDF workflows:
 
-## ðŸŽ“ Example Transformation
+- `pypdf`
+- `reportlab`
+- `Pillow`
+- `Flask`
+- `watchdog`
 
-### Before
+## Documentation Map
 
-```
-Downloads/
-â”œâ”€â”€ 1221432HASdade.pdf
-â”œâ”€â”€ Python_Tutorial.pdf
-â”œâ”€â”€ book.pdf
-â”œâ”€â”€ 2023_tax.pdf
-â””â”€â”€ random_doc.pdf
-```
+- [README](../../README.md)
+- [Project Brief](../../PROJECT_BRIEF.md)
+- [Quick Start](../guides/QUICK_START.md)
+- [Getting Started](../guides/GET_STARTED.md)
+- [Features Summary](../features/FEATURES_SUMMARY.md)
+- [PowerPoint To EPUB Guide](../guides/POWERPOINT_TO_EPUB_GUIDE.md)
 
-### After
-
-```
-F:\ebooks\
-â”œâ”€â”€ Computer & ICT/
-â”‚   â””â”€â”€ Programming/
-â”‚       â””â”€â”€ Python/
-â”‚           â”œâ”€â”€ Machine Learning Basics.pdf (renamed from 1221432HASdade.pdf)
-â”‚           â””â”€â”€ Python Tutorial.pdf
-â”œâ”€â”€ Business/
-â”‚   â”œâ”€â”€ Accounting/
-â”‚   â”‚   â””â”€â”€ Tax/
-â”‚   â”‚       â””â”€â”€ Tax Guide 2023.pdf (renamed from 2023_tax.pdf)
-â”‚   â””â”€â”€ Finance/
-â”‚       â””â”€â”€ Financial Planning Guide.pdf (renamed from book.pdf)
-â””â”€â”€ Uncategorized/
-    â””â”€â”€ random_doc.pdf
-```
-
----
-
-## ðŸ›¡ï¸ Privacy & Security
-
-- âœ… Only filenames and metadata sent to API
-- âœ… PDF content never uploaded
-- âœ… All file operations are local
-- âœ… API key entered at runtime
-- âœ… No data collection
-
----
-
-## ðŸ“ˆ Expected Impact
-
-### For Individuals
-
-- Organize 1000+ personal PDFs quickly
-- Save money on API costs
-- Find documents faster with good structure
-
-### For Organizations
-
-- Organize company document libraries
-- Maintain consistent categorization
-- Save significant API costs at scale
-
-### For Researchers
-
-- Organize academic papers
-- Maintain research libraries
-- Quick categorization of new papers
-
----
-
-## ðŸŽ¯ Publishing to GitHub
-
-### Repository Details
-
-- **Name:** pyPDFLibrarianSort
-- **Description:** "AI-powered PDF library organizer - Your intelligent librarian for organizing thousands of PDFs!"
-- **License:** MIT (open source)
-- **Language:** Python 3.8+
-- **Tags:** `pdf`, `ai`, `gemini`, `python`, `automation`, `organizer`, `librarian`
-
-### Repository URL Structure
-
-```
-https://github.com/peterbamuhigire/pyPDFLibrarianSort
-```
-
-### First Release
-
-- **Tag:** v1.0.0
-- **Title:** "v1.0.0 - Initial Release"
-- **Tagline:** "Your AI librarian is here!"
-
----
-
-## ðŸŒŸ Marketing Message
-
-**One-liner:**
-> "Your AI librarian that organizes thousands of PDFs - 100x more economically!"
-
-**Elevator Pitch:**
-> "pyPDFLibrarianSort uses Gemini AI to intelligently categorize and organize your PDF library. Process 200 PDFs for $0.10 instead of $10, maintain deep folder hierarchies, and automatically rename files using metadata - all with simple Python scripts."
-
-**Twitter/Social Media:**
-
-```
-ðŸš€ Introducing pyPDFLibrarianSort!
-
-Your AI librarian for organizing PDFs:
-âœ¨ Intelligent categorization  
-ðŸ’° 100x more cost-effective
-ðŸŒ² Deep folder hierarchies
-ðŸ“ Smart auto-renaming
-
-200 PDFs: $0.10 vs $10 traditional!
-
-Built with Google Gemini
-#Python #OpenSource
-
-github.com/peterbamuhigire/pyPDFLibrarianSort
-```
-
----
-
-## ðŸ“‹ Publishing Checklist
-
-Before publishing to GitHub:
-
-- [x] All files named correctly
-- [x] README is comprehensive
-- [x] LICENSE file present (MIT)
-- [x] CONTRIBUTING guide complete
-- [x] .gitignore configured
-- [x] requirements.txt accurate
-- [x] No sensitive data (API keys, personal paths)
-- [x] All documentation proofread
-- [x] Example outputs included
-- [x] Cost comparisons accurate
-- [x] Git commands documented
-- [x] Project name consistent throughout
-
----
-
-## ðŸŽ‰ Next Steps
-
-1. **Organize files** into proper structure
-2. **Create GitHub repository** named `pyPDFLibrarianSort`
-3. **Push to GitHub** following git commands
-4. **Create first release** (v1.0.0)
-5. **Share on social media** (Twitter, Reddit, HN)
-6. **Submit to lists** (awesome-python, Product Hunt)
-7. **Engage with community** (respond to issues/PRs)
-
----
-
-## ðŸ“ž Support Resources
-
-- **Documentation:** `/docs` folder
-- **Issues:** GitHub Issues
-- **Discussions:** GitHub Discussions
-- **Email:** (your contact)
-
----
-
-## ðŸ† Success Metrics
-
-**Initial Goals (First Month):**
-
-- â­ 50-100 GitHub stars
-- ðŸ´ 10-20 forks
-- ðŸ‘€ 500+ repository views
-- ðŸ’¬ 5-10 active discussions
-- ðŸ› 5-10 issues/feature requests
-
-**Long-term Goals (6 Months):**
-
-- â­ 500+ stars
-- ðŸ´ 50+ forks
-- ðŸ‘¥ 5-10 regular contributors
-- ðŸ“¦ 100+ active users
-- ðŸŒŸ Featured in awesome-lists
-
----
-
-## ðŸ“„ License
-
-MIT License - Free to use, modify, and distribute
-
----
-
-**Made with â¤ï¸ for PDF organization enthusiasts**
-
-**Intelligent â€¢ Economical â€¢ Fast â€¢ Open Source**
-
----
-
-## ðŸ”— Quick Links
-
-- GitHub Repo: `https://github.com/peterbamuhigire/pyPDFLibrarianSort`
-- Documentation: `/docs`
-- Issues: `/issues`
-- Discussions: `/discussions`
-- License: MIT
-- Python Version: 3.8+
-- Dependencies: google-genai, pypdf
-
----
-
-**Ready to publish! ðŸš€**
-
-Replace `peterbamuhigire` with your actual GitHub username and you're ready to go!
+Legacy PDF docs are still present in the `docs/guides/` directory for the tools that already existed before this repositioning.

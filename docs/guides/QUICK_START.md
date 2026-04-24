@@ -1,321 +1,54 @@
-# Quick Start Guide - Multiple Approaches
+# Quick Start
 
-## ðŸš¨ If Nothing Else Works - Try These
+## Fastest Way To Try The New Direction
 
-### Method 1: Simple Interactive Script (EASIEST)
+Install dependencies:
 
-**Just run this ONE command:**
+```bash
+pip install -r requirements.txt
+```
+
+Launch the new PowerPoint-to-EPUB GUI:
+
+```bash
+python pptx_to_epub.py
+```
+
+Then:
+
+1. choose a single `.pptx` file or a directory of `.pptx` files
+2. choose the output directory
+3. click `Convert to EPUB`
+
+## CLI Examples
+
+Single PowerPoint:
+
+```bash
+python pptx_to_epub.py --input "C:\slides\deck.pptx" --output-dir "C:\exports\epubs"
+```
+
+Whole directory:
+
+```bash
+python pptx_to_epub.py --input "C:\slides" --output-dir "C:\exports\epubs"
+```
+
+## What The Tool Produces
+
+- one EPUB per PowerPoint file
+- one section per slide
+- text-only extraction
+- no embedded slide images
+
+## Other Scripts Still In The Repo
+
+The repository still includes PDF-specific utilities:
 
 ```bash
 python organize_batch.py
+python pdf_signature.py
+python watch_setup.py
 ```
 
-This will:
-
-- âœ… Check if packages are installed (installs them if missing)
-- âœ… Ask you step-by-step what you need
-- âœ… Auto-detect your Downloads folder
-- âœ… Guide you through setup
-- âœ… Start organizing
-
-**No configuration files, no GUI issues, just simple questions!**
-
----
-
-### Method 2: Test First, Then Run
-
-**Step 1 - Test everything:**
-
-```bash
-python test_basic.py
-```
-
-This verifies:
-
-- Python packages installed
-- API key available
-- PDFOrganizer class works
-- Validation working
-
-**Step 2 - If tests pass, organize:**
-
-```bash
-python organize_batch.py
-```
-
----
-
-### Method 3: Command Line (Most Reliable)
-
-**One command with everything specified:**
-
-```bash
-python organize_batch.py --downloads "C:\Users\Peter\Downloads" --ebooks "F:\ebooks" --api-key "your-key-here"
-```
-
-Replace:
-
-- `C:\Users\Peter\Downloads` with your actual Downloads path
-- `F:\ebooks` with where you want PDFs organized
-- `your-key-here` with your Gemini API key
-
----
-
-### Method 4: Set Environment Variable, Then Run
-
-**Windows (Command Prompt):**
-
-```cmd
-set GEMINI_API_KEY=your-key-here
-python organize_batch.py
-```
-
-**Windows (PowerShell):**
-
-```powershell
-$env:GEMINI_API_KEY="your-key-here"
-python organize_batch.py
-```
-
-**Mac/Linux:**
-
-```bash
-export GEMINI_API_KEY="your-key-here"
-python organize_batch.py
-```
-
----
-
-## ðŸ” What's Different About These Approaches
-
-### organize_batch.py
-
-- **Interactive**: Asks questions step by step
-- **Auto-installs**: Installs missing packages
-- **Auto-detects**: Finds your Downloads folder
-- **Validates**: Checks everything before starting
-- **No config files**: Everything specified when you run it
-
-### test_basic.py
-
-- **Diagnostic**: Tests each component
-- **Safe**: Doesn't modify anything
-- **Clear**: Shows exactly what's wrong
-- **Quick**: Runs in seconds
-
----
-
-## ðŸ“‹ Absolute Minimum Setup
-
-### 1. Install Python Packages
-
-```bash
-pip install google-genai pdfplumber pypdf
-```
-
-### 2. Get API Key
-
-Go to: <https://aistudio.google.com/app/apikey>
-Copy your API key (starts with `AIza`)
-
-### 3. Run Simple Script
-
-```bash
-python organize_batch.py
-```
-
-Follow the prompts!
-
----
-
-## ðŸŽ¯ Step-by-Step: organize_batch.py
-
-**What you'll see:**
-
-```
-======================================================================
-  PDF Organizer - Interactive Setup
-======================================================================
-
-Step 1: Checking dependencies...
-  âœ“ google-genai
-  âœ“ pdfplumber
-  âœ“ pypdf
-
-Step 2: Configure Downloads Folder
-----------------------------------------------------------------------
-Auto-detected: C:\Users\Peter\Downloads
-âœ“ This folder exists
-
-Use this folder? (Y/n): y
-âœ“ Using: C:\Users\Peter\Downloads
-
-Step 3: Configure Ebooks Folder
-----------------------------------------------------------------------
-This is where organized PDFs will be stored.
-Example: F:\ebooks or C:\Users\Peter\Documents\eBooks
-
-Enter Ebooks folder path: F:\ebooks
-
-Folder doesn't exist. Create F:\ebooks? (Y/n): y
-âœ“ Created: F:\ebooks
-
-Step 4: Configure API Key
-----------------------------------------------------------------------
-Get your API key at: https://aistudio.google.com/app/apikey
-
-Enter your Gemini API key: AIza-your-key-here
-âœ“ API key configured
-
-======================================================================
-  Configuration Summary
-======================================================================
-Downloads: C:\Users\Peter\Downloads
-Ebooks:    F:\ebooks
-API Key:   AIza-xxx...xxx
-
-Found 15 PDFs in Downloads folder
-
-Start organizing? (Y/n): y
-
-======================================================================
-  Starting Organization
-======================================================================
-
-[Processing PDFs...]
-```
-
----
-
-## âŒ Common Issues & Quick Fixes
-
-### "ModuleNotFoundError: No module named 'google-genai'"
-
-**Fix:**
-
-```bash
-pip install google-genai pdfplumber pypdf
-```
-
-### "Error: ebooks_folder is required"
-
-**Fix:** Use `organize_batch.py` - it will guide you through setup
-
-### "API key not found"
-
-**Fix:** `organize_batch.py` will ask you for it
-
-### GUI not working
-
-**Fix:** Skip the GUI, use `organize_batch.py` instead
-
-### Configuration confusing
-
-**Fix:** Ignore all config files, use `organize_batch.py`
-
----
-
-## ðŸ†˜ Emergency Procedure
-
-If NOTHING works:
-
-**Step 1:**
-
-```bash
-python test_basic.py
-```
-
-Read the output carefully. It will tell you exactly what's wrong.
-
-**Step 2:**
-Fix what `test_basic.py` reports.
-
-**Step 3:**
-
-```bash
-python organize_batch.py
-```
-
-**Step 4:**
-If still failing, copy the FULL error message and check `ERROR_HANDLING.md`
-
----
-
-## ðŸ’¡ Why organize_batch.py is Better
-
-| Feature | organize_batch.py | GUI | Command Line |
-|---------|-------------------|-----|--------------|
-| Auto-installs packages | âœ… Yes | âŒ No | âŒ No |
-| Interactive setup | âœ… Yes | âš  Manual | âš  Manual |
-| Auto-detects paths | âœ… Yes | âš  Partial | âŒ No |
-| No config files needed | âœ… Yes | âŒ No | âœ… Yes |
-| Validates before running | âœ… Yes | âš  Partial | âŒ No |
-| Shows clear errors | âœ… Yes | âš  Sometimes | âœ… Yes |
-| Works when GUI fails | âœ… Yes | âŒ N/A | âœ… Yes |
-
----
-
-## ðŸŽ“ Example Complete Session
-
-```bash
-C:\Users\Peter\Downloads\files> python organize_batch.py
-
-======================================================================
-  PDF Organizer - Interactive Setup
-======================================================================
-
-Step 1: Checking dependencies...
-  âœ“ google-genai
-  âœ“ pdfplumber
-  âœ“ pypdf
-
-Step 2: Configure Downloads Folder
-----------------------------------------------------------------------
-Auto-detected: C:\Users\Peter\Downloads
-âœ“ This folder exists
-Use this folder? (Y/n): y
-âœ“ Using: C:\Users\Peter\Downloads
-
-Step 3: Configure Ebooks Folder
-----------------------------------------------------------------------
-Enter Ebooks folder path: F:\ebooks
-âœ“ Using: F:\ebooks
-
-Step 4: Configure API Key
-----------------------------------------------------------------------
-Enter your Gemini API key: AIza-xxxxx
-âœ“ API key configured
-
-======================================================================
-  Configuration Summary
-======================================================================
-Downloads: C:\Users\Peter\Downloads
-Ebooks:    F:\ebooks
-API Key:   AIza-xxxx...xxxx
-
-Found 23 PDFs in Downloads folder
-
-Start organizing? (Y/n): y
-
-Analyzing existing ebooks folder structure...
-Found 15 categories in your ebooks library:
-[Processing begins...]
-
-âœ“ Organized 23 PDFs
-Check: F:\ebooks
-
-Press Enter to exit...
-```
-
----
-
-## âœ… Recommended Workflow
-
-1. **First time:** `python test_basic.py` (verify setup)
-2. **Every time:** `python organize_batch.py` (organize PDFs)
-
-That's it! No GUI, no complex config, just simple scripts that work.
-
----
-
-**TL;DR: Just run `python organize_batch.py` and answer the questions!** ðŸŽ¯
+Those remain available, but they are no longer the only focus of the project.

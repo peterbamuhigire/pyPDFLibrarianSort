@@ -2,70 +2,71 @@
 
 ## 30-Second Overview
 
-**Modern web-based PDF management platform** with two powerful tools: (1) AI-powered organization with 98% cost savings, and (2) digital signature tool requiring no AI credits. Drag & drop interface, batch processing, and automated workflows.
+`pyPDFLibrarianSort` is now a broader Python tools repository for document and content-processing workflows.
 
-## Key Innovations
+It started as a PDF project, but it is being repositioned into a workspace for multiple utilities. The current expansion starts with a PowerPoint-to-EPUB converter that extracts slide text and generates readable EPUB books through a GUI or CLI.
 
-1. **Batch Processing**: Organize 200 PDFs in one API call ($0.10) vs individual processing ($10). **98% cost savings**.
-2. **Zero-Cost Signatures**: Add signatures to PDFs with no AI credits required.
+## Current Product Shape
 
-## Core Capabilities
+The repository now contains:
 
-### PDF Organization (AI-Powered)
-1. **Three AI Providers**: Gemini, Anthropic, DeepSeek
-2. **Batch Mode**: Process all PDFs in single API call
-3. **Watch Mode**: Auto-organize PDFs as they arrive (24/7)
-4. **Smart Renaming**: Detects gibberish filenames, reads content, suggests meaningful names
+1. document conversion tools
+2. extraction and restructuring scripts
+3. legacy PDF workflow tools already built in the project
 
-### PDF Signatures (No AI Required)
-1. **Flexible Positioning**: 4 corner positions with adjustable margins
-2. **Page Selection**: Sign all, first, last, odd, even, or custom ranges
-3. **Full Customization**: Size, opacity (10-100%), rotation (0-360°)
-4. **Batch Processing**: Sign multiple PDFs at once
+## First Non-PDF Tool
 
-### Web Interface
-- **Drag & Drop**: Upload signatures and PDFs easily
-- **Real-Time Preview**: See signature placement before applying
-- **Visual Approval**: Review AI categorization before organizing
-- **Browse Library**: Explore organized PDF collection
+### PowerPoint To EPUB
+
+`pptx_to_epub.py`:
+
+1. reads `.pptx` files
+2. extracts text from slides
+3. ignores images
+4. creates structured EPUB output
+5. supports one file or a whole directory
+6. lets the user choose the output directory
+7. includes a desktop GUI and CLI mode
+
+## Existing Tool Families
+
+### PDF Utilities
+
+- AI-assisted PDF organization
+- PDF signature placement
+- watch-mode PDF automation
+
+These remain supported, but they no longer define the entire project.
 
 ## Target Users
 
-- Professionals managing document libraries (organization + signatures)
-- Legal firms needing document signing and organization
-- Researchers with hundreds of PDFs to categorize
-- Students organizing study materials
-- Businesses requiring signed contracts and organized files
-- Anyone needing PDF management without expensive tools
+- people who need desktop-friendly Python tools for document workflows
+- researchers and educators converting presentation material into reading formats
+- office users who want batch conversion tools without complex setup
+- users who still need the existing PDF utilities
 
 ## Technical Stack
 
-- **Language**: Python 3.x
-- **AI Providers**: Google Gemini, Anthropic Claude, DeepSeek (for organization)
-- **PDF Processing**: pypdf, ReportLab, Pillow (for signatures)
-- **File Monitoring**: watchdog
-- **Web Framework**: Flask with RESTful API
-- **Deployment**: Cross-platform (Windows, macOS, Linux)
+- Python 3.x
+- `python-pptx` for reading PowerPoint slides
+- `ebooklib` for EPUB generation
+- `tkinter` for desktop GUI workflows
+- existing PDF stack for legacy tools: `pypdf`, `reportlab`, `Pillow`, `Flask`, `watchdog`
 
-## Project Status
+## Immediate Direction
 
-**Active Development** | **v2.0** with web interface, watch mode, and multi-provider support
+1. reposition the repo as a multi-tool Python workspace
+2. ship the PowerPoint-to-EPUB converter as the first expansion
+3. keep existing PDF tools available as part of the wider toolkit
 
-## Quick Links
+## Key Documents
 
-- **Setup**: See `docs/guides/QUICK_START.md`
-- **Features**: See `docs/features/FEATURES_SUMMARY.md`
-- **Web Interface**: See `docs/guides/WEB_INTERFACE_GUIDE.md`
-- **PDF Signatures**: See `docs/guides/SIGNATURE_GUIDE.md`
-- **Watch Mode**: See `docs/guides/WATCH_MODE_README.md`
-- **Claude Instructions**: See `CLAUDE.md`
+- [README.md](README.md)
+- [Quick Start](docs/guides/QUICK_START.md)
+- [Getting Started](docs/guides/GET_STARTED.md)
+- [Project Summary](docs/overview/PROJECT_SUMMARY.md)
+- [PowerPoint To EPUB Guide](docs/guides/POWERPOINT_TO_EPUB_GUIDE.md)
 
-## Repository
+## Status
 
-**GitHub**: [pyPDFLibrarianSort](https://github.com/yourusername/pyPDFLibrarianSort)
-
----
-
-**Maintained by**: Peter Bamuhigire
-**Last Updated**: January 2026
-**License**: MIT
+Active development, with the repository transitioning from a PDF-specific product into a general Python tools collection.

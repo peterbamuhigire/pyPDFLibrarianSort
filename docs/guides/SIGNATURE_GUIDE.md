@@ -1,5 +1,7 @@
 # PDF Signature Guide
 
+This guide documents one PDF-specific tool inside the broader `pyPDFLibrarianSort` Python tools workspace.
+
 Complete guide to signing PDFs with pyPDFLibrarianSort.
 
 ## Overview

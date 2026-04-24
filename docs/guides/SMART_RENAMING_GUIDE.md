@@ -1,5 +1,7 @@
 # Smart Renaming Guide
 
+This guide documents a PDF-specific renaming workflow inside the broader `pyPDFLibrarianSort` Python tools workspace.
+
 ## How the System Handles Gibberish Filenames
 
 The PDF organizer now includes **intelligent content analysis** to handle PDFs with meaningless filenames like `SAJSABC4345.pdf`.

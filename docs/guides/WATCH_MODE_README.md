@@ -1,5 +1,7 @@
 # Watch Mode - Automatic PDF Organization
 
+This guide documents a PDF-specific automation tool inside the broader `pyPDFLibrarianSort` Python tools workspace.
+
 ## What is Watch Mode?
 
 Watch Mode continuously monitors your Downloads folder and automatically organizes new PDFs as they arrive. Perfect for "set it and forget it" automation!

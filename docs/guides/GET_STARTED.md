@@ -1,173 +1,72 @@
-# Getting Started - PDF Organizer
+# Getting Started
 
-## 🚀 Quick Start (3 Steps)
+## Project Scope
 
-### Step 1: Install Dependencies
+This repository is no longer just a PDF project. It is being developed into a collection of Python utilities for document and content-processing workflows.
 
-**Double-click:** `INSTALL_DEPENDENCIES.bat`
+The first step in that broader direction is a PowerPoint-to-EPUB converter.
 
-This will install all required Python packages. It only needs to be done once.
+## Setup
 
-### Step 2: Get API Key
+### 1. Install Python
 
-1. Go to: <https://aistudio.google.com/app/apikey>
-2. Sign up or log in
-3. Create an API key
-4. Copy the key (starts with `AIza`)
+Use Python 3.8 or newer.
 
-### Step 3: Run the Tool
+### 2. Install Dependencies
 
-**Double-click:** `START_HERE.bat`
+```bash
+pip install -r requirements.txt
+```
 
-Enter your API key in the GUI and start organizing!
+### 3. Start With The New Tool
 
----
+```bash
+python pptx_to_epub.py
+```
 
-## 📋 What You Need
+## PowerPoint To EPUB Workflow
 
-- ✅ Windows (7, 10, or 11)
-- ✅ Python 3.8 or higher ([Download here](https://www.python.org/downloads/))
-- ✅ Gemini API key (free to get, pay per use)
-- ✅ Internet connection (for AI processing)
+The new tool:
 
----
+1. opens one `.pptx` file or scans a whole directory
+2. extracts text from slides
+3. ignores images
+4. builds an EPUB for each presentation
+5. writes output into the directory you choose
 
-## 💰 Cost
+## CLI Usage
 
-- **Free to install** - No upfront cost
-- **Pay per use** - Approximately $0.01-0.03 per PDF
-- **Example:** Organizing 100 PDFs ≈ $1-3
+Single file:
 
-You only pay when the AI categorizes PDFs. Preview mode (dry run) is free.
+```bash
+python pptx_to_epub.py --input "C:\presentations\deck.pptx" --output-dir "C:\books"
+```
 
----
+Directory mode:
 
-## 📁 File Overview
+```bash
+python pptx_to_epub.py --input "C:\presentations" --output-dir "C:\books"
+```
 
-**Essential Files:**
+When using directory mode, the tool searches recursively for `.pptx` files and mirrors their relative structure into the output directory.
 
-- `START_HERE.bat` - Launch the tool (GUI)
-- `INSTALL_DEPENDENCIES.bat` - One-time setup
-- `organize_batch.py` - Main application (GUI version)
-- `organize_batch.py` - Organizer (GUI + CLI)
-- `requirements.txt` - List of dependencies
+## Files To Know
 
-**Documentation:**
+- `pptx_to_epub.py`: new PowerPoint-to-EPUB GUI and CLI tool
+- `test_pptx_to_epub.py`: smoke test for the new converter
+- `organize_batch.py`: existing PDF organization tool
+- `pdf_signature.py`: existing PDF signing tool
 
-- `README.md` - Full user guide
-- `INSTALLATION.md` - Detailed setup instructions
-- `QUICK_FIX.md` - Troubleshooting common errors
-- `GET_STARTED.md` - This file
+## Existing PDF Documentation
 
-**Installers:**
+The repository still contains the previous PDF documentation for users who rely on those scripts. Those guides are now tool-specific references rather than the main identity of the project.
 
-- `install.ps1` - PowerShell auto-installer (admin)
-- `install_simple.ps1` - PowerShell installer (no admin)
-- `setup.py` - Python setup wizard
+## Recommended First Test
 
-**Other:**
+Run:
 
-- `run_gui.bat` / `run_gui.sh` - Alternative launchers
+```bash
+python test_pptx_to_epub.py
+```
 
----
-
-## ❓ Common Issues
-
-### "Python is not recognized"
-
-**Problem:** Python not installed or not in PATH
-
-**Fix:**
-
-1. Install Python from <https://www.python.org/>
-2. ✅ CHECK "Add Python to PATH" during installation
-3. Restart your computer
-4. Try again
-
-### "ModuleNotFoundError: No module named 'pdfplumber'"
-
-**Problem:** Dependencies not installed
-
-**Fix:** Run `INSTALL_DEPENDENCIES.bat`
-
-### "API key not found"
-
-**Problem:** No API key configured
-
-**Fix:** Get a key from <https://aistudio.google.com/app/apikey> and enter it in the GUI
-
-### Tool is running from wrong folder
-
-**Problem:** Batch file can't find Python files
-
-**Fix:**
-
-1. Make sure ALL files are in the SAME folder
-2. Use `START_HERE.bat` instead of `run_gui.bat`
-3. Or run from Command Prompt in the correct folder
-
----
-
-## 🎯 First Time Workflow
-
-1. **Install Python** (if not already installed)
-2. **Run INSTALL_DEPENDENCIES.bat**
-3. **Get Gemini API key**
-4. **Run START_HERE.bat**
-5. **Configure in GUI:**
-   - Set Downloads folder
-   - Set Ebooks folder (e.g., F:\ebooks)
-   - Enter API key
-6. **Check "Dry Run"** to preview first
-7. **Click "Organize PDFs"**
-8. **Review suggestions**
-9. **Uncheck "Dry Run" and run again** to actually move files
-
----
-
-## 📞 Need Help?
-
-1. **Read QUICK_FIX.md** - Solutions for common errors
-2. **Read INSTALLATION.md** - Detailed setup guide
-3. **Check error messages** - They usually explain what's wrong
-4. **Try the manual steps** in INSTALLATION.md
-
----
-
-## ✅ Checklist Before First Run
-
-- [ ] Python is installed (`python --version` works in Command Prompt)
-- [ ] Dependencies are installed (ran INSTALL_DEPENDENCIES.bat)
-- [ ] I have a Gemini API key
-- [ ] All files are in the same folder
-- [ ] I know my Downloads folder path
-- [ ] I know my Ebooks folder path (or will create it)
-
-If all checked, you're ready! Run `START_HERE.bat` 🎉
-
----
-
-## 🎓 How It Works
-
-1. **Scans** your Downloads folder for PDFs
-2. **Extracts** text from the first few pages
-3. **Analyzes** your existing ebooks folder structure
-4. **Uses AI** (Gemini) to categorize based on content
-5. **Suggests** categories with confidence levels
-6. **Moves** files to organized subdirectories
-
-The AI reads the content and metadata to understand what each PDF is about, then suggests the most appropriate category based on your existing organization.
-
----
-
-## 🔒 Privacy
-
-- PDF content is sent to Google's Gemini API for analysis
-- Only text is sent, not the actual PDF files
-- Your API key stays on your computer
-- All file operations are local
-- See Google's privacy policy: <https://policies.google.com/privacy>
-
----
-
-**Ready?** Run `INSTALL_DEPENDENCIES.bat` to begin! 🚀
+Then open the GUI and convert a small sample PowerPoint deck.

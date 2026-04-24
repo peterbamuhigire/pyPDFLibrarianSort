@@ -1,69 +1,65 @@
-# 📚 pyPDFLibrarianSort
+# pyPDFLibrarianSort
 
-**Modern web-based PDF management platform** - AI-powered organization with 98% cost savings + digital signatures with zero AI credits.
+Python tools workspace for practical document and content-processing utilities.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Multi-AI](https://img.shields.io/badge/AI-Gemini%20%7C%20Anthropic%20%7C%20DeepSeek-blueviolet)](https://ai.google.dev/)
+The repository started as a PDF-focused project. It is now being expanded into a broader collection of Python scripts and desktop tools for file conversion, extraction, organization, and publishing workflows.
 
-> **Complete PDF management: AI organization + digital signatures, all in one modern web interface**
+## Current Direction
 
-## 🎯 Key Features
+The project is no longer limited to PDF operations. Existing PDF tools remain available, but the repository now serves as a home for multiple independent utilities.
 
-- 🤖 **Three AI Providers** - Choose Gemini, Anthropic (Claude), or DeepSeek
-- 💰 **98% Cost Savings** - Batch processing: $0.10 for 200 PDFs vs $10 individual
-- 🌐 **Modern Web Interface** - Drag & drop, real-time preview, visual approval
-- ✍️ **PDF Signature Tool** - Add signatures to PDFs with NO AI credits (web + CLI)
-- 👀 **Watch Mode** - Auto-organize PDFs as they arrive (24/7 background mode)
-- 🔍 **Smart Renaming** - Detects gibberish filenames, reads content, suggests better names
-- 🌲 **Deep Hierarchy** - Preserves multi-level folder structures (3+ levels)
-- 📊 **Content Analysis** - Reads PDF content for accurate categorization
-- 🎒 **Cross-Platform** - Works on Windows, macOS, Linux
-- 🔒 **Privacy-First** - Only filenames/metadata sent to API, never PDF content
+The first expansion beyond PDFs is:
 
-## 💰 Cost Comparison
+- `pptx_to_epub.py`: extract text from PowerPoint slides, ignore images, and export well-structured EPUB books
 
-| PDFs | Traditional | Batch | **Savings** |
-|------|------------|------------|-------------|
-| 50   | $2.50      | $0.05      | **98%** ✅  |
-| 200  | $10.00     | $0.10      | **99%** ✅  |
-| 500  | $25.00     | $0.15      | **99%** ✅  |
+Existing PDF tools still in the repo:
 
-**Why such huge savings?** The organizer batches many PDFs into a single AI request instead of making one request per file.
+- `organize_batch.py`: AI-assisted PDF organization
+- `pdf_signature.py`: PDF signature placement with GUI support
+- `watch_organizer.py`: watch-mode PDF organization
 
-## 📖 Documentation
+## New Tool: PowerPoint To EPUB
 
-### Getting Started
-- **[Quick Start Guide](docs/guides/QUICK_START.md)** - Get running in 5 minutes
-- **[Project Brief](PROJECT_BRIEF.md)** - 30-second overview
-- **[Get Started](docs/guides/GET_STARTED.md)** - Detailed setup guide
+`pptx_to_epub.py` converts `.pptx` files into EPUBs by reading slide text only.
 
-### User Guides
-- **[Web Interface Guide](docs/guides/WEB_INTERFACE_GUIDE.md)** - Using the web UI
-- **[PDF Signature Guide](docs/guides/SIGNATURE_GUIDE.md)** - Sign PDFs with no AI credits
-- **[Watch Mode](docs/guides/WATCH_MODE_README.md)** - Auto-organization setup
-- **[Smart Renaming](docs/guides/SMART_RENAMING_GUIDE.md)** - How gibberish detection works
-- **[Features Summary](docs/features/FEATURES_SUMMARY.md)** - Complete feature list
+What it does:
 
-### Reference
-- **[Error Handling](docs/reference/ERROR_HANDLING.md)** - Troubleshooting guide
-- **[Portable Usage](docs/reference/PORTABLE_USAGE.md)** - Cross-platform usage
-- **[Hierarchical Categories](docs/reference/HIERARCHICAL_CATEGORIES.md)** - Category system explained
+- extracts text from slide titles, text boxes, and tables
+- ignores images and other non-text content
+- creates one EPUB section per slide
+- supports a single PowerPoint file or an entire directory
+- lets you choose the output directory
+- includes both GUI and CLI modes
 
-### For Developers
-- **[CLAUDE.md](CLAUDE.md)** - AI assistant guidance
-- **[Skills Directory](skills/)** - Reusable development skills
+### GUI
 
-## 📋 Table of Contents
+```bash
+python pptx_to_epub.py
+```
 
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Usage Modes](#-usage-modes)
-- [Cost Comparison](#-cost-comparison)
-- [Contributing](#-contributing)
-- [License](#-license)
+From the GUI you can:
 
-## 🔧 Installation
+- choose one PowerPoint file or a whole folder
+- choose the output directory
+- run conversion with progress feedback
+
+### CLI
+
+Single file:
+
+```bash
+python pptx_to_epub.py --input "C:\path\deck.pptx" --output-dir "C:\path\epubs"
+```
+
+Whole directory:
+
+```bash
+python pptx_to_epub.py --input "C:\path\slides" --output-dir "C:\path\epubs"
+```
+
+When the input is a directory, the converter scans for `.pptx` files recursively and mirrors the relative folder structure inside the selected output directory.
+
+## Installation
 
 ```bash
 git clone https://github.com/peterbamuhigire/pyPDFLibrarianSort.git
@@ -71,92 +67,57 @@ cd pyPDFLibrarianSort
 pip install -r requirements.txt
 ```
 
-**Get an API key:**
-- **Gemini**: https://aistudio.google.com/app/apikey
-- **Anthropic**: https://console.anthropic.com/
-- **DeepSeek**: https://platform.deepseek.com/
+Core dependencies for the new PowerPoint tool:
 
-See [docs/guides/GET_STARTED.md](docs/guides/GET_STARTED.md) for detailed setup instructions.
+- `python-pptx`
+- `ebooklib`
 
-## 🚀 Quick Start
+## Documentation
 
-**Web Interface (Recommended - All Features):**
+### Project Docs
+
+- [Project Brief](PROJECT_BRIEF.md)
+- [Project Summary](docs/overview/PROJECT_SUMMARY.md)
+- [Quick Start](docs/guides/QUICK_START.md)
+- [Getting Started](docs/guides/GET_STARTED.md)
+- [Features Summary](docs/features/FEATURES_SUMMARY.md)
+
+### PowerPoint To EPUB
+
+- [PowerPoint To EPUB Guide](docs/guides/POWERPOINT_TO_EPUB_GUIDE.md)
+
+### Existing PDF Tools
+
+These are still part of the repository, but they are no longer the entire project scope:
+
+- [Web Interface Guide](docs/guides/WEB_INTERFACE_GUIDE.md)
+- [PDF Signature Guide](docs/guides/SIGNATURE_GUIDE.md)
+- [Watch Mode Guide](docs/guides/WATCH_MODE_README.md)
+- [Smart Renaming Guide](docs/guides/SMART_RENAMING_GUIDE.md)
+
+## Testing
+
+PowerPoint converter smoke test:
+
 ```bash
-python web_interface.py
-# Opens http://localhost:5000 automatically
-# Access: PDF Organization + PDF Signatures
+python test_pptx_to_epub.py
 ```
 
-**PDF Organization:**
-- **Organizer GUI / CLI**: `python organize_batch.py`
-- **Watch Mode**: `python watch_setup.py` (auto-organize 24/7)
+Existing PDF signature tests:
 
-**PDF Signatures (No AI Credits):**
 ```bash
-python pdf_signature.py
+python test_signature.py
 ```
 
-See [docs/guides/QUICK_START.md](docs/guides/QUICK_START.md) for detailed usage.
+## Roadmap
 
-## 📖 Features & Usage Modes
+Planned direction for the repository:
 
-### PDF Organization (AI-Powered)
+- more document conversion tools
+- more extraction and restructuring utilities
+- more GUI-first scripts for non-technical users
+- shared patterns for batch processing and output organization
 
-| Mode | Best For | Cost (200 PDFs) | Command |
-|------|----------|-----------------|---------|
-| **Web Interface** | Interactive use, visual review | $0.10 | `python web_interface.py` |
-| **Watch Mode** | Auto-organize 24/7 | $0.10-0.20 | `python watch_setup.py` |
-| **Organizer GUI / CLI** | One-time organization | $0.10 | `python organize_batch.py` |
+## License
 
-### PDF Signatures (No AI Credits)
-
-| Mode | Best For | Cost | Command |
-|------|----------|------|---------|
-| **Web Interface** | Interactive signing with preview | $0 | `python web_interface.py` |
-| **Signature Tool** | Interactive signing | $0 | `python pdf_signature.py` |
-
-**Signature Features**: 4 corner positions • Page selection (all/first/last/odd/even/ranges) • Size control (10-100%) • Opacity (10-100%) • Rotation (0-360°) • Batch processing
-
-See [docs/features/FEATURES_SUMMARY.md](docs/features/FEATURES_SUMMARY.md) for detailed comparisons.
-
-See comprehensive documentation in [docs/](docs/) directory for detailed guides on configuration, troubleshooting, and advanced usage.
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
-
-## 📝 License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-Free to use, modify, and distribute!
-
-## 🙏 Credits
-
-- **AI Organization**: Powered by [Google Gemini](https://ai.google.dev/), [Anthropic Claude](https://www.anthropic.com/), and [DeepSeek](https://www.deepseek.com/)
-- **PDF Processing**: ReportLab, PyPDF, Pillow
-- Built with ❤️ for PDF management needs
-- Thanks to all contributors!
-
-## 🔗 Links
-
-- [Documentation](docs/)
-- [Issue Tracker](https://github.com/yourusername/pyPDFLibrarianSort/issues)
-- [Discussions](https://github.com/yourusername/pyPDFLibrarianSort/discussions)
-- [Gemini API](https://ai.google.dev/)
-
----
-
-⭐ **Star this repo if it helped you organize your PDF library!**
-
-💡 **Have questions?** Open a [Discussion](https://github.com/yourusername/pyPDFLibrarianSort/discussions)
-
-🐛 **Found a bug?** Report an [Issue](https://github.com/yourusername/pyPDFLibrarianSort/issues)
+MIT License.
