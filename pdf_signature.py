@@ -335,6 +335,54 @@ class PDFSignature:
         image.save(output, format="PNG")
         return output.getvalue(), image.width, image.height
 
+    def _calculate_pymupdf_image_rect(self, page, sig_width, sig_height):
+        """
+        Convert the user-visible placement into PyMuPDF's unrotated page space.
+
+        PyMuPDF requires insertion coordinates relative to the unrotated page,
+        while users choose corners based on the page as displayed. Rotated and
+        scanner-produced PDFs often rely on `/Rotate`, so this conversion keeps
+        placement aligned with the visible page.
+        """
+        visible_rect = page.rect
+        visible_width = float(visible_rect.width)
+        visible_height = float(visible_rect.height)
+
+        # Visible coordinates use a top-left origin.
+        if self.position == 'bottom-right':
+            x0 = visible_width - sig_width - self.x_offset
+            y0 = visible_height - sig_height - self.y_offset
+        elif self.position == 'bottom-left':
+            x0 = self.x_offset
+            y0 = visible_height - sig_height - self.y_offset
+        elif self.position == 'top-right':
+            x0 = visible_width - sig_width - self.x_offset
+            y0 = self.y_offset
+        else:  # top-left
+            x0 = self.x_offset
+            y0 = self.y_offset
+
+        x1 = x0 + sig_width
+        y1 = y0 + sig_height
+
+        # Translate displayed coordinates back into the unrotated page space
+        # expected by PyMuPDF insertion APIs.
+        top_left = fitz.Point(x0, y0) * page.derotation_matrix
+        bottom_right = fitz.Point(x1, y1) * page.derotation_matrix
+
+        # If the cropbox does not start at (0, 0), insertion coordinates must
+        # be shifted by that displacement to match the page's real PDF space.
+        crop_shift = page.cropbox_position
+        top_left = fitz.Point(top_left.x + crop_shift.x, top_left.y + crop_shift.y)
+        bottom_right = fitz.Point(bottom_right.x + crop_shift.x, bottom_right.y + crop_shift.y)
+
+        return fitz.Rect(
+            min(top_left.x, bottom_right.x),
+            min(top_left.y, bottom_right.y),
+            max(top_left.x, bottom_right.x),
+            max(top_left.y, bottom_right.y),
+        )
+
     def _add_signature_to_pdf_with_pymupdf(self, input_pdf_path, output_pdf_path):
         """Stamp the signature as an overlay using PyMuPDF."""
         doc = fitz.open(input_pdf_path)
@@ -351,28 +399,12 @@ class PDFSignature:
                     continue
 
                 page = doc.load_page(page_index)
-                page_rect = page.rect
-                page_width = float(page_rect.width)
-                page_height = float(page_rect.height)
+                page_width = float(page.rect.width)
 
                 sig_width = page_width * self.scale
                 sig_height = sig_width * image_ratio
 
-                # PyMuPDF uses a top-left origin with y increasing downward.
-                if self.position == 'bottom-right':
-                    x = page_width - sig_width - self.x_offset
-                    y = page_height - sig_height - self.y_offset
-                elif self.position == 'bottom-left':
-                    x = self.x_offset
-                    y = page_height - sig_height - self.y_offset
-                elif self.position == 'top-right':
-                    x = page_width - sig_width - self.x_offset
-                    y = self.y_offset
-                else:  # top-left
-                    x = self.x_offset
-                    y = self.y_offset
-
-                rect = fitz.Rect(x, y, x + sig_width, y + sig_height)
+                rect = self._calculate_pymupdf_image_rect(page, sig_width, sig_height)
                 page.insert_image(rect, stream=image_bytes, overlay=True, keep_proportion=False)
                 pages_signed += 1
 

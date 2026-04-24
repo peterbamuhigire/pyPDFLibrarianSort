@@ -28,6 +28,11 @@ except ImportError:
     sys.exit(1)
 
 try:
+    import fitz
+except ImportError:
+    fitz = None
+
+try:
     from pdf_signature import PDFSignature
 except ImportError:
     print("ERROR: pdf_signature.py not found!")
@@ -368,6 +373,80 @@ def test_opacity_and_rotation():
             pass
 
 
+def test_rotated_page_signature_placement():
+    """Test placement on a rotated PDF page via the PyMuPDF signing path."""
+    print("\n" + "=" * 60)
+    print("TEST: Rotated Page Placement")
+    print("=" * 60)
+
+    if fitz is None:
+        print("  SKIP PyMuPDF not installed")
+        return True
+
+    sig_path = create_test_signature()
+    pdf_path = create_test_pdf(num_pages=1)
+    rotated_pdf_path = pdf_path.replace('.pdf', '_rotated.pdf')
+    output_path = pdf_path.replace('.pdf', '_rotated_signed.pdf')
+
+    try:
+        doc = fitz.open(pdf_path)
+        page = doc[0]
+        page.set_rotation(90)
+        doc.save(rotated_pdf_path)
+        doc.close()
+
+        signer = PDFSignature(
+            sig_path,
+            position='bottom-right',
+            scale=0.2,
+            x_offset=0.5,
+            y_offset=0.5,
+        )
+        result = signer.add_signature_to_pdf(rotated_pdf_path, output_path)
+
+        if not result['success']:
+            print(f"  FAIL Signing failed: {result['error']}")
+            return False
+
+        signed_doc = fitz.open(output_path)
+        try:
+            signed_page = signed_doc[0]
+            images = signed_page.get_images(full=True)
+            if not images:
+                print("  FAIL No image found on signed rotated page")
+                return False
+
+            bbox = signed_page.get_image_bbox(images[-1])
+            visible_rect = signed_page.rect
+            expected_width = visible_rect.width * signer.scale
+            expected_height = expected_width * (signer.signature_image.height / signer.signature_image.width)
+            expected_x0 = visible_rect.width - expected_width - signer.x_offset
+            expected_y0 = visible_rect.height - expected_height - signer.y_offset
+
+            if abs(bbox.x0 - expected_x0) < 2 and abs(bbox.y0 - expected_y0) < 2:
+                print(f"  OK Rotated page bbox: ({bbox.x0:.1f}, {bbox.y0:.1f})")
+                return True
+
+            print(
+                f"  FAIL Expected visible bottom-right near ({expected_x0:.1f}, {expected_y0:.1f}), "
+                f"got ({bbox.x0:.1f}, {bbox.y0:.1f})"
+            )
+            return False
+        finally:
+            signed_doc.close()
+
+    finally:
+        try:
+            os.unlink(sig_path)
+        except (PermissionError, FileNotFoundError):
+            pass
+        for path in (pdf_path, rotated_pdf_path, output_path):
+            try:
+                os.unlink(path)
+            except (PermissionError, FileNotFoundError):
+                pass
+
+
 def test_batch_processing():
     """Test batch processing multiple PDFs"""
     print("\n" + "=" * 60)
@@ -468,6 +547,7 @@ def main():
         ("Page Filtering", test_page_filtering),
         ("Skip Pages", test_skip_pages),
         ("Opacity & Rotation", test_opacity_and_rotation),
+        ("Rotated Page Placement", test_rotated_page_signature_placement),
         ("Batch Processing", test_batch_processing),
         ("Error Handling", test_error_handling)
     ]
