@@ -383,6 +383,49 @@ class PDFSignature:
             max(top_left.y, bottom_right.y),
         )
 
+    def _stamp_page_pymupdf(self, page, rect, image_bytes):
+        """
+        Stamp a page using insert_image; fall back to a PDF-overlay merge if
+        insert_image returns 0 (silent failure on some complex page structures).
+        Returns True on success.
+        """
+        xref = page.insert_image(rect, stream=image_bytes, overlay=True, keep_proportion=False)
+        if xref > 0:
+            return True
+
+        # Fallback: build a one-page PDF overlay via ReportLab and merge it
+        # in using PyMuPDF's show_pdf_page, which always works regardless of
+        # the target page's internal structure.
+        try:
+            from reportlab.pdfgen import canvas as rl_canvas
+            from reportlab.lib.utils import ImageReader
+            from PIL import Image as PILImage
+
+            packet = BytesIO()
+            pw = float(page.rect.width)
+            ph = float(page.rect.height)
+            c = rl_canvas.Canvas(packet, pagesize=(pw, ph))
+
+            # ReportLab uses bottom-left origin; convert PyMuPDF top-left rect
+            rl_x = rect.x0
+            rl_y = ph - rect.y1          # flip y
+            rl_w = rect.width
+            rl_h = rect.height
+
+            sig_img = PILImage.open(BytesIO(image_bytes))
+            c.setFillAlpha(self.opacity)
+            c.drawImage(ImageReader(sig_img), rl_x, rl_y, width=rl_w, height=rl_h, mask='auto')
+            c.save()
+            packet.seek(0)
+
+            overlay_doc = fitz.open("pdf", packet.read())
+            page.show_pdf_page(page.rect, overlay_doc, 0, overlay=True)
+            overlay_doc.close()
+            return True
+        except Exception as e:
+            print(f"    Warning: fallback stamp also failed: {e}")
+            return False
+
     def _add_signature_to_pdf_with_pymupdf(self, input_pdf_path, output_pdf_path):
         """Stamp the signature as an overlay using PyMuPDF."""
         doc = fitz.open(input_pdf_path)
@@ -390,6 +433,7 @@ class PDFSignature:
         try:
             total_pages = doc.page_count
             pages_signed = 0
+            pages_failed = []
             image_bytes, image_width, image_height = self._get_processed_signature_bytes()
             image_ratio = image_height / image_width
 
@@ -405,8 +449,14 @@ class PDFSignature:
                 sig_height = sig_width * image_ratio
 
                 rect = self._calculate_pymupdf_image_rect(page, sig_width, sig_height)
-                page.insert_image(rect, stream=image_bytes, overlay=True, keep_proportion=False)
-                pages_signed += 1
+                if self._stamp_page_pymupdf(page, rect, image_bytes):
+                    pages_signed += 1
+                else:
+                    pages_failed.append(page_num)
+                    print(f"    Warning: could not stamp page {page_num}")
+
+            if pages_failed:
+                print(f"    Pages not stamped: {pages_failed}")
 
             os.makedirs(os.path.dirname(os.path.abspath(output_pdf_path)), exist_ok=True)
             doc.save(output_pdf_path)
