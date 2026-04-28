@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-19T18:51:13.709461",
+  "generated_at": "2026-04-12T00:15:00.695462",
   "ebooks_root": "F:\\eBooks",
-  "category_count": 629,
+  "category_count": 634,
   "categories": [
     {
       "path": "Biographies",
@@ -21,12 +21,12 @@
     {
       "path": "Computer & ICT/AI/AI Concepts",
       "depth": 3,
-      "count": 26
+      "count": 34
     },
     {
       "path": "Computer & ICT/AI/AI Engineering",
       "depth": 3,
-      "count": 8
+      "count": 9
     },
     {
       "path": "Computer & ICT/AI/AI for Creativity",
@@ -36,17 +36,17 @@
     {
       "path": "Computer & ICT/AI/AI in Business Management",
       "depth": 3,
-      "count": 50
+      "count": 56
     },
     {
       "path": "Computer & ICT/AI/Prompting",
       "depth": 3,
-      "count": 25
+      "count": 28
     },
     {
       "path": "Computer & ICT/AI/Software Development with AI",
       "depth": 3,
-      "count": 26
+      "count": 28
     },
     {
       "path": "Computer & ICT/Books, Profiles and Biographies",
@@ -366,7 +366,7 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/Coding",
       "depth": 3,
-      "count": 16
+      "count": 17
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Delphi",
@@ -2231,17 +2231,17 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/Javascript",
       "depth": 3,
-      "count": 7
+      "count": 20
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Mobile Development",
       "depth": 3,
-      "count": 22
+      "count": 55
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/PHP",
       "depth": 3,
-      "count": 18
+      "count": 22
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/PHP/Shanker S. Building Dynamic Web Experiences with PHP...2024",
@@ -2256,7 +2256,7 @@
     {
       "path": "Computer & ICT/Coding & Programming Languages/Python",
       "depth": 3,
-      "count": 16
+      "count": 18
     },
     {
       "path": "Computer & ICT/Coding & Programming Languages/Robotics & IOT",
@@ -2286,17 +2286,17 @@
     {
       "path": "Computer & ICT/Data Science, Analytics & Visualization",
       "depth": 2,
-      "count": 35
+      "count": 43
     },
     {
       "path": "Computer & ICT/Databases",
       "depth": 2,
-      "count": 23
+      "count": 24
     },
     {
       "path": "Computer & ICT/Design",
       "depth": 2,
-      "count": 21
+      "count": 34
     },
     {
       "path": "Computer & ICT/ERP",
@@ -2304,9 +2304,14 @@
       "count": 10
     },
     {
+      "path": "Computer & ICT/ERP/ERP Playbook Umbrex",
+      "depth": 3,
+      "count": 12
+    },
+    {
       "path": "Computer & ICT/ERP/SAP",
       "depth": 3,
-      "count": 7
+      "count": 9
     },
     {
       "path": "Computer & ICT/GIS",
@@ -2316,7 +2321,7 @@
     {
       "path": "Computer & ICT/IT Policy & Management",
       "depth": 2,
-      "count": 23
+      "count": 24
     },
     {
       "path": "Computer & ICT/IT Products, Business, Projects & Consulting",
@@ -2361,12 +2366,12 @@
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals",
       "depth": 2,
-      "count": 8
+      "count": 13
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Linux",
       "depth": 3,
-      "count": 53
+      "count": 54
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Linux/Linux USA 2025 Complete",
@@ -2376,7 +2381,7 @@
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Microsoft Excel",
       "depth": 3,
-      "count": 5
+      "count": 7
     },
     {
       "path": "Computer & ICT/Operating Systems and Software Manuals/Photoshop",
@@ -2411,7 +2416,7 @@
     {
       "path": "Computer & ICT/Software Architecture",
       "depth": 2,
-      "count": 7
+      "count": 9
     },
     {
       "path": "Computer & ICT/Software Development",
@@ -2422,6 +2427,11 @@
       "path": "Computer & ICT/Software Development/Development Tools & Frameworks",
       "depth": 3,
       "count": 4
+    },
+    {
+      "path": "Computer & ICT/Software Development/Git",
+      "depth": 3,
+      "count": 0
     },
     {
       "path": "Computer & ICT/Software Development/Object Oriented Design & Programming",
@@ -2446,7 +2456,7 @@
     {
       "path": "Computer & ICT/Software Development/Software Engineering",
       "depth": 3,
-      "count": 45
+      "count": 46
     },
     {
       "path": "Computer & ICT/Software Development/Software Requirements",
@@ -2466,7 +2476,7 @@
     {
       "path": "Computer & ICT/Web Development",
       "depth": 2,
-      "count": 3
+      "count": 10
     },
     {
       "path": "Computer & ICT/Web and Digital Marketing",
@@ -2476,7 +2486,7 @@
     {
       "path": "Computer & ICT/Web and Digital Marketing/Search Engine Optimization",
       "depth": 3,
-      "count": 22
+      "count": 21
     },
     {
       "path": "Economics, Business & Management",
@@ -2491,7 +2501,7 @@
     {
       "path": "Economics, Business & Management/Business",
       "depth": 2,
-      "count": 22
+      "count": 25
     },
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas",
@@ -2506,12 +2516,12 @@
     {
       "path": "Economics, Business & Management/Business Plan Guides & Ideas/Plans & Proposals Writing",
       "depth": 3,
-      "count": 10
+      "count": 14
     },
     {
       "path": "Economics, Business & Management/Business Statistics & Analytics",
       "depth": 2,
-      "count": 10
+      "count": 11
     },
     {
       "path": "Economics, Business & Management/CFA",
@@ -2541,12 +2551,12 @@
     {
       "path": "Economics, Business & Management/Consulting",
       "depth": 2,
-      "count": 54
+      "count": 57
     },
     {
       "path": "Economics, Business & Management/Consulting/Consulting Playbooks",
       "depth": 3,
-      "count": 18
+      "count": 41
     },
     {
       "path": "Economics, Business & Management/Consulting/Cost Cutting",
@@ -2586,17 +2596,17 @@
     {
       "path": "Economics, Business & Management/Entreprenuership & Startups",
       "depth": 2,
-      "count": 47
+      "count": 51
     },
     {
       "path": "Economics, Business & Management/HRM, Performance & Payroll",
       "depth": 2,
-      "count": 33
+      "count": 34
     },
     {
       "path": "Economics, Business & Management/Harvard Business Review",
       "depth": 2,
-      "count": 19
+      "count": 20
     },
     {
       "path": "Economics, Business & Management/IT Policy & Management",
@@ -2626,12 +2636,7 @@
     {
       "path": "Economics, Business & Management/Marketing & Sales",
       "depth": 2,
-      "count": 73
-    },
-    {
-      "path": "Economics, Business & Management/Marketing & Sales/Digital Marketing",
-      "depth": 3,
-      "count": 0
+      "count": 110
     },
     {
       "path": "Economics, Business & Management/Papers & Publications",
@@ -2642,6 +2647,11 @@
       "path": "Economics, Business & Management/Presentations",
       "depth": 2,
       "count": 16
+    },
+    {
+      "path": "Economics, Business & Management/Product Management",
+      "depth": 2,
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Production, Operations & Manufacturing",
@@ -2661,17 +2671,37 @@
     {
       "path": "Economics, Business & Management/Sales",
       "depth": 2,
-      "count": 9
+      "count": 14
     },
     {
       "path": "Economics, Business & Management/Specific Industries",
       "depth": 2,
-      "count": 25
+      "count": 4
     },
     {
-      "path": "Economics, Business & Management/Specific Industries/AgriBusiness",
+      "path": "Economics, Business & Management/Specific Industries/Agriculture",
       "depth": 3,
-      "count": 5
+      "count": 6
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/Education & Schools",
+      "depth": 3,
+      "count": 0
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/Healthcare",
+      "depth": 3,
+      "count": 1
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/Hospitality & Hotel",
+      "depth": 3,
+      "count": 9
+    },
+    {
+      "path": "Economics, Business & Management/Specific Industries/Manufacturing & Industry",
+      "depth": 3,
+      "count": 6
     },
     {
       "path": "Economics, Business & Management/Specific Industries/Property Management",
@@ -2681,47 +2711,47 @@
     {
       "path": "Economics, Business & Management/Strategy & Competitiveness",
       "depth": 2,
-      "count": 25
+      "count": 26
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing",
       "depth": 2,
-      "count": 0
+      "count": 92
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Blogging",
       "depth": 3,
-      "count": 0
+      "count": 7
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Email",
       "depth": 3,
-      "count": 0
+      "count": 2
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Facebook",
       "depth": 3,
-      "count": 0
+      "count": 7
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Google",
       "depth": 3,
-      "count": 0
+      "count": 5
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Instagram",
       "depth": 3,
-      "count": 0
+      "count": 11
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Tiktok",
       "depth": 3,
-      "count": 0
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Twitter X",
       "depth": 3,
-      "count": 0
+      "count": 1
     },
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Whatsapp",
@@ -2731,12 +2761,12 @@
     {
       "path": "Economics, Business & Management/Web and Digital Marketing/Youtube",
       "depth": 3,
-      "count": 0
+      "count": 10
     },
     {
       "path": "Forms and Documents",
       "depth": 1,
-      "count": 37
+      "count": 41
     },
     {
       "path": "Health, Food & Wellness",
@@ -2751,7 +2781,7 @@
     {
       "path": "Health, Food & Wellness/Health Guides",
       "depth": 2,
-      "count": 5
+      "count": 17
     },
     {
       "path": "Health, Food & Wellness/Herbal Medicine",
@@ -2781,7 +2811,7 @@
     {
       "path": "History, Military and Politics/African History",
       "depth": 2,
-      "count": 15
+      "count": 16
     },
     {
       "path": "History, Military and Politics/American History",
@@ -2861,7 +2891,7 @@
     {
       "path": "Knowledge & Academic Subjects",
       "depth": 1,
-      "count": 1
+      "count": 2
     },
     {
       "path": "Knowledge & Academic Subjects/Archaeology",
@@ -2901,7 +2931,7 @@
     {
       "path": "Knowledge & Academic Subjects/Geography & Natural Sciences",
       "depth": 2,
-      "count": 4
+      "count": 5
     },
     {
       "path": "Knowledge & Academic Subjects/Interesting & Unconventional stuff",
@@ -2971,7 +3001,7 @@
     {
       "path": "Literature, Writing & Novels/Writing & Authoring",
       "depth": 2,
-      "count": 9
+      "count": 17
     },
     {
       "path": "Literature, Writing & Novels/Writing & Authoring/Proposals & Grants",
@@ -2981,7 +3011,7 @@
     {
       "path": "Magazines, Journals & Periodicals",
       "depth": 1,
-      "count": 4
+      "count": 5
     },
     {
       "path": "Magazines, Journals & Periodicals/Old Pulp Magazines Collection 184",
@@ -3001,7 +3031,7 @@
     {
       "path": "Nature, Gardening & Farming",
       "depth": 1,
-      "count": 52
+      "count": 60
     },
     {
       "path": "Personal Development",
@@ -3031,12 +3061,12 @@
     {
       "path": "Personal Development/People Skills",
       "depth": 2,
-      "count": 14
+      "count": 16
     },
     {
       "path": "Personal Development/Personal Branding & Strategy",
       "depth": 2,
-      "count": 14
+      "count": 23
     },
     {
       "path": "Personal Development/Psychology & Thought Process",
@@ -3056,7 +3086,7 @@
     {
       "path": "Personal Development/Work, Performance and Success",
       "depth": 2,
-      "count": 39
+      "count": 40
     },
     {
       "path": "Philosophy and Thought",
@@ -3136,17 +3166,12 @@
     {
       "path": "Ugandan Books, Laws, History",
       "depth": 1,
-      "count": 8
+      "count": 9
     },
     {
       "path": "Ugandan Books, Laws, History/Statistics and Info",
       "depth": 2,
       "count": 60
-    },
-    {
-      "path": "Uncategorized",
-      "depth": 1,
-      "count": 0
     }
   ]
 }
