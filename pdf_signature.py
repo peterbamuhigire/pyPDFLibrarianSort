@@ -335,107 +335,25 @@ class PDFSignature:
         image.save(output, format="PNG")
         return output.getvalue(), image.width, image.height
 
-    def _calculate_pymupdf_image_rect(self, page, sig_width, sig_height):
-        """
-        Convert the user-visible placement into PyMuPDF's unrotated page space.
-
-        PyMuPDF requires insertion coordinates relative to the unrotated page,
-        while users choose corners based on the page as displayed. Rotated and
-        scanner-produced PDFs often rely on `/Rotate`, so this conversion keeps
-        placement aligned with the visible page.
-        """
-        visible_rect = page.rect
-        visible_width = float(visible_rect.width)
-        visible_height = float(visible_rect.height)
-
-        # Visible coordinates use a top-left origin.
-        if self.position == 'bottom-right':
-            x0 = visible_width - sig_width - self.x_offset
-            y0 = visible_height - sig_height - self.y_offset
-        elif self.position == 'bottom-left':
-            x0 = self.x_offset
-            y0 = visible_height - sig_height - self.y_offset
-        elif self.position == 'top-right':
-            x0 = visible_width - sig_width - self.x_offset
-            y0 = self.y_offset
-        else:  # top-left
-            x0 = self.x_offset
-            y0 = self.y_offset
-
-        x1 = x0 + sig_width
-        y1 = y0 + sig_height
-
-        # Translate displayed coordinates back into the unrotated page space
-        # expected by PyMuPDF insertion APIs.
-        top_left = fitz.Point(x0, y0) * page.derotation_matrix
-        bottom_right = fitz.Point(x1, y1) * page.derotation_matrix
-
-        # If the cropbox does not start at (0, 0), insertion coordinates must
-        # be shifted by that displacement to match the page's real PDF space.
-        crop_shift = page.cropbox_position
-        top_left = fitz.Point(top_left.x + crop_shift.x, top_left.y + crop_shift.y)
-        bottom_right = fitz.Point(bottom_right.x + crop_shift.x, bottom_right.y + crop_shift.y)
-
-        return fitz.Rect(
-            min(top_left.x, bottom_right.x),
-            min(top_left.y, bottom_right.y),
-            max(top_left.x, bottom_right.x),
-            max(top_left.y, bottom_right.y),
-        )
-
-    def _stamp_page_pymupdf(self, page, rect, image_bytes):
-        """
-        Stamp a page using insert_image; fall back to a PDF-overlay merge if
-        insert_image returns 0 (silent failure on some complex page structures).
-        Returns True on success.
-        """
-        xref = page.insert_image(rect, stream=image_bytes, overlay=True, keep_proportion=False)
-        if xref > 0:
-            return True
-
-        # Fallback: build a one-page PDF overlay via ReportLab and merge it
-        # in using PyMuPDF's show_pdf_page, which always works regardless of
-        # the target page's internal structure.
-        try:
-            from reportlab.pdfgen import canvas as rl_canvas
-            from reportlab.lib.utils import ImageReader
-            from PIL import Image as PILImage
-
-            packet = BytesIO()
-            pw = float(page.rect.width)
-            ph = float(page.rect.height)
-            c = rl_canvas.Canvas(packet, pagesize=(pw, ph))
-
-            # ReportLab uses bottom-left origin; convert PyMuPDF top-left rect
-            rl_x = rect.x0
-            rl_y = ph - rect.y1          # flip y
-            rl_w = rect.width
-            rl_h = rect.height
-
-            sig_img = PILImage.open(BytesIO(image_bytes))
-            c.setFillAlpha(self.opacity)
-            c.drawImage(ImageReader(sig_img), rl_x, rl_y, width=rl_w, height=rl_h, mask='auto')
-            c.save()
-            packet.seek(0)
-
-            overlay_doc = fitz.open("pdf", packet.read())
-            page.show_pdf_page(page.rect, overlay_doc, 0, overlay=True)
-            overlay_doc.close()
-            return True
-        except Exception as e:
-            print(f"    Warning: fallback stamp also failed: {e}")
-            return False
-
     def _add_signature_to_pdf_with_pymupdf(self, input_pdf_path, output_pdf_path):
-        """Stamp the signature as an overlay using PyMuPDF."""
-        doc = fitz.open(input_pdf_path)
+        """Stamp the signature as an overlay using PyMuPDF + ReportLab.
 
+        Uses show_pdf_page (never insert_image) so every page is stamped
+        reliably regardless of rotation or internal page structure.
+        Size is fixed relative to the shorter display dimension so the
+        signature looks the same on both portrait and landscape pages.
+        """
+        from reportlab.pdfgen import canvas as rl_canvas
+        from reportlab.lib.utils import ImageReader
+        from PIL import Image as PILImage
+
+        doc = fitz.open(input_pdf_path)
         try:
             total_pages = doc.page_count
             pages_signed = 0
-            pages_failed = []
             image_bytes, image_width, image_height = self._get_processed_signature_bytes()
             image_ratio = image_height / image_width
+            sig_pil = PILImage.open(BytesIO(image_bytes))
 
             for page_index in range(total_pages):
                 page_num = page_index + 1
@@ -443,20 +361,58 @@ class PDFSignature:
                     continue
 
                 page = doc.load_page(page_index)
-                page_width = float(page.rect.width)
+                disp_w = float(page.rect.width)
+                disp_h = float(page.rect.height)
 
-                sig_width = page_width * self.scale
-                sig_height = sig_width * image_ratio
+                # Consistent physical size: scale off the shorter display edge
+                ref_dim = min(disp_w, disp_h)
+                sig_w = ref_dim * self.scale
+                sig_h = sig_w * image_ratio
 
-                rect = self._calculate_pymupdf_image_rect(page, sig_width, sig_height)
-                if self._stamp_page_pymupdf(page, rect, image_bytes):
-                    pages_signed += 1
-                else:
-                    pages_failed.append(page_num)
-                    print(f"    Warning: could not stamp page {page_num}")
+                # Position in display coords (top-left origin, y down)
+                if self.position == 'bottom-left':
+                    dx0 = self.x_offset
+                    dy0 = disp_h - sig_h - self.y_offset
+                elif self.position == 'bottom-right':
+                    dx0 = disp_w - sig_w - self.x_offset
+                    dy0 = disp_h - sig_h - self.y_offset
+                elif self.position == 'top-right':
+                    dx0 = disp_w - sig_w - self.x_offset
+                    dy0 = self.y_offset
+                else:  # top-left
+                    dx0 = self.x_offset
+                    dy0 = self.y_offset
 
-            if pages_failed:
-                print(f"    Pages not stamped: {pages_failed}")
+                # Convert display rect -> internal (mediabox/unrotated) coords
+                dm = page.derotation_matrix
+                tl = fitz.Point(dx0, dy0) * dm
+                br = fitz.Point(dx0 + sig_w, dy0 + sig_h) * dm
+                ix0 = min(tl.x, br.x)
+                iy0 = min(tl.y, br.y)
+                ix1 = max(tl.x, br.x)
+                iy1 = max(tl.y, br.y)
+
+                # Build overlay PDF at mediabox (internal) dimensions
+                mb = page.mediabox
+                iw = float(mb.width)
+                ih = float(mb.height)
+                packet = BytesIO()
+                c = rl_canvas.Canvas(packet, pagesize=(iw, ih))
+                # ReportLab uses bottom-left origin; flip y
+                c.setFillAlpha(self.opacity)
+                c.drawImage(
+                    ImageReader(sig_pil),
+                    ix0, ih - iy1,
+                    width=ix1 - ix0, height=iy1 - iy0,
+                    mask='auto',
+                )
+                c.save()
+                packet.seek(0)
+
+                overlay_doc = fitz.open("pdf", packet.read())
+                page.show_pdf_page(mb, overlay_doc, 0, overlay=True)
+                overlay_doc.close()
+                pages_signed += 1
 
             os.makedirs(os.path.dirname(os.path.abspath(output_pdf_path)), exist_ok=True)
             doc.save(output_pdf_path)
