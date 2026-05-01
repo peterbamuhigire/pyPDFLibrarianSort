@@ -181,7 +181,7 @@ class ToolCard(ctk.CTkFrame):
         py = sys.executable
         if sys.platform == "win32":
             self.process = subprocess.Popen(
-                f'start "{title}" cmd /k "{py}" "{script}"',
+                f'start "{title}" cmd /k ""{py}" "{script}""',
                 shell=True,
                 cwd=str(HERE),
             )
