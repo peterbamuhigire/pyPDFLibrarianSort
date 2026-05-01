@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 import os
+import queue as queue_module
 import shutil
 import subprocess
 import sys
-import queue as queue_module
-from dataclasses import dataclass
+import threading
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
+
+from rich.text import Text
+from textual import on
+from textual.app import App, ComposeResult
+from textual.reactive import reactive
+from textual.screen import ModalScreen
+from textual.widgets import Footer, Input, Label, ListItem, ListView, RichLog, Static
 
 
 # ---------------------------------------------------------------------------
@@ -165,15 +173,6 @@ def start_scan(result_queue: queue_module.Queue) -> ThreadPoolExecutor:
 # ---------------------------------------------------------------------------
 # TUI
 # ---------------------------------------------------------------------------
-
-import threading
-from textual.app import App, ComposeResult
-from textual.widgets import Static, Footer, ListView, ListItem, Label
-from textual.widgets import RichLog
-from textual.reactive import reactive
-from textual import on
-from rich.text import Text
-
 
 class ScanPanel(Static):
     """Top panel showing scan progress."""
@@ -441,8 +440,6 @@ class GitPullerApp(App):
         event: threading.Event,
         result_holder: list[bool],
     ) -> None:
-        from textual.widgets import Input
-        from textual.screen import ModalScreen
 
         class ConfirmScreen(ModalScreen):
             def __init__(self, repo_path: str) -> None:
