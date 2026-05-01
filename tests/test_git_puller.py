@@ -1,0 +1,104 @@
+"""Tests for git_puller pure utility functions."""
+
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+from git_puller import RepoInfo, should_skip_dir, get_available_drives
+
+
+class TestShouldSkipDir:
+    def test_skips_node_modules(self):
+        assert should_skip_dir("node_modules") is True
+
+    def test_skips_pycache(self):
+        assert should_skip_dir("__pycache__") is True
+
+    def test_skips_windows(self):
+        assert should_skip_dir("Windows") is True
+
+    def test_skips_program_files(self):
+        assert should_skip_dir("Program Files") is True
+
+    def test_skips_program_files_x86(self):
+        assert should_skip_dir("Program Files (x86)") is True
+
+    def test_skips_recycle_bin(self):
+        assert should_skip_dir("$Recycle.Bin") is True
+
+    def test_skips_system_volume_info(self):
+        assert should_skip_dir("System Volume Information") is True
+
+    def test_skips_dot_git(self):
+        assert should_skip_dir(".git") is True
+
+    def test_allows_normal_dirs(self):
+        assert should_skip_dir("my-project") is False
+
+    def test_allows_src(self):
+        assert should_skip_dir("src") is False
+
+
+class TestGetAvailableDrives:
+    def test_returns_list(self):
+        drives = get_available_drives()
+        assert isinstance(drives, list)
+
+    def test_returns_strings(self):
+        drives = get_available_drives()
+        assert all(isinstance(d, str) for d in drives)
+
+    def test_c_drive_present_on_windows(self):
+        if sys.platform == "win32":
+            drives = get_available_drives()
+            assert any("C" in d.upper() for d in drives)
+
+    def test_drive_paths_end_with_backslash(self):
+        if sys.platform == "win32":
+            drives = get_available_drives()
+            assert all(d.endswith("\\") for d in drives)
+
+
+class TestRepoInfo:
+    def test_default_not_selected(self):
+        repo = RepoInfo(path="C:\\myrepo")
+        assert repo.selected is False
+
+    def test_no_upstream_not_selected_by_default(self):
+        repo = RepoInfo(path="C:\\myrepo", has_upstream=False)
+        assert repo.selected is False
+
+    def test_can_be_selected(self):
+        repo = RepoInfo(path="C:\\myrepo")
+        repo.selected = True
+        assert repo.selected is True
+
+    def test_status_badge_dirty(self):
+        repo = RepoInfo(path="C:\\myrepo", dirty=True, has_upstream=True, ahead=0, behind=0)
+        assert repo.status_badge == "~ dirty"
+
+    def test_status_badge_ahead_behind(self):
+        repo = RepoInfo(path="C:\\myrepo", dirty=False, has_upstream=True, ahead=2, behind=3)
+        assert repo.status_badge == "↑2 ↓3"
+
+    def test_status_badge_clean(self):
+        repo = RepoInfo(path="C:\\myrepo", dirty=False, has_upstream=True, ahead=0, behind=0)
+        assert repo.status_badge == "✓"
+
+    def test_status_badge_no_upstream(self):
+        repo = RepoInfo(path="C:\\myrepo", has_upstream=False)
+        assert repo.status_badge == "(no upstream)"
+
+    def test_status_badge_timeout(self):
+        repo = RepoInfo(path="C:\\myrepo", timed_out=True)
+        assert repo.status_badge == "(timeout)"
+
+    def test_display_path_truncates_long_paths(self):
+        long_path = "C:\\" + "a" * 60
+        repo = RepoInfo(path=long_path)
+        assert len(repo.display_path) <= 50
+        assert repo.display_path.endswith("…")
+
+    def test_display_path_short_path_unchanged(self):
+        repo = RepoInfo(path="C:\\short\\path")
+        assert repo.display_path == "C:\\short\\path"

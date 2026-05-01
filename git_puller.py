@@ -2,9 +2,89 @@
 
 from __future__ import annotations
 
+import os
 import shutil
 import sys
+from dataclasses import dataclass
 
+
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
+SKIP_DIRS: frozenset[str] = frozenset({
+    "node_modules",
+    "__pycache__",
+    "Windows",
+    "Program Files",
+    "Program Files (x86)",
+    "$Recycle.Bin",
+    "System Volume Information",
+    ".git",
+})
+
+
+# ---------------------------------------------------------------------------
+# Data model
+# ---------------------------------------------------------------------------
+
+@dataclass
+class RepoInfo:
+    path: str
+    branch: str = ""
+    ahead: int = 0
+    behind: int = 0
+    dirty: bool = False
+    has_upstream: bool = True
+    timed_out: bool = False
+    selected: bool = False
+    pull_state: str = "idle"  # idle | pulling | done | error | skipped
+
+    @property
+    def status_badge(self) -> str:
+        if self.timed_out:
+            return "(timeout)"
+        if not self.has_upstream:
+            return "(no upstream)"
+        if self.dirty:
+            return "~ dirty"
+        if self.ahead > 0 or self.behind > 0:
+            return f"↑{self.ahead} ↓{self.behind}"
+        return "✓"
+
+    @property
+    def display_path(self) -> str:
+        max_len = 50
+        if len(self.path) <= max_len:
+            return self.path
+        return self.path[:max_len - 1] + "…"
+
+
+# ---------------------------------------------------------------------------
+# Pure utility functions
+# ---------------------------------------------------------------------------
+
+def should_skip_dir(name: str) -> bool:
+    """Return True if a directory name should never be descended into."""
+    return name in SKIP_DIRS
+
+
+def get_available_drives() -> list[str]:
+    """Return available drive root paths on Windows (e.g. ['C:\\\\', 'D:\\\\']).
+    On non-Windows systems returns ['/'] as a single root."""
+    if sys.platform != "win32":
+        return ["/"]
+    drives = []
+    for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        root = f"{letter}:\\"
+        if os.path.exists(root):
+            drives.append(root)
+    return drives
+
+
+# ---------------------------------------------------------------------------
+# Git guard
+# ---------------------------------------------------------------------------
 
 def check_git() -> None:
     """Exit with a clear message if git is not on PATH."""
