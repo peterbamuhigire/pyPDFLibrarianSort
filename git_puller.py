@@ -163,6 +163,87 @@ def start_scan(result_queue: queue_module.Queue) -> ThreadPoolExecutor:
 
 
 # ---------------------------------------------------------------------------
+# TUI
+# ---------------------------------------------------------------------------
+
+import threading
+from textual.app import App, ComposeResult
+from textual.widgets import Static, Footer
+from textual.reactive import reactive
+
+
+class ScanPanel(Static):
+    """Top panel showing scan progress."""
+
+    scanning: reactive[bool] = reactive(True)
+    drives_text: reactive[str] = reactive("")
+    found_count: reactive[int] = reactive(0)
+
+    def render(self) -> str:
+        if self.scanning:
+            return f"[bold]SCAN[/bold]  Scanning {self.drives_text}  Found: {self.found_count} repos"
+        return f"[bold]SCAN[/bold]  Scan complete — {self.found_count} repos found"
+
+
+class GitPullerApp(App):
+    """Main Textual application."""
+
+    CSS = """
+    ScanPanel {
+        height: 1;
+        background: $panel;
+        padding: 0 1;
+        color: $text;
+    }
+    """
+
+    BINDINGS = [
+        ("q", "quit", "Quit"),
+    ]
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._result_queue: queue_module.Queue = queue_module.Queue()
+        self._repos: list[RepoInfo] = []
+        self._executor = None
+        self._scan_done = False
+
+    def compose(self) -> ComposeResult:
+        yield ScanPanel()
+        yield Footer()
+
+    def on_mount(self) -> None:
+        drives = get_available_drives()
+        scan_panel = self.query_one(ScanPanel)
+        scan_panel.drives_text = "  ".join(drives)
+        self._executor = start_scan(self._result_queue)
+        self.set_interval(0.1, self._poll_queue)
+        threading.Thread(target=self._wait_for_scan_done, daemon=True).start()
+
+    def _poll_queue(self) -> None:
+        drained = 0
+        while not self._result_queue.empty() and drained < 20:
+            try:
+                repo = self._result_queue.get_nowait()
+                self._repos.append(repo)
+                scan_panel = self.query_one(ScanPanel)
+                scan_panel.found_count = len(self._repos)
+                drained += 1
+            except queue_module.Empty:
+                break
+
+    def _wait_for_scan_done(self) -> None:
+        if self._executor:
+            self._executor.shutdown(wait=True)
+        self._scan_done = True
+        self.call_from_thread(self._on_scan_complete)
+
+    def _on_scan_complete(self) -> None:
+        scan_panel = self.query_one(ScanPanel)
+        scan_panel.scanning = False
+
+
+# ---------------------------------------------------------------------------
 # Git guard
 # ---------------------------------------------------------------------------
 
@@ -175,4 +256,5 @@ def check_git() -> None:
 
 if __name__ == "__main__":
     check_git()
-    print("git found — TUI not yet implemented")
+    app = GitPullerApp()
+    app.run()
