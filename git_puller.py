@@ -6,7 +6,9 @@ import os
 import shutil
 import subprocess
 import sys
+import queue as queue_module
 from dataclasses import dataclass
+from concurrent.futures import ThreadPoolExecutor
 
 
 # ---------------------------------------------------------------------------
@@ -128,6 +130,36 @@ def resolve_repo_status(path: str) -> RepoInfo:
                 info.has_upstream = False
 
     return info
+
+
+# ---------------------------------------------------------------------------
+# Scanner
+# ---------------------------------------------------------------------------
+
+def scan_drive(root: str, result_queue: queue_module.Queue) -> None:
+    """Walk root recursively, find git repos, post RepoInfo objects to result_queue."""
+    try:
+        for dirpath, dirnames, _ in os.walk(root, topdown=True):
+            # Prune skip dirs in-place so os.walk won't descend into them
+            dirnames[:] = [d for d in dirnames if not should_skip_dir(d)]
+
+            if ".git" in os.listdir(dirpath):
+                # This directory is a git repo
+                info = resolve_repo_status(dirpath)
+                result_queue.put(info)
+                # Don't descend further into the repo's subdirs
+                dirnames.clear()
+    except PermissionError:
+        pass  # Inaccessible drive root — skip silently
+
+
+def start_scan(result_queue: queue_module.Queue) -> ThreadPoolExecutor:
+    """Start scanning all available drives. Returns the executor (call shutdown to join)."""
+    drives = get_available_drives()
+    executor = ThreadPoolExecutor(max_workers=8)
+    for drive in drives:
+        executor.submit(scan_drive, drive, result_queue)
+    return executor
 
 
 # ---------------------------------------------------------------------------

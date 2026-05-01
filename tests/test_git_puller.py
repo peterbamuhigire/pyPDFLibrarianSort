@@ -146,3 +146,57 @@ class TestResolveRepoStatus:
         repo = self._make_git_repo(tmp_path)
         info = resolve_repo_status(repo)
         assert info.path == repo
+
+
+import queue
+from git_puller import scan_drive
+
+
+class TestScanDrive:
+    def _make_git_repo(self, tmp_path: pathlib.Path) -> str:
+        repo = str(tmp_path)
+        subprocess.run(["git", "init", repo], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "config", "user.email", "t@t.com"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "config", "user.name", "T"], check=True, capture_output=True)
+        (tmp_path / "f.txt").write_text("x")
+        subprocess.run(["git", "-C", repo, "add", "."], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "commit", "-m", "x"], check=True, capture_output=True)
+        return repo
+
+    def test_finds_git_repo_in_dir(self, tmp_path):
+        repo_path = tmp_path / "myrepo"
+        repo_path.mkdir()
+        self._make_git_repo(repo_path)
+        q: queue.Queue = queue.Queue()
+        scan_drive(str(tmp_path), q)
+        results = []
+        while not q.empty():
+            results.append(q.get())
+        paths = [r.path for r in results]
+        assert str(repo_path) in paths
+
+    def test_skips_node_modules(self, tmp_path):
+        skip_dir = tmp_path / "node_modules"
+        skip_dir.mkdir()
+        repo_path = skip_dir / "hidden_repo"
+        repo_path.mkdir()
+        self._make_git_repo(repo_path)
+        q: queue.Queue = queue.Queue()
+        scan_drive(str(tmp_path), q)
+        results = []
+        while not q.empty():
+            results.append(q.get())
+        paths = [r.path for r in results]
+        assert str(repo_path) not in paths
+
+    def test_does_not_descend_into_git_internals(self, tmp_path):
+        repo_path = tmp_path / "repo"
+        repo_path.mkdir()
+        self._make_git_repo(repo_path)
+        q: queue.Queue = queue.Queue()
+        scan_drive(str(tmp_path), q)
+        results = []
+        while not q.empty():
+            results.append(q.get())
+        paths = [r.path for r in results]
+        assert not any(".git" in p and p != str(repo_path) for p in paths)
