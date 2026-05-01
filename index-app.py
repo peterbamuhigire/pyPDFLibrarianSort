@@ -56,6 +56,14 @@ TOOLS = [
         "args":        ["--gui"],
         "terminal":    False,
     },
+    {
+        "id":          "git_puller",
+        "title":       "Git Puller",
+        "description": "Scan all drives for git repos\nand pull any or all of them",
+        "icon":        "🔄",
+        "script":      "git_puller.py",
+        "terminal":    True,
+    },
 ]
 
 
