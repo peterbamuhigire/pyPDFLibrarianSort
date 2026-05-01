@@ -306,6 +306,7 @@ class GitPullerApp(App):
         ("a", "select_all", "All"),
         ("n", "deselect_all", "None"),
         ("p", "pull_selected", "Pull"),
+        ("r", "rescan", "Rescan"),
         ("q", "quit", "Quit"),
     ]
 
@@ -362,6 +363,24 @@ class GitPullerApp(App):
 
     def action_deselect_all(self) -> None:
         self.query_one(RepoList).deselect_all()
+
+    def action_rescan(self) -> None:
+        old_executor = self._executor
+        if old_executor:
+            threading.Thread(
+                target=old_executor.shutdown, kwargs={"wait": False}, daemon=True
+            ).start()
+
+        self.query_one(RepoList).clear()
+        self._repos = []
+        self._result_queue = queue_module.Queue()
+
+        scan_panel = self.query_one(ScanPanel)
+        scan_panel.scanning = True
+        scan_panel.found_count = 0
+
+        self._executor = start_scan(self._result_queue)
+        threading.Thread(target=self._wait_for_scan_done, daemon=True).start()
 
     def action_pull_selected(self) -> None:
         repos = self.query_one(RepoList).selected_repos()
