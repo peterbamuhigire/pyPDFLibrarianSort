@@ -168,8 +168,10 @@ def start_scan(result_queue: queue_module.Queue) -> ThreadPoolExecutor:
 
 import threading
 from textual.app import App, ComposeResult
-from textual.widgets import Static, Footer
+from textual.widgets import Static, Footer, ListView, ListItem, Label
 from textual.reactive import reactive
+from textual import on
+from rich.text import Text
 
 
 class ScanPanel(Static):
@@ -185,6 +187,73 @@ class ScanPanel(Static):
         return f"[bold]SCAN[/bold]  Scan complete — {self.found_count} repos found"
 
 
+class RepoRow(ListItem):
+    """A single row in the repo list."""
+
+    def __init__(self, repo: RepoInfo) -> None:
+        super().__init__()
+        self.repo = repo
+
+    def render_row(self) -> Text:
+        checkbox = "[x]" if self.repo.selected else "[ ]"
+        path = self.repo.display_path.ljust(45)
+        branch = (self.repo.branch or "?").ljust(12)
+        badge = self.repo.status_badge
+
+        t = Text()
+        t.append(checkbox + " ", style="bold cyan" if self.repo.selected else "dim")
+        t.append(path + "  ", style="white")
+        t.append(branch + "  ", style="green")
+
+        if "dirty" in badge:
+            t.append(badge, style="yellow")
+        elif "upstream" in badge or "timeout" in badge:
+            t.append(badge, style="dim")
+        elif badge == "✓":
+            t.append(badge, style="green")
+        else:
+            t.append(badge, style="cyan")
+        return t
+
+    def compose(self) -> ComposeResult:
+        yield Label(self.render_row())
+
+    def refresh_label(self) -> None:
+        self.query_one(Label).update(self.render_row())
+
+
+class RepoList(ListView):
+    """Scrollable list of discovered repos."""
+
+    def add_repo(self, repo: RepoInfo) -> None:
+        self.append(RepoRow(repo))
+
+    def toggle_current(self) -> None:
+        if self.highlighted_child:
+            row: RepoRow = self.highlighted_child  # type: ignore
+            row.repo.selected = not row.repo.selected
+            row.refresh_label()
+
+    def select_all(self) -> None:
+        for child in self.children:
+            row: RepoRow = child  # type: ignore
+            row.repo.selected = True
+            row.refresh_label()
+
+    def deselect_all(self) -> None:
+        for child in self.children:
+            row: RepoRow = child  # type: ignore
+            row.repo.selected = False
+            row.refresh_label()
+
+    def selected_repos(self) -> list[RepoInfo]:
+        return [
+            child.repo  # type: ignore
+            for child in self.children
+            if child.repo.selected  # type: ignore
+        ]
+
+
 class GitPullerApp(App):
     """Main Textual application."""
 
@@ -195,9 +264,17 @@ class GitPullerApp(App):
         padding: 0 1;
         color: $text;
     }
+    RepoList {
+        height: 1fr;
+        border: solid $primary;
+    }
     """
 
     BINDINGS = [
+        ("space", "toggle_repo", "Toggle"),
+        ("a", "select_all", "All"),
+        ("n", "deselect_all", "None"),
+        ("p", "pull_selected", "Pull"),
         ("q", "quit", "Quit"),
     ]
 
@@ -210,6 +287,7 @@ class GitPullerApp(App):
 
     def compose(self) -> ComposeResult:
         yield ScanPanel()
+        yield RepoList()
         yield Footer()
 
     def on_mount(self) -> None:
@@ -222,10 +300,12 @@ class GitPullerApp(App):
 
     def _poll_queue(self) -> None:
         drained = 0
+        repo_list = self.query_one(RepoList)
         while not self._result_queue.empty() and drained < 20:
             try:
                 repo = self._result_queue.get_nowait()
                 self._repos.append(repo)
+                repo_list.add_repo(repo)
                 scan_panel = self.query_one(ScanPanel)
                 scan_panel.found_count = len(self._repos)
                 drained += 1
@@ -241,6 +321,18 @@ class GitPullerApp(App):
     def _on_scan_complete(self) -> None:
         scan_panel = self.query_one(ScanPanel)
         scan_panel.scanning = False
+
+    def action_toggle_repo(self) -> None:
+        self.query_one(RepoList).toggle_current()
+
+    def action_select_all(self) -> None:
+        self.query_one(RepoList).select_all()
+
+    def action_deselect_all(self) -> None:
+        self.query_one(RepoList).deselect_all()
+
+    def action_pull_selected(self) -> None:
+        pass  # implemented in Task 7
 
 
 # ---------------------------------------------------------------------------
