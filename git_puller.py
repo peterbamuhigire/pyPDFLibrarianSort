@@ -169,6 +169,7 @@ def start_scan(result_queue: queue_module.Queue) -> ThreadPoolExecutor:
 import threading
 from textual.app import App, ComposeResult
 from textual.widgets import Static, Footer, ListView, ListItem, Label
+from textual.widgets import RichLog
 from textual.reactive import reactive
 from textual import on
 from rich.text import Text
@@ -254,6 +255,23 @@ class RepoList(ListView):
         ]
 
 
+class PullLog(RichLog):
+    """Scrolling log of git pull output."""
+
+    def log_line(self, repo_name: str, line: str, style: str = "white") -> None:
+        prefix = Text(f"[{repo_name}] ", style="bold")
+        prefix.append(line, style=style)
+        self.write(prefix)
+
+    def log_summary(self, pulled: int, skipped: int, failed: int) -> None:
+        self.write(
+            Text(
+                f"── Done: {pulled} pulled, {skipped} skipped, {failed} failed ──",
+                style="bold white"
+            )
+        )
+
+
 class GitPullerApp(App):
     """Main Textual application."""
 
@@ -267,6 +285,20 @@ class GitPullerApp(App):
     RepoList {
         height: 1fr;
         border: solid $primary;
+    }
+    PullLog {
+        height: 10;
+        border: solid $accent;
+    }
+    #confirm-msg {
+        padding: 1 2;
+        background: $panel;
+        border: solid $warning;
+        margin: 4 8;
+        height: auto;
+    }
+    #confirm-input {
+        margin: 0 8;
     }
     """
 
@@ -288,6 +320,7 @@ class GitPullerApp(App):
     def compose(self) -> ComposeResult:
         yield ScanPanel()
         yield RepoList()
+        yield PullLog(highlight=True, markup=True)
         yield Footer()
 
     def on_mount(self) -> None:
@@ -332,7 +365,107 @@ class GitPullerApp(App):
         self.query_one(RepoList).deselect_all()
 
     def action_pull_selected(self) -> None:
-        pass  # implemented in Task 7
+        repos = self.query_one(RepoList).selected_repos()
+        if not repos:
+            return
+        pull_log = self.query_one(PullLog)
+        threading.Thread(
+            target=self._run_pulls, args=(repos, pull_log), daemon=True
+        ).start()
+
+    def _run_pulls(self, repos: list[RepoInfo], pull_log: PullLog) -> None:
+        pulled = skipped = failed = 0
+
+        for repo in repos:
+            name = os.path.basename(repo.path)
+
+            if repo.dirty:
+                confirmed = threading.Event()
+                result_holder: list[bool] = []
+
+                def ask(r=repo, ev=confirmed, holder=result_holder) -> None:
+                    self.call_from_thread(
+                        self._confirm_dirty_pull, r, ev, holder
+                    )
+
+                ask()
+                confirmed.wait(timeout=60)
+                if not result_holder or not result_holder[0]:
+                    self.call_from_thread(
+                        pull_log.log_line, name,
+                        "Skipped (dirty, not confirmed)", "yellow"
+                    )
+                    skipped += 1
+                    continue
+
+            repo.pull_state = "pulling"
+            self.call_from_thread(pull_log.log_line, name, "Pulling...", "cyan")
+
+            try:
+                result = subprocess.run(
+                    ["git", "-C", repo.path, "pull"],
+                    capture_output=True, text=True, timeout=60
+                )
+                output = (result.stdout + result.stderr).strip()
+                for line in output.splitlines():
+                    lower = line.lower()
+                    if "conflict" in lower or "error" in lower:
+                        style = "yellow"
+                    elif result.returncode != 0:
+                        style = "red"
+                    else:
+                        style = "green"
+                    self.call_from_thread(pull_log.log_line, name, line, style)
+
+                if result.returncode == 0:
+                    repo.pull_state = "done"
+                    pulled += 1
+                else:
+                    repo.pull_state = "error"
+                    failed += 1
+
+            except subprocess.TimeoutExpired:
+                self.call_from_thread(pull_log.log_line, name, "Timed out", "red")
+                repo.pull_state = "error"
+                failed += 1
+            except Exception as exc:
+                self.call_from_thread(pull_log.log_line, name, str(exc), "red")
+                repo.pull_state = "error"
+                failed += 1
+
+        self.call_from_thread(pull_log.log_summary, pulled, skipped, failed)
+
+    def _confirm_dirty_pull(
+        self,
+        repo: RepoInfo,
+        event: threading.Event,
+        result_holder: list[bool],
+    ) -> None:
+        from textual.widgets import Input
+        from textual.screen import ModalScreen
+
+        class ConfirmScreen(ModalScreen):
+            def __init__(self, repo_path: str) -> None:
+                super().__init__()
+                self._repo_path = repo_path
+
+            def compose(self) -> ComposeResult:
+                yield Static(
+                    f"[yellow]{self._repo_path}[/yellow] has uncommitted changes.\n"
+                    "Pull anyway? (y/n)",
+                    id="confirm-msg"
+                )
+                yield Input(placeholder="y/n", id="confirm-input")
+
+            @on(Input.Submitted, "#confirm-input")
+            def on_answer(self, ev: Input.Submitted) -> None:
+                self.dismiss(ev.value.strip().lower() == "y")
+
+        def handle_result(confirmed: bool) -> None:
+            result_holder.append(confirmed)
+            event.set()
+
+        self.push_screen(ConfirmScreen(repo.path), handle_result)
 
 
 # ---------------------------------------------------------------------------
