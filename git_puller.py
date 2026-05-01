@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import shutil
+import subprocess
 import sys
 from dataclasses import dataclass
 
@@ -80,6 +81,53 @@ def get_available_drives() -> list[str]:
         if os.path.exists(root):
             drives.append(root)
     return drives
+
+
+# ---------------------------------------------------------------------------
+# Status resolver
+# ---------------------------------------------------------------------------
+
+def resolve_repo_status(path: str) -> RepoInfo:
+    """Run three git commands to get branch, dirty flag, and ahead/behind for a repo."""
+    info = RepoInfo(path=path)
+
+    def run(args: list[str]) -> tuple[str, int]:
+        try:
+            result = subprocess.run(
+                ["git", "-C", path] + args,
+                capture_output=True, text=True, timeout=5
+            )
+            return result.stdout.strip(), result.returncode
+        except subprocess.TimeoutExpired:
+            return "", -1
+
+    # Branch
+    branch, rc = run(["branch", "--show-current"])
+    if rc == -1:
+        info.timed_out = True
+        return info
+    info.branch = branch or "(detached)"
+
+    # Dirty
+    dirty_out, _ = run(["status", "--porcelain"])
+    info.dirty = bool(dirty_out)
+
+    # Ahead / behind
+    ab_out, ab_rc = run(["rev-list", "--left-right", "--count", "HEAD...@{u}"])
+    if ab_rc != 0 or not ab_out:
+        info.has_upstream = False
+        info.selected = False
+    else:
+        parts = ab_out.split()
+        if len(parts) == 2:
+            try:
+                info.ahead = int(parts[0])
+                info.behind = int(parts[1])
+                info.has_upstream = True
+            except ValueError:
+                info.has_upstream = False
+
+    return info
 
 
 # ---------------------------------------------------------------------------

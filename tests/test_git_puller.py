@@ -102,3 +102,47 @@ class TestRepoInfo:
     def test_display_path_short_path_unchanged(self):
         repo = RepoInfo(path="C:\\short\\path")
         assert repo.display_path == "C:\\short\\path"
+
+
+import subprocess
+import pathlib
+from git_puller import resolve_repo_status
+
+
+class TestResolveRepoStatus:
+    def _make_git_repo(self, tmp_path: pathlib.Path) -> str:
+        """Create a git repo with one commit. Returns the path string."""
+        repo = str(tmp_path)
+        subprocess.run(["git", "init", repo], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "config", "user.email", "test@test.com"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "config", "user.name", "Test"], check=True, capture_output=True)
+        (tmp_path / "README.md").write_text("hello")
+        subprocess.run(["git", "-C", repo, "add", "."], check=True, capture_output=True)
+        subprocess.run(["git", "-C", repo, "commit", "-m", "init"], check=True, capture_output=True)
+        return repo
+
+    def test_detects_branch(self, tmp_path):
+        repo = self._make_git_repo(tmp_path)
+        info = resolve_repo_status(repo)
+        assert info.branch in ("main", "master")
+
+    def test_clean_repo_not_dirty(self, tmp_path):
+        repo = self._make_git_repo(tmp_path)
+        info = resolve_repo_status(repo)
+        assert info.dirty is False
+
+    def test_modified_file_is_dirty(self, tmp_path):
+        repo = self._make_git_repo(tmp_path)
+        (tmp_path / "README.md").write_text("modified")
+        info = resolve_repo_status(repo)
+        assert info.dirty is True
+
+    def test_no_upstream_flagged(self, tmp_path):
+        repo = self._make_git_repo(tmp_path)
+        info = resolve_repo_status(repo)
+        assert info.has_upstream is False
+
+    def test_path_preserved(self, tmp_path):
+        repo = self._make_git_repo(tmp_path)
+        info = resolve_repo_status(repo)
+        assert info.path == repo
