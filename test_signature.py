@@ -374,7 +374,7 @@ def test_opacity_and_rotation():
 
 
 def test_rotated_page_signature_placement():
-    """Test placement on a rotated PDF page via the PyMuPDF signing path."""
+    """Test visible placement on a rotated PDF page via the PyMuPDF signing path."""
     print("\n" + "=" * 60)
     print("TEST: Rotated Page Placement")
     print("=" * 60)
@@ -411,27 +411,53 @@ def test_rotated_page_signature_placement():
         signed_doc = fitz.open(output_path)
         try:
             signed_page = signed_doc[0]
-            images = signed_page.get_images(full=True)
-            if not images:
-                print("  FAIL No image found on signed rotated page")
-                return False
-
-            bbox = signed_page.get_image_bbox(images[-1])
             visible_rect = signed_page.rect
             expected_width = visible_rect.width * signer.scale
             expected_height = expected_width * (signer.signature_image.height / signer.signature_image.width)
             expected_x0 = visible_rect.width - expected_width - signer.x_offset
             expected_y0 = visible_rect.height - expected_height - signer.y_offset
 
-            if abs(bbox.x0 - expected_x0) < 2 and abs(bbox.y0 - expected_y0) < 2:
-                print(f"  OK Rotated page bbox: ({bbox.x0:.1f}, {bbox.y0:.1f})")
-                return True
-
-            print(
-                f"  FAIL Expected visible bottom-right near ({expected_x0:.1f}, {expected_y0:.1f}), "
-                f"got ({bbox.x0:.1f}, {bbox.y0:.1f})"
+            # Check the expected visible bottom-right area for non-white pixels.
+            hit_clip = fitz.Rect(
+                max(0, expected_x0 - 4),
+                max(0, expected_y0 - 4),
+                min(visible_rect.width, expected_x0 + expected_width + 4),
+                min(visible_rect.height, expected_y0 + expected_height + 4),
             )
-            return False
+            hit_pix = signed_page.get_pixmap(matrix=fitz.Matrix(1, 1), clip=hit_clip, alpha=False)
+            hit_samples = hit_pix.samples
+            hit_non_white = sum(
+                1 for j in range(0, len(hit_samples), 3)
+                if not (hit_samples[j] > 240 and hit_samples[j + 1] > 240 and hit_samples[j + 2] > 240)
+            )
+
+            if hit_non_white <= 20:
+                print(
+                    f"  FAIL No visible signature near bottom-right "
+                    f"({expected_x0:.1f}, {expected_y0:.1f})"
+                )
+                return False
+
+            # Check the opposite visible corner stays empty to catch rotation / corner mixups.
+            miss_clip = fitz.Rect(
+                0,
+                0,
+                min(visible_rect.width * 0.25, expected_width + 40),
+                min(visible_rect.height * 0.25, expected_height + 40),
+            )
+            miss_pix = signed_page.get_pixmap(matrix=fitz.Matrix(1, 1), clip=miss_clip, alpha=False)
+            miss_samples = miss_pix.samples
+            miss_non_white = sum(
+                1 for j in range(0, len(miss_samples), 3)
+                if not (miss_samples[j] > 240 and miss_samples[j + 1] > 240 and miss_samples[j + 2] > 240)
+            )
+
+            if miss_non_white > 20:
+                print("  FAIL Signature content leaked into the visible top-left corner")
+                return False
+
+            print(f"  OK Visible bottom-right placement near ({expected_x0:.1f}, {expected_y0:.1f})")
+            return True
         finally:
             signed_doc.close()
 

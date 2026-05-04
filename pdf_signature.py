@@ -340,8 +340,9 @@ class PDFSignature:
 
         Uses show_pdf_page (never insert_image) so every page is stamped
         reliably regardless of rotation or internal page structure.
-        Size is fixed relative to the shorter display dimension so the
-        signature looks the same on both portrait and landscape pages.
+        Placement matches the same display-width-based rule used by the
+        pypdf overlay path, so the configured corner, scale, and offsets
+        remain exact regardless of page rotation.
         """
         from reportlab.pdfgen import canvas as rl_canvas
         from reportlab.lib.utils import ImageReader
@@ -364,9 +365,8 @@ class PDFSignature:
                 disp_w = float(page.rect.width)
                 disp_h = float(page.rect.height)
 
-                # Consistent physical size: scale off the shorter display edge
-                ref_dim = min(disp_w, disp_h)
-                sig_w = ref_dim * self.scale
+                # Match the width-based sizing rule used everywhere else.
+                sig_w = disp_w * self.scale
                 sig_h = sig_w * image_ratio
 
                 # Position in display coords (top-left origin, y down)
