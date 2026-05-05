@@ -358,17 +358,10 @@ class PDFSignature:
         by the pypdf overlay path, so the configured corner, scale, and
         offsets remain exact regardless of page size or rotation.
         """
-        from reportlab.pdfgen import canvas as rl_canvas
-        from reportlab.lib.utils import ImageReader
-        from PIL import Image as PILImage
-
         doc = fitz.open(input_pdf_path)
         try:
             total_pages = doc.page_count
             pages_signed = 0
-            image_bytes, image_width, image_height = self._get_processed_signature_bytes()
-            image_ratio = image_height / image_width
-            sig_pil = PILImage.open(BytesIO(image_bytes))
 
             for page_index in range(total_pages):
                 page_num = page_index + 1
@@ -376,53 +369,32 @@ class PDFSignature:
                     continue
 
                 page = doc.load_page(page_index)
-                disp_w = float(page.rect.width)
-                disp_h = float(page.rect.height)
 
-                # Match the fixed A4 portrait-width sizing rule used everywhere else.
-                sig_w, sig_h = self._calculate_signature_size(image_ratio)
-
-                # Position in display coords (top-left origin, y down)
-                if self.position == 'bottom-left':
-                    dx0 = self.x_offset
-                    dy0 = disp_h - sig_h - self.y_offset
-                elif self.position == 'bottom-right':
-                    dx0 = disp_w - sig_w - self.x_offset
-                    dy0 = disp_h - sig_h - self.y_offset
-                elif self.position == 'top-right':
-                    dx0 = disp_w - sig_w - self.x_offset
-                    dy0 = self.y_offset
-                else:  # top-left
-                    dx0 = self.x_offset
-                    dy0 = self.y_offset
-
-                # Convert display rect -> internal (mediabox/unrotated) coords
-                dm = page.derotation_matrix
-                tl = fitz.Point(dx0, dy0) * dm
-                br = fitz.Point(dx0 + sig_w, dy0 + sig_h) * dm
-                ix0 = min(tl.x, br.x)
-                iy0 = min(tl.y, br.y)
-                ix1 = max(tl.x, br.x)
-                iy1 = max(tl.y, br.y)
-
-                # Build overlay PDF at mediabox (internal) dimensions
+                # Build overlay in mediabox coordinates with an inverse-rotation
+                # transform baked in. show_pdf_page places the overlay into
+                # the mediabox; the viewer then applies the page's /Rotate to
+                # the merged content. Pre-applying the inverse rotation keeps
+                # the signature visually upright in the user's chosen corner
+                # regardless of page orientation (portrait vs landscape) or
+                # /Rotate value.
                 mb = page.mediabox
-                iw = float(mb.width)
-                ih = float(mb.height)
-                packet = BytesIO()
-                c = rl_canvas.Canvas(packet, pagesize=(iw, ih))
-                # ReportLab uses bottom-left origin; flip y
-                c.setFillAlpha(self.opacity)
-                c.drawImage(
-                    ImageReader(sig_pil),
-                    ix0, ih - iy1,
-                    width=ix1 - ix0, height=iy1 - iy0,
-                    mask='auto',
-                )
-                c.save()
-                packet.seek(0)
+                mb_width = float(mb.width)
+                mb_height = float(mb.height)
+                try:
+                    page_rotation = int(page.rotation) % 360
+                except (AttributeError, TypeError):
+                    page_rotation = 0
 
-                overlay_doc = fitz.open("pdf", packet.read())
+                # show_pdf_page maps the overlay's full pagesize onto the
+                # target mediabox rect, so build the canvas at mediabox
+                # dimensions with a 0-origin (no mediabox offset baked in).
+                overlay_pdf = self._create_signature_overlay(
+                    mb_width, mb_height,
+                    0, 0,
+                    page_rotation,
+                )
+
+                overlay_doc = fitz.open("pdf", overlay_pdf.read())
                 page.show_pdf_page(mb, overlay_doc, 0, overlay=True)
                 overlay_doc.close()
                 pages_signed += 1
