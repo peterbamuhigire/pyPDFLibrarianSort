@@ -27,7 +27,7 @@ The PDF Signature Tool lets you add PNG signature images to PDFs with extensive 
 4. **Configure signature:**
    - Choose pages to sign (all, first, last, odd, even, or custom range)
    - Select position (4 corners available)
-   - Adjust size (10-100% of page width)
+   - Adjust size (10-100% of A4 portrait width)
    - Set margins (0.1-2.0 inches from edges)
    - Configure opacity (10-100%)
    - Set rotation (0-360 degrees)
@@ -126,7 +126,7 @@ python pdf_signature.py --signature sig.png --input doc.pdf --position bottom-le
 
 ### Size Control
 
-Signature size as percentage of page width (10-100%):
+Signature size as percentage of A4 portrait width (10-100%):
 
 - **Default:** 25% (0.25)
 - **Small:** 15-20%
@@ -135,10 +135,10 @@ Signature size as percentage of page width (10-100%):
 
 **Examples:**
 ```bash
-# Small signature (15% of page width)
+# Small signature (15% of A4 portrait width)
 python pdf_signature.py --signature sig.png --input doc.pdf --scale 0.15
 
-# Large signature (50% of page width)
+# Large signature (50% of A4 portrait width)
 python pdf_signature.py --signature sig.png --input doc.pdf --scale 0.5
 ```
 
@@ -230,7 +230,7 @@ This signs:
 - All PDFs in `contracts/` directory
 - Only first and last pages
 - Bottom-right corner
-- 20% of page width
+- 20% of A4 portrait width
 - 0.75" from right edge, 0.5" from bottom
 - 90% opacity
 - Rotated 10 degrees
@@ -394,10 +394,10 @@ done
 
 ### Size Recommendations
 
-- **Personal signatures:** 20-30% of page width
-- **Company seals:** 10-20% of page width
-- **Watermarks:** 30-50% of page width (low opacity)
-- **Initials:** 10-15% of page width
+- **Personal signatures:** 20-30% of A4 portrait width
+- **Company seals:** 10-20% of A4 portrait width
+- **Watermarks:** 30-50% of A4 portrait width (low opacity)
+- **Initials:** 10-15% of A4 portrait width
 
 ## Logging
 

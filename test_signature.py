@@ -122,6 +122,38 @@ def test_position_calculation():
             pass  # File still in use, will be cleaned up later
 
 
+def test_a4_reference_width_scaling():
+    """Test that signature scale uses A4 portrait width, not actual page width."""
+    print("\n" + "=" * 60)
+    print("TEST: A4 Reference Width Scaling")
+    print("=" * 60)
+
+    sig_path = create_test_signature()
+
+    try:
+        signer = PDFSignature(sig_path, scale=0.1)
+        sig_width, sig_height = signer._calculate_signature_size(0.5)
+
+        expected_width = PDFSignature.A4_PORTRAIT_WIDTH_POINTS * 0.1
+        expected_height = expected_width * 0.5
+
+        if abs(sig_width - expected_width) < 0.01 and abs(sig_height - expected_height) < 0.01:
+            print(f"  OK 10% scale is {sig_width:.2f} pts using A4 portrait width")
+            return True
+
+        print(
+            f"  FAIL Expected {expected_width:.2f}x{expected_height:.2f}, "
+            f"got {sig_width:.2f}x{sig_height:.2f}"
+        )
+        return False
+
+    finally:
+        try:
+            os.unlink(sig_path)
+        except (PermissionError, FileNotFoundError):
+            pass
+
+
 def test_page_selection():
     """Test page selection parsing"""
     print("\n" + "=" * 60)
@@ -412,7 +444,7 @@ def test_rotated_page_signature_placement():
         try:
             signed_page = signed_doc[0]
             visible_rect = signed_page.rect
-            expected_width = visible_rect.width * signer.scale
+            expected_width = PDFSignature.A4_PORTRAIT_WIDTH_POINTS * signer.scale
             expected_height = expected_width * (signer.signature_image.height / signer.signature_image.width)
             expected_x0 = visible_rect.width - expected_width - signer.x_offset
             expected_y0 = visible_rect.height - expected_height - signer.y_offset
@@ -568,6 +600,7 @@ def main():
 
     tests = [
         ("Position Calculation", test_position_calculation),
+        ("A4 Reference Width Scaling", test_a4_reference_width_scaling),
         ("Page Selection", test_page_selection),
         ("Single PDF Signing", test_single_pdf_signing),
         ("Page Filtering", test_page_filtering),

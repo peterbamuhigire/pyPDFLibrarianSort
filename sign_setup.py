@@ -261,11 +261,11 @@ def main():
     # Step 6: Configure size
     print_header(6, "Configure Signature Size")
     print("How large should the signature be?")
-    print("Size is specified as percentage of page width (10-100%).")
+    print("Size is specified as percentage of A4 portrait width (10-100%).")
     print()
     scale_percent = get_float("Signature size (%)", 10, 100, default=25)
     scale = scale_percent / 100.0
-    print(f"OK Scale: {scale_percent}% of page width")
+    print(f"OK Scale: {scale_percent}% of A4 portrait width")
 
     # Step 7: Configure margins
     print_header(7, "Configure Margins")
@@ -315,7 +315,7 @@ def main():
     if skip_pages:
         print(f"Skip pages: {skip_pages}")
     print(f"Position:   {position}")
-    print(f"Size:       {scale_percent}% of page width")
+    print(f"Size:       {scale_percent}% of A4 portrait width")
     print(f"Margins:    {x_offset}\" H, {y_offset}\" V")
     print(f"Opacity:    {opacity_percent}%")
     print(f"Rotation:   {rotation}°")

@@ -765,24 +765,28 @@ function renderPreviewCanvas() {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
+    const a4Ratio = 210 / 297;
 
     // Clear canvas
     ctx.fillStyle = '#f5f5f5';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Draw page outline
+    // Draw A4 portrait page outline
+    const pageHeight = canvas.height - 20;
+    const pageWidth = pageHeight * a4Ratio;
+    const pageX = (canvas.width - pageWidth) / 2;
+    const pageY = 10;
+
     ctx.strokeStyle = '#333';
     ctx.lineWidth = 2;
-    ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+    ctx.strokeRect(pageX, pageY, pageWidth, pageHeight);
 
     // Draw page label
     ctx.fillStyle = '#666';
     ctx.font = '12px Arial';
-    ctx.fillText('Sample Page', 20, 30);
+    ctx.fillText('A4 Reference', pageX + 10, pageY + 20);
 
     // Calculate signature dimensions
-    const pageWidth = canvas.width - 20;
-    const pageHeight = canvas.height - 20;
     const sigWidth = pageWidth * signatureConfig.scale;
     const aspectRatio = signatureConfig.signatureDimensions
         ? signatureConfig.signatureDimensions.height / signatureConfig.signatureDimensions.width
@@ -796,17 +800,17 @@ function renderPreviewCanvas() {
     // Calculate position
     let x, y;
     if (signatureConfig.position === 'bottom-right') {
-        x = canvas.width - 10 - sigWidth - xOffsetPx;
-        y = canvas.height - 10 - sigHeight - yOffsetPx;
+        x = pageX + pageWidth - sigWidth - xOffsetPx;
+        y = pageY + pageHeight - sigHeight - yOffsetPx;
     } else if (signatureConfig.position === 'bottom-left') {
-        x = 10 + xOffsetPx;
-        y = canvas.height - 10 - sigHeight - yOffsetPx;
+        x = pageX + xOffsetPx;
+        y = pageY + pageHeight - sigHeight - yOffsetPx;
     } else if (signatureConfig.position === 'top-right') {
-        x = canvas.width - 10 - sigWidth - xOffsetPx;
-        y = 10 + yOffsetPx;
+        x = pageX + pageWidth - sigWidth - xOffsetPx;
+        y = pageY + yOffsetPx;
     } else if (signatureConfig.position === 'top-left') {
-        x = 10 + xOffsetPx;
-        y = 10 + yOffsetPx;
+        x = pageX + xOffsetPx;
+        y = pageY + yOffsetPx;
     }
 
     // Draw signature placeholder with rotation and opacity

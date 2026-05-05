@@ -8,7 +8,7 @@ Features:
 - 4 corner positions (bottom-right, bottom-left, top-right, top-left)
 - Page selection (all, first, last, odd, even, ranges)
 - Skip pages (exclude specific pages from signing)
-- Adjustable scaling (10-100% of page width)
+- Adjustable scaling (10-100% of A4 portrait width)
 - Configurable margins (X/Y offsets in inches)
 - Opacity control (10-100% transparency)
 - Rotation (0-360 degrees)
@@ -52,6 +52,7 @@ class PDFSignature:
 
     VALID_POSITIONS = ['bottom-right', 'bottom-left', 'top-right', 'top-left']
     VALID_PAGE_OPTIONS = ['all', 'first', 'last', 'odd', 'even']
+    A4_PORTRAIT_WIDTH_POINTS = 595.2755905511812  # 210 mm at 72 PDF points/inch
 
     def __init__(self, signature_image_path, position='bottom-left',
                  scale=0.3, x_offset=0.5, y_offset=0.5, opacity=1.0,
@@ -62,7 +63,7 @@ class PDFSignature:
         Args:
             signature_image_path: Path to PNG signature image
             position: Corner position - 'bottom-right', 'bottom-left', 'top-right', 'top-left'
-            scale: Signature width as fraction of page width (0.1-1.0)
+            scale: Signature width as fraction of A4 portrait width (0.1-1.0)
             x_offset: Horizontal margin from edge in inches (0.1-2.0)
             y_offset: Vertical margin from edge in inches (0.1-2.0)
             opacity: Transparency level (0.1-1.0, where 1.0 is opaque)
@@ -200,6 +201,18 @@ class PDFSignature:
 
         return x, y
 
+    def _calculate_signature_size(self, image_ratio):
+        """
+        Calculate signature dimensions using a fixed A4 portrait reference.
+
+        The scale setting is intentionally independent of the actual PDF page
+        size and orientation, so 10% is always 10% of an A4 portrait sheet's
+        width.
+        """
+        sig_width = self.A4_PORTRAIT_WIDTH_POINTS * self.scale
+        sig_height = sig_width * image_ratio
+        return sig_width, sig_height
+
     def _create_signature_overlay(self, page_width, page_height,
                                    mediabox_left=0, mediabox_bottom=0,
                                    page_rotation=0):
@@ -258,9 +271,10 @@ class PDFSignature:
             c.translate(0, page_height)
             c.rotate(270)
 
-        # Calculate signature dimensions using visual page width
-        sig_width = vis_width * self.scale
-        sig_height = sig_width * (self.signature_image.height / self.signature_image.width)
+        # Calculate signature dimensions using fixed A4 portrait width.
+        sig_width, sig_height = self._calculate_signature_size(
+            self.signature_image.height / self.signature_image.width
+        )
 
         # Warn if signature is too large
         if sig_width > vis_width * 0.5 or sig_height > vis_height * 0.5:
@@ -340,9 +354,9 @@ class PDFSignature:
 
         Uses show_pdf_page (never insert_image) so every page is stamped
         reliably regardless of rotation or internal page structure.
-        Placement matches the same display-width-based rule used by the
-        pypdf overlay path, so the configured corner, scale, and offsets
-        remain exact regardless of page rotation.
+        Placement matches the same fixed A4 portrait-width sizing rule used
+        by the pypdf overlay path, so the configured corner, scale, and
+        offsets remain exact regardless of page size or rotation.
         """
         from reportlab.pdfgen import canvas as rl_canvas
         from reportlab.lib.utils import ImageReader
@@ -365,9 +379,8 @@ class PDFSignature:
                 disp_w = float(page.rect.width)
                 disp_h = float(page.rect.height)
 
-                # Match the width-based sizing rule used everywhere else.
-                sig_w = disp_w * self.scale
-                sig_h = sig_w * image_ratio
+                # Match the fixed A4 portrait-width sizing rule used everywhere else.
+                sig_w, sig_h = self._calculate_signature_size(image_ratio)
 
                 # Position in display coords (top-left origin, y down)
                 if self.position == 'bottom-left':
@@ -715,7 +728,7 @@ def main():
 
             # sliders
             sliders = [
-                ('Size (% of page width):', self.scale,    10, 100, 1),
+                ('Size (% of A4 width):',   self.scale,    10, 100, 1),
                 ('H margin (inches):',       self.x_offset, 0.1, 2.0, 0.1),
                 ('V margin (inches):',       self.y_offset, 0.1, 2.0, 0.1),
                 ('Opacity (%):',             self.opacity,  10, 100, 1),
@@ -837,12 +850,13 @@ def main():
             cw, ch = 220, 280
             margin = 14
 
-            # Page rect
-            c.create_rectangle(margin, margin, cw - margin, ch - margin,
-                                fill='white', outline='#444', width=2)
-
-            pw = cw - 2 * margin
+            # A4 portrait reference page
             ph = ch - 2 * margin
+            pw = ph * (210 / 297)
+            px = (cw - pw) / 2
+            py = margin
+            c.create_rectangle(px, py, px + pw, py + ph,
+                                fill='white', outline='#444', width=2)
 
             scale     = self.scale.get() / 100
             x_off_px  = self.x_offset.get() * 20
@@ -855,17 +869,17 @@ def main():
 
             # Position in page-local coords (top-left origin for canvas)
             if pos == 'bottom-left':
-                sx = margin + x_off_px
-                sy = ch - margin - y_off_px - sig_h
+                sx = px + x_off_px
+                sy = py + ph - y_off_px - sig_h
             elif pos == 'bottom-right':
-                sx = cw - margin - x_off_px - sig_w
-                sy = ch - margin - y_off_px - sig_h
+                sx = px + pw - x_off_px - sig_w
+                sy = py + ph - y_off_px - sig_h
             elif pos == 'top-left':
-                sx = margin + x_off_px
-                sy = margin + y_off_px
+                sx = px + x_off_px
+                sy = py + y_off_px
             else:  # top-right
-                sx = cw - margin - x_off_px - sig_w
-                sy = margin + y_off_px
+                sx = px + pw - x_off_px - sig_w
+                sy = py + y_off_px
 
             # Draw a blue rectangle for the signature (with simple opacity via stipple)
             fill = '#4a90d9'
