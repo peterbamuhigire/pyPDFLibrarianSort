@@ -1,17 +1,16 @@
 """
-Smoke tests for the PowerPoint to EPUB converter.
+Smoke tests for the PowerPoint to Markdown converter.
 
 Run with: python test_pptx_to_epub.py
 """
 
 import sys
 import tempfile
-import zipfile
 from pathlib import Path
 
 from pptx import Presentation
 
-from pptx_to_epub import PowerPointToEpubConverter
+from pptx_to_epub import PowerPointToMarkdownConverter
 
 
 def create_sample_pptx(target: Path) -> Path:
@@ -19,7 +18,11 @@ def create_sample_pptx(target: Path) -> Path:
 
     slide = presentation.slides.add_slide(presentation.slide_layouts[1])
     slide.shapes.title.text = "Introduction"
-    slide.placeholders[1].text = "Overview paragraph\nFirst bullet\nSecond bullet"
+    body = slide.placeholders[1].text_frame
+    body.text = "Overview paragraph"
+    bullet = body.add_paragraph()
+    bullet.text = "First bullet"
+    bullet.level = 1
 
     slide2 = presentation.slides.add_slide(presentation.slide_layouts[5])
     textbox = slide2.shapes.add_textbox(left=1000000, top=1200000, width=6000000, height=3000000)
@@ -42,26 +45,21 @@ def test_single_file_conversion():
         pptx_path = create_sample_pptx(temp_path / "deck.pptx")
         output_dir = temp_path / "out"
 
-        converter = PowerPointToEpubConverter()
+        converter = PowerPointToMarkdownConverter()
         results = converter.convert(pptx_path, output_dir)
 
         if len(results) != 1:
-            raise AssertionError(f"Expected 1 EPUB, got {len(results)}")
+            raise AssertionError(f"Expected 1 Markdown file, got {len(results)}")
 
-        epub_path = results[0]
-        if not epub_path.exists():
-            raise AssertionError("EPUB file was not created")
+        markdown_path = results[0]
+        if not markdown_path.exists():
+            raise AssertionError("Markdown file was not created")
 
-        with zipfile.ZipFile(epub_path, "r") as archive:
-            names = set(archive.namelist())
-            if "EPUB/slide_001.xhtml" not in names:
-                raise AssertionError("First slide chapter missing from EPUB")
-            if "EPUB/nav.xhtml" not in names:
-                raise AssertionError("Navigation file missing from EPUB")
-
-            chapter = archive.read("EPUB/slide_001.xhtml").decode("utf-8")
-            assert_contains(chapter, "Introduction")
-            assert_contains(chapter, "Overview paragraph")
+        content = markdown_path.read_text(encoding="utf-8")
+        assert_contains(content, "# Introduction")
+        assert_contains(content, "## 01. Introduction")
+        assert_contains(content, "Overview paragraph")
+        assert_contains(content, "- First bullet")
 
 
 def main():
